@@ -21,12 +21,7 @@ public:
 	/// <param name="msg"></param>
 	void WinMSG(MSG& msg);
 
-	HWND SetHwnd()
-	{
-		return hwnd_;
-	}
-
-
+	
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 private:
