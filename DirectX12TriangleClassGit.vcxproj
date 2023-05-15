@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Desktop\工学院課題\CG2\DirectX12_Class_02\WinSetup.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,32 +129,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <None Include="..\DirectX12_Class_02\.editorconfig" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\DirectX12_Class_02\Adapter.cpp" />
-    <ClCompile Include="..\DirectX12_Class_02\DirectXSetup.cpp" />
-    <ClCompile Include="..\DirectX12_Class_02\main.cpp" />
-    <ClCompile Include="..\DirectX12_Class_02\WinSetup.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\DirectX12_Class_02\Adapter.h" />
-    <ClInclude Include="..\DirectX12_Class_02\DirectXSetup.h" />
-    <ClInclude Include="..\DirectX12_Class_02\TrianglePos.h" />
-    <ClInclude Include="..\DirectX12_Class_02\Vector4.h" />
-    <ClInclude Include="..\DirectX12_Class_02\WinSetup.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\DirectX12_Class_02\Object3d.PS.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="..\DirectX12_Class_02\Object3d.VS.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

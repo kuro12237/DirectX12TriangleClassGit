@@ -15,47 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\DirectX12_Class_02\Adapter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\DirectX12_Class_02\DirectXSetup.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\DirectX12_Class_02\main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\DirectX12_Class_02\WinSetup.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\DirectX12_Class_02\Adapter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DirectX12_Class_02\DirectXSetup.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DirectX12_Class_02\TrianglePos.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DirectX12_Class_02\Vector4.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DirectX12_Class_02\WinSetup.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\DirectX12_Class_02\Object3d.PS.hlsl">
+    <ClInclude Include="..\..\..\Desktop\工学院課題\CG2\DirectX12_Class_02\WinSetup.h">
       <Filter>リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="..\DirectX12_Class_02\Object3d.VS.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\DirectX12_Class_02\.editorconfig">
-      <Filter>リソース ファイル</Filter>
-    </None>
+    </ClInclude>
   </ItemGroup>
 </Project>
