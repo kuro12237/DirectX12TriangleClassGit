@@ -9,24 +9,17 @@ public:
 
 	void Initialize(const int Width, const int Height);
 
-
+	void WinMSG( MSG &msg);
 
 
 private:
 
 
-	WinSetup* WinSetup_ = new WinSetup();
+	WindowsSetup* WinSetup_ = new WindowsSetup();
 
 
 
 };
 
-Adapter::Adapter()
-{
-}
-
-Adapter::~Adapter()
-{
-}
 
 

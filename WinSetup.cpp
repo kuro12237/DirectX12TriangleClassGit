@@ -22,15 +22,14 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 
 
-WinSetup::WinSetup()
+
+
+WindowsSetup::WindowsSetup()
 {
 }
 
-void WinSetup::Initialize(const int Width, const int Height)
+void WindowsSetup::Initialize(const int Width, const int Height)
 {
-	//ウインドウクラス
-	WNDCLASS wc_{};
-	HWND hwnd_;
 
 	//ウインドウプロージャー
 	wc_.lpfnWndProc = WindowProc;
@@ -70,6 +69,13 @@ void WinSetup::Initialize(const int Width, const int Height)
 	ShowWindow(hwnd_, SW_SHOW);
 
 	LogWinSetup(Width, Height);
+
+}
+
+void WindowsSetup::WinMSG(MSG& msg)
+{
+	TranslateMessage(&msg);
+	DispatchMessage(&msg);
 
 }
 
