@@ -22,7 +22,6 @@ LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LP
 
 
 
-
 WindowsSetup::WindowsSetup()
 {
 }
