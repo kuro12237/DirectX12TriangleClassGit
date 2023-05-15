@@ -9,14 +9,14 @@ public:
 	~WindowsSetup();
 
 	/// <summary>
-	/// ウインドウの表示・初期化
+	/// window:Show:Initialize
 	/// </summary>
 	/// <param name="Width"></param>
 	/// <param name="Height"></param>
 	void Initialize(const int Width, const int Height);
 
 	/// <summary>
-	///ウインドウメッセージ処理 
+	///WinMsg
 	/// </summary>
 	/// <param name="msg"></param>
 	void WinMSG(MSG& msg);
@@ -31,7 +31,7 @@ public:
 
 private:
 
-	//ウインドウクラス
+	//WindowClass
 	WNDCLASS wc_{};
 	HWND hwnd_;
 

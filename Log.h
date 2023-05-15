@@ -15,6 +15,7 @@ std::wstring ConvertString(const std::string& str)
 		return std::wstring();
 	}
 
+
 	auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), NULL, 0);
 	if (sizeNeeded == 0)
 	{
