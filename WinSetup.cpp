@@ -5,8 +5,7 @@
 #include"Log.h"
 
 
-//ウインドウプロージャー
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	//メッセージにおいて固有の動作を行う
 	switch (msg)
@@ -78,4 +77,5 @@ void WindowsSetup::WinMSG(MSG& msg)
 	DispatchMessage(&msg);
 
 }
+
 
