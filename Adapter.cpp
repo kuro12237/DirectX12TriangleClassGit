@@ -1,10 +1,10 @@
 #include"Adapter.h"
 
 
-void Adapter::Initialize(const int Width, const int Height)
+void Adapter::Initialize(const int32_t kClientWidth, const int32_t  kClientHeight)
 {
 	//windows
-	WinSetup_->Initialize(Width,Height);
+	WinSetup_->Initialize(kClientWidth,kClientHeight);
 
 
 }

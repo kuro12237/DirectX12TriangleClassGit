@@ -19,10 +19,6 @@ LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LP
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-
-
-
-
 WindowsSetup::WindowsSetup()
 {
 }
