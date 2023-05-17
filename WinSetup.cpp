@@ -27,7 +27,7 @@ WindowsSetup::WindowsSetup()
 {
 }
 
-void WindowsSetup::Initialize(const int Width, const int Height)
+void WindowsSetup::Initialize(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 
 	//ウインドウプロージャー
@@ -43,10 +43,9 @@ void WindowsSetup::Initialize(const int Width, const int Height)
 
 	RegisterClass(&wc_);
 
-	const int32_t kCientWidth = Width;
-	const int32_t kCientHeight = Height;
+
 	//クライアントの領域設定
-	RECT wrc = { 0,0,kCientWidth,kCientHeight };
+	RECT wrc = { 0,0,kClientWidth,kClientHeight };
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
 
@@ -67,7 +66,7 @@ void WindowsSetup::Initialize(const int Width, const int Height)
 	);
 	ShowWindow(hwnd_, SW_SHOW);
 
-	LogWinSetup(Width, Height);
+	LogWinSetup(kClientWidth, kClientHeight);
 
 }
 
