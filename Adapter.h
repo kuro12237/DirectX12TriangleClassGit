@@ -12,8 +12,11 @@ public:
 
 	void WinMSG( MSG &msg);
 
+	void BeginFlame();
 
+	void EndFlame();
 
+	void Deleate();
 
 private:
 
