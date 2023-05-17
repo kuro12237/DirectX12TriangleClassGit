@@ -14,6 +14,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	MSG msg{};
 
+
 	//game
 	while (msg.message != WM_QUIT)
 	{
