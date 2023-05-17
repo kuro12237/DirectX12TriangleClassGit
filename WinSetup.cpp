@@ -1,4 +1,3 @@
-
 #include"WinSetup.h"
 #include<string>
 #include<format>
@@ -19,14 +18,11 @@ LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LP
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-
-
-
 WindowsSetup::WindowsSetup()
 {
 }
 
-void WindowsSetup::Initialize(const int Width, const int Height)
+void WindowsSetup::Initialize(const int32_t Width, const int32_t Height)
 {
 
 	//ウインドウプロージャー
@@ -42,13 +38,9 @@ void WindowsSetup::Initialize(const int Width, const int Height)
 
 	RegisterClass(&wc_);
 
-	const int32_t kCientWidth = Width;
-	const int32_t kCientHeight = Height;
 	//クライアントの領域設定
-	RECT wrc = { 0,0,kCientWidth,kCientHeight };
+	RECT wrc = { 0,0,Width,Height };
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
-
-
 
 	//ウインドウの生成
 	hwnd_ = CreateWindow(
@@ -65,7 +57,7 @@ void WindowsSetup::Initialize(const int Width, const int Height)
 		nullptr
 	);
 	ShowWindow(hwnd_, SW_SHOW);
-
+	
 	LogWinSetup(Width, Height);
 
 }

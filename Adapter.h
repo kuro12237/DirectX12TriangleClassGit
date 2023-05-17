@@ -1,6 +1,7 @@
 #include"WinSetup.h"
-
-
+#include <windows.h>
+#include<string>
+#include<format>
 class Adapter
 {
 public:
