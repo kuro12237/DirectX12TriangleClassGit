@@ -193,15 +193,14 @@ void DirectXSetup::CreatertvDescritorHeap()
 
 void DirectXSetup::CreateSwapChainResorce()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		swapChain.Resource[i] = nullptr;
-	}
-	for (int i = 0; i < 2; i++)
-	{
-		hr = swapChain.swapChain->GetBuffer(0, IID_PPV_ARGS(&swapChain.Resource[i]));
-		assert(SUCCEEDED(hr));
-	}
+	hr = swapChain.swapChain->GetBuffer(0, IID_PPV_ARGS(&swapChain.Resource[0]));
+
+	//うまく取得できなければ起動できない
+	assert(SUCCEEDED(hr));
+
+	hr = swapChain.swapChain->GetBuffer(1, IID_PPV_ARGS(&swapChain.Resource[1]));
+
+	assert(SUCCEEDED(hr));
 
 }
 
@@ -215,7 +214,7 @@ void DirectXSetup::SettingandCreateRTV()
 	rtv.rtvHandles[0] = rtv.rtvStartHandle;
 	device->CreateRenderTargetView(swapChain.Resource[0], &rtv.rtvDesc, rtv.rtvHandles[0]);
 
-	//2つ目のディスクリプタハンドルを得る(自力で)
+	//1つ目のディスクリプタハンドルを得る(自力で)
 	rtv.rtvHandles[1].ptr = rtv.rtvHandles[0].ptr + device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	//2つ目を作る
@@ -238,18 +237,19 @@ void DirectXSetup::SettingandCreateRTV()
 
 void DirectXSetup::BeginFlame()
 {
-	
+	fenceValue = 0;
+
 	//バリア
 	UINT backBufferIndex = swapChain.swapChain->GetCurrentBackBufferIndex();
     
-	D3D12_RESOURCE_BARRIER barrier{};
+
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier.Transition.pResource = swapChain.Resource[backBufferIndex];
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 
-	//commands.List->ResourceBarrier(1, &barrier);
+	commands.List->ResourceBarrier(1, &barrier);
 
 	//コマンドリスト
 	commands.List->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, nullptr);
@@ -258,19 +258,24 @@ void DirectXSetup::BeginFlame()
 	
 	commands.List->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 	
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
-	
-	hr = commands.List->Close();
-	assert(SUCCEEDED(hr));
+
 }
 
 void DirectXSetup::EndFlame()
 {
+
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+
+	commands.List->ResourceBarrier(1, &barrier);
+
+
+	hr = commands.List->Close();
+	assert(SUCCEEDED(hr));
 	ID3D12CommandList* commandLists[] = { commands.List };
 
 	commands.Queue->ExecuteCommandLists(1, commandLists);
-	hr=swapChain.swapChain->Present(1, 0);
+	swapChain.swapChain->Present(0, 1);
 
 
 	//Fenceの値を更新
@@ -278,8 +283,7 @@ void DirectXSetup::EndFlame()
 
 	//GPUがここまでたどり着いたときに、Fenceの値を指定した値に代入するようにSignalを送る
 	commands.Queue->Signal(fence, fenceValue);
-
-
+	
 	//Fenceの値が指定したSignal値にたどり着いているか確認する
 	//GetCompletedValueの初期値はFence作成時に渡した初期値
 	if (fence->GetCompletedValue() < fenceValue)
@@ -292,10 +296,13 @@ void DirectXSetup::EndFlame()
 
 	}
 
+	swapChain.swapChain->Present(1, 0);
+
+
 	hr = commands.Allocator->Reset();
 	assert(SUCCEEDED(hr));
 
-	hr = commands.List->Reset(commands.Allocator, nullptr);
+    hr = commands.List->Reset(commands.Allocator, nullptr);
 	assert(SUCCEEDED(hr));
 
 

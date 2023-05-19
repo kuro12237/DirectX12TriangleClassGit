@@ -93,5 +93,6 @@ private:
 	ID3D12Fence* fence = nullptr;
 	uint64_t fenceValue;
 	HANDLE fenceEvent;
+	D3D12_RESOURCE_BARRIER barrier{};
 };
 

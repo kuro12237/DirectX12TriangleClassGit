@@ -26,7 +26,7 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreatertvDescritorHeap();
 	//swapChainを引っ張る
 	DXSetup_->CreateSwapChainResorce();
-	//
+	//RTVの設定と作成
 	DXSetup_->SettingandCreateRTV();
 
 	//終了
@@ -47,7 +47,7 @@ void Adapter::BeginFlame()
 
 void Adapter::EndFlame()
 {
-	DXSetup_->BeginFlame();
+	DXSetup_->EndFlame();
 }
 
 void Adapter::Deleate()
