@@ -51,9 +51,5 @@ void Log(const std::string& message)
 }
 
 
-void LogWinSetup(int Width, int Height)
-{
-	Log(ConvertString(std::format(L"CompliteWindow\nWinLog\nWidth:{}   Height:{}\n", Width, Height)));
 
-}
 

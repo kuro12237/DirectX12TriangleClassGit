@@ -1,8 +1,6 @@
 
 #include"WinSetup.h"
-#include<string>
-#include<format>
-#include"Log.h"
+
 
 
 LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
@@ -27,7 +25,7 @@ WindowsSetup::WindowsSetup()
 {
 }
 
-void WindowsSetup::Initialize(const int32_t kClientWidth, const int32_t kClientHeight)
+void WindowsSetup::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
 
 	//ウインドウプロージャー
@@ -51,7 +49,7 @@ void WindowsSetup::Initialize(const int32_t kClientWidth, const int32_t kClientH
 
 
 	//ウインドウの生成
-	hwnd_ = CreateWindow(
+	hwnd = CreateWindow(
 		wc_.lpszClassName,
 		L"DirectX",
 		WS_OVERLAPPEDWINDOW,
@@ -64,9 +62,9 @@ void WindowsSetup::Initialize(const int32_t kClientWidth, const int32_t kClientH
 		wc_.hInstance,
 		nullptr
 	);
-	ShowWindow(hwnd_, SW_SHOW);
+	ShowWindow(hwnd, SW_SHOW);
 
-	LogWinSetup(kClientWidth, kClientHeight);
+
 
 }
 

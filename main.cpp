@@ -29,7 +29,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		}
 
+		adapter_->BeginFlame();
 
+
+
+		adapter_->EndFlame();
 	}
 
 

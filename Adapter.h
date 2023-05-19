@@ -1,6 +1,8 @@
+#pragma once
 #include"WinSetup.h"
 #include<string>
 #include<format>
+#include "DirectXSetup.h"
 
 class Adapter
 {
@@ -22,9 +24,9 @@ private:
 
 
 	WindowsSetup* WinSetup_ = new WindowsSetup();
+	DirectXSetup* DXSetup_ = new DirectXSetup();
 
-
-
+	
 };
 
 
