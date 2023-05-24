@@ -379,7 +379,7 @@ void DirectXSetup::SettingandCreateRTV()
 	device->CreateRenderTargetView(swapChain.Resource[1], &rtv.rtvDesc, rtv.rtvHandles[1]);
 
 
-	//�����l0��Fence����
+    //フェンスの作成
 	fence = nullptr;
 	fenceValue = 0;
 	hr = device->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
@@ -625,10 +625,6 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 
 	//描画!(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	commands.List->DrawInstanced(3, 1, 0, 0);
-
-	
-
-
 
 
 }

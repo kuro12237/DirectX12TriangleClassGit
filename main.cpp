@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		adapter_->BeginFlame(kClientWidth,kClientHeight);
 		
-		adapter_->Triangle(top, left, right);
+		adapter_->TriangleDraw(top, left, right);
 
 		adapter_->EndFlame();
 

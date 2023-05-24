@@ -56,7 +56,7 @@ void Adapter::EndFlame()
 	DXSetup_->EndFlame();
 }
 
-void Adapter::Triangle(Vec4 top, Vec4 left, Vec4 right)
+void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right)
 {
 
 	DXSetup_->Draw(top, left, right);
