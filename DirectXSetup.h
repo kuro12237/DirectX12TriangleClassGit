@@ -13,6 +13,11 @@
 
 #include<cassert>
 
+struct  Vec4
+{
+	float x, y, z, w;
+};
+
 
 struct Commands
 {
@@ -46,6 +51,18 @@ struct  RTV
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 };
 
+struct DXCProperty
+{
+	IDxcUtils*Utils;
+	IDxcCompiler3* Compiler;
+
+};
+
+struct shader
+{
+	IDxcBlob* vertexBlob;
+	IDxcBlob* pixeBlob;
+};
 
 //= rtvDescritorHeap->GetCPUDescriptorHandleForHeapStart();
 class DirectXSetup
@@ -53,6 +70,14 @@ class DirectXSetup
 public:
 	DirectXSetup();
 	~DirectXSetup();
+
+	static IDxcBlob* CompilerShader(
+		const std::wstring& filePath,
+		const wchar_t* profile,
+		IDxcUtils* dxcUtils,
+		IDxcCompiler3* dxcCompiler,
+		IDxcIncludeHandler* includeHandler);
+
 
 	void CreateDXGiFactory();
 
@@ -70,14 +95,25 @@ public:
 
 	void SettingandCreateRTV();
 
+	void DXCInitialize();
 
-	void BeginFlame();
+	void CreatePSO();
+
+	void CreateVecrtexResource();
+
+
+
+	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
+
+	void Draw(Vec4 top, Vec4 left, Vec4 right);
 
 	void EndFlame();
 	
 	void Deleate();
 
+
 private:
+
 
 	IDXGIFactory7* dxgiFactory = nullptr;
 	IDXGIAdapter4* useAdapter = nullptr;
@@ -85,14 +121,26 @@ private:
 
 	Commands commands;
 	SwapChain swapChain;
-	
-
 	RTV rtv;
-	HRESULT hr ;
 
+	DXCProperty dxc;
+
+	Vec4* vertexData = nullptr;
+
+	//PSOの本体
+	ID3D12PipelineState* graphicsPipelineState = nullptr;
+	
+	ID3D12RootSignature* rootSignature = nullptr;
+	ID3D12Resource* vertexResource = nullptr;
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView{};
+
+	HRESULT hr ;
 	ID3D12Fence* fence = nullptr;
 	uint64_t fenceValue;
 	HANDLE fenceEvent;
 	D3D12_RESOURCE_BARRIER barrier{};
+
+
+
 };
 

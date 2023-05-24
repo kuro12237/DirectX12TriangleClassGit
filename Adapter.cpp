@@ -28,6 +28,12 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreateSwapChainResorce();
 	//RTVの設定と作成
 	DXSetup_->SettingandCreateRTV();
+	//DXCの初期化
+	DXSetup_->DXCInitialize();
+	//PSOの生成
+	DXSetup_->CreatePSO();
+
+	DXSetup_->CreateVecrtexResource();
 
 	//終了
 
@@ -40,14 +46,20 @@ void Adapter::WinMSG(MSG &msg)
 
 }
 
-void Adapter::BeginFlame()
+void Adapter::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
-	DXSetup_->BeginFlame();
+	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 }
 
 void Adapter::EndFlame()
 {
 	DXSetup_->EndFlame();
+}
+
+void Adapter::Triangle(Vec4 top, Vec4 left, Vec4 right)
+{
+
+	DXSetup_->Draw(top, left, right);
 }
 
 void Adapter::Deleate()

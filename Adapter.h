@@ -14,10 +14,11 @@ public:
 
 	void WinMSG( MSG &msg);
 
-	void BeginFlame();
+	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
 
 	void EndFlame();
 
+	void Triangle(Vec4 top, Vec4 left, Vec4 right);
 	void Deleate();
 
 private:
