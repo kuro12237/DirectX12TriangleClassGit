@@ -41,9 +41,6 @@
     <ClInclude Include="Vector4.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="WinSetup.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>

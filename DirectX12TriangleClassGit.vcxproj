@@ -27,7 +27,6 @@
   <ItemGroup>
     <ClInclude Include="Adapter.h" />
     <ClInclude Include="DirectXSetup.h" />
-    <ClInclude Include="Log.h" />
     <ClInclude Include="TrianglePos.h" />
     <ClInclude Include="Vector4.h" />
     <ClInclude Include="WinSetup.h" />
