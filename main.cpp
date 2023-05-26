@@ -11,9 +11,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const int32_t kClientHeight = 720;
 
 
-	Vec4 top = { -0.5f,-0.5f,0.0f,1.0f };
+	Vec4 left = { -0.5f,-0.5f,0.0f,1.0f };
 
-	Vec4 left = { 0.0f,0.5f,0.0f,1.0f };
+	Vec4 top = { 0.0f,0.5f,0.0f,1.0f };
 
 	Vec4 right= { 0.5f,-0.5f,0.0f,1.0f };
 
