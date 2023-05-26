@@ -1,5 +1,6 @@
-
 #include"WinSetup.h"
+
+
 
 
 
@@ -22,6 +23,10 @@ LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LP
 
 
 WindowsSetup::WindowsSetup()
+{
+}
+
+WindowsSetup::~WindowsSetup()
 {
 }
 
@@ -76,3 +81,9 @@ void WindowsSetup::WinMSG(MSG& msg)
 }
 
 
+void WindowsSetup::Deleate()
+{
+	CloseWindow(hwnd);
+
+
+}

@@ -19,6 +19,7 @@ public:
 	void EndFlame();
 
 	void TriangleDraw(Vec4 top, Vec4 left, Vec4 right);
+
 	void Deleate();
 
 private:

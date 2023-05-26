@@ -1,4 +1,14 @@
 #include"Adapter.h"
+#define Triangle_Property_MAX 15
+
+struct  TriangleProperty
+{
+	Vec4 top;
+	Vec4 left;
+	Vec4 right;
+
+};
+
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -11,23 +21,117 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const int32_t kClientHeight = 720;
 
 
-	Vec4 left = { -1.0f,-0.5f,0.0f,1.0f };
+	TriangleProperty TriangleProperty_[Triangle_Property_MAX];
+	{
+		TriangleProperty_[0] =
+		{
 
-	Vec4 top = { -0.5f,0.5f,0.0f,1.0f };
+			{-0.8f,1.0f,0.0f,1.0f },
+			{-1.0f,0.5f,0.0f,1.0f },
+			{-0.6f,0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[1] =
+		{
 
-	Vec4 right= { 0.0f,-0.5f,0.0f,1.0f };
+			{-0.4f,1.0f,0.0f,1.0f },
+			{-0.6f,0.5f,0.0f,1.0f },
+			{-0.2f,0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[2] =
+		{
 
+			{0.0f,1.0f,0.0f,1.0f },
+			{-0.2f,0.5f,0.0f,1.0f },
+			{0.2f,0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[3] =
+		{
 
+			{0.4f,1.0f,0.0f,1.0f },
+			{0.2f,0.5f,0.0f,1.0f },
+			{0.6f,0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[4] =
+		{
 
-	Vec4 left2 = { 0.0f,-0.5f,0.0f,1.0f };
+			{0.8f,1.0f,0.0f,1.0f },
+			{0.6f,0.5f,0.0f,1.0f },
+			{1.0f,0.5f,0.0f,1.0f }
+		};
 
-	Vec4 top2 = { 0.5f,0.5f,0.0f,1.0f };
+		TriangleProperty_[5] =
+		{
 
-	Vec4 right2 = { 1.0f,-0.5f,0.0f,1.0f };
+			{-0.8f,0.5f,0.0f,1.0f },
+			{-1.0f,0.0f,0.0f,1.0f },
+			{-0.6f,0.0f,0.0f,1.0f }
+		};
+		TriangleProperty_[6] =
+		{
 
+			{-0.4f,0.5f,0.0f,1.0f },
+			{-0.6f,0.0f,0.0f,1.0f },
+			{-0.2f,0.0f,0.0f,1.0f }
+		};
+		TriangleProperty_[7] =
+		{
 
-	
+			{0.0f,0.5f,0.0f,1.0f },
+			{-0.2f,0.0f,0.0f,1.0f },
+			{0.2f,0.0f,0.0f,1.0f }
+		};
+		TriangleProperty_[8] =
+		{
 
+			{0.4f,0.5f,0.0f,1.0f },
+			{0.2f,0.0f,0.0f,1.0f },
+			{0.6f,0.0f,0.0f,1.0f }
+		};
+		TriangleProperty_[9] =
+		{
+
+			{0.8f,0.5f,0.0f,1.0f },
+			{0.6f,0.0f,0.0f,1.0f },
+			{1.0f,0.0f,0.0f,1.0f }
+		};
+
+		TriangleProperty_[10] =
+		{
+
+			{-0.8f,0.0f,0.0f,1.0f },
+			{-1.0f,-0.5f,0.0f,1.0f },
+			{-0.6f,-0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[11] =
+		{
+
+			{-0.4f,0.0f,0.0f,1.0f },
+			{-0.6f,-0.5f,0.0f,1.0f },
+			{-0.2f,-0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[12] =
+		{
+
+			{0.0f,0.0f,0.0f,1.0f },
+			{-0.2f,-0.5f,0.0f,1.0f },
+			{0.2f,-0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[13] =
+		{
+
+			{0.4f,0.0f,0.0f,1.0f },
+			{0.2f,-0.5f,0.0f,1.0f },
+			{0.6f,-0.5f,0.0f,1.0f }
+		};
+		TriangleProperty_[14] =
+		{
+
+			{0.8f,0.0f,0.0f,1.0f },
+			{0.6f,-0.5f,0.0f,1.0f },
+			{1.0f,-0.5f,0.0f,1.0f }
+		};
+
+	}
 
 	adapter_->Initialize(kClientWidth, kClientHeight);
 
@@ -47,16 +151,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		adapter_->BeginFlame(kClientWidth,kClientHeight);
 		
-		adapter_->TriangleDraw(top, left, right);
+	
+		for (int i = 0; i < Triangle_Property_MAX; i++)
+		{
 
-		adapter_->TriangleDraw(top2, left2, right2);
+			
+			adapter_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right);
+			
+
+		}
+	
 
 		adapter_->EndFlame();
 
 		
 	}
 
-
+	adapter_->Deleate();
+	adapter_->~Adapter();
 
 	return 0;
 }

@@ -163,6 +163,7 @@ DirectXSetup::DirectXSetup()
 
 DirectXSetup::~DirectXSetup()
 {
+	
 }
 
 
@@ -173,7 +174,7 @@ void DirectXSetup::CreateDXGiFactory()
 
     #ifdef _DEBUG
 
-	ID3D12Debug1* debugController = nullptr;
+
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
 		//�f�o�b�O���C���[��L��������
@@ -340,12 +341,12 @@ void DirectXSetup::CreateSwapChain(const int32_t Width,const int32_t Height, HWN
 
 void DirectXSetup::CreatertvDescritorHeap()
 {
-	rtv.rtvDescritorHeap= nullptr;
+	rtv.DescritorHeap= nullptr;
 
 	rtv.rtvDescritorHeapDesc.Type= D3D12_DESCRIPTOR_HEAP_TYPE_RTV; //�����_�[�^�[�Q�b�g�r���[�p
 	rtv.rtvDescritorHeapDesc.NumDescriptors = 2;//�_�u���o�b�t�@
 	
-	hr = device->CreateDescriptorHeap(&rtv.rtvDescritorHeapDesc, IID_PPV_ARGS(&rtv.rtvDescritorHeap));
+	hr = device->CreateDescriptorHeap(&rtv.rtvDescritorHeapDesc, IID_PPV_ARGS(&rtv.DescritorHeap));
 	assert(SUCCEEDED(hr));
 }
 
@@ -367,7 +368,7 @@ void DirectXSetup::SettingandCreateRTV()
 	rtv.rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; //�o�͌��ʂ�SRGB�ɕϊ����ď�������
 	rtv.rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; //2d�e�N�X�`���Ƃ��ď�������
 
-	rtv.rtvStartHandle= rtv.rtvDescritorHeap->GetCPUDescriptorHandleForHeapStart();
+	rtv.rtvStartHandle= rtv.DescritorHeap->GetCPUDescriptorHandleForHeapStart();
 
 	rtv.rtvHandles[0] = rtv.rtvStartHandle;
 	device->CreateRenderTargetView(swapChain.Resource[0], &rtv.rtvDesc, rtv.rtvHandles[0]);
@@ -421,8 +422,7 @@ void DirectXSetup::CreatePSO()
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//シリアライズしてバイナリにする
-	ID3DBlob* signatureBlob = nullptr;
-	ID3DBlob* errorBlob = nullptr;
+	
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
@@ -467,11 +467,11 @@ void DirectXSetup::CreatePSO()
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	//Shaderをコンパイルする
-	IDxcBlob* vertexShaderBlob = CompilerShader(L"Object3d.VS.hlsl",
+	vertexShaderBlob = CompilerShader(L"Object3d.VS.hlsl",
 		L"vs_6_0", dxc.Utils, dxc.Compiler, includeHandler);
 	assert(vertexShaderBlob != nullptr);
 
-	IDxcBlob* pixeShaderBlob = CompilerShader(L"Object3d.PS.hlsl",
+	 pixeShaderBlob = CompilerShader(L"Object3d.PS.hlsl",
 		L"ps_6_0", dxc.Utils, dxc.Compiler, includeHandler);
 	assert(pixeShaderBlob != nullptr);
 
@@ -504,48 +504,12 @@ void DirectXSetup::CreatePSO()
 		IID_PPV_ARGS(&graphicsPipelineState));
 	assert(SUCCEEDED(hr));
 
+	vertexShaderBlob->Release();
+	pixeShaderBlob->Release();
+
+	
 }
 
-void DirectXSetup::CreateVecrtexResource()
-{
-
-	//頂点リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapを使う
-
-	//頂点リソースの設定
-	D3D12_RESOURCE_DESC vertexResourceDesc{};
-
-	//バッファリソース。テクスチャの場合はまた別の設定をする
-	vertexResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	vertexResourceDesc.Width = sizeof(Vec4) * 3; //リソースのサイズ。今回はvector4を3頂点分
-
-	//バッファの場合はこれらは1にする決まり
-	vertexResourceDesc.Height = 1;
-	vertexResourceDesc.DepthOrArraySize = 1;
-	vertexResourceDesc.MipLevels = 1;
-	vertexResourceDesc.SampleDesc.Count = 1;
-
-	//バッファの場合はこれにする決まり
-	vertexResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	//実際に頂点リソースを作る
-	vertexResource = nullptr;
-
-	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertexResource));
-	assert(SUCCEEDED(hr));
-
-	vertexBufferView.BufferLocation = vertexResource->GetGPUVirtualAddress();
-
-	//使用するリソースのサイズは頂点3つ分のサイズ
-	vertexBufferView.SizeInBytes = sizeof(Vec4) * 3;
-
-	//1頂点あたりのサイズ
-	vertexBufferView.StrideInBytes = sizeof(Vec4);
-
-
-}
 
 
 
@@ -596,6 +560,47 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 	commands.List->RSSetScissorRects(1, &scissorRect);
 }
 
+#pragma region 三角形
+void DirectXSetup::CreateVecrtexResource()
+{
+
+	//頂点リソース用のヒープの設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
+	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapを使う
+
+	//頂点リソースの設定
+	D3D12_RESOURCE_DESC vertexResourceDesc{};
+
+	//バッファリソース。テクスチャの場合はまた別の設定をする
+	vertexResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	vertexResourceDesc.Width = sizeof(Vec4) * 3; //リソースのサイズ。今回はvector4を3頂点分
+
+	//バッファの場合はこれらは1にする決まり
+	vertexResourceDesc.Height = 1;
+	vertexResourceDesc.DepthOrArraySize = 1;
+	vertexResourceDesc.MipLevels = 1;
+	vertexResourceDesc.SampleDesc.Count = 1;
+
+	//バッファの場合はこれにする決まり
+	vertexResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	//実際に頂点リソースを作る
+	vertexResource = nullptr;
+
+	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
+		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertexResource));
+	assert(SUCCEEDED(hr));
+
+	vertexBufferView.BufferLocation = vertexResource->GetGPUVirtualAddress();
+
+	//使用するリソースのサイズは頂点3つ分のサイズ
+	vertexBufferView.SizeInBytes = sizeof(Vec4) * 3;
+
+	//1頂点あたりのサイズ
+	vertexBufferView.StrideInBytes = sizeof(Vec4);
+
+
+}
 void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 {
 
@@ -626,6 +631,7 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 
 
 }
+#pragma endregion
 
 void DirectXSetup::EndFlame()
 {
@@ -647,17 +653,16 @@ void DirectXSetup::EndFlame()
 	//Fence�̒l��X�V
 	fenceValue++;
 
-	//GPU�������܂ł��ǂ蒅�����Ƃ��ɁAFence�̒l��w�肵���l�ɑ������悤��Signal�𑗂�
+	//GPUにシグナル
 	commands.Queue->Signal(fence, fenceValue);
 	
-	//Fence�̒l���w�肵��Signal�l�ɂ��ǂ蒅���Ă��邩�m�F����
-	//GetCompletedValue�̏����l��Fence�쐬���ɓn���������l
+
 	if (fence->GetCompletedValue() < fenceValue)
 	{
-		//�w�肵��Signal�ɂ��ǂ���ĂȂ��̂ŁA���ǂ蒅���܂ő҂悤�ɃC�x���g��ݒ肷��
+	
 		fence->SetEventOnCompletion(fenceValue, fenceEvent);
 
-		//�C�x���g�҂�
+		
 		WaitForSingleObject(fenceEvent, INFINITE);
 
 	}
@@ -678,4 +683,42 @@ void DirectXSetup::EndFlame()
 
 void DirectXSetup::Deleate()
 {
+
+
+	CloseHandle(fenceEvent);
+	fence->Release();
+
+	rtv.DescritorHeap->Release();
+
+	swapChain.Resource[0]->Release();
+	swapChain.Resource[1]->Release();
+	swapChain.swapChain->Release();
+
+	commands.List->Release();
+	commands.Allocator->Release();
+	commands.Queue->Release();
+	
+	device->Release();
+	useAdapter->Release();
+	dxgiFactory->Release();
+
+	vertexResource->Release();
+	graphicsPipelineState->Release();
+
+	signatureBlob->Release();
+	if (errorBlob)
+	{
+		errorBlob->Release();
+	}
+
+	rootSignature->Release();
+
+
+#ifdef _DEBUG
+
+	debugController->Release();
+
+#endif // _DEBUG
+
+	
 }

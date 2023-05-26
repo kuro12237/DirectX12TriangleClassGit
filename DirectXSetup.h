@@ -40,7 +40,7 @@ struct SwapChain
 
 struct  RTV
 {
-	ID3D12DescriptorHeap* rtvDescritorHeap;
+	ID3D12DescriptorHeap* DescritorHeap;
 	D3D12_DESCRIPTOR_HEAP_DESC rtvDescritorHeapDesc{};
 
 
@@ -138,6 +138,16 @@ private:
 	uint64_t fenceValue;
 	HANDLE fenceEvent;
 	D3D12_RESOURCE_BARRIER barrier{};
+
+	shader shader = {nullptr,nullptr};
+
+	ID3DBlob* signatureBlob = nullptr;
+	ID3DBlob* errorBlob = nullptr;
+
+	IDxcBlob* vertexShaderBlob;
+	IDxcBlob* pixeShaderBlob;
+
+	ID3D12Debug1 *debugController = nullptr;
 
 
 

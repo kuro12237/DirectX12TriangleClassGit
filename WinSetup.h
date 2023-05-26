@@ -24,7 +24,13 @@ public:
 	/// <param name="msg"></param>
 	void WinMSG(MSG& msg);
 
-	
+
+	/// <summary>
+	/// Close
+	/// </summary>
+	void Deleate();
+
+
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 	HWND SetHwnd()

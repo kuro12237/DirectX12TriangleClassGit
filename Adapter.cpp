@@ -66,10 +66,16 @@ void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right)
 void Adapter::Deleate()
 {
 	DXSetup_->Deleate();
+	WinSetup_->Deleate();
 }
 
 Adapter::Adapter()
 {
+	
+}
 
-
+Adapter::~Adapter()
+{
+	DXSetup_->~DirectXSetup();
+	WinSetup_->~WindowsSetup();
 }
