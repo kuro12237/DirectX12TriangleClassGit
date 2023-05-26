@@ -549,9 +549,6 @@ void DirectXSetup::CreateVecrtexResource()
 
 
 
-
-
-
 void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 	
@@ -602,6 +599,7 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 {
 
+	Vec4* vertexData = nullptr;
 
 
 	//書き込むためのアドレスを取得
@@ -623,7 +621,7 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//描画!(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
+	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);
 
 

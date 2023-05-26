@@ -33,7 +33,7 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	//PSOの生成
 	DXSetup_->CreatePSO();
 
-	DXSetup_->CreateVecrtexResource();
+
 
 	//終了
 
@@ -48,6 +48,7 @@ void Adapter::WinMSG(MSG &msg)
 
 void Adapter::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
+	
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 }
 
@@ -58,7 +59,7 @@ void Adapter::EndFlame()
 
 void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right)
 {
-
+	DXSetup_->CreateVecrtexResource();
 	DXSetup_->Draw(top, left, right);
 }
 

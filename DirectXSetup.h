@@ -125,7 +125,6 @@ private:
 
 	DXCProperty dxc;
 
-	Vec4* vertexData = nullptr;
 
 	//PSOの本体
 	ID3D12PipelineState* graphicsPipelineState = nullptr;
