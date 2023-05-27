@@ -79,7 +79,7 @@ IDxcBlob* DirectXSetup::CompilerShader(
 	//1.hlslファイルを読む
 
 	//これからシェーダーをコンパイルする旨をログに出す
-	//Log(ConvertString(std::format(L"Begin CompileShader, path:{}, profile:{}\n", filePath, profile)));
+	Log(ConvertString(std::format(L"Begin CompileShader, path:{}, profile:{}\n", filePath, profile)));
 
 
 	//1.hlslファイルを読む
@@ -144,7 +144,7 @@ IDxcBlob* DirectXSetup::CompilerShader(
 	assert(SUCCEEDED(hr));
 
 	//成功したログを出す
-	Log(ConvertString(std::format(L"Compile Succeeded, path:{},profile:{}", filePath, profile)));
+	Log(ConvertString(std::format(L"Compile Succeeded, path:{},profile:{}\n", filePath, profile)));
 
 	//もう使わないリソースを解放
 	shaderSource->Release();
@@ -177,10 +177,10 @@ void DirectXSetup::CreateDXGiFactory()
 
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
-		//�f�o�b�O���C���[��L��������
+		
 		debugController->EnableDebugLayer();
 
-		//�����GRU���ł�`�F�b�N��s���悤�ɂ���	
+		
 		debugController->SetEnableGPUBasedValidation(TRUE);
 
 	}
@@ -193,29 +193,29 @@ void DirectXSetup::CreateDXGiFactory()
 
 	assert(SUCCEEDED(hr));
 	//Adapter
-	//�������ɃA�_�v�^�𗊂�
+	
 	for (UINT i = 0; dxgiFactory->EnumAdapterByGpuPreference(i,
 		DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&useAdapter)) !=
 		DXGI_ERROR_NOT_FOUND; i++)
 	{
-		//�A�_�v�^�[�̏���擾����
+		
 		DXGI_ADAPTER_DESC3 adapterDesc{};
 		hr = useAdapter->GetDesc3(&adapterDesc);
-		assert(SUCCEEDED(hr)); //�擾�ł��Ȃ��͈̂�厖
+		assert(SUCCEEDED(hr)); 
 
-		//�\�t�g�E�F�A�A�_�v�^�łȂ���΍̗p�I
+		
 		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE))
 		{
-			//�̗p�������O��o��
-			//Log(ConvertString(std::format(L"Use Adapater:{}\n", adapterDesc.Description)));
+			
+			Log(ConvertString(std::format(L"Use Adapater:{}\n", adapterDesc.Description)));
 			break;
 		}
 
-		//�\�t�g�E�F�A�A�_�v�^�̏ꍇ�͖�������
+	
 		useAdapter = nullptr;
 
 	}
-	//�K�؂ȃA�_�v�^���Ȃ��̂ŋN�����Ȃ�
+
 	assert(useAdapter != nullptr);
 
 }
@@ -628,8 +628,8 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);
-
-
+	
+	
 }
 #pragma endregion
 
@@ -640,10 +640,10 @@ void DirectXSetup::EndFlame()
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
 	commands.List->ResourceBarrier(1, &barrier);
-
-
 	hr = commands.List->Close();
 	assert(SUCCEEDED(hr));
+
+	
 	ID3D12CommandList* commandLists[] = { commands.List };
 
 	commands.Queue->ExecuteCommandLists(1, commandLists);
@@ -670,13 +670,13 @@ void DirectXSetup::EndFlame()
 	swapChain.swapChain->Present(1, 0);
 
 
-	hr = commands.Allocator->Reset();
-	assert(SUCCEEDED(hr));
+		hr = commands.Allocator->Reset();
+		assert(SUCCEEDED(hr));
 
-    hr = commands.List->Reset(commands.Allocator, nullptr);
-	assert(SUCCEEDED(hr));
+		hr = commands.List->Reset(commands.Allocator, nullptr);
+		assert(SUCCEEDED(hr));
 
-
+	
 	
 
 }
@@ -702,7 +702,7 @@ void DirectXSetup::Deleate()
 	useAdapter->Release();
 	dxgiFactory->Release();
 
-	vertexResource->Release();
+
 	graphicsPipelineState->Release();
 
 	signatureBlob->Release();
@@ -713,7 +713,7 @@ void DirectXSetup::Deleate()
 
 	rootSignature->Release();
 
-
+	vertexResource->Release();
 #ifdef _DEBUG
 
 	debugController->Release();
