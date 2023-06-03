@@ -152,7 +152,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		adapter_->BeginFlame(kClientWidth,kClientHeight);
 		
 	
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
 			
