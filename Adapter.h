@@ -18,7 +18,9 @@ public:
 
 	void EndFlame();
 
-	void TriangleDraw(Vec4 top, Vec4 left, Vec4 right);
+	void VertexCreate(VertexProperty &vertex);
+		 
+	void TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex);
 
 	void Deleate();
 

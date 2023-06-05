@@ -17,7 +17,11 @@ struct  Vec4
 {
 	float x, y, z, w;
 };
-
+struct  VertexProperty
+{
+	D3D12_VERTEX_BUFFER_VIEW vertex;
+	ID3D12Resource* resouce;
+};
 
 struct Commands
 {
@@ -99,18 +103,22 @@ public:
 
 	void CreatePSO();
 
-	void CreateVecrtexResource();
+	void SetCreateVecrtexResource(VertexProperty &vertex);
 
 
 
 	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
 
-	void Draw(Vec4 top, Vec4 left, Vec4 right);
+
+
+
+	void Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex);
 
 	void EndFlame();
 	
 	void Deleate();
 
+	void ChackRelease();
 
 private:
 
@@ -130,7 +138,7 @@ private:
 	ID3D12PipelineState* graphicsPipelineState = nullptr;
 	
 	ID3D12RootSignature* rootSignature = nullptr;
-	ID3D12Resource* vertexResource = nullptr;
+	
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView{};
 
 	HRESULT hr ;
@@ -149,6 +157,8 @@ private:
 
 	ID3D12Debug1 *debugController = nullptr;
 
+	//頂点リソース用のヒープの設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 
 
 };

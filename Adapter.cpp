@@ -57,16 +57,26 @@ void Adapter::EndFlame()
 	DXSetup_->EndFlame();
 }
 
-void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right)
+void Adapter::VertexCreate(VertexProperty&vertex)
 {
-	DXSetup_->CreateVecrtexResource();
-	DXSetup_->Draw(top, left, right);
+	
+	DXSetup_->SetCreateVecrtexResource(vertex);
+
+	
+}
+
+void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
+{
+	//DXSetup_->CreateVecrtexResource();
+	DXSetup_->Draw(top, left, right,vertex);
 }
 
 void Adapter::Deleate()
 {
+
 	DXSetup_->Deleate();
 	WinSetup_->Deleate();
+	DXSetup_->ChackRelease();
 }
 
 Adapter::Adapter()

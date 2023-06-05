@@ -504,8 +504,8 @@ void DirectXSetup::CreatePSO()
 		IID_PPV_ARGS(&graphicsPipelineState));
 	assert(SUCCEEDED(hr));
 
-	vertexShaderBlob->Release();
-	pixeShaderBlob->Release();
+	//vertexShaderBlob->Release();
+	//pixeShaderBlob->Release();
 
 	
 }
@@ -561,16 +561,16 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 }
 
 #pragma region 三角形
-void DirectXSetup::CreateVecrtexResource()
+void DirectXSetup::SetCreateVecrtexResource(VertexProperty&vertex)
 {
 
-	//頂点リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
+
 	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapを使う
 
 	//頂点リソースの設定
 	D3D12_RESOURCE_DESC vertexResourceDesc{};
 
+	
 	//バッファリソース。テクスチャの場合はまた別の設定をする
 	vertexResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	vertexResourceDesc.Width = sizeof(Vec4) * 3; //リソースのサイズ。今回はvector4を3頂点分
@@ -585,30 +585,32 @@ void DirectXSetup::CreateVecrtexResource()
 	vertexResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	//実際に頂点リソースを作る
-	vertexResource = nullptr;
-
+	
 	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertexResource));
+		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertex.resouce));
 	assert(SUCCEEDED(hr));
 
-	vertexBufferView.BufferLocation = vertexResource->GetGPUVirtualAddress();
+
+
+	
+
+	vertex.vertex.BufferLocation = vertex.resouce->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	vertexBufferView.SizeInBytes = sizeof(Vec4) * 3;
+	vertex.vertex.SizeInBytes = sizeof(Vec4) * 3;
 
 	//1頂点あたりのサイズ
-	vertexBufferView.StrideInBytes = sizeof(Vec4);
-
+	vertex.vertex.StrideInBytes = sizeof(Vec4);
 
 }
-void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
+void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
 {
 
 	Vec4* vertexData = nullptr;
 
 
 	//書き込むためのアドレスを取得
-	vertexResource->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	vertex.resouce->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 
 	//左下
 	vertexData[0] = { left };
@@ -621,7 +623,7 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right)
 
 	commands.List->SetGraphicsRootSignature(rootSignature);
 	commands.List->SetPipelineState(graphicsPipelineState);//
-	commands.List->IASetVertexBuffers(0, 1, &vertexBufferView);
+	commands.List->IASetVertexBuffers(0, 1, &vertex.vertex);
 
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -713,12 +715,28 @@ void DirectXSetup::Deleate()
 
 	rootSignature->Release();
 
-	vertexResource->Release();
+
 #ifdef _DEBUG
 
 	debugController->Release();
 
 #endif // _DEBUG
 
+
 	
+}
+
+void DirectXSetup::ChackRelease()
+{
+
+	IDXGIDebug1* debug;
+	if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(&debug))))
+	{
+		debug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_ALL);
+		debug->ReportLiveObjects(DXGI_DEBUG_APP, DXGI_DEBUG_RLO_ALL);
+		debug->ReportLiveObjects(DXGI_DEBUG_D3D12, DXGI_DEBUG_RLO_ALL);
+		debug->Release();
+	}
+
+
 }
