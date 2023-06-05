@@ -32,7 +32,7 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreateFence();
 	//DXCの初期化
 	DXSetup_->DXCInitialize();
-	//PSOの生成
+	//PSOの生成能
 	DXSetup_->CreatePSO();
 	//終了
 
