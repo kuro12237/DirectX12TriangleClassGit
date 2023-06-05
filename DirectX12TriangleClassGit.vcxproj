@@ -19,17 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Adapter.cpp" />
-    <ClCompile Include="DirectXSetup.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="WinSetup.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Adapter.h" />
-    <ClInclude Include="DirectXSetup.h" />
     <ClInclude Include="TrianglePos.h" />
     <ClInclude Include="Vector4.h" />
-    <ClInclude Include="WinSetup.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
