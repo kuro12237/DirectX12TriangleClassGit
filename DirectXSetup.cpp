@@ -601,20 +601,20 @@ void DirectXSetup::SetCreateVecrtexResource(VertexProperty&vertex)
 	//実際に頂点リソースを作る
 	
 	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertex.resouce));
+		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&vertex.Resource));
 	assert(SUCCEEDED(hr));
 
 
 
 	
 
-	vertex.vertex.BufferLocation = vertex.resouce->GetGPUVirtualAddress();
+	vertex.BufferView.BufferLocation = vertex.Resource->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	vertex.vertex.SizeInBytes = sizeof(Vec4) * 3;
+	vertex.BufferView.SizeInBytes = sizeof(Vec4) * 3;
 
 	//1頂点あたりのサイズ
-	vertex.vertex.StrideInBytes = sizeof(Vec4);
+	vertex.BufferView.StrideInBytes = sizeof(Vec4);
 
 }
 void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
@@ -624,7 +624,7 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
 
 
 	//書き込むためのアドレスを取得
-	vertex.resouce->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	vertex.Resource->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 
 	//左下
 	vertexData[0] = { left };
@@ -637,7 +637,7 @@ void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
 
 	commands.List->SetGraphicsRootSignature(rootSignature);
 	commands.List->SetPipelineState(graphicsPipelineState);//
-	commands.List->IASetVertexBuffers(0, 1, &vertex.vertex);
+	commands.List->IASetVertexBuffers(0, 1, &vertex.BufferView);
 
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

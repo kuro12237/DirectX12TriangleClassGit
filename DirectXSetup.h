@@ -19,8 +19,8 @@ struct  Vec4
 };
 struct  VertexProperty
 {
-	D3D12_VERTEX_BUFFER_VIEW vertex;
-	ID3D12Resource* resouce;
+	D3D12_VERTEX_BUFFER_VIEW BufferView;
+	ID3D12Resource* Resource;
 };
 
 struct Commands
