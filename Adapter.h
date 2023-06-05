@@ -58,8 +58,8 @@ public:
 private:
 
 
-	WindowsSetup* WinSetup_ = new WindowsSetup();
-	DirectXSetup* DXSetup_ = new DirectXSetup();
+	WindowsSetup* WinSetup_ = nullptr; 
+	DirectXSetup* DXSetup_ = nullptr;
 
 	
 };

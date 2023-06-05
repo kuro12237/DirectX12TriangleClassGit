@@ -152,14 +152,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			adapter_->WinMSG(msg);
-
-
 		}
 		else
 		{
 
 		}
+
 		adapter_->BeginFlame(kClientWidth,kClientHeight);
+		
+
+		///
+		///更新処理 
+		/// 
+		
+
+
+		/// 
+		///更新処理終了
+		/// 
+		
+		/// 
+		///描画処理 
+		/// 
 		
 	
 		for (int i = 0; i < Triangle_Property_MAX	; i++)
@@ -169,17 +183,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			
 
 		}
-	
+		/// 
+		///描画処理終了
+		///
+
 
 		adapter_->EndFlame();
 
 		
 	}
+
+	///
+	///作成した頂点のResourceのRelease
+	///
+	
+
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 		TriangleProperty_[i].vertex.resouce->Release();
 	}
 
+
+	///
+	/// 終了
+	///
+	
 	adapter_->Deleate();
 	adapter_->~Adapter();
 
