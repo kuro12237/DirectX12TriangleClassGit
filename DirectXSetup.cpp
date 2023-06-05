@@ -187,13 +187,15 @@ void DirectXSetup::CreateDXGiFactory()
  
     #endif
 
-
+	//DXGIファクトリーの生成
 	dxgiFactory = nullptr;
 	hr=CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
 
 	assert(SUCCEEDED(hr));
-	//Adapter
 	
+	//Adapter
+
+	//いい順にアダプタを頼む
 	for (UINT i = 0; dxgiFactory->EnumAdapterByGpuPreference(i,
 		DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&useAdapter)) !=
 		DXGI_ERROR_NOT_FOUND; i++)
@@ -231,21 +233,22 @@ void DirectXSetup::CreateDevice()
    };
    const char* featureLevelStrings[] = { "12.2","12.1","12.0"};
 
+   //高い順に生成できるか試していく
    for (size_t i = 0; i < _countof(featureLevels); i++)
    {
-	   //�̗p�����A�_�v�^�[�Ńf�o�C�X�������ł�������m�F
+	 
 	   hr = D3D12CreateDevice(useAdapter, featureLevels[i], IID_PPV_ARGS(&device));
 
-	   //�w�肵���@�\���x���Ńf�o�C�X�������ł�������m�F
+	  
 	   if (SUCCEEDED(hr))
 	   {
-		   //�����ł����̂Ń��O�o�͂�s���ă��[�v�𔲂���
-		  // Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
+		
+		   Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
 		   break;
 
 	   }
    }
-   //�f�o�C�X�̐��������܂������Ȃ������̂ŋN�����Ȃ�
+
    assert(device != nullptr);
 
 
@@ -253,32 +256,33 @@ void DirectXSetup::CreateDevice()
 
 void DirectXSetup::DebugErrorInfoQueue()
 {
+
 	ID3D12InfoQueue* infoQueue = nullptr;
 
 	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
 	{
-		//��΂��G���[���Ɏ~�܂�
+		//やばいエラー時に止まる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
 
-		//�G���[���Ɏ~�܂�
+		//エラー時に止まる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
 
-		//�x�����Ɏ~�܂�
+		//警告時に止まる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
 
 		//
-		//�G���[�ƌx���̗}��
+		//エラーと警告の抑制
 
 
 		D3D12_MESSAGE_ID denyIds[] =
 		{
-			//windows11�ł�DXGI�f�o�b�O���C���[��DX12�f�o�b�O���C���[�̑��݃o�O�ɂ��G���[���b�Z�[�W
+			//windows11でのDXGIデバッグレイヤーとDX12デバッグレイヤーの相互バグによるエラーメッセージ
 			//https:,,stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
 
 			D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
 		};
 
-		//�}�����郌�x��
+		//抑制するレベル
 		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
 		D3D12_INFO_QUEUE_FILTER filter{};
 
@@ -287,28 +291,29 @@ void DirectXSetup::DebugErrorInfoQueue()
 		filter.DenyList.NumSeverities = _countof(severities);
 		filter.DenyList.pSeverityList = severities;
 
-		//�w�肵�����b�Z�[�W�̕\����}������
+		//指定したメッセージの表示を抑制する
 		infoQueue->PushStorageFilter(&filter);
 
-		//���
+		//解放
 		infoQueue->Release();
 	}
+
 }
 
 void DirectXSetup::CreateCommands()
 {
-	///������
-	//�R�}���h�L���[
+	///commands
+	//コマンドキューの生成
 	commands.Queue = nullptr;
 	hr = device->CreateCommandQueue(&commands.QueueDesc, IID_PPV_ARGS(&commands.Queue));
 	assert(SUCCEEDED(hr));
 
-	//�R�}���h�A���[�P�[�^
+	//アローケーターの生成
 	commands.Allocator = nullptr;
 	hr = device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commands.Allocator));
     assert(SUCCEEDED(hr));
    
-	//�R�}���h���X�g
+	//リストの作成
 	commands.List = nullptr;
 	hr=device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT,
 		commands.Allocator, nullptr,
@@ -321,17 +326,17 @@ void DirectXSetup::CreateSwapChain(const int32_t Width,const int32_t Height, HWN
 {
     swapChain.swapChain = nullptr;
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
-
+	//スワップチェーンの設定
 	swapChainDesc.Width = Width;
 	swapChainDesc.Height = Height;
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.SampleDesc.Count = 1; //�}���`�T���v�����Ȃ�
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; //�`��̃^�[�Q�b�g�Ƃ��ė��p����
-	swapChainDesc.BufferCount = 2; //�_�u���o�b�t�@
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; //���j�^�[�ɂ�������A���g��j��
+	swapChainDesc.SampleDesc.Count = 1;
+	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	swapChainDesc.BufferCount = 2; 
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; 
 
 
-	//�R�}���h�L���[�A�E�B���h�E�n���h���A�ݒ��n���Đ�������
+	//スワップチェーンの生成
 	hr = dxgiFactory->CreateSwapChainForHwnd(commands.Queue, hwnd_, &swapChainDesc,
 		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&swapChain.swapChain));
 
@@ -343,8 +348,8 @@ void DirectXSetup::CreatertvDescritorHeap()
 {
 	rtv.DescritorHeap= nullptr;
 
-	rtv.rtvDescritorHeapDesc.Type= D3D12_DESCRIPTOR_HEAP_TYPE_RTV; //�����_�[�^�[�Q�b�g�r���[�p
-	rtv.rtvDescritorHeapDesc.NumDescriptors = 2;//�_�u���o�b�t�@
+	rtv.rtvDescritorHeapDesc.Type= D3D12_DESCRIPTOR_HEAP_TYPE_RTV; 
+	rtv.rtvDescritorHeapDesc.NumDescriptors = 2; // ダブルバッファ用に2つ、多くても構わない
 	
 	hr = device->CreateDescriptorHeap(&rtv.rtvDescritorHeapDesc, IID_PPV_ARGS(&rtv.DescritorHeap));
 	assert(SUCCEEDED(hr));
@@ -354,7 +359,7 @@ void DirectXSetup::CreateSwapChainResorce()
 {
 	hr = swapChain.swapChain->GetBuffer(0, IID_PPV_ARGS(&swapChain.Resource[0]));
 
-	//���܂��擾�ł��Ȃ���΋N���ł��Ȃ�
+	
 	assert(SUCCEEDED(hr));
 
 	hr = swapChain.swapChain->GetBuffer(1, IID_PPV_ARGS(&swapChain.Resource[1]));
@@ -365,31 +370,40 @@ void DirectXSetup::CreateSwapChainResorce()
 
 void DirectXSetup::SettingandCreateRTV()
 {
-	rtv.rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; //�o�͌��ʂ�SRGB�ɕϊ����ď�������
-	rtv.rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; //2d�e�N�X�`���Ƃ��ď�������
+	rtv.rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; 
+	rtv.rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; 
 
 	rtv.rtvStartHandle= rtv.DescritorHeap->GetCPUDescriptorHandleForHeapStart();
 
 	rtv.rtvHandles[0] = rtv.rtvStartHandle;
 	device->CreateRenderTargetView(swapChain.Resource[0], &rtv.rtvDesc, rtv.rtvHandles[0]);
 
-	//1�ڂ̃f�B�X�N���v�^�n���h���𓾂�(���͂�)
+	
 	rtv.rtvHandles[1].ptr = rtv.rtvHandles[0].ptr + device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
-	//2�ڂ���
 	device->CreateRenderTargetView(swapChain.Resource[1], &rtv.rtvDesc, rtv.rtvHandles[1]);
 
+  
+}
 
-    //フェンスの作成
+
+void DirectXSetup::CreateFence()
+{
+	//フェンスの作成
 	fence = nullptr;
 	fenceValue = 0;
 	hr = device->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 	assert(SUCCEEDED(hr));
 
-	//Fence��Signal��҂��߂̃C�x���g��쐬����
+
 	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	assert(fenceEvent != nullptr);
+
+
 }
+
+
+
 
 void DirectXSetup::DXCInitialize()
 {
@@ -516,7 +530,7 @@ void DirectXSetup::CreatePSO()
 void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 	
-	//�o���A
+	//書き込むスワップチェーンのindexをとる
 	UINT backBufferIndex = swapChain.swapChain->GetCurrentBackBufferIndex();
     
 
@@ -528,7 +542,7 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 
 	commands.List->ResourceBarrier(1, &barrier);
 
-	//�R�}���h���X�g
+	//描画先のRTYを設定
 	commands.List->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, nullptr);
 	
 	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
@@ -652,7 +666,7 @@ void DirectXSetup::EndFlame()
     swapChain.swapChain->Present(0, 1);
 
 
-	//Fence�̒l��X�V
+	//Fence数値加算
 	fenceValue++;
 
 	//GPUにシグナル

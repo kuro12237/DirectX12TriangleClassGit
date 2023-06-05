@@ -28,13 +28,12 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreateSwapChainResorce();
 	//RTVの設定と作成
 	DXSetup_->SettingandCreateRTV();
+	//フェンスの生成
+	DXSetup_->CreateFence();
 	//DXCの初期化
 	DXSetup_->DXCInitialize();
 	//PSOの生成
 	DXSetup_->CreatePSO();
-
-
-
 	//終了
 
 }
@@ -48,7 +47,6 @@ void Adapter::WinMSG(MSG &msg)
 
 void Adapter::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
-	
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 }
 

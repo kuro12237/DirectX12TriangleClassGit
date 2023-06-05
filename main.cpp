@@ -176,10 +176,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		
 	}
 
-	for (int i = 0; i < Triangle_Property_MAX; i++)
-	{
-		TriangleProperty_[i].vertex.resouce->Release();
-	}
 
 	adapter_->Deleate();
 	adapter_->~Adapter();
