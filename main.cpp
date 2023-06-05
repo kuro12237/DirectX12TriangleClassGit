@@ -9,7 +9,7 @@ struct  TriangleProperty
 	Vec4 top;
 	Vec4 left;
 	Vec4 right;
-	VertexProperty vertexData;
+	VertexProperty vertex;
 };
 
 
@@ -143,7 +143,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 
-		adapter_->VertexCreate(TriangleProperty_[i].vertexData);
+		adapter_->VertexCreate(TriangleProperty_[i].vertex);
 	}
 	MSG msg{};
 	
@@ -165,7 +165,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < Triangle_Property_MAX	; i++)
 		{
 
-			adapter_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,TriangleProperty_[i].vertexData);
+			adapter_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,TriangleProperty_[i].vertex);
 			
 
 		}
@@ -177,7 +177,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
-		TriangleProperty_[i].vertexData.Resource->Release();
+		TriangleProperty_[i].vertex.resouce->Release();
 	}
 
 	adapter_->Deleate();
