@@ -12,27 +12,11 @@
 #pragma comment(lib,"dxcompiler.lib")
 
 #include<cassert>
+#include "Struct.h"
 
-struct  Vec4
-{
-	float x, y, z, w;
-};
-struct  VertexProperty
-{
-	D3D12_VERTEX_BUFFER_VIEW BufferView;
-	ID3D12Resource* Resource;
-};
+#include "ShapeDraw.h"
 
-struct Commands
-{
-	//コマンドキュー
-	ID3D12CommandQueue* Queue;
-	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
-	//コマンドアローケータ
-	ID3D12CommandAllocator* Allocator;
-	//コマンドリスト
-	ID3D12GraphicsCommandList* List;
-};
+
 
 struct SwapChain
 {
@@ -141,6 +125,9 @@ public:
 	void SetCreateVecrtexResource(VertexProperty &vertex);
 
 
+
+
+
 	/// <summary>
 	/// ループの一番最初に行う処理
 	/// </summary>
@@ -156,6 +143,8 @@ public:
 	/// </summary>
 	void EndFlame();
 	
+
+
 	/// <summary>
 	/// Release処理
 	/// </summary>
@@ -165,6 +154,14 @@ public:
 	/// しっかりリリース処理されているかチェック
 	/// </summary>
 	void ChackRelease();
+
+
+
+	//void SetDevice(ID3D12Device *device_);
+
+	ID3D12Device* GetDevice() { return device; }
+
+	Commands GetCommands() { return commands; }
 
 private:
 
@@ -203,8 +200,6 @@ private:
 
 	ID3D12Debug1 *debugController = nullptr;
 
-	//頂点リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 
 
 };

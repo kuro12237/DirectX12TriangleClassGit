@@ -8,7 +8,7 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	//終了
 
 	//DirectX
-	DXSetup_->CreateDXGiFactory();
+    DXSetup_->CreateDXGiFactory();
 
 	DXSetup_->CreateDevice();
 
@@ -36,6 +36,8 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreatePSO();
 	//終了
 
+	ShapeDraw_->DirectXSetDevice(DXSetup_->GetDevice());
+	ShapeDraw_->DirectXSetCommands(DXSetup_->GetCommands());
 }
 
 void Adapter::WinMSG(MSG &msg)
@@ -55,18 +57,22 @@ void Adapter::EndFlame()
 	DXSetup_->EndFlame();
 }
 
+//頂点の作成
 void Adapter::VertexCreate(VertexProperty&vertex)
 {
-	
-	DXSetup_->SetCreateVecrtexResource(vertex);
-
-	
+	ShapeDraw_->CreateVertex(vertex);
 }
 
+/// <summary>
+/// 三角形の描画
+/// </summary>
+/// <param name="top"></param>
+/// <param name="left"></param>
+/// <param name="right"></param>
+/// <param name="vertex"></param>
 void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
 {
-	//DXSetup_->CreateVecrtexResource();
-	DXSetup_->Draw(top, left, right,vertex);
+	ShapeDraw_->TriangleDraw( top, left,  right, vertex);
 }
 
 void Adapter::Deleate()

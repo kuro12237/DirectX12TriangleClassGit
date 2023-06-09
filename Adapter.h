@@ -3,7 +3,7 @@
 #include<string>
 #include<format>
 #include "DirectXSetup.h"
-
+#include"ShapeDraw.h"
 class Adapter
 {
 public:
@@ -60,8 +60,10 @@ private:
 
 	WindowsSetup* WinSetup_ = new WindowsSetup();
 	DirectXSetup* DXSetup_ = new DirectXSetup();
-
+	ShapeDraw* ShapeDraw_ = new ShapeDraw();
 	
+
+
 };
 
 
