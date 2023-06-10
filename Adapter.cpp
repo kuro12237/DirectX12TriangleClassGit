@@ -36,8 +36,11 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreatePSO();
 	//終了
 
+	//コマンド・デバイスの設定毛終わった後
+	//ShapeDrawで使うため↓
 	ShapeDraw_->DirectXSetDevice(DXSetup_->GetDevice());
 	ShapeDraw_->DirectXSetCommands(DXSetup_->GetCommands());
+	//終了
 }
 
 void Adapter::WinMSG(MSG &msg)
@@ -57,7 +60,10 @@ void Adapter::EndFlame()
 	DXSetup_->EndFlame();
 }
 
-//頂点の作成
+/// <summary>
+/// 頂点データの作成
+/// </summary>
+/// <param name="vertex"></param>
 void Adapter::VertexCreate(VertexProperty&vertex)
 {
 	ShapeDraw_->CreateVertex(vertex);
@@ -92,4 +98,5 @@ Adapter::~Adapter()
 {
 	DXSetup_->~DirectXSetup();
 	WinSetup_->~WindowsSetup();
+	ShapeDraw_->~ShapeDraw();
 }

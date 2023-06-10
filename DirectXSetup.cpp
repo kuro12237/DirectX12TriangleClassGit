@@ -518,8 +518,8 @@ void DirectXSetup::CreatePSO()
 		IID_PPV_ARGS(&graphicsPipelineState));
 	assert(SUCCEEDED(hr));
 
-	//vertexShaderBlob->Release();
-	//pixeShaderBlob->Release();
+	vertexShaderBlob->Release();
+	pixeShaderBlob->Release();
 
 	
 }
@@ -533,7 +533,7 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 	//書き込むスワップチェーンのindexをとる
 	UINT backBufferIndex = swapChain.swapChain->GetCurrentBackBufferIndex();
     
-
+	//バリア
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier.Transition.pResource = swapChain.Resource[backBufferIndex];
@@ -546,7 +546,7 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 	commands.List->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, nullptr);
 	
 	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
-	
+	//float clearColor[] = { 1.0f,0.0f,0.0f,1.0f };
 	commands.List->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 	
 	D3D12_VIEWPORT viewport{};
@@ -572,25 +572,9 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 	//コマンドを積む
 	commands.List->RSSetViewports(1, &viewport); //
 	commands.List->RSSetScissorRects(1, &scissorRect);
-
 	commands.List->SetGraphicsRootSignature(rootSignature);
 	commands.List->SetPipelineState(graphicsPipelineState);//
 }
-
-#pragma region 三角形
-void DirectXSetup::SetCreateVecrtexResource(VertexProperty&vertex)
-{
-
-
-	
-
-}
-void DirectXSetup::Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
-{
-
-	
-}
-#pragma endregion
 
 void DirectXSetup::EndFlame()
 {
@@ -599,6 +583,7 @@ void DirectXSetup::EndFlame()
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
 	commands.List->ResourceBarrier(1, &barrier);
+
 	hr = commands.List->Close();
 	assert(SUCCEEDED(hr));
 
@@ -629,11 +614,11 @@ void DirectXSetup::EndFlame()
 	swapChain.swapChain->Present(1, 0);
 
 
-		hr = commands.Allocator->Reset();
-		assert(SUCCEEDED(hr));
+	hr = commands.Allocator->Reset();
+	assert(SUCCEEDED(hr));
 
-		hr = commands.List->Reset(commands.Allocator, nullptr);
-		assert(SUCCEEDED(hr));
+	hr = commands.List->Reset(commands.Allocator, nullptr);
+	assert(SUCCEEDED(hr));
 
 	
 	

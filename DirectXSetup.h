@@ -119,12 +119,7 @@ public:
 	/// </summary>
 	void CreatePSO();
 
-	/// <summary>
-	/// 三角形の頂点の生成
-	/// </summary>
-	void SetCreateVecrtexResource(VertexProperty &vertex);
-
-
+	
 
 
 
@@ -133,11 +128,7 @@ public:
 	/// </summary>
 	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
 
-	/// <summary>
-	/// 三角形の描画
-	/// </summary>
-	void Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex);
-
+	
 	/// <summary>
 	/// ループの最後の処理
 	/// </summary>
