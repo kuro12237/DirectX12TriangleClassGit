@@ -37,6 +37,7 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 	DXSetup_->CreatePSO();
 	//終了
 
+
 	//コマンドとデバイスの情報を送る
 	Model_->DirectXSetDevice(DXSetup_->GetDevice());
 	Model_->DirectXSetCommands(DXSetup_->GetCommands());
