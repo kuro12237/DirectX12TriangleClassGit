@@ -7,6 +7,7 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 	WinSetup_->Initialize(Width,Height);
 	//終了
 
+
 	//DirectX
     DXSetup_->CreateDXGiFactory();
 
