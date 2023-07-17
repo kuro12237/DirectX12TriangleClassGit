@@ -461,6 +461,7 @@ void DirectXSetup::CreatePSO()
 		assert(false);
 	}
 
+
 	//バイナリを元に生成
 	
 	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
