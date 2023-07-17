@@ -130,19 +130,6 @@
     <None Include="..\DirectX12_Class_02\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\DirectX12_Class_02\Adapter.cpp" />
-    <ClCompile Include="..\DirectX12_Class_02\DirectXSetup.cpp" />
-    <ClCompile Include="..\DirectX12_Class_02\main.cpp" />
-    <ClCompile Include="..\DirectX12_Class_02\WinSetup.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\DirectX12_Class_02\Adapter.h" />
-    <ClInclude Include="..\DirectX12_Class_02\DirectXSetup.h" />
-    <ClInclude Include="..\DirectX12_Class_02\TrianglePos.h" />
-    <ClInclude Include="..\DirectX12_Class_02\Vector4.h" />
-    <ClInclude Include="..\DirectX12_Class_02\WinSetup.h" />
-  </ItemGroup>
-  <ItemGroup>
     <FxCompile Include="..\DirectX12_Class_02\Object3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -151,6 +138,34 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CLEYERA\Cleyera.cpp" />
+    <ClCompile Include="CLEYERA\Draw\Model.cpp" />
+    <ClCompile Include="CLEYERA\Draw\Rect.cpp" />
+    <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\Setup\DirectXSetup.cpp" />
+    <ClCompile Include="CLEYERA\Setup\SceneSetup.cpp" />
+    <ClCompile Include="CLEYERA\Setup\WinSetup.cpp" />
+    <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLEYERA\Cleyera.h" />
+    <ClInclude Include="CLEYERA\CleyeraStruct.h" />
+    <ClInclude Include="CLEYERA\Draw\Model.h" />
+    <ClInclude Include="CLEYERA\Draw\Rect.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
+    <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\Setup\DirectXSetup.h" />
+    <ClInclude Include="CLEYERA\Setup\SceneSetup.h" />
+    <ClInclude Include="CLEYERA\Setup\WinSetup.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector2.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector3.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector4.h" />
+    <ClInclude Include="CLEYERA\Vector\VectorTransform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
