@@ -7,56 +7,6 @@
 
 
 
-
-
-std::wstring ConvertString(const std::string& str)
-{
-	if (str.empty())
-	{
-		return std::wstring();
-	}
-
-	auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), NULL, 0);
-	if (sizeNeeded == 0)
-	{
-		return std::wstring();
-	}
-	std::wstring result(sizeNeeded, 0);
-	MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), &result[0], sizeNeeded);
-	return result;
-}
-
-std::string ConvertString(const std::wstring& str)
-{
-	if (str.empty())
-	{
-		return std::string();
-	}
-
-	auto sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), NULL, 0, NULL, NULL);
-	if (sizeNeeded == 0)
-	{
-		return std::string();
-	}
-	std::string result(sizeNeeded, 0);
-	WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), result.data(), sizeNeeded, NULL, NULL);
-	return result;
-}
-
-//Log
-void Log(const std::string& message)
-{
-	OutputDebugStringA(message.c_str());
-
-
-}
-
-
-
-
-
-
-
 /// <summary>
 /// Compiler
 /// </summary>
@@ -79,7 +29,7 @@ IDxcBlob* DirectXSetup::CompilerShader(
 	//1.hlslファイルを読む
 
 	//これからシェーダーをコンパイルする旨をログに出す
-	Log(ConvertString(std::format(L"Begin CompileShader, path:{}, profile:{}\n", filePath, profile)));
+	//Log(ConvertString(std::format(L"Begin CompileShader, path:{}, profile:{}\n", filePath, profile)));
 
 
 	//1.hlslファイルを読む
@@ -130,7 +80,7 @@ IDxcBlob* DirectXSetup::CompilerShader(
 
 	if (shaderError != nullptr && shaderError->GetStringLength() != 0)
 	{
-		Log(shaderError->GetStringPointer());
+		//Log(shaderError->GetStringPointer());
 
 		//警告・エラーダメゼッタイ
 		assert(false);
@@ -144,7 +94,7 @@ IDxcBlob* DirectXSetup::CompilerShader(
 	assert(SUCCEEDED(hr));
 
 	//成功したログを出す
-	Log(ConvertString(std::format(L"Compile Succeeded, path:{},profile:{}\n", filePath, profile)));
+	//Log(ConvertString(std::format(L"Compile Succeeded, path:{},profile:{}\n", filePath, profile)));
 
 	//もう使わないリソースを解放
 	shaderSource->Release();
@@ -223,7 +173,7 @@ void DirectXSetup::CreateDXGiFactory()
 		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE))
 		{
 			
-			Log(ConvertString(std::format(L"Use Adapater:{}\n", adapterDesc.Description)));
+			//Log(ConvertString(std::format(L"Use Adapater:{}\n", adapterDesc.Description)));
 			break;
 		}
 
@@ -257,7 +207,7 @@ void DirectXSetup::CreateDevice()
 	   if (SUCCEEDED(hr))
 	   {
 		
-		   Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
+		  // Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
 		   break;
 
 	   }
@@ -467,7 +417,7 @@ void DirectXSetup::CreatePSO()
 		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
+		//Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
