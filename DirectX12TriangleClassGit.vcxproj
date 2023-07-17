@@ -144,34 +144,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="..\DirectX12_Class_02\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CLEYERA\Cleyera.cpp" />
-    <ClCompile Include="CLEYERA\Draw\Model.cpp" />
-    <ClCompile Include="CLEYERA\Draw\Rect.cpp" />
-    <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
-    <ClCompile Include="CLEYERA\SetLog\Log.cpp" />
-    <ClCompile Include="CLEYERA\Setup\DirectXSetup.cpp" />
-    <ClCompile Include="CLEYERA\Setup\WinSetup.cpp" />
-    <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CLEYERA\Cleyera.h" />
-    <ClInclude Include="CLEYERA\CleyeraStruct.h" />
-    <ClInclude Include="CLEYERA\Draw\Model.h" />
-    <ClInclude Include="CLEYERA\Draw\Rect.h" />
-    <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
-    <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
-    <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
-    <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
-    <ClInclude Include="CLEYERA\SetLog\Log.h" />
-    <ClInclude Include="CLEYERA\Setup\DirectXSetup.h" />
-    <ClInclude Include="CLEYERA\Setup\WinSetup.h" />
-    <ClInclude Include="CLEYERA\Vector\Vector2.h" />
-    <ClInclude Include="CLEYERA\Vector\Vector3.h" />
-    <ClInclude Include="CLEYERA\Vector\Vector4.h" />
-    <ClInclude Include="CLEYERA\Vector\VectorTransform.h" />
-  </ItemGroup>
-  <ItemGroup>
     <FxCompile Include="Shader\Object3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -180,6 +152,27 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLEYERA\CLEYERA.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
+    <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\Models\Model.h" />
+    <ClInclude Include="CLEYERA\Setup\DX\DirectXSetup.h" />
+    <ClInclude Include="CLEYERA\Setup\Win\WinSetup.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector2.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector3.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector4.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CLEYERA\CLEYERA.cpp" />
+    <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\Models\Model.cpp" />
+    <ClCompile Include="CLEYERA\Setup\DX\DirectXSetup.cpp" />
+    <ClCompile Include="CLEYERA\Setup\Win\WinSetup.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

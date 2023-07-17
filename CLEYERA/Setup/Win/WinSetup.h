@@ -1,9 +1,12 @@
-#pragma once
+﻿#pragma once
+
+
 #include<windows.h>
 
 #include<string>
 #include<format>
 //#include"Log.h"
+
 
 class WindowsSetup
 {
@@ -33,7 +36,7 @@ public:
 
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-	HWND SetHwnd()
+	HWND GetHwnd()
 	{
 		return hwnd;
 	}

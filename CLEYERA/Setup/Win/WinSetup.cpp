@@ -2,26 +2,6 @@
 
 
 
-
-
-LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
-{
-	//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«ãŠã„ã¦å›ºæœ‰ã®å‹•ä½œã‚’è¡Œã†
-	switch (msg)
-	{
-		//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒç ´æ£„
-	case WM_DESTROY:
-		//OSã«å¯¾ã—ã‚¢ãƒ—ãƒªçµ‚äº†ã‚’ä¼ãˆã‚‹
-		PostQuitMessage(0);
-		return 0;
-	}
-	return DefWindowProc(hwnd, msg, wparam, lparam);
-}
-
-
-
-
-
 WindowsSetup::WindowsSetup()
 {
 }
@@ -30,33 +10,50 @@ WindowsSetup::~WindowsSetup()
 {
 }
 
+LRESULT CALLBACK WindowsSetup::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+{
+
+
+	//ƒƒbƒZ[ƒW‚É‚¨‚¢‚ÄŒÅ—L‚Ì“®ì‚ğs‚¤
+	switch (msg)
+	{
+		//ƒEƒCƒ“ƒhƒE‚ª”jŠü
+	case WM_DESTROY:
+		//OS‚É‘Î‚µƒAƒvƒŠI—¹‚ğ“`‚¦‚é
+		PostQuitMessage(0);
+		return 0;
+	}
+	return DefWindowProc(hwnd, msg, wparam, lparam);
+}
+
+
 void WindowsSetup::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
 
-	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ãƒ¼ã‚¸ãƒ£ãƒ¼
+	//ƒEƒCƒ“ƒhƒEƒvƒ[ƒWƒƒ[
 	wc_.lpfnWndProc = WindowProc;
 
-	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹å
-	wc_.lpszClassName = L"directXClass";
-	//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	//ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX–¼
+	wc_.lpszClassName = L"CLEYERA";
+	//ƒCƒ“ƒXƒ^ƒ“ƒX
 	wc_.hInstance = GetModuleHandle(nullptr);
-	//ã‚«ãƒ¼ã‚½ãƒ«
+	//ƒJ[ƒ\ƒ‹
 	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
 
 
 	RegisterClass(&wc_);
 
 
-	//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®é ˜åŸŸè¨­å®š
+	//ƒNƒ‰ƒCƒAƒ“ƒg‚Ì—Ìˆæİ’è
 	RECT wrc = { 0,0,kClientWidth,kClientHeight };
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
 
 
-	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç”Ÿæˆ
+	//ƒEƒCƒ“ƒhƒE‚Ì¶¬
 	hwnd = CreateWindow(
 		wc_.lpszClassName,
-		L"DirectX",
+		L"CLEYERA",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,

@@ -1,145 +1,109 @@
-#include"Cleyera.h"
+#include"CLEYERA.h"
 
-
-void Cleyera::Initialize(const int32_t Width, const int32_t Height)
+Cleyera::Cleyera()
 {
-	//windows
-	WinSetup_->Initialize(Width,Height);
-	//çµ‚äº†
-
-
-	//DirectX
-    DXSetup_->CreateDXGiFactory();
-
-	DXSetup_->CreateDevice();
-
-#ifdef _DEBUG
-	//ã‚¨ãƒ©ãƒ¼ã€è­¦å‘Š
-	DXSetup_->DebugErrorInfoQueue();
-
-#endif // _DEBUG
-	
-	//CommandList
-	DXSetup_->CreateCommands();
-	//swapChain
-	DXSetup_->CreateSwapChain(Width,Height,WinSetup_->SetHwnd());
-	//rtvDescritor
-	DXSetup_->CreatertvDescritorHeap();
-	//swapChainã‚’å¼•ã£å¼µã‚‹
-	DXSetup_->CreateSwapChainResorce();
-	//RTVã®è¨­å®šã¨ä½œæˆ
-	DXSetup_->SettingandCreateRTV();
-	//ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
-	DXSetup_->CreateFence();
-	//DXCã®åˆæœŸåŒ–
-	DXSetup_->DXCInitialize();
-	//PSOã®ç”Ÿæˆ
-	DXSetup_->CreatePSO();
-	//çµ‚äº†
-
-	//ã‚³ãƒãƒ³ãƒ‰ã¨ãƒ‡ãƒã‚¤ã‚¹ã®æƒ…å ±ã‚’é€ã‚‹
-	Model_->DirectXSetDevice(DXSetup_->GetDevice());
-	Model_->DirectXSetCommands(DXSetup_->GetCommands());
-
-	Rect_->DirectXSetDevice(DXSetup_->GetDevice());
-	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
 }
 
-void Cleyera::WinMSG(MSG &msg)
+Cleyera::~Cleyera()
+{
+}
+
+void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
 
-	WinSetup_->WinMSG(msg);
+	WinSetup = new WindowsSetup();
+	DXSetup = new DirectXSetup();
+	model = new Model();
+
+	//WinSetup‚Ì‰Šú‰»
+	
+
+	WinSetup->Initialize(kClientWidth, kClientHeight);
+
+	//
+	////DirectX‚Ì‰Šú‰»
+	//
+
+	///ƒtƒ@ƒNƒgƒŠ[ì¬
+	DXSetup->CreateDXGIFactorye();
+
+	///ƒfƒoƒCƒXì¬
+	DXSetup->CreateDevice();
+
+#ifdef _DEBUG
+
+	DXSetup->debugErrorInfoQueue();
+
+#endif // _DEBUG
+
+	///ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ì¶¬
+	DXSetup->CreateCommands();
+
+	//swapChain
+	DXSetup->CreateSwapChain(kClientWidth, kClientHeight, WinSetup->GetHwnd());
+	//rtvDescritor
+	DXSetup->CreatertvDescritorHeap();
+	//swapChain‚ğˆø‚Á’£‚é
+	DXSetup->CreateSwapChainResorce();
+	//RTV‚Ìİ’è‚Æì¬
+	DXSetup->SettingandCreateRTV();
+	//ƒtƒFƒ“ƒX‚Ì¶¬
+	DXSetup->CreateFence();
+
+	///ƒ‚ƒfƒ‹‚Ì‰Šú‰»
+
+	//DX‚Å‚Â‚­‚Á‚½‚à‚Ì‚ğ“]‘—
+	model->SetDevice(DXSetup->GetDevice());
+	model->SetCommands(DXSetup->GetCommands());
+
+	//DXC‚Ì‰Šú‰»
+	model->dxcInitialize();
+	//Compile‚·‚é‚½‚ß‚Ì‘Î‰ˆ—
+	model->InitializeDfIncludeHandler();
+	
+	///ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹ˆ—
+	model->CompileShaders();
+
+	//}Œ`•`‰æ‚ÌƒpƒCƒvƒ‰ƒCƒ“
+	model->ShapeCreatePSO();
+
+
+
+	model->ShaderRelease();
+}
+
+
+void Cleyera::WinMSG(MSG msg)
+{
+	WinSetup->WinMSG(msg);
 
 }
 
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
-	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
+
+	DXSetup->BeginFlame();
+	DXSetup->ScissorViewCommand(kClientWidth, kClientHeight);
+
 }
 
 void Cleyera::EndFlame()
 {
-	DXSetup_->EndFlame();
+	DXSetup->EndFlame();
 }
 
-/// <summary>
-/// ä¸‰è§’å½¢ã®é ‚ç‚¹ã®ä½œæˆ
-/// </summary>
-/// <param name="vertex"></param>
-void Cleyera::TriangleVertexCreate(BufferResource&vertex)
+ResourcePeroperty  Cleyera::CreateResource()
 {
-	Model_->CreateVertex(vertex);
+	ResourcePeroperty resultResource;
+	resultResource=model->CreateResource();
+	return resultResource;
 }
 
-/// <summary>
-/// å››è§’å½¢ã®é ‚ç‚¹ä½œæˆ
-/// </summary>
-/// <param name="vertex"></param>
-void Cleyera::RectVartexCreate(RectBufferResource& vertex)
+void Cleyera::TriangleDraw(Position position, unsigned int ColorCode, Matrix4x4 worldTransform, ResourcePeroperty Resource)
 {
-	Rect_->BufferCreate(vertex);
-}
-
-/// <summary>
-/// ä¸‰è§’å½¢ã®æç”»
-/// </summary>
-/// <param name="top"></param>
-/// <param name="left"></param>
-/// <param name="right"></param>
-/// <param name="vertex"></param>
-void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, BufferResource vertex)
-{
-	Model_->Draw( top, left,  right,ColorCode,vertex);
-}
-
-
-/// <summary>
-/// å››è§’å½¢ã®æç”»
-/// </summary>
-/// <param name="å·¦ä¸Š"></param>
-/// <param name="å³ä¸Š"></param>
-/// <param name="å·¦ä¸‹"></param>
-/// <param name="å³ä¸‹"></param>
-/// <param name="vertex"></param>
-void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, RectBufferResource vertex)
-{
-	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode, vertex);
-}
-
-/// <summary>
-/// ä¸‰è§’å½¢ã®é ‚ç‚¹ã®è§£æ”¾å‡¦ç†
-/// </summary>
-/// <param name="vartex"></param>
-void Cleyera::TriangleRelease(BufferResource Resource)
-{
-	Model_->VartexRelease(Resource);
-
-
-}
-
-void Cleyera::RectRelese(RectBufferResource Resource)
-{
-	Model_->VartexRelease(Resource.left);
-	Model_->VartexRelease(Resource.right);
+	model->ShapeDraw(position, ColorCode,worldTransform, Resource);
 
 }
 
 
-void Cleyera::Deleate()
-{
 
-	DXSetup_->Deleate();
-	WinSetup_->Deleate();
-	DXSetup_->ChackRelease();
-}
-
-Cleyera::Cleyera()
-{
-	
-}
-
-Cleyera::~Cleyera()
-{
-	DXSetup_->~DirectXSetup();
-	WinSetup_->~WindowsSetup();
-}
