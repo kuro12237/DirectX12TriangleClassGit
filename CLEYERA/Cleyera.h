@@ -6,6 +6,7 @@
 #include"CleyeraStruct.h"
 class Cleyera
 {
+
 public:
 	Cleyera();
 	~Cleyera();
