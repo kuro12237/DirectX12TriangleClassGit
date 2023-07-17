@@ -16,7 +16,8 @@
 
 #include "../Draw/Model.h"
 
-#include"../Log/Log.h"
+#include"../SetLog/Log.h"
+
 
 struct SwapChain
 {
