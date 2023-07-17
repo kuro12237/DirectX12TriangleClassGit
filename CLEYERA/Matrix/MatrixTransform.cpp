@@ -1,102 +1,7 @@
-#include"MatrixTransform.h"
+#include "MatrixTransform.h"
 
 
-
-
-MatrixTransform::MatrixTransform()
-{
-
-}
-
-MatrixTransform::~MatrixTransform()
-{
-
-}
-
-#pragma region 二次元行列
-
-#pragma region +-*
-Matrix2x2 MatrixTransform::Add(Matrix2x2 matrix1, Matrix2x2 matrix2)
-{
-	Matrix2x2 result;
-	result.m[0][0] = matrix1.m[0][0] + matrix2.m[0][0];
-	result.m[0][1] = matrix1.m[0][1] + matrix2.m[0][1];
-	result.m[1][0] = matrix1.m[1][0] + matrix2.m[1][0];
-	result.m[1][1] = matrix1.m[1][1] + matrix2.m[1][1];
-
-	return result;
-}
-
-Matrix2x2 MatrixTransform::Subtract(Matrix2x2 matrix1, Matrix2x2 matrix2)
-{
-	Matrix2x2 result;
-	result.m[0][0] = matrix1.m[0][0] - matrix2.m[0][0];
-	result.m[0][1] = matrix1.m[0][1] - matrix2.m[0][1];
-	result.m[1][0] = matrix1.m[1][0] - matrix2.m[1][0];
-	result.m[1][1] = matrix1.m[1][1] - matrix2.m[1][1];
-
-	return result;
-}
-
-Matrix2x2 MatrixTransform::Multiply(Matrix2x2 matrix1, Matrix2x2 matrix2)
-{
-	Matrix2x2 result;
-
-	result.m[0][0] = matrix1.m[0][0] * matrix2.m[0][0];
-	result.m[0][1] = matrix1.m[0][1] * matrix2.m[0][1];
-	result.m[1][0] = matrix1.m[1][0] * matrix2.m[1][0];
-	result.m[1][1] = matrix1.m[1][1] * matrix2.m[1][1];
-	return result;
-}
-
-#pragma endregion
-
-#pragma region 回転
-
-Matrix2x2 MatrixTransform::MakeRotate2x2Matrix(float theta)
-{
-	Matrix2x2 restult;
-	restult.m[0][0] = std::cosf(theta);
-	restult.m[0][1] = std::sinf(theta);
-	restult.m[1][0] = -std::sinf(theta);
-	restult.m[1][1] = std::cosf(theta);
-	return restult;
-}
-
-#pragma endregion 
-
-#pragma region 変換
-
-Matrix2x2 MatrixTransform::Inverse(Matrix2x2 matrix)
-{
-	Matrix2x2 result;
-	float determinant = matrix.m[0][0] * matrix.m[1][1] - matrix.m[0][1] * matrix.m[1][0];
-	assert(determinant != 0.0f);
-	float deteminanRacp = 1.0f / determinant;
-	result.m[0][0] = matrix.m[1][1] * deteminanRacp;
-	result.m[0][1] = -matrix.m[0][1] * deteminanRacp;
-	result.m[1][0] = -matrix.m[1][0] * deteminanRacp;
-	result.m[1][1] = matrix.m[0][0] * deteminanRacp;
-	return result;
-}
-
-Matrix2x2 MatrixTransform::Transpose(Matrix2x2 matrix)
-{
-	Matrix2x2 result;
-	result.m[0][0] = matrix.m[0][0];
-	result.m[0][1] = matrix.m[1][0];
-	result.m[1][0] = matrix.m[0][1];
-	result.m[1][1] = matrix.m[1][1];
-	return result;
-
-}
-
-#pragma endregion
-
-#pragma endregion
-
-
-#pragma region 三次元行列
+#pragma region �O�����s��
 
 #pragma region +-*
 
@@ -147,7 +52,7 @@ Matrix3x3 MatrixTransform::Multiply(const Matrix3x3& m1, const Matrix3x3& m2)
 
 #pragma endregion 
 
-#pragma region 移動・回転・大きさ
+#pragma region �ړ��E��]�E�傫��
 
 Matrix3x3 MatrixTransform::MakeTranslate3x3Matrix(Vector2 translate)
 {
@@ -192,24 +97,24 @@ Matrix3x3 MatrixTransform::MakeScaleMatrix(const Vector2 scale)
 	result.m[0][0] = scale.x;
 	result.m[0][1] = 0.0f;
 	result.m[0][2] = 0.0f;
-	
+
 
 	result.m[1][0] = 0.0f;
 	result.m[1][1] = scale.y;
 	result.m[1][2] = 0.0f;
-	
+
 
 	result.m[2][0] = 0.0f;
 	result.m[2][1] = 0.0f;
 	result.m[2][2] = 0.0f;
-	
+
 
 	return result;
 }
 
 #pragma endregion
 
-#pragma region 行列変換
+#pragma region �s��ϊ�
 
 Matrix3x3 MatrixTransform::MakeAffineMatrix(const Vector2 translate, float radian, const Vector2 scale)
 {
@@ -350,10 +255,14 @@ Matrix3x3 MatrixTransform::MakeviewportMatrix(float left, float top, float width
 
 #pragma endregion 
 
+MatrixTransform::MatrixTransform()
+{
+}
 
-#pragma region 四次元行列
+MatrixTransform::~MatrixTransform()
+{
+}
 
-#pragma region +-*
 Matrix4x4 MatrixTransform::Add(const Matrix4x4& m1, const Matrix4x4& m2)
 {
 	Matrix4x4 result;
@@ -369,6 +278,7 @@ Matrix4x4 MatrixTransform::Add(const Matrix4x4& m1, const Matrix4x4& m2)
 	return result;
 }
 
+
 Matrix4x4 MatrixTransform::Subract(const Matrix4x4& m1, const Matrix4x4& m2)
 {
 	Matrix4x4 result;
@@ -383,6 +293,7 @@ Matrix4x4 MatrixTransform::Subract(const Matrix4x4& m1, const Matrix4x4& m2)
 
 	return result;
 }
+
 
 Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 {
@@ -427,9 +338,7 @@ Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 	return result;
 }
 
-#pragma endregion 
-
-#pragma region スケール・移動・回転
+#pragma region �X�P�[���E�ړ��E��]
 Matrix4x4 MatrixTransform::MakeScaleMatrix(const Vector3 scale)
 {
 	Matrix4x4 result;
@@ -482,7 +391,7 @@ Matrix4x4 MatrixTransform::MakeTranslateMatrix(Vector3 translate)
 	return result;
 }
 
-#pragma region 回転
+#pragma region ��]
 Matrix4x4 MatrixTransform::MakeRotateXMatrix(float radian)
 {
 	Matrix4x4 result;
@@ -577,9 +486,10 @@ Matrix4x4 MatrixTransform::MakeRotateXYZMatrix(float radianX, float radianY, flo
 	return result;
 }
 #pragma endregion 
-#pragma endregion 
+#pragma endregion
 
-#pragma region 行列の変換
+
+#pragma region �s��̕ϊ�
 Matrix4x4 MatrixTransform::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate)
 {
 	Matrix4x4 result;
@@ -866,11 +776,12 @@ Matrix4x4 MatrixTransform::MakeViewportMatrix(float left, float top, float width
 
 }
 
+
 float MatrixTransform::Cot(float theta)
 {
-	
+
 	return (1.0f / tan(theta));
-	
+
 }
 
 
@@ -902,7 +813,3 @@ Matrix4x4 MatrixTransform::MakePerspectiveFovMatrix(float fovY, float aspectRati
 	return result;
 }
 
-
-#pragma endregion 
-
-#pragma endregion

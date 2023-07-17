@@ -18,6 +18,89 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CLEYERA\Camera\Camera.cpp" />
+    <ClCompile Include="CLEYERA\CLEYERA.cpp" />
+    <ClCompile Include="CLEYERA\DX\DirectXSetup.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="CLEYERA\ImGui\ImGuiManager.cpp" />
+    <ClCompile Include="CLEYERA\input\Input.cpp" />
+    <ClCompile Include="CLEYERA\LogManager\Log.cpp" />
+    <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\Models\Model.cpp" />
+    <ClCompile Include="CLEYERA\Models\Rect.cpp" />
+    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp" />
+    <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
+    <ClCompile Include="CLEYERA\Win\WinApp.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="scene\EngineDebug\EnegineDebug.cpp" />
+    <ClCompile Include="scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="scene\Title\Title.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLEYERA\Camera\Camera.h" />
+    <ClInclude Include="CLEYERA\CLEYERA.h" />
+    <ClInclude Include="CLEYERA\DX\DirectXSetup.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imconfig.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_dx12.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_internal.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="CLEYERA\ImGui\ImGuiManager.h" />
+    <ClInclude Include="CLEYERA\input\Input.h" />
+    <ClInclude Include="CLEYERA\LogManager\Log.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
+    <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\Models\Model.h" />
+    <ClInclude Include="CLEYERA\Models\Rect.h" />
+    <ClInclude Include="CLEYERA\TexManager\TexManager.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector2.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector3.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector4.h" />
+    <ClInclude Include="CLEYERA\Vector\VectorTransform.h" />
+    <ClInclude Include="CLEYERA\Win\WinApp.h" />
+    <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="scene\EngineDebug\EngineDebug.h" />
+    <ClInclude Include="scene\GameScene\GameScene.h" />
+    <ClInclude Include="scene\Title\Title.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CLEYERA\config\.editorconfig" />
+    <None Include="Shader\SpriteObject3d.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\ShapeObject3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Shader\ShapeObject3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Shader\SpriteObject3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Shader\SpriteObject3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -104,6 +187,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,6 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

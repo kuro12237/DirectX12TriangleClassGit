@@ -1,12 +1,12 @@
-
 #include"ImGuiManager.h"
+
 
 
 ImGuiManager::ImGuiManager()
 {
 }
 
-void ImGuiManager::Initialize(WindowsSetup* WinSetup_, DirectXSetup* DXSetup_)
+void ImGuiManager::Initialize(WinApp* WinSetup_, DirectXSetup* DXSetup_)
 {
 
 	IMGUI_CHECKVERSION();
@@ -24,14 +24,14 @@ void ImGuiManager::Initialize(WindowsSetup* WinSetup_, DirectXSetup* DXSetup_)
 	);
 }
 
-void ImGuiManager::BeginFlame(DirectXSetup *DXSetup_)
+void ImGuiManager::BeginFlame(DirectXSetup* DXSetup_)
 {
 
 	ImGui_ImplDX12_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-	
-	ID3D12DescriptorHeap* descripterHeap[] = { DXSetup_->GetSrvDescripterHeap()};
+
+	ID3D12DescriptorHeap* descripterHeap[] = { DXSetup_->GetSrvDescripterHeap() };
 	DXSetup_->GetCommands().List->SetDescriptorHeaps(1, descripterHeap);
 
 }
@@ -45,9 +45,7 @@ void ImGuiManager::EndFlame(DirectXSetup* DXSetup_)
 
 }
 
-void ImGuiManager::Release()
+void ImGuiManager::Finalize()
 {
 	ImGui_ImplDX12_Shutdown();
 }
-
-

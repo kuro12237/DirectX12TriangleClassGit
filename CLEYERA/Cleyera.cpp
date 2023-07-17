@@ -1,186 +1,183 @@
-#include"Cleyera.h"
-
-//cleyera//ã‚¯ãƒ¬ã‚¤ãƒ©
-//CLEYERA ENGINE
+#include"CLEYERA.h"
 
 
 Cleyera::Cleyera()
 {
-	WinSetup_ = new WindowsSetup();
-	DXSetup_ = new DirectXSetup();
-	SceSetup_ = new ScenceSetup();
-
-	Model_ = new Model();
-	Rect_ = new Rect();
-	ImGuiManager_ = new ImGuiManager();
-
-	vectorTransform_ = new VectorTransform();
-	matrixTransform_ = new MatrixTransform();
-
 }
+
 
 Cleyera::~Cleyera()
 {
-	delete WinSetup_;
-	delete DXSetup_;
-	delete SceSetup_;
-
-	delete ImGuiManager_;
-
-	delete Model_;
-	delete Rect_;
-
-	delete vectorTransform_;
-	delete matrixTransform_;
-
 }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="Width"></param>
-/// <param name="Height"></param>
-void Cleyera::Initialize(const int32_t Width, const int32_t Height)
+
+void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
-	//windows
-	WinSetup_->Initialize(Width,Height);
-	//çµ‚äº†
+	//WinApp‚Ì‰Šú‰»
+	
+	WinApp::Initialize(kClientWidth, kClientHeight);
 
-	//DirectX
-    DXSetup_->CreateDXGiFactory();
+	//
+	////DirectX‚Ì‰Šú‰»
+	//
+	
+	///ƒtƒ@ƒNƒgƒŠ[ì¬
+	
+	DirectXSetup::CreateDxgiFactory();
 
-	DXSetup_->CreateDevice();
+	///ƒfƒoƒCƒXì¬
+	DirectXSetup::CreateDevice();
 
 #ifdef _DEBUG
-	//ã‚¨ãƒ©ãƒ¼ã€è­¦å‘Š
-	DXSetup_->DebugErrorInfoQueue();
+
+	DirectXSetup::debugErrorInfoQueue();
 
 #endif // _DEBUG
-	
-	//CommandList
-	DXSetup_->CreateCommands();
+
+	///ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ì¶¬
+	DirectXSetup::CreateCommands();
+
 	//swapChain
-	DXSetup_->CreateSwapChain(Width,Height,WinSetup_->GetHwnd());
+	DirectXSetup::CreateSwapChain(kClientWidth, kClientHeight, WinApp::GetInstance()->GetHwnd());
+	
 	//rtvDescritor
-	DXSetup_->CreatertvDescritorHeap();
-	//swapChainã‚’å¼•ã£å¼µã‚‹
-	DXSetup_->CreateSwapChainResorce();
-	//RTVã®è¨­å®šã¨ä½œæˆ
-	DXSetup_->SettingandCreateRTV();
-	//ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
-	DXSetup_->CreateFence();
-	//DXCã®åˆæœŸåŒ–
-	DXSetup_->DXCInitialize();
-	//PSOã®ç”Ÿæˆ
-	DXSetup_->CreatePSO();
-	//çµ‚äº†
-
-	//ã‚³ãƒžãƒ³ãƒ‰ã¨ãƒ‡ãƒã‚¤ã‚¹ã®æƒ…å ±ã‚’é€ã‚‹
-	Model_->DirectXSetDevice(DXSetup_->GetDevice());
-	Model_->DirectXSetCommands(DXSetup_->GetCommands());
-
-	Rect_->DirectXSetDevice(DXSetup_->GetDevice());
-	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
+	DirectXSetup::CreatertvDescritorHeap();
 	
-	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåŒ–
-	 
-	CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
-	SceSetup_->SceneInitialize(camera, Width, Height);
+	//swapChain‚ðˆø‚Á’£‚é
+	DirectXSetup::CreateSwapChainResorce();
 	
-	
-	ImGuiManager_->Initialize(WinSetup_,DXSetup_);
+	//RTV‚ÌÝ’è‚Æì¬
+	DirectXSetup::SettingandCreateRTV();
 
+	//ƒtƒFƒ“ƒX‚Ì¶¬
+	DirectXSetup::CreateFence();
+
+	Input::DirectInputObjCreate();
+	Input::KeyDeviceCreate();
+
+
+	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXSetup::GetInstance());
+
+	TexManager::Initialize();
+
+	///ƒ‚ƒfƒ‹‚Ì‰Šú‰»
+
+	//DX‚Å‚Â‚­‚Á‚½‚à‚Ì‚ð“]‘—
+	
+	Model::SetDevice(DirectXSetup::GetInstance()->GetDevice());
+	Model::SetCommands(DirectXSetup::GetInstance()->GetCommands());
+
+	//DXC‚Ì‰Šú‰»
+	Model::dxcInitialize();
+	//Compile‚·‚é‚½‚ß‚Ì‘Î‰žˆ—
+
+	Model::InitializeDfIncludeHandler();
+
+	///ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹ˆ—
+	Model::CompileShaders();
+	
+	//}Œ`•`‰æ‚ÌƒpƒCƒvƒ‰ƒCƒ“
+	Model::ShapeCreatePSO();
+	
+	//Tex•`‰æ‚ÌƒpƒCƒvƒ‰ƒCƒ“
+	Model::SpriteCreatePSO();
+
+	//ƒRƒ“ƒpƒCƒ‹‚µ‚½ƒVƒF[ƒ_[‚Ì‰ð•ú
+	Model::ShaderRelease();
+	
+	//ƒJƒƒ‰‚Ì‰Šú‰»
+	Camera::Initialize(kClientWidth,kClientHeight);
 }
 
-void Cleyera::WinMSG(MSG &msg)
+
+void Cleyera::WinMSG(MSG msg)
 {
-
-	WinSetup_->WinMSG(msg);
-
+	WinApp::Msg(msg);
 }
-
-
 
 
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
+	ImGuiManager::BeginFlame(DirectXSetup::GetInstance());
 
-	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
-	DXSetup_->ScissorViewCommand(kClientWidth, kClientHeight);
-	ImGuiManager_->BeginFlame(DXSetup_);
-
-
+	DirectXSetup::BeginFlame();
+	DirectXSetup::ScissorViewCommand(kClientWidth, kClientHeight);
 }
+
 
 void Cleyera::EndFlame()
 {
+	ImGuiManager::EndFlame(DirectXSetup::GetInstance());
+	DirectXSetup::EndFlame();
+}
+
+
+void Cleyera::Finalize()
+{
+	Camera::Finalize();
+
+	ImGuiManager::Finalize();
 	
-	ImGuiManager_->EndFlame(DXSetup_);
-	DXSetup_->EndFlame();
-}
+	TexManager::Finalize();
 
-
-void Cleyera::TriangleResourceCreate(BufferResource&bufferResource)
-{
-	Model_->CreateVertex(bufferResource);
-}
-
-
-void Cleyera::RectResourceCreate(RectBufferResource& bufferResource)
-{
-	Rect_->BufferCreate(bufferResource);
-}
-
-
-void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource)
-{
+	Model::Finalize();
+	DirectXSetup::Finalize();
 	
-	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+	WinApp::Finalize();
 
-	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource);
+	DirectXSetup::ReleaseChack();
+
 }
 
 
-
-void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource bufferResouce)
+texResourceProperty Cleyera::LoadTex(const std::string& filePath)
 {
+	texResourceProperty tex;
 
-	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+	tex = TexManager::LoadTexture(filePath, DirectXSetup::GetInstance());
 
-	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,bufferResouce);
+	return tex;
 }
 
-void Cleyera::CameraUpdate(Transform cameraTransform)
+
+ResourcePeroperty Cleyera::CreateSpriteResource()
 {
-
-	SceSetup_->TransformUpdate(cameraTransform);
-
+	ResourcePeroperty ResultResource;
+	
+	ResultResource = Model::CreateTriangleSpriteResource();
+	return ResultResource;
 }
 
-void Cleyera::TriangleRelease(BufferResource Resource)
+
+void Cleyera::SpriteTriangleResourceRelease(ResourcePeroperty &Resource, texResourceProperty &tex)
 {
-	Model_->VartexRelease(Resource);
-
-
+	Model::TriangleSpriteResourceRelease(Resource, tex);
 }
 
-void Cleyera::RectRelese(RectBufferResource Resource)
+
+
+ResourcePeroperty  Cleyera::CreateShapeResource()
 {
-	Model_->VartexRelease(Resource.left);
-	Model_->VartexRelease(Resource.right);
-
+	ResourcePeroperty resultResource;
+	resultResource=Model::GetInstance()->CreateShapeResource();
+	return resultResource;
 }
 
 
-void Cleyera::Deleate()
+void Cleyera::TriangleResourceRelease(ResourcePeroperty Resource)
 {
-	ImGuiManager_->Release();
-
-	DXSetup_->Deleate();
-	WinSetup_->Deleate();
-	DXSetup_->ChackRelease();
+	Model::ShapeResourceRelease(Resource);
 }
 
 
+void Cleyera::TriangleDraw(Position position, unsigned int ColorCode, Matrix4x4 worldTransform, ResourcePeroperty Resource)
+{
+	Matrix4x4 m = Camera::worldViewProjectionMatrixFanc(worldTransform);
+	Model::ShapeDraw(position, ColorCode,m, Resource);
+}
 
 
+void Cleyera::SpriteTriangleDraw(Position position, unsigned int color, Matrix4x4 worldTransform, ResourcePeroperty Resource, texResourceProperty tex)
+{
+	Model::TriangleSpriteDraw(position, color, worldTransform, Resource, tex);
+}

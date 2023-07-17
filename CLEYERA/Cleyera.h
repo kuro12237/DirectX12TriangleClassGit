@@ -1,18 +1,23 @@
-#pragma once
-#include"Setup/WinSetup.h"
-#include "Setup/DirectXSetup.h"
-#include"Setup/SceneSetup.h"
-#include"Draw/Model.h"
-#include"Draw/Rect.h"
-#include"CleyeraStruct.h"
-#include"ImGuiManager/ImGuiManager.h"
-
-#include<string>
+﻿#pragma once
 #include<format>
+#include"Win/WinApp.h"
+#include"DX/DirectXSetup.h"
 
-/// <summary>
-/// CLEYERA ENGINE
-/// </summary>
+#include"Models/Model.h"
+#include"TexManager/TexManager.h"
+
+#include"ImGui/ImGuiManager.h"
+#include"Camera/Camera.h"
+#include"input/Input.h"
+
+struct Triangle
+{
+	Position position;
+	ResourcePeroperty Resources;
+	unsigned int Color;
+	Matrix4x4 matrix;
+};
+
 class Cleyera
 {
 public:
@@ -20,107 +25,120 @@ public:
 	~Cleyera();
 
 	/// <summary>
-	/// Adapterの初期化
-	/// </summary>
-	/// <param name="Width"></param>
-	/// <param name="Height"></param>
-	void Initialize(const int32_t Width, const int32_t Height);
-
-	/// <summary>
-	/// WinMessageをWinSetupに送る
-	/// </summary>
-	/// <param name="msg"></param>
-	void WinMSG( MSG &msg);
-
-	/// <summary>
-	/// ループの最初に行う処理
+	/// 初期化
 	/// </summary>
 	/// <param name="kClientWidth"></param>
 	/// <param name="kClientHeight"></param>
-	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
+	static void Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight);
 
 	/// <summary>
-	/// ループの最終処理
+	/// 解放
 	/// </summary>
-	void EndFlame();
+	static void Finalize();
+#pragma region ループする必要がある処理
+
 
 	/// <summary>
-	/// 三角形の頂点の生成
+	/// メッセージをWinSetupに転送
 	/// </summary>
-	/// <param name="vertex"></param>
-	void TriangleResourceCreate(BufferResource &bufferResource);
-		
-	/// <summary>
-	/// 四角形の頂点の作成
-	/// </summary>
-	/// <param name="bufferResource"></param>
-	void RectResourceCreate(RectBufferResource &bufferResource);
+	/// <param name="msg"></param>
+	static void WinMSG(MSG msg);
 
+	static void BeginFlame(const int32_t  kClientWidth, const int32_t  kClientHeight);
+
+	static void EndFlame();
+		  
+	
+#pragma region テクスチャー
+
+	/// <summary>
+	/// テクスチャの読み込み
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
+	static texResourceProperty LoadTex(const std::string& filePath);
+
+
+
+
+#pragma endregion
+
+
+#pragma region 三角形
+
+	/// <summary>
+	/// 頂点を作る
+	/// </summary>
+	/// <param name="Resource"></param>
+	static	ResourcePeroperty CreateShapeResource();
+
+	/// <summary>
+	/// 三角形のResourceの解放
+	/// </summary>
+	static void TriangleResourceRelease(
+		ResourcePeroperty Resource);
+	
 	/// <summary>
 	/// 三角形の表示
 	/// </summary>
-	/// <param name="top"></param>
-	/// <param name="left"></param>
-	/// <param name="right"></param>
-	/// <param name="三角形の頂点"></param>
-	void TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource vertex);
+	/// <param name="position"></param>
+	/// <param name="Color"></param>
+	/// <param name="worldTransform"></param>
+	/// <param name="Resource"></param>
+	static void TriangleDraw(
+		Position position,unsigned int Color,
+		Matrix4x4 worldTransform,
+		ResourcePeroperty Resource);
+
 
 	/// <summary>
-	/// 四角形の表示/// </summary>
-	/// <param name="左上"></param>
-	/// <param name="右上"></param>
-	/// <param name="左下"></param>
-	/// <param name="右下"></param>
-	/// <param name="vertex"></param>
-	void RectDraw(Vector4 lefttop, Vector4 righttop, Vector4 leftdown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource vertex);
-	
-	/// <summary>
-	/// カメラ位置更新処理
+	/// テクスチャ描画のResourceの作成
 	/// </summary>
-	/// <param name="cameraTransform"></param>
-	void CameraUpdate(Transform cameraTransform);
+	/// <returns></returns>
+	static ResourcePeroperty CreateSpriteResource();
 
 	/// <summary>
-	/// 三角形の頂点の解放処理
+	/// 三角形の表示(テクスチャ)
 	/// </summary>
-	/// <param name="vartex"></param>
-	void TriangleRelease(BufferResource vartex);
-
+	/// <param name=""></param>
+	/// <param name="color"></param>
+	/// <param name="worldTransform"></param>
+	/// <param name="Resource"></param>
+	/// <param name="tex"></param>
+	static void SpriteTriangleDraw(
+		Position position, unsigned int color,
+		Matrix4x4 worldTransform,
+		ResourcePeroperty Resource,
+		texResourceProperty tex
+	);
 	/// <summary>
-	/// 四角形の頂点解放処理
-	/// </summary>
-	/// <param name="vartex"></param>
-	void RectRelese(RectBufferResource vartex);
+    /// リソースの解放
+    /// </summary>
+    /// <param name="Resource"></param>
+    /// <param name="tex"></param>
+	static void SpriteTriangleResourceRelease(
+		ResourcePeroperty& Resource,
+		texResourceProperty& tex
+	);
+
+#pragma endregion
+
+#pragma region 四角形
 
 
-	/// <summary>
-	/// CleyeraEngineの解放
-	/// </summary>
-	void Deleate();
-
-	
 
 
+#pragma endregion
 
-	
+
+#pragma endregion
+
+
 private:
 
 
-	WindowsSetup* WinSetup_ =nullptr;
-	DirectXSetup* DXSetup_ = nullptr;
-	ScenceSetup* SceSetup_ = nullptr;
-	Model* Model_ = nullptr;
-	Rect* Rect_ = nullptr;
-	ImGuiManager* ImGuiManager_=nullptr;
-
-
-	//
-	VectorTransform* vectorTransform_ =nullptr;
-	MatrixTransform* matrixTransform_ =nullptr;
-
 
 	
+
 };
-
-
 
