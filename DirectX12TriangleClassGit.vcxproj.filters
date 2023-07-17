@@ -67,6 +67,9 @@
     <Filter Include="Scene\Title">
       <UniqueIdentifier>{126e8420-b3c5-4516-b090-4f4f308a0c52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\config">
+      <UniqueIdentifier>{99e9f466-6500-409d-ab44-7e6040484eef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -249,9 +252,11 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CLEYERA\config\.editorconfig" />
     <None Include="Shader\SpriteObject3d.hlsli">
       <Filter>Shader</Filter>
+    </None>
+    <None Include="CLEYERA\config\.editorconfig">
+      <Filter>CLEYERA\config</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
