@@ -1,7 +1,7 @@
 #pragma once
 
-#include"../externals/DirectXTex/DirectXTex/d3dx12.h"
-#include"../externals/DirectXTex/DirectXTex/DirectXTex.h"
+#include"../externals/DirectXTex/d3dx12.h"
+#include"../externals/DirectXTex/DirectXTex.h"
 #include"../LogManager/Log.h"
 #include"../DX/DirectXSetup.h"
 
