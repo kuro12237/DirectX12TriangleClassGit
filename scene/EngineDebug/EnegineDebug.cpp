@@ -47,7 +47,7 @@ void EngineDebug::Update(Game* game)
 	StateTimer--;
 	if (StateTimer<0)
 	{
-		Game::ChangeState(new Title());
+		//Game::ChangeState(new Title());
 
 	}
 	
