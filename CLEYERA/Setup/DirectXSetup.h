@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include<windows.h>
 #include<string>
 #include <dxgidebug.h>
@@ -143,7 +143,7 @@ public:
 	/// <summary>
 	/// ループの一番最初に行う処理
 	/// </summary>
-	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
+	void BeginFlame();
 
 	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 	

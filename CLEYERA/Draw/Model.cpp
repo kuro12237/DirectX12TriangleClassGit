@@ -1,4 +1,4 @@
-#include"Model.h"
+﻿#include"Model.h"
 
 Model::Model()
 {
@@ -65,10 +65,10 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte,ID3D12Resourc
 	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	resultBufferView.SizeInBytes = sizeInbyte;
+	resultBufferView.SizeInBytes = UINT(sizeInbyte);
 
 	//1頂点あたりのサイズ
-	resultBufferView.StrideInBytes = sizeInbyte / 3;
+	resultBufferView.StrideInBytes = UINT(sizeInbyte / 3);
 	return resultBufferView;
 }
 

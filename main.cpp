@@ -1,4 +1,4 @@
-#include"CLEYERA/Cleyera.h"
+﻿#include"CLEYERA/Cleyera.h"
 #define Triangle_Property_MAX 15
 
 #include"CLEYERA/Matrix/MatrixTransform.h"
@@ -36,7 +36,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const int32_t kClientHeight = 720;
 
 	MatrixTransform* matrixTransform_ = new MatrixTransform();
-	VectorTransform* VectorTransform_ = new VectorTransform();
+	//VectorTransform* VectorTransform_ = new VectorTransform();
 
 	Cleyera_->Initialize(kClientWidth, kClientHeight);
 
@@ -189,7 +189,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	float rotate = 0.0f;
 	Vector3 translate = {0.03f,0.0f,0.0f};
-	float speed = 0.01;
+	float speed = 0.01f;
 
 	
 	int timer = 0;
@@ -214,7 +214,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			
 		}
-		rotate += 0.03;
+		rotate += 0.03f;
 		Transform CameraPosition = { {0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 		timer++;
 		if (timer>=120)
@@ -227,10 +227,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		if (translate.x<=-2.0f)
 		{
-			speed = 0.01;
+			speed = 0.01f;
 		}if (translate.x >= 2.0f)
 		{
-			speed = -0.01;
+			speed = -0.01f;
 		}
 		//translate.x += speed;
 		/// 
@@ -247,7 +247,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < 2; i++)
 		{
 
-			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, RED,
+			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,unsigned int( RED),
 				TriangleProperty_[i].matrixTransform,
 				TriangleProperty_[i].ResourceData);
 		}

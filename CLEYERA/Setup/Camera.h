@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"../CleyeraStruct.h"
 
 #include"../Matrix/MatrixTransform.h"
@@ -9,11 +9,11 @@ struct  CameraTransform
 	Transform transform;
 	float aspectRatio;
 };
-class ScenceSetup
+class Camera
 {
 public:
-	ScenceSetup();
-	~ScenceSetup();
+	Camera();
+	~Camera();
     
 	/// <summary>
 	/// シーンの初期化

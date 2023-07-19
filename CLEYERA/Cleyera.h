@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 #include"Setup/WinSetup.h"
 #include "Setup/DirectXSetup.h"
-#include"Setup/SceneSetup.h"
+#include"Setup/Camera.h"
 #include"Draw/Model.h"
 #include"Draw/Rect.h"
 #include"CleyeraStruct.h"
@@ -108,7 +108,7 @@ private:
 
 	WindowsSetup* WinSetup_ =nullptr;
 	DirectXSetup* DXSetup_ = nullptr;
-	ScenceSetup* SceSetup_ = nullptr;
+	Camera* SceSetup_ = nullptr;
 	Model* Model_ = nullptr;
 	Rect* Rect_ = nullptr;
 	ImGuiManager* ImGuiManager_=nullptr;

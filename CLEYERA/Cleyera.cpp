@@ -8,7 +8,7 @@ Cleyera::Cleyera()
 {
 	WinSetup_ = new WindowsSetup();
 	DXSetup_ = new DirectXSetup();
-	SceSetup_ = new ScenceSetup();
+	SceSetup_ = new Camera();
 
 	Model_ = new Model();
 	Rect_ = new Rect();
@@ -105,7 +105,7 @@ void Cleyera::WinMSG(MSG &msg)
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 
-	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
+	DXSetup_->BeginFlame();
 	DXSetup_->ScissorViewCommand(kClientWidth, kClientHeight);
 	ImGuiManager_->BeginFlame(DXSetup_);
 

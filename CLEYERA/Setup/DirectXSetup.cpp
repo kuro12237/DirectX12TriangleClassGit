@@ -503,7 +503,7 @@ void DirectXSetup::CreatePSO()
 
 
 
-void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
+void DirectXSetup::BeginFlame()
 {
 	
 	//書き込むスワップチェーンのindexをとる
