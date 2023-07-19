@@ -62,10 +62,10 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferVier(size_t sizeInbyte,ID3D12Resourc
 	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	resultBufferView.SizeInBytes = sizeInbyte;
+	resultBufferView.SizeInBytes = UINT(sizeInbyte);
 
 	//1頂点あたりのサイズ
-	resultBufferView.StrideInBytes = sizeInbyte / 3;
+	resultBufferView.StrideInBytes = UINT(sizeInbyte / 3);
 	return resultBufferView;
 }
 
@@ -116,7 +116,7 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 
 	Transform camera={ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} };
 
-	Matrix4x4 projectionMatrix = matrixTransform_->MakePerspectiveFovMatrix(0.45, 1280.0f / 720.0f, 0.1f, 100.0f);
+	Matrix4x4 projectionMatrix = matrixTransform_->MakePerspectiveFovMatrix(0.45f, 1280.0f / 720.0f, 0.1f, 100.0f);
 	Matrix4x4 cameraMatrix = matrixTransform_->MakeAffineMatrix(camera.scale, camera.rotate, camera.translate);
 	Matrix4x4 viewMatrix = matrixTransform_->Inverse(cameraMatrix);
 

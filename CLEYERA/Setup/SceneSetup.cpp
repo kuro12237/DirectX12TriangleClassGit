@@ -9,15 +9,15 @@ ScenceSetup::ScenceSetup()
 void ScenceSetup::SceneInitialize(CameraTransform cameraTransform_, int32_t kWindowWidth_, int32_t kwindowHeight_)
 {
 	cameraTransform.transform = cameraTransform_.transform;
-	cameraTransform.aspectRatio = kWindowWidth_ / kwindowHeight_;
+	cameraTransform.aspectRatio = float( kWindowWidth_ / kwindowHeight_);
 	//cameraMatrix = matrixTransform->MakeAffineMatrix(cameraTransform.transform.scale, cameraTransform.transform.rotate, cameraTransform.transform.translate);
 }
 
 void ScenceSetup::TransformUpdate(Transform cameraTransform_)
 {
-	//cameraTransform.transform.rotate = vectorTransform_->Add(cameraTransform.transform.rotate, cameraTransform_.rotate);
-	//cameraTransform.transform.scale = vectorTransform_->Add(cameraTransform.transform.scale, cameraTransform_.scale);
-	//cameraTransform.transform.translate = vectorTransform_->Add(cameraTransform.transform.translate, cameraTransform_.translate);
+	cameraTransform.transform.rotate = vectorTransform_->Add(cameraTransform.transform.rotate, cameraTransform_.rotate);
+	cameraTransform.transform.scale = vectorTransform_->Add(cameraTransform.transform.scale, cameraTransform_.scale);
+	cameraTransform.transform.translate = vectorTransform_->Add(cameraTransform.transform.translate, cameraTransform_.translate);
 	//cameraTransform.transform.translate.x += cameraTransform_.translate.x;
 
 

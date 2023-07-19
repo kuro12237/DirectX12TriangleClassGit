@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 ///ベクトル
 #include"../Vector/Vector2.h"

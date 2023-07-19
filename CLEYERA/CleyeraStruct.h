@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"Vector/Vector4.h"
 #include<windows.h>
 #include<string>

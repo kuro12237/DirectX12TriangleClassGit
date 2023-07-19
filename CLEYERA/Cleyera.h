@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"Setup/WinSetup.h"
 #include "Setup/DirectXSetup.h"
 #include"Setup/SceneSetup.h"

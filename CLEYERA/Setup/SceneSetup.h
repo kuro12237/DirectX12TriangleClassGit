@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"../CleyeraStruct.h"
 
 #include"../Matrix/MatrixTransform.h"
