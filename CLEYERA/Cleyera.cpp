@@ -1,4 +1,4 @@
-#include"Cleyera.h"
+﻿#include"Cleyera.h"
 
 
 void Cleyera::Initialize(const int32_t Width, const int32_t Height)
