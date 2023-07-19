@@ -1,4 +1,4 @@
-#include"Cleyera.h"
+﻿#include"Cleyera.h"
 
 //cleyera//クレイラ
 //CLEYERA ENGINE
