@@ -21,13 +21,11 @@
 struct  RTV
 {
 	ID3D12DescriptorHeap* DescritorHeap;
-	//D3D12_DESCRIPTOR_HEAP_DESC rtvDescritorHeapDesc{};
 
 
-	//D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
+
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
 
-	//RTV��2���̂Ńf�B�X�N���v�^��2�p��
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 };
 struct SwapChain
@@ -40,12 +38,12 @@ struct SwapChain
 
 struct Commands
 {
-	//�R�}���h�L���[
+
 	ID3D12CommandQueue* Queue;
 	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
-	//�R�}���h�A���[�P�[�^
+
 	ID3D12CommandAllocator* Allocator;
-	//�R�}���h���X�g
+
 	ID3D12GraphicsCommandList* List;
 };
 
@@ -63,27 +61,27 @@ public:
 #pragma region Initialize�Ŏg���֐�
 
 	/// <summary>
-	/// DXGI�t�@�N�g���[�̍쐬
+	/// ファクトリーの作成
 	/// </summary>
 	void CreateDXGIFactorye();
 
 	/// <summary>
-	/// �f�o�C�X�̍쐬
+	///デバイス作成
 	/// </summary>
 	void CreateDevice();
 
 	/// <summary>
-	/// windows11�ł�DXGI�f�o�b�O���C���[��DX12�f�o�b�O���C���[�̑��݃o�O�ɂ��G���[�`�F�b�N
+	/// 
 	/// </summary>
 	void debugErrorInfoQueue();
 
 	/// <summary>
-    /// �R�}���h���X�g�̐���
+    /// コマンド作成
     /// </summary>
 	void CreateCommands();
 
 	/// <summary>
-    /// �X���b�v�`�F�[���̐ݒ�
+    /// スワップチェイン作成
     /// </summary>
 	void CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_);
 
@@ -98,12 +96,12 @@ public:
 	void CreateSwapChainResorce();
 
 	/// <summary>
-	/// RTV�̐���
+	/// RTV
 	/// </summary>
 	void SettingandCreateRTV();
 
 	/// <summary>
-	/// �t�F���X�̐���
+	/// フェンス作成
 	/// </summary>
 	void CreateFence();
 
@@ -118,7 +116,7 @@ public:
 	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 
 	/// <summary>
-	/// �r���[�|�[�g�̐ݒ�
+	/// ビューポート
 	/// </summary>
 	/// <param name="kClientWidth"></param>
 	/// <param name="kClientHeight"></param>
@@ -134,7 +132,7 @@ public:
 
 private:
 
-	//�Ńo�b�N�p
+	
 	ID3D12Debug1* debugController = nullptr;
 
 
@@ -153,7 +151,7 @@ private:
 	RTV rtv;
 	ID3D12DescriptorHeap* srvDescriptorHeap;
 
-	//�t�F���X
+	//フェンス
 	ID3D12Fence* fence = nullptr;
 	uint64_t fenceValue;
 	HANDLE fenceEvent;
