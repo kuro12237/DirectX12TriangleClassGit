@@ -27,7 +27,7 @@ struct  RTV
 	//D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
 
-	//RTV‚ğ2‚Âì‚é‚Ì‚ÅƒfƒBƒXƒNƒŠƒvƒ^‚ğ2‚Â—pˆÓ
+	//RTVï¿½ï¿½2ï¿½Âï¿½ï¿½Ì‚Åƒfï¿½Bï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½^ï¿½ï¿½2ï¿½Â—pï¿½ï¿½
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 };
 struct SwapChain
@@ -40,12 +40,12 @@ struct SwapChain
 
 struct Commands
 {
-	//ƒRƒ}ƒ“ƒhƒLƒ…[
+	//ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½Lï¿½ï¿½ï¿½[
 	ID3D12CommandQueue* Queue;
 	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
-	//ƒRƒ}ƒ“ƒhƒAƒ[ƒP[ƒ^
+	//ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½Aï¿½ï¿½ï¿½[ï¿½Pï¿½[ï¿½^
 	ID3D12CommandAllocator* Allocator;
-	//ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	//ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Xï¿½g
 	ID3D12GraphicsCommandList* List;
 };
 
@@ -60,30 +60,30 @@ public:
 
 
 
-#pragma region Initialize‚Åg‚¤ŠÖ”
+#pragma region Initializeï¿½Ågï¿½ï¿½ï¿½Öï¿½
 
 	/// <summary>
-	/// DXGIƒtƒ@ƒNƒgƒŠ[‚Ìì¬
+	/// DXGIï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½[ï¿½Ìì¬
 	/// </summary>
 	void CreateDXGIFactorye();
 
 	/// <summary>
-	/// ƒfƒoƒCƒX‚Ìì¬
+	/// ï¿½fï¿½oï¿½Cï¿½Xï¿½Ìì¬
 	/// </summary>
 	void CreateDevice();
 
 	/// <summary>
-	/// windows11‚Å‚ÌDXGIƒfƒoƒbƒOƒŒƒCƒ„[‚ÆDX12ƒfƒoƒbƒOƒŒƒCƒ„[‚Ì‘ŠŒİƒoƒO‚É‚æ‚éƒGƒ‰[ƒ`ƒFƒbƒN
+	/// windows11ï¿½Å‚ï¿½DXGIï¿½fï¿½oï¿½bï¿½Oï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½DX12ï¿½fï¿½oï¿½bï¿½Oï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì‘ï¿½ï¿½İƒoï¿½Oï¿½É‚ï¿½ï¿½Gï¿½ï¿½ï¿½[ï¿½`ï¿½Fï¿½bï¿½N
 	/// </summary>
 	void debugErrorInfoQueue();
 
 	/// <summary>
-    /// ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ì¶¬
+    /// ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Xï¿½gï¿½Ìï¿½ï¿½ï¿½
     /// </summary>
 	void CreateCommands();
 
 	/// <summary>
-    /// ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ìİ’è
+    /// ï¿½Xï¿½ï¿½ï¿½bï¿½vï¿½`ï¿½Fï¿½[ï¿½ï¿½ï¿½Ìİ’ï¿½
     /// </summary>
 	void CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_);
 
@@ -93,17 +93,17 @@ public:
 	void CreatertvDescritorHeap();
 
 	/// <summary>
-	///  ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ì¶¬
+	///  ï¿½Xï¿½ï¿½ï¿½bï¿½vï¿½`ï¿½Fï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
 	/// </summary>
 	void CreateSwapChainResorce();
 
 	/// <summary>
-	/// RTV‚Ì¶¬
+	/// RTVï¿½Ìï¿½ï¿½ï¿½
 	/// </summary>
 	void SettingandCreateRTV();
 
 	/// <summary>
-	/// ƒtƒFƒ“ƒX‚Ì¶¬
+	/// ï¿½tï¿½Fï¿½ï¿½ï¿½Xï¿½Ìï¿½ï¿½ï¿½
 	/// </summary>
 	void CreateFence();
 
@@ -111,14 +111,14 @@ public:
 	ID3D12Device* GetDevice() { return device; }
 	Commands GetCommands() { return commands; }
 
-#pragma region ƒ‹[ƒv
+#pragma region ï¿½ï¿½ï¿½[ï¿½v
 
 	void BeginFlame();
 
 	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 
 	/// <summary>
-	/// ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+	/// ï¿½rï¿½ï¿½ï¿½[ï¿½|ï¿½[ï¿½gï¿½Ìİ’ï¿½
 	/// </summary>
 	/// <param name="kClientWidth"></param>
 	/// <param name="kClientHeight"></param>
@@ -134,7 +134,7 @@ public:
 
 private:
 
-	//‚ÅƒoƒbƒN—p
+	//ï¿½Åƒoï¿½bï¿½Nï¿½p
 	ID3D12Debug1* debugController = nullptr;
 
 
@@ -153,7 +153,7 @@ private:
 	RTV rtv;
 	ID3D12DescriptorHeap* srvDescriptorHeap;
 
-	//ƒtƒFƒ“ƒX
+	//ï¿½tï¿½Fï¿½ï¿½ï¿½X
 	ID3D12Fence* fence = nullptr;
 	uint64_t fenceValue;
 	HANDLE fenceEvent;
