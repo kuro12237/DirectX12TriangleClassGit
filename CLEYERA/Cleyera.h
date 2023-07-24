@@ -80,7 +80,7 @@ public:
 	/// <param name="Resource"></param>
 	static void TriangleDraw(
         Vector3 position,unsigned int Color,
-		Matrix4x4 worldTransform,
+		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
 
 

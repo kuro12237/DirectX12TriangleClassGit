@@ -15,7 +15,7 @@ void EngineDebug::Initialize(GameScene* game)
 
 	worldTransform_.Initiallize();
 
-	worldTransform_.scale_ = { 2,2,2 };
+	worldTransform_.scale_ = { 1,1,1 };
 
 
 }
@@ -42,7 +42,7 @@ void EngineDebug::Draw(GameScene* game)
 	Cleyera::TriangleDraw(
 		pos_,
 		color_, 
-		worldTransform_.matWorld_,
+		worldTransform_,
 		resource_
 	);
 }

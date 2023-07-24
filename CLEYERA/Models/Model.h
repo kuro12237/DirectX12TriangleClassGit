@@ -26,7 +26,7 @@
 
 #include"../TexManager/TexManager.h"
 #include"../Vector/Vector2.h"
-
+#include"../WorldTransform/WorldTransform.h"
 
 #define WHITE 0xFFFFFFFF
 #define BLACK 0x000000FF
@@ -172,7 +172,7 @@ public:
 	/// <param name="Resource"></param>
 	static void ShapeDraw(
 		Vector3 position, unsigned int Color, 
-		Matrix4x4 matrix,
+		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
 
 	/// <summary>
