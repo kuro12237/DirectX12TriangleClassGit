@@ -32,8 +32,6 @@ private:
 	WorldTransform worldTransform_;
 
 	
-
-	
 	int StateTimer = 300;
 };
 

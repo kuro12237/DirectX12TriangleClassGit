@@ -13,7 +13,7 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Initialize()
 {
-	//Engin‰Šú‰»
+	//Engine‰Šú‰»
 	Cleyera::Initialize(
 		GameScene::GetInstance()->kClientWidth,
 		GameScene::GetInstance()->kClientHeight
