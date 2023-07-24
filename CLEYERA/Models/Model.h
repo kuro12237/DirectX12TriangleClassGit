@@ -184,29 +184,6 @@ public:
 	
 #pragma endregion
 
-#pragma region ‰~
-
-
-
-#pragma endregion
-
-#pragma region ‰æ‘œ•\Ž¦
-
-	/*
-	static ResourcePeroperty CreateTriangleSpriteResource();
-
-	static void TriangleSpriteDraw(
-		Position position, unsigned int color,
-		Matrix4x4 worldTransform,
-		ResourcePeroperty Resource,
-		texResourceProperty tex);
-
-	static void TriangleSpriteResourceRelease(ResourcePeroperty &Resource,texResourceProperty &tex);
-	*/
-	
-#pragma endregion
-
-
 private:
 
 	/// <summary>

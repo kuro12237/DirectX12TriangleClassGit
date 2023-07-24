@@ -23,7 +23,6 @@ void GameScene::Initialize()
 		GameScene::GetInstance()->kClientHeight
 	);
 
-	///ゲームシーンの初期化
 
 	GameScene::GetInstance()->state_ = new EngineDebug();
 
@@ -36,9 +35,11 @@ void GameScene::Run()
 
 	BYTE key[256] = { 0 };
 
+	///ゲームシーンの初期化
+
 	GameScene::GetInstance()->state_->Initialize(GameScene::GetInstance());
 
-	//ゲームスープ
+	//ゲーム更新処理
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))

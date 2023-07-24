@@ -34,7 +34,6 @@
     <ClCompile Include="CLEYERA\LogManager\Log.cpp" />
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\Models\Model.cpp" />
-    <ClCompile Include="CLEYERA\Models\Rect.cpp" />
     <ClCompile Include="CLEYERA\TexManager\TexManager.cpp" />
     <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Win\WinApp.cpp" />
@@ -65,7 +64,6 @@
     <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
     <ClInclude Include="CLEYERA\Models\Model.h" />
-    <ClInclude Include="CLEYERA\Models\Rect.h" />
     <ClInclude Include="CLEYERA\TexManager\TexManager.h" />
     <ClInclude Include="CLEYERA\Vector\Vector2.h" />
     <ClInclude Include="CLEYERA\Vector\Vector3.h" />

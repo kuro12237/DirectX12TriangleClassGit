@@ -543,9 +543,9 @@ void Model::ShapeDraw(Vector3 position, unsigned int ColorCode, Matrix4x4 worldT
 	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
 
-	Vector3 left = { position.x - 0.1f,position.y,position.z };
-	Vector3 right = { position.x +0.1f,position.y,position.z };
-	Vector3 top = { position.x ,position.y+0.1f,position.z };
+	Vector3 left = { position.x - 0.4f,position.y,position.z };
+	Vector3 right = { position.x +0.4f,position.y,position.z };
+	Vector3 top = { position.x ,position.y+0.4f,position.z };
 
 
 	//ç¿ïW

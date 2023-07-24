@@ -27,14 +27,13 @@ private:
 	MatrixTransform* matrixTransform_=nullptr;
 
 	Vector3 pos_;
-	
 	ResourcePeroperty resource_;
-	
 	unsigned int color_;
-
 	WorldTransform worldTransform_;
 
-	texResourceProperty texHandule;
+
+
+	
 	int StateTimer = 300;
 };
 

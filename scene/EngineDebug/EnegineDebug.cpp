@@ -5,9 +5,10 @@
 void EngineDebug::Initialize(GameScene* game)
 {
 	game;
+	
 	matrixTransform_ = new MatrixTransform();
 
-	//t,l,r
+	//三角形初期化
 	pos_ ={ 0.0f,0.0f,0.0f};
 	
 	resource_ = Cleyera::CreateShapeResource();
@@ -16,22 +17,21 @@ void EngineDebug::Initialize(GameScene* game)
 
 	worldTransform_.Initiallize();
 
-	worldTransform_.scale_ = { 10,3,3 };
+	worldTransform_.scale_ = { 3,3,3 };
 
 }
 
 void EngineDebug::Update(GameScene* game)
 {
 	game;
-
-	
-
 	StateTimer--;
+
 	if (StateTimer<0)
 	{
 		//Game::ChangeState(new Title());
 
 	}
+
 	worldTransform_.UpdateMatrix();
 }
 

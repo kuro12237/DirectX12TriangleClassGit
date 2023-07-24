@@ -120,9 +120,6 @@
     <ClCompile Include="CLEYERA\Models\Model.cpp">
       <Filter>CLEYERA\Model</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Models\Rect.cpp">
-      <Filter>CLEYERA\Model</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\Vector</Filter>
     </ClCompile>
@@ -195,9 +192,6 @@
       <Filter>CLEYERA\Log</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Models\Model.h">
-      <Filter>CLEYERA\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Models\Rect.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Vector\Vector2.h">
