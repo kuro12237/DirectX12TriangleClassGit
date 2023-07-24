@@ -10,13 +10,13 @@
 #include"Camera/Camera.h"
 #include"input/Input.h"
 
-struct Triangle
-{
-	Position position;
-	ResourcePeroperty Resources;
-	unsigned int Color;
-	Matrix4x4 matrix;
-};
+//struct Triangle
+//{
+//	Vector3 position;
+//	ResourcePeroperty Resources;
+//	unsigned int Color;
+//	Matrix4x4 matrix;
+//};
 
 class Cleyera
 {
@@ -86,11 +86,11 @@ public:
 	/// <param name="worldTransform"></param>
 	/// <param name="Resource"></param>
 	static void TriangleDraw(
-		Position position,unsigned int Color,
+        Vector3 position,unsigned int Color,
 		Matrix4x4 worldTransform,
 		ResourcePeroperty Resource);
 
-
+	/*
 	/// <summary>
 	/// テクスチャ描画のResourceの作成
 	/// </summary>
@@ -106,7 +106,7 @@ public:
 	/// <param name="Resource"></param>
 	/// <param name="tex"></param>
 	static void SpriteTriangleDraw(
-		Position position, unsigned int color,
+		Vector3 position, unsigned int color,
 		Matrix4x4 worldTransform,
 		ResourcePeroperty Resource,
 		texResourceProperty tex
@@ -120,7 +120,7 @@ public:
 		ResourcePeroperty& Resource,
 		texResourceProperty& tex
 	);
-
+	*/
 #pragma endregion
 
 #pragma region 四角形

@@ -516,7 +516,7 @@ Vector4 Model::ColorCodeAdapter(unsigned int color)
 	return ResultColor;
 
 }
-
+/*
 ResourcePeroperty Model::CreateTriangleSpriteResource()
 {
 	ResourcePeroperty resultResource;
@@ -531,8 +531,8 @@ ResourcePeroperty Model::CreateTriangleSpriteResource()
 
 
 }
-
-void Model::ShapeDraw(Position position, unsigned int ColorCode, Matrix4x4 worldTransform,ResourcePeroperty Resource)
+*/
+void Model::ShapeDraw(Vector3 position, unsigned int ColorCode, Matrix4x4 worldTransform,ResourcePeroperty Resource)
 {
 	Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
@@ -542,15 +542,21 @@ void Model::ShapeDraw(Position position, unsigned int ColorCode, Matrix4x4 world
 	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
+
+	Vector3 left = { position.x - 0.1f,position.y,position.z };
+	Vector3 right = { position.x +0.1f,position.y,position.z };
+	Vector3 top = { position.x ,position.y+0.1f,position.z };
+
+
 	//座標
 	//左下
-	vertexData[0] = { position.left.x,position.left.y,position.left.z , 1.0f};
+	vertexData[0] = { left.x,left.y,left.z , 1.0f};
 
 	//上
-	vertexData[1] = { position.top.x,position.top.y,position.top.z,1.0f};
+	vertexData[1] = { top.x,top.y,top.z,1.0f};
 
 	//右上
-	vertexData[2] = { position.right.x,position.right.y,position.right.z,1.0f};
+	vertexData[2] = { right.x,right.y,right.z,1.0f};
 
 	//マテリアル
 	Vector4 colorData = ColorCodeAdapter(ColorCode);
@@ -601,7 +607,7 @@ void Model::ShapeResourceRelease(ResourcePeroperty Resource)
 	
 }
 
-
+/*
 
 void Model::TriangleSpriteDraw(Position position, unsigned int color, Matrix4x4 worldTransform, ResourcePeroperty Resource, texResourceProperty tex)
 {
@@ -664,6 +670,7 @@ void Model::SpriteDrawCommands(ResourcePeroperty Resource, texResourceProperty t
 	commands.List->DrawInstanced(3, 1, 0, 0);
 
 }
+*/
 
 void Model::PSORelese(PSOProperty PSO)
 {
@@ -684,7 +691,7 @@ void Model::FancShaderRelease(Mode shader)
 	shader.vertexBlob->Release();
 
 }
-
+/*
 void Model::TriangleSpriteResourceRelease(ResourcePeroperty &Resource, texResourceProperty &tex)
 {
 
@@ -695,3 +702,4 @@ void Model::TriangleSpriteResourceRelease(ResourcePeroperty &Resource, texResour
     tex.Resource->Release();
 	
 }
+*/

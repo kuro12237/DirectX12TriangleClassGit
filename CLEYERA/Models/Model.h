@@ -69,13 +69,9 @@ struct Shaders
 };
 
 
-struct  Position
-{
-	Vector3 top;
-	Vector3 left;
-	Vector3 right;
 
-};
+
+
 
 struct ResourcePeroperty
 {
@@ -175,7 +171,7 @@ public:
 	/// <param name="Color"></param>
 	/// <param name="Resource"></param>
 	static void ShapeDraw(
-		Position position, unsigned int Color, 
+		Vector3 position, unsigned int Color, 
 		Matrix4x4 matrix,
 		ResourcePeroperty Resource);
 
@@ -196,6 +192,7 @@ public:
 
 #pragma region ‰æ‘œ•\Ž¦
 
+	/*
 	static ResourcePeroperty CreateTriangleSpriteResource();
 
 	static void TriangleSpriteDraw(
@@ -205,12 +202,8 @@ public:
 		texResourceProperty tex);
 
 	static void TriangleSpriteResourceRelease(ResourcePeroperty &Resource,texResourceProperty &tex);
+	*/
 	
-	static void Triangle3DSpriteDraw(
-		Position position, unsigned int color,
-		Matrix4x4 worldTransform,
-		ResourcePeroperty Resource,
-		texResourceProperty tex);
 #pragma endregion
 
 

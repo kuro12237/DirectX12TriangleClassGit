@@ -70,6 +70,9 @@
     <Filter Include="CLEYERA\config">
       <UniqueIdentifier>{99e9f466-6500-409d-ab44-7e6040484eef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\WorldTransform">
+      <UniqueIdentifier>{9a9b8cca-2e5a-475f-982b-84875dca5385}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="scene\Game\GameScene.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\WorldTransform\worldTransform.cpp">
+      <Filter>Game\WorldTransform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="scene\Game\GameScene.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h">
+      <Filter>Game\WorldTransform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

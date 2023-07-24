@@ -5,9 +5,9 @@
 #include"../../CLEYERA/Vector/VectorTransform.h"
 #include"../../CLEYERA/CLEYERA.h"
 #include"../Title/Title.h"
+#include"../../CLEYERA/WorldTransform/WorldTransform.h"
 
 
-#define TriangleMax 3
 
 class EngineDebug:public GameBase
 {
@@ -26,8 +26,14 @@ private:
 
 	MatrixTransform* matrixTransform_=nullptr;
 
-	Triangle triangle[TriangleMax];
+	Vector3 pos_;
 	
+	ResourcePeroperty resource_;
+	
+	unsigned int color_;
+
+	WorldTransform worldTransform_;
+
 	texResourceProperty texHandule;
 	int StateTimer = 300;
 };
