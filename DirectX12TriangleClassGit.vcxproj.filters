@@ -141,11 +141,11 @@
     <ClCompile Include="scene\GameBase\GameBase.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="scene\Game\GameSceneManager.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\WorldTransform\worldTransform.cpp">
       <Filter>Game\WorldTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\GameSceneManager\GameSceneManager.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,11 +233,11 @@
     <ClInclude Include="scene\GameBase\GameBase.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="scene\Game\GameSceneManager.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h">
       <Filter>Game\WorldTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameSceneManager\GameSceneManager.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
