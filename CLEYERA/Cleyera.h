@@ -1,8 +1,11 @@
-﻿#pragma once
+#pragma once
 #include<format>
 #include"Setup/Win/WinSetup.h"
 #include"Setup/DX/DirectXSetup.h"
 #include"Models/Model.h"
+#include"WorldTransform/WorldTransform.h"
+
+
 class Cleyera
 {
 public:
@@ -34,7 +37,7 @@ public:
 	/// <param name="Resource"></param>
 	ResourcePeroperty CreateResource();
 
-	void TriangleDraw(Position position,unsigned int Color, Matrix4x4 worldTransform, ResourcePeroperty Resource);
+	void TriangleDraw(Vector3 position,unsigned int Color, Matrix4x4 worldTransform, ResourcePeroperty Resource);
 
 #pragma endregion
 

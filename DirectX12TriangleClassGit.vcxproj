@@ -165,6 +165,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="CLEYERA\Vector\Vector2.h" />
     <ClInclude Include="CLEYERA\Vector\Vector3.h" />
     <ClInclude Include="CLEYERA\Vector\Vector4.h" />
+    <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\CLEYERA.cpp" />
@@ -172,6 +173,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="CLEYERA\Models\Model.cpp" />
     <ClCompile Include="CLEYERA\Setup\DX\DirectXSetup.cpp" />
     <ClCompile Include="CLEYERA\Setup\Win\WinSetup.cpp" />
+    <ClCompile Include="CLEYERA\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

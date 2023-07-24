@@ -15,19 +15,19 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	DXSetup = new DirectXSetup();
 	model = new Model();
 
-	//WinSetup‚Ì‰Šú‰»
+	//WinSetupã®åˆæœŸåŒ–
 	
 
 	WinSetup->Initialize(kClientWidth, kClientHeight);
 
 	//
-	////DirectX‚Ì‰Šú‰»
+	////DirectXã®åˆæœŸåŒ–
 	//
 
-	///ƒtƒ@ƒNƒgƒŠ[ì¬
+	///ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ä½œæˆ
 	DXSetup->CreateDXGIFactorye();
 
-	///ƒfƒoƒCƒXì¬
+	///ãƒ‡ãƒã‚¤ã‚¹ä½œæˆ
 	DXSetup->CreateDevice();
 
 #ifdef _DEBUG
@@ -36,35 +36,35 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 
 #endif // _DEBUG
 
-	///ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ì¶¬
+	///ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®ç”Ÿæˆ
 	DXSetup->CreateCommands();
 
 	//swapChain
 	DXSetup->CreateSwapChain(kClientWidth, kClientHeight, WinSetup->GetHwnd());
 	//rtvDescritor
 	DXSetup->CreatertvDescritorHeap();
-	//swapChain‚ðˆø‚Á’£‚é
+	//swapChainã‚’å¼•ã£å¼µã‚‹
 	DXSetup->CreateSwapChainResorce();
-	//RTV‚ÌÝ’è‚Æì¬
+	//RTVã®è¨­å®šã¨ä½œæˆ
 	DXSetup->SettingandCreateRTV();
-	//ƒtƒFƒ“ƒX‚Ì¶¬
+	//ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
 	DXSetup->CreateFence();
 
-	///ƒ‚ƒfƒ‹‚Ì‰Šú‰»
+	///ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–
 
-	//DX‚Å‚Â‚­‚Á‚½‚à‚Ì‚ð“]‘—
+	//DXã§ã¤ãã£ãŸã‚‚ã®ã‚’è»¢é€
 	model->SetDevice(DXSetup->GetDevice());
 	model->SetCommands(DXSetup->GetCommands());
 
-	//DXC‚Ì‰Šú‰»
+	//DXCã®åˆæœŸåŒ–
 	model->dxcInitialize();
-	//Compile‚·‚é‚½‚ß‚Ì‘Î‰žˆ—
+	//Compileã™ã‚‹ãŸã‚ã®å¯¾å¿œå‡¦ç†
 	model->InitializeDfIncludeHandler();
 	
-	///ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹ˆ—
+	///ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«å‡¦ç†
 	model->CompileShaders();
 
-	//}Œ`•`‰æ‚ÌƒpƒCƒvƒ‰ƒCƒ“
+	//å›³å½¢æç”»ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³
 	model->ShapeCreatePSO();
 
 
@@ -99,7 +99,7 @@ ResourcePeroperty  Cleyera::CreateResource()
 	return resultResource;
 }
 
-void Cleyera::TriangleDraw(Position position, unsigned int ColorCode, Matrix4x4 worldTransform, ResourcePeroperty Resource)
+void Cleyera::TriangleDraw(Vector3 position, unsigned int ColorCode, Matrix4x4 worldTransform, ResourcePeroperty Resource)
 {
 	model->ShapeDraw(position, ColorCode,worldTransform, Resource);
 

@@ -72,7 +72,7 @@ public:
 	Model();
 	~Model();
 
-#pragma region ‰Šú‰»
+#pragma region åˆæœŸåŒ–
 	void Initialize();
 
 	void SetDevice(ID3D12Device* device_);
@@ -84,7 +84,7 @@ public:
 
 
 	/// <summary>
-    /// ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹ŠÖ”
+    /// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«é–¢æ•°
     /// </summary>
     /// <param name="filePath"></param>
     /// <param name="profile"></param>
@@ -100,17 +100,17 @@ public:
 		IDxcIncludeHandler* includeHandler);
 
 	/// <summary>
-	/// ÀÛ‚ÉƒRƒ“ƒpƒCƒ‹‚·‚é
+	/// å®Ÿéš›ã«ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹
 	/// </summary>
 	void CompileShaders();
 
 	/// <summary>
-	/// F‚Ì}Œ`‚ÌPSO¶¬
+	/// è‰²ã®å›³å½¢ã®PSOç”Ÿæˆ
 	/// </summary>
 	void ShapeCreatePSO();
 
 	/// <summary>
-	/// ƒRƒ“ƒpƒCƒ‹‚µ‚½ƒVƒF[ƒ_[‚ÌƒŠƒŠ[ƒX
+	/// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã—ãŸã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒªãƒªãƒ¼ã‚¹
 	/// </summary>
 	void ShaderRelease();
 
@@ -119,10 +119,10 @@ public:
 
 #pragma endregion
 
-#pragma region OŠpŒ`
+#pragma region ä¸‰è§’å½¢
 
 	/// <summary>
-	/// Resource‚ğì¬
+	/// Resourceã‚’ä½œæˆ
 	/// </summary>
 	/// <param name="device"></param>
 	/// <param name="sizeInbyte"></param>
@@ -130,7 +130,7 @@ public:
 	static ID3D12Resource* CreateBufferResource(ID3D12Device* device, size_t sizeInbyte);
 	
 	/// <summary>
-	/// BufferView‚ğì¬
+	/// BufferViewã‚’ä½œæˆ
 	/// </summary>
 	/// <param name="sizeInbyte"></param>
 	/// <param name="Resource"></param>
@@ -138,25 +138,25 @@ public:
 	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource);
 
 	/// <summary>
-	/// Resource¶¬
+	/// Resourceç”Ÿæˆ
 	/// </summary>
 	/// <returns></returns>
 	ResourcePeroperty  CreateResource();
 
 	/// <summary>
-	/// F•ÏŠ·
+	/// è‰²å¤‰æ›
 	/// </summary>
 	/// <param name="color"></param>
 	/// <returns></returns>
 	Vector4 ColorAdapter(unsigned int color);
 
 	/// <summary>
-	/// •\¦
+	/// è¡¨ç¤º
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="Color"></param>
 	/// <param name="Resource"></param>
-	void ShapeDraw(Position position, unsigned int Color, Matrix4x4 matrix,ResourcePeroperty Resource);
+	void ShapeDraw(Vector3 position, unsigned int Color, Matrix4x4 matrix,ResourcePeroperty Resource);
 
 	/// <summary>
 	/// Commands
