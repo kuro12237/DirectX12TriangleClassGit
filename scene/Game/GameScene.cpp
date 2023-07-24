@@ -27,14 +27,16 @@ void GameScene::Initialize()
 
 	GameScene::GetInstance()->state_ = new EngineDebug();
 
-	GameScene::GetInstance()->state_->Initialize(GameScene::GetInstance());
 }
 
 void GameScene::Run()
 {
+
 	MSG msg{};
 
 	BYTE key[256] = { 0 };
+
+	GameScene::GetInstance()->state_->Initialize(GameScene::GetInstance());
 
 	//ゲームスープ
 	while (msg.message != WM_QUIT)
@@ -47,6 +49,7 @@ void GameScene::Run()
 		Cleyera::BeginFlame(
 			GameScene::GetInstance()->kClientWidth,
 			GameScene::GetInstance()->kClientHeight);
+		
 		Input::BeginFlame(key);
 
 
