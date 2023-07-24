@@ -1,14 +1,8 @@
 #include"WinApp.h"
 
+WinApp::WinApp(){}
 
-
-WinApp::WinApp()
-{
-}
-
-WinApp::~WinApp()
-{
-}
+WinApp::~WinApp(){}
 
 WinApp* WinApp::GetInstance()
 {

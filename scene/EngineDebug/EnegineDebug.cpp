@@ -27,10 +27,8 @@ void EngineDebug::Update(GameScene* game)
 
 	if (StateTimer<0)
 	{
-		GameScene::ChangeState(new Title());
-
+		//GameScene::ChangeState(new Title());
 	}
-
 	worldTransform_.UpdateMatrix();
 }
 

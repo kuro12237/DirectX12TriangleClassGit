@@ -1,15 +1,8 @@
 #include"CLEYERA.h"
 
+Cleyera::Cleyera(){}
 
-Cleyera::Cleyera()
-{
-}
-
-
-Cleyera::~Cleyera()
-{
-}
-
+Cleyera::~Cleyera(){}
 
 void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
@@ -139,9 +132,6 @@ texResourceProperty Cleyera::LoadTex(const std::string& filePath)
 	return tex;
 }
 
-
-
-
 ResourcePeroperty  Cleyera::CreateShapeResource()
 {
 	ResourcePeroperty resultResource;
@@ -149,12 +139,10 @@ ResourcePeroperty  Cleyera::CreateShapeResource()
 	return resultResource;
 }
 
-
 void Cleyera::TriangleResourceRelease(ResourcePeroperty Resource)
 {
 	Model::ShapeResourceRelease(Resource);
 }
-
 
 void Cleyera::TriangleDraw(Vector3 position, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
 {

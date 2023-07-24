@@ -1,12 +1,8 @@
 #include"GameScene.h"
 
-GameScene::GameScene()
-{
-}
+GameScene::GameScene(){}
 
-GameScene::~GameScene()
-{
-}
+GameScene::~GameScene(){}
 
 GameScene* GameScene::GetInstance()
 {
@@ -22,7 +18,6 @@ void GameScene::Initialize()
 		GameScene::GetInstance()->kClientWidth,
 		GameScene::GetInstance()->kClientHeight
 	);
-
 
 	GameScene::GetInstance()->Stage_ = new EngineDebug();
 
@@ -53,8 +48,6 @@ void GameScene::Run()
 		
 		Input::BeginFlame(key);
 
-
-
 		///ゲームシーン
 		//更新
 
@@ -62,13 +55,11 @@ void GameScene::Run()
 
 		//更新終了
 
-		
 		//描画
 
 		GameScene::GetInstance()->Stage_->Draw(GameScene::GetInstance());
 
 		//描画終了
-
 
 		Cleyera::EndFlame();
 	}

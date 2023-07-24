@@ -1,14 +1,8 @@
 #include "Model.h"
 
-Model::Model()
-{
-}
+Model::Model(){}
 
-Model::~Model()
-{
-}
-
-
+Model::~Model(){}
 
 Model* Model::GetInstance()
 {
@@ -22,13 +16,11 @@ void Model::Initialize()
 void Model::SetDevice(ID3D12Device*device_)
 {
 	Model::GetInstance()->device = device_;
-
 }
 
 void Model::SetCommands(Commands command_)
 {
 	Model::GetInstance()->commands = command_;
-
 }
 
 void Model::dxcInitialize()
@@ -321,9 +313,6 @@ void Model::SpriteCreatePSO()
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
 
-
-
-
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
@@ -417,13 +406,8 @@ void Model::SpriteCreatePSO()
 	Model::GetInstance()->shader = shader;
 }
 
-
-
-
 void Model::ShaderRelease()
-{
-
-	
+{	
 	FancShaderRelease(Model::GetInstance()->shader.shape);
 	FancShaderRelease(Model::GetInstance()->shader.sprite);
 }
@@ -604,8 +588,6 @@ void Model::PSORelese(PSOProperty PSO)
 		PSO.errorBlob->Release();
 	}
 	PSO.rootSignature->Release();
-
-
 }
 
 void Model::FancShaderRelease(Mode shader)
