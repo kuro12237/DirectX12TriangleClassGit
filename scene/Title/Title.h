@@ -12,13 +12,13 @@ class Title :public GameBase
 {
 public:
 
-	void Initialize(GameScene* game)override;
+	void Initialize()override;
 
-	void Update(GameScene* game)override;
+	void Update()override;
 
-	void Draw(GameScene* game)override;
+	void Draw()override;
 
-	void Release(GameScene* game)override;
+	void Release()override;
 
 
 private:

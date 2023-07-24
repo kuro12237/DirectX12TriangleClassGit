@@ -32,7 +32,7 @@ void GameScene::Run()
 
 	///ゲームシーンの初期化
 
-	GameScene::GetInstance()->Stage_->Initialize(GameScene::GetInstance());
+	GameScene::GetInstance()->Stage_->Initialize();
 
 	//ゲーム更新処理
 	while (msg.message != WM_QUIT)
@@ -51,13 +51,13 @@ void GameScene::Run()
 		///ゲームシーン
 		//更新
 
-		GameScene::GetInstance()->Stage_->Update(GameScene::GetInstance());
+		GameScene::GetInstance()->Stage_->Update();
 
 		//更新終了
 
 		//描画
 
-		GameScene::GetInstance()->Stage_->Draw(GameScene::GetInstance());
+		GameScene::GetInstance()->Stage_->Draw();
 
 		//描画終了
 
@@ -70,7 +70,7 @@ void GameScene::Run()
 void GameScene::Finalize()
 {
 	//頂点などの解放処理
-	GameScene::GetInstance()->Stage_->Release(GameScene::GetInstance());;
+	GameScene::GetInstance()->Stage_->Release();;
 
 	//Engine解放
 	Cleyera::Finalize();

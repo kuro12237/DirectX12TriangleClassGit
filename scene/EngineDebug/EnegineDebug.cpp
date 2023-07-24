@@ -1,8 +1,7 @@
 ﻿#include"EngineDebug.h"
 
-void EngineDebug::Initialize(GameScene* game)
+void EngineDebug::Initialize()
 {
-	game;
 	
 	matrixTransform_ = new MatrixTransform();
 
@@ -19,9 +18,8 @@ void EngineDebug::Initialize(GameScene* game)
 
 }
 
-void EngineDebug::Update(GameScene* game)
+void EngineDebug::Update()
 {
-	game;
 
 	StateTimer--;
 
@@ -32,9 +30,8 @@ void EngineDebug::Update(GameScene* game)
 	worldTransform_.UpdateMatrix();
 }
 
-void EngineDebug::Draw(GameScene* game)
+void EngineDebug::Draw()
 {
-	game;
 
 	Cleyera::TriangleDraw(
 		pos_,
@@ -44,11 +41,9 @@ void EngineDebug::Draw(GameScene* game)
 	);
 }
 
-void EngineDebug::Release(GameScene* game)
+void EngineDebug::Release()
 {
-	game;
 
-	Cleyera::TriangleResourceRelease(
-		resource_);
+	Cleyera::TriangleResourceRelease(resource_);
 
 }
