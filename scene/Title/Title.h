@@ -1,6 +1,6 @@
 #pragma once
-#include"../GameScene/GameScene.h"
-#include"../../Game/Game.h"
+#include"../Game/GameScene.h"
+#include"../GameBase/GameBase.h"
 
 #include"../../CLEYERA/Matrix/MatrixTransform.h"
 #include"../../CLEYERA/Vector/VectorTransform.h"
@@ -8,17 +8,17 @@
 
 #define TriangleMax 3
 
-class Title :public GameScene
+class Title :public GameBase
 {
 public:
 
-	void Initialize(Game* game)override;
+	void Initialize(GameScene* game)override;
 
-	void Update(Game* game)override;
+	void Update(GameScene* game)override;
 
-	void Draw(Game* game)override;
+	void Draw(GameScene* game)override;
 
-	void Release(Game* game)override;
+	void Release(GameScene* game)override;
 
 
 private:

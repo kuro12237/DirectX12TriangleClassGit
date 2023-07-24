@@ -111,12 +111,6 @@
     <ClCompile Include="CLEYERA\ImGui\ImGuiManager.cpp">
       <Filter>CLEYERA\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="scene\GameScene\GameScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\LogManager\Log.cpp">
       <Filter>CLEYERA\Log</Filter>
     </ClCompile>
@@ -143,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="scene\Title\Title.cpp">
       <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\GameBase\GameBase.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Game\GameScene.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,12 +184,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\ImGui\ImGuiManager.h">
       <Filter>CLEYERA\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\GameScene\GameScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Game.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\LogManager\Log.h">
       <Filter>CLEYERA\Log</Filter>
@@ -235,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="scene\Title\Title.h">
       <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameBase\GameBase.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Game\GameScene.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

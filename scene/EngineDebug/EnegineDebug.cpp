@@ -2,7 +2,7 @@
 
 
 
-void EngineDebug::Initialize(Game* game)
+void EngineDebug::Initialize(GameScene* game)
 {
 	game;
 	matrixTransform_ = new MatrixTransform();
@@ -40,7 +40,7 @@ void EngineDebug::Initialize(Game* game)
 	triangle[2].matrix = matrixTransform_->Identity();
 }
 
-void EngineDebug::Update(Game* game)
+void EngineDebug::Update(GameScene* game)
 {
 	game;
 
@@ -53,7 +53,7 @@ void EngineDebug::Update(Game* game)
 	
 }
 
-void EngineDebug::Draw(Game* game)
+void EngineDebug::Draw(GameScene* game)
 {
 	game;
 
@@ -76,7 +76,7 @@ void EngineDebug::Draw(Game* game)
 
 }
 
-void EngineDebug::Release(Game* game)
+void EngineDebug::Release(GameScene* game)
 {
 	game;
 	Cleyera::TriangleResourceRelease(triangle[0].Resources);

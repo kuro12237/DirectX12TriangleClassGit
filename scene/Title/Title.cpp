@@ -1,21 +1,21 @@
 #include "Title.h"
 
-void Title::Initialize(Game* game)
+void Title::Initialize(GameScene* game)
 {
 	game;
 }
 
-void Title::Update(Game* game)
+void Title::Update(GameScene* game)
 {
 	game;
 }
 
-void Title::Draw(Game* game)
+void Title::Draw(GameScene* game)
 {
 	game;
 }
 
-void Title::Release(Game* game)
+void Title::Release(GameScene* game)
 {
 	game;
 }

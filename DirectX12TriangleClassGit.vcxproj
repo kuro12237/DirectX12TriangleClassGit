@@ -38,10 +38,10 @@
     <ClCompile Include="CLEYERA\TexManager\TexManager.cpp" />
     <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Win\WinApp.cpp" />
-    <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\EngineDebug\EnegineDebug.cpp" />
-    <ClCompile Include="scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="scene\GameBase\GameBase.cpp" />
+    <ClCompile Include="scene\Game\GameScene.cpp" />
     <ClCompile Include="scene\Title\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -71,9 +71,9 @@
     <ClInclude Include="CLEYERA\Vector\Vector4.h" />
     <ClInclude Include="CLEYERA\Vector\VectorTransform.h" />
     <ClInclude Include="CLEYERA\Win\WinApp.h" />
-    <ClInclude Include="Game\Game.h" />
     <ClInclude Include="scene\EngineDebug\EngineDebug.h" />
-    <ClInclude Include="scene\GameScene\GameScene.h" />
+    <ClInclude Include="scene\GameBase\GameBase.h" />
+    <ClInclude Include="scene\Game\GameScene.h" />
     <ClInclude Include="scene\Title\Title.h" />
   </ItemGroup>
   <ItemGroup>
