@@ -65,14 +65,13 @@ void GameSceneManager::Run()
 		Cleyera::EndFlame();
 	}
 
+	//頂点などのゲームシーンの解放処理
+	GameSceneManager::GetInstance()->Stage_->Release();;
 
 }
 
 void GameSceneManager::Finalize()
 {
-	//頂点などのゲームシーンの解放処理
-	GameSceneManager::GetInstance()->Stage_->Release();;
-
 	//Engine解放
 	Cleyera::Finalize();
 }
