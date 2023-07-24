@@ -45,8 +45,6 @@ void EngineDebug::Draw(GameScene* game)
 		worldTransform_.matWorld_,
 		resource_
 	);
-
-	
 }
 
 void EngineDebug::Release(GameScene* game)
