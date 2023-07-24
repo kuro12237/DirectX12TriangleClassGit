@@ -17,7 +17,6 @@ void EngineDebug::Initialize(GameScene* game)
 
 	worldTransform_.scale_ = { 1,1,1 };
 
-
 }
 
 void EngineDebug::Update(GameScene* game)
