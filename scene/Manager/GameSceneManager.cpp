@@ -19,6 +19,7 @@ void GameSceneManager::Initialize()
 		GameSceneManager::GetInstance()->kClientHeight
 	);
 
+	//ゲームシーンの初期化
 	GameSceneManager::GetInstance()->Stage_ = new EngineDebug();
 
 }
@@ -30,7 +31,7 @@ void GameSceneManager::Run()
 
 	BYTE key[256] = { 0 };
 
-	///ゲームシーンの初期化
+	///初期化
 
 	GameSceneManager::GetInstance()->Stage_->Initialize();
 
@@ -69,7 +70,7 @@ void GameSceneManager::Run()
 
 void GameSceneManager::Finalize()
 {
-	//頂点などの解放処理
+	//頂点などのゲームシーンの解放処理
 	GameSceneManager::GetInstance()->Stage_->Release();;
 
 	//Engine解放
