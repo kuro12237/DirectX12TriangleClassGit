@@ -25,7 +25,7 @@ public:
 
 private:
 
-	GameBase* state_ = nullptr;
+	GameBase* Stage_ = nullptr;
 
 	//ウインドウサイズの設定
 	const int32_t kClientWidth = 1280;

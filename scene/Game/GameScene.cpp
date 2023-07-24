@@ -24,7 +24,7 @@ void GameScene::Initialize()
 	);
 
 
-	GameScene::GetInstance()->state_ = new EngineDebug();
+	GameScene::GetInstance()->Stage_ = new EngineDebug();
 
 }
 
@@ -37,7 +37,7 @@ void GameScene::Run()
 
 	///ゲームシーンの初期化
 
-	GameScene::GetInstance()->state_->Initialize(GameScene::GetInstance());
+	GameScene::GetInstance()->Stage_->Initialize(GameScene::GetInstance());
 
 	//ゲーム更新処理
 	while (msg.message != WM_QUIT)
@@ -58,14 +58,14 @@ void GameScene::Run()
 		///ゲームシーン
 		//更新
 
-		GameScene::GetInstance()->state_->Update(GameScene::GetInstance());
+		GameScene::GetInstance()->Stage_->Update(GameScene::GetInstance());
 
 		//更新終了
 
 		
 		//描画
 
-		GameScene::GetInstance()->state_->Draw(GameScene::GetInstance());
+		GameScene::GetInstance()->Stage_->Draw(GameScene::GetInstance());
 
 		//描画終了
 
@@ -79,7 +79,7 @@ void GameScene::Run()
 void GameScene::Finalize()
 {
 	//頂点などの解放処理
-	GameScene::GetInstance()->state_->Release(GameScene::GetInstance());;
+	GameScene::GetInstance()->Stage_->Release(GameScene::GetInstance());;
 
 	//Engine解放
 	Cleyera::Finalize();
@@ -87,7 +87,7 @@ void GameScene::Finalize()
 
 void GameScene::ChangeState(GameBase* newState)
 {
-	GameScene::GetInstance()->state_ = newState;
+	GameScene::GetInstance()->Stage_ = newState;
 }
 
 
