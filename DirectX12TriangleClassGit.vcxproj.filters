@@ -73,6 +73,9 @@
     <Filter Include="Game\WorldTransform">
       <UniqueIdentifier>{9a9b8cca-2e5a-475f-982b-84875dca5385}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Manager">
+      <UniqueIdentifier>{90bed3d2-5531-44cd-9ac5-8303f690712e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,8 +147,8 @@
     <ClCompile Include="CLEYERA\WorldTransform\worldTransform.cpp">
       <Filter>Game\WorldTransform</Filter>
     </ClCompile>
-    <ClCompile Include="scene\GameSceneManager\GameSceneManager.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="scene\Manager\GameSceneManager.cpp">
+      <Filter>Scene\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,8 +239,8 @@
     <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h">
       <Filter>Game\WorldTransform</Filter>
     </ClInclude>
-    <ClInclude Include="scene\GameSceneManager\GameSceneManager.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="scene\Manager\GameSceneManager.h">
+      <Filter>Scene\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

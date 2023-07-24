@@ -1,4 +1,4 @@
-#include"scene/GameSceneManager/GameSceneManager.h"
+#include"scene/Manager/GameSceneManager.h"
 
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
