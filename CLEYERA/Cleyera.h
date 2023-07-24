@@ -10,7 +10,6 @@
 #include"Camera/Camera.h"
 #include"input/Input.h"
 
-
 class Cleyera
 {
 public:
