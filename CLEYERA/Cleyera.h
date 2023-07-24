@@ -50,9 +50,6 @@ public:
 	/// <returns></returns>
 	static texResourceProperty LoadTex(const std::string& filePath);
 
-
-
-
 #pragma endregion
 
 
@@ -82,12 +79,7 @@ public:
 		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
 
-
-
 private:
-
-
-
 	
 
 };
