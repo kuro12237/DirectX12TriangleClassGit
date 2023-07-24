@@ -1,5 +1,5 @@
 #pragma once
-#include"../Game/GameScene.h"
+#include"../Game/GameSceneManager.h"
 #include"../GameBase/GameBase.h"
 #include"../../CLEYERA/Matrix/MatrixTransform.h"
 #include"../../CLEYERA/Vector/VectorTransform.h"

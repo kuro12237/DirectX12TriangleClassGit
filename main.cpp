@@ -1,14 +1,14 @@
-#include"scene/Game/GameScene.h"
+#include"scene/Game/GameSceneManager.h"
 
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 
-	GameScene::Initialize();
+	GameSceneManager::Initialize();
 
-	GameScene::Run();
+	GameSceneManager::Run();
 
-	GameScene::Finalize();
+	GameSceneManager::Finalize();
 
 	return 0;
 }

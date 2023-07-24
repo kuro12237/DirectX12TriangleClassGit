@@ -7,13 +7,13 @@
 
 class GameBase;
 
-class GameScene
+class GameSceneManager
 {
 public:
-	GameScene();
-	~GameScene();
+	GameSceneManager();
+	~GameSceneManager();
 
-	static GameScene* GetInstance();
+	static GameSceneManager* GetInstance();
 
 	static void Initialize();
 

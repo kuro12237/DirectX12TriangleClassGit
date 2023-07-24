@@ -41,7 +41,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\EngineDebug\EnegineDebug.cpp" />
     <ClCompile Include="scene\GameBase\GameBase.cpp" />
-    <ClCompile Include="scene\Game\GameScene.cpp" />
+    <ClCompile Include="scene\Game\GameSceneManager.cpp" />
     <ClCompile Include="scene\Title\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -73,7 +73,7 @@
     <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h" />
     <ClInclude Include="scene\EngineDebug\EngineDebug.h" />
     <ClInclude Include="scene\GameBase\GameBase.h" />
-    <ClInclude Include="scene\Game\GameScene.h" />
+    <ClInclude Include="scene\Game\GameSceneManager.h" />
     <ClInclude Include="scene\Title\Title.h" />
   </ItemGroup>
   <ItemGroup>
