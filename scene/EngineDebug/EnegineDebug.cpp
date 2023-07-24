@@ -1,7 +1,5 @@
 ﻿#include"EngineDebug.h"
 
-
-
 void EngineDebug::Initialize(GameScene* game)
 {
 	game;
@@ -17,13 +15,15 @@ void EngineDebug::Initialize(GameScene* game)
 
 	worldTransform_.Initiallize();
 
-	worldTransform_.scale_ = { 3,3,3 };
+	worldTransform_.scale_ = { 2,2,2 };
+
 
 }
 
 void EngineDebug::Update(GameScene* game)
 {
 	game;
+
 	StateTimer--;
 
 	if (StateTimer<0)

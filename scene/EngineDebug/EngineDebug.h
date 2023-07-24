@@ -7,7 +7,7 @@
 #include"../Title/Title.h"
 #include"../../CLEYERA/WorldTransform/WorldTransform.h"
 
-
+#define TRIANGLE_MAX 2
 
 class EngineDebug:public GameBase
 {
@@ -31,7 +31,7 @@ private:
 	unsigned int color_;
 	WorldTransform worldTransform_;
 
-
+	
 
 	
 	int StateTimer = 300;
