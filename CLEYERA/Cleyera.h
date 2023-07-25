@@ -4,11 +4,9 @@
 #include"DX/DirectXSetup.h"
 
 #include"Models/Model.h"
-#include"TexManager/TexManager.h"
 
 #include"ImGui/ImGuiManager.h"
 #include"Camera/Camera.h"
-#include"input/Input.h"
 
 class Cleyera
 {
@@ -41,16 +39,6 @@ public:
 	static void EndFlame();
 		  
 	
-#pragma region テクスチャー
-
-	/// <summary>
-	/// テクスチャの読み込み
-	/// </summary>
-	/// <param name="filePath"></param>
-	/// <returns></returns>
-	static texResourceProperty LoadTex(const std::string& filePath);
-
-#pragma endregion
 
 
 #pragma region 三角形
@@ -59,12 +47,12 @@ public:
 	/// 頂点を作る
 	/// </summary>
 	/// <param name="Resource"></param>
-	static	ResourcePeroperty CreateShapeResource();
+	static	ResourcePeroperty CreateResource();
 
 	/// <summary>
 	/// 三角形のResourceの解放
 	/// </summary>
-	static void TriangleResourceRelease(
+	static void ResourceRelease(
 		ResourcePeroperty Resource);
 	
 	/// <summary>

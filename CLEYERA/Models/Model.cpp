@@ -39,15 +39,10 @@ void Model::dxcInitialize()
 
 void Model::InitializeDfIncludeHandler()
 {
-
-
 	HRESULT hr = Model::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&Model::GetInstance()->includeHandler);
 	assert(SUCCEEDED(hr));
 
-
-
 }
-
 
 
 ////CompileShader関数
@@ -129,13 +124,6 @@ void Model::CompileShaders()
 		L"ps_6_0", dxc.Utils, dxc.Compiler, includeHandler);
 	assert(shader.shape.pixelBlob != nullptr);
 
-	shader.sprite.vertexBlob = CompilerShader(L"shader/SpriteObject3d.VS.hlsl",
-		L"vs_6_0", dxc.Utils, dxc.Compiler, includeHandler);
-	assert(shader.sprite.vertexBlob);
-
-	shader.sprite.pixelBlob = CompilerShader(L"shader/SpriteObject3d.PS.hlsl",
-		L"ps_6_0", dxc.Utils, dxc.Compiler, includeHandler);
-	assert(shader.sprite.pixelBlob);
 
 	Model::GetInstance()->shader = shader;
 
@@ -257,159 +245,9 @@ void Model::ShapeCreatePSO()
 }
 
 
-void Model::SpriteCreatePSO()
-{
-	PSOProperty Sprite;
-	ID3D12Device* device = Model::GetInstance()->device;
-	Commands commands = Model::GetInstance()->commands;
-	Shaders shader = Model::GetInstance()->shader;
-
-
-	//RootSignature作成
-	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
-
-	//descriptionRootSignature = CreateDescriptRootSignature();
-	descriptionRootSignature.Flags =
-		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
-
-	//Material設定
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
-	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[0].Descriptor.ShaderRegister = 0;
-
-	//VertexのTransform
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[1].Descriptor.ShaderRegister = 0;
-
-
-	//DescriptorRanged
-	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
-	descriptorRange[0].BaseShaderRegister = 0;
-	descriptorRange[0].NumDescriptors = 1;
-	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-
-	//rootPrameterに入れる
-	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRange;
-	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
-
-
-	//Samplerの設定
-	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
-	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
-	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-	staticSamplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-	staticSamplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-
-	staticSamplers[0].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
-	staticSamplers[0].MaxLOD = D3D12_FLOAT32_MAX;
-	staticSamplers[0].ShaderRegister = 0;
-	staticSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-
-	descriptionRootSignature.pStaticSamplers = staticSamplers;
-	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-
-	descriptionRootSignature.pParameters = rootParameters;
-	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
-	//シリアライズしてバイナリにする
-
-	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &Sprite.signatureBlob, &Sprite.errorBlob);
-	if (FAILED(hr))
-	{
-		Log(reinterpret_cast<char*>(Sprite.errorBlob->GetBufferPointer()));
-		assert(false);
-	}
-
-	//バイナリを元に生成
-
-	hr = device->CreateRootSignature(0, Sprite.signatureBlob->GetBufferPointer(),
-		Sprite.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&Sprite.rootSignature));
-	assert(SUCCEEDED(hr));
-
-
-
-
-	//InputLayoutの設定
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
-	inputElementDescs[0].SemanticName = "POSITION";
-	inputElementDescs[0].SemanticIndex = 0;
-	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	inputElementDescs[0].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-
-	inputElementDescs[1].SemanticName = "TEXCOORD";
-	inputElementDescs[1].SemanticIndex = 0;
-	inputElementDescs[1].Format = DXGI_FORMAT_R32G32_FLOAT;
-	inputElementDescs[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-
-
-
-
-	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	inputLayoutDesc.pInputElementDescs = inputElementDescs;
-	inputLayoutDesc.NumElements = _countof(inputElementDescs);
-
-
-	//BlendStateの設定を行う
-	D3D12_BLEND_DESC blendDesc{};
-	//すべての色要素を書き込む
-	blendDesc.RenderTarget[0].RenderTargetWriteMask =
-		D3D12_COLOR_WRITE_ENABLE_ALL;
-
-
-	//RasterrizerStateぼ設定
-	D3D12_RASTERIZER_DESC rasterizerDesc{};
-
-	//裏面（時計回り）を表示しない
-	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	//三角形の中を塗りつぶす
-	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
-
-
-	//PSOの生成
-	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
-
-	graphicsPipelineStateDesc.pRootSignature = Sprite.rootSignature; //RootSignature
-	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
-	graphicsPipelineStateDesc.VS = { shader.sprite.vertexBlob->GetBufferPointer(),
-	shader.sprite.vertexBlob->GetBufferSize() }; //VertexShader
-	graphicsPipelineStateDesc.PS = { shader.sprite.pixelBlob->GetBufferPointer(),
-	shader.sprite.pixelBlob->GetBufferSize() }; //PixeShader
-	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
-	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
-
-
-	//書き込むRTVの情報
-	graphicsPipelineStateDesc.NumRenderTargets = 1;
-	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-
-	//利用するトポロジ(形状)のタイプ。三角形
-	graphicsPipelineStateDesc.PrimitiveTopologyType =
-		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-
-	//どのように画面に色を打ち込むかの設定(気にしなくて良い)
-	graphicsPipelineStateDesc.SampleDesc.Count = 1;
-	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
-
-	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
-		IID_PPV_ARGS(&Sprite.GraphicsPipelineState));
-	assert(SUCCEEDED(hr));
-
-	Model::GetInstance()->Sprite = Sprite;
-	Model::GetInstance()->device = device;
-	Model::GetInstance()->commands = commands;
-	Model::GetInstance()->shader = shader;
-}
-
 void Model::ShaderRelease()
 {	
 	FancShaderRelease(Model::GetInstance()->shader.shape);
-	FancShaderRelease(Model::GetInstance()->shader.sprite);
 }
 
 
@@ -418,8 +256,6 @@ void Model::Finalize()
 	//図形
 	PSORelese(Model::GetInstance()->Shape);
 
-	//sprite
-	PSORelese(Model::GetInstance()->Sprite);
 	
 }
 
@@ -470,7 +306,7 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte, ID3D12Resour
 
 }
 
-ResourcePeroperty  Model::CreateShapeResource()
+ResourcePeroperty  Model::CreateResource()
 {
 	ResourcePeroperty resultResource;
 	ID3D12Device* device = Model::GetInstance()->device;
@@ -502,7 +338,7 @@ Vector4 Model::ColorCodeAdapter(unsigned int color)
 }
 
 
-void Model::ShapeDraw(Vector3 position, unsigned int ColorCode, WorldTransform worldTransform,ResourcePeroperty Resource)
+void Model::Draw(Vector3 position, unsigned int ColorCode, WorldTransform worldTransform,ResourcePeroperty Resource)
 {
 	Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
@@ -568,7 +404,7 @@ void Model::ShapeDrawCommands(Commands commands, ResourcePeroperty Resource,PSOP
 
 }
 
-void Model::ShapeResourceRelease(ResourcePeroperty Resource)
+void Model::ResourceRelease(ResourcePeroperty Resource)
 {
 
 	Resource.Vertex->Release();

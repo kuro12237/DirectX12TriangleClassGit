@@ -45,13 +45,10 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	//フェンスの生成
 	DirectXSetup::CreateFence();
 
-	Input::DirectInputObjCreate();
-	Input::KeyDeviceCreate();
-
 
 	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXSetup::GetInstance());
 
-	TexManager::Initialize();
+
 
 	///モデルの初期化
 
@@ -72,9 +69,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	//図形描画のパイプライン
 	Model::ShapeCreatePSO();
 	
-	//Tex描画のパイプライン
-	Model::SpriteCreatePSO();
-
+	
 	//コンパイルしたシェーダーの解放
 	Model::ShaderRelease();
 	
@@ -111,8 +106,7 @@ void Cleyera::Finalize()
 
 	ImGuiManager::Finalize();
 	
-	TexManager::Finalize();
-
+	
 	Model::Finalize();
 	DirectXSetup::Finalize();
 	
@@ -123,25 +117,16 @@ void Cleyera::Finalize()
 }
 
 
-texResourceProperty Cleyera::LoadTex(const std::string& filePath)
-{
-	texResourceProperty tex;
-
-	tex = TexManager::LoadTexture(filePath, DirectXSetup::GetInstance());
-
-	return tex;
-}
-
-ResourcePeroperty  Cleyera::CreateShapeResource()
+ResourcePeroperty  Cleyera::CreateResource()
 {
 	ResourcePeroperty resultResource;
-	resultResource=Model::GetInstance()->CreateShapeResource();
+	resultResource=Model::GetInstance()->CreateResource();
 	return resultResource;
 }
 
-void Cleyera::TriangleResourceRelease(ResourcePeroperty Resource)
+void Cleyera::ResourceRelease(ResourcePeroperty Resource)
 {
-	Model::ShapeResourceRelease(Resource);
+	Model::ResourceRelease(Resource);
 }
 
 void Cleyera::TriangleDraw(Vector3 position, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
@@ -149,5 +134,5 @@ void Cleyera::TriangleDraw(Vector3 position, unsigned int ColorCode, WorldTransf
 	//カメラ
 	worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
 
-	Model::ShapeDraw(position, ColorCode,worldTransform, Resource);
+	Model::Draw(position, ColorCode,worldTransform, Resource);
 }

@@ -30,19 +30,13 @@
     <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="CLEYERA\ImGui\ImGuiManager.cpp" />
-    <ClCompile Include="CLEYERA\input\Input.cpp" />
     <ClCompile Include="CLEYERA\LogManager\Log.cpp" />
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\Models\Model.cpp" />
-    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp" />
     <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\WorldTransform\worldTransform.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="scene\EngineDebug\EnegineDebug.cpp" />
-    <ClCompile Include="scene\GameBase\GameBase.cpp" />
-    <ClCompile Include="scene\Manager\GameSceneManager.cpp" />
-    <ClCompile Include="scene\Title\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Camera\Camera.h" />
@@ -57,31 +51,24 @@
     <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h" />
     <ClInclude Include="CLEYERA\ImGui\ImGuiManager.h" />
-    <ClInclude Include="CLEYERA\input\Input.h" />
     <ClInclude Include="CLEYERA\LogManager\Log.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
     <ClInclude Include="CLEYERA\Models\Model.h" />
-    <ClInclude Include="CLEYERA\TexManager\TexManager.h" />
     <ClInclude Include="CLEYERA\Vector\Vector2.h" />
     <ClInclude Include="CLEYERA\Vector\Vector3.h" />
     <ClInclude Include="CLEYERA\Vector\Vector4.h" />
     <ClInclude Include="CLEYERA\Vector\VectorTransform.h" />
     <ClInclude Include="CLEYERA\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h" />
-    <ClInclude Include="scene\EngineDebug\EngineDebug.h" />
-    <ClInclude Include="scene\GameBase\GameBase.h" />
-    <ClInclude Include="scene\Manager\GameSceneManager.h" />
-    <ClInclude Include="scene\Title\Title.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\config\.editorconfig" />
-    <None Include="Shader\SpriteObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\ShapeObject3d.PS.hlsl">
@@ -89,14 +76,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Shader\ShapeObject3d.VS.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Shader\SpriteObject3d.PS.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Shader\SpriteObject3d.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>

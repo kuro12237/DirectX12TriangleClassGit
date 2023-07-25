@@ -24,7 +24,7 @@
 #include"../Matrix/Matrix4x4.h"
 #include"../Matrix/MatrixTransform.h"
 
-#include"../TexManager/TexManager.h"
+
 #include"../Vector/Vector2.h"
 #include"../WorldTransform/WorldTransform.h"
 
@@ -67,10 +67,6 @@ struct Shaders
 	Mode sprite;
 
 };
-
-
-
-
 
 
 struct ResourcePeroperty
@@ -131,12 +127,6 @@ public:
 	/// </summary>
 	static void ShapeCreatePSO();
 
-	/// <summary>
-	/// 画像用のPSO
-	/// </summary>
-	static void SpriteCreatePSO();
-
-
 
 	/// <summary>
 	/// コンパイルしたシェーダーのリリース
@@ -161,7 +151,7 @@ public:
 	/// Resource生成
 	/// </summary>
 	/// <returns></returns>
-	static ResourcePeroperty  CreateShapeResource();
+	static ResourcePeroperty  CreateResource();
 
 
 	/// <summary>
@@ -170,7 +160,7 @@ public:
 	/// <param name="position"></param>
 	/// <param name="Color"></param>
 	/// <param name="Resource"></param>
-	static void ShapeDraw(
+	static void Draw(
 		Vector3 position, unsigned int Color, 
 		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
@@ -179,7 +169,7 @@ public:
 	/// Resourceの解放処理
 	/// </summary>
 	/// <param name="Resource"></param>
-	static void ShapeResourceRelease(ResourcePeroperty Resource);
+	static void ResourceRelease(ResourcePeroperty Resource);
 
 	
 #pragma endregion
@@ -220,14 +210,6 @@ private:
 		ResourcePeroperty Resource,
 		PSOProperty Shape);
 
-	/// <summary>
-    /// SpriteCommands
-    /// </summary>
-    /// <param name="commands"></param>
-	static void SpriteDrawCommands(
-		ResourcePeroperty Resource, 
-		texResourceProperty tex, 
-		Commands commands, PSOProperty PSO);
 
 	/// <summary>
 	/// パイプラインの解放

@@ -34,9 +34,6 @@
     <Filter Include="CLEYERA\ImGui\ex">
       <UniqueIdentifier>{82ff4388-4b83-4217-ba48-4d00f156cfb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{28f70f20-eacb-402f-a231-7459c8656289}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{a17759c4-8826-4e5d-9703-85ae3d802c23}</UniqueIdentifier>
     </Filter>
@@ -52,29 +49,14 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{60c478d6-b109-4a08-af34-c15b1c1c41bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\EngineDebug">
-      <UniqueIdentifier>{bccf3984-4e0d-4553-89eb-9de357268fd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\input">
-      <UniqueIdentifier>{acb28bdb-e2f4-471d-a2c9-618342a99f5b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Matrix">
       <UniqueIdentifier>{023b15d3-cd23-487b-98e7-3b08a745bc7b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\TexManager">
-      <UniqueIdentifier>{0c422894-2a8e-4cba-91e6-44e91275a940}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Title">
-      <UniqueIdentifier>{126e8420-b3c5-4516-b090-4f4f308a0c52}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\config">
       <UniqueIdentifier>{99e9f466-6500-409d-ab44-7e6040484eef}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\WorldTransform">
       <UniqueIdentifier>{9a9b8cca-2e5a-475f-982b-84875dca5385}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Manager">
-      <UniqueIdentifier>{90bed3d2-5531-44cd-9ac5-8303f690712e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,29 +108,11 @@
     <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="scene\EngineDebug\EnegineDebug.cpp">
-      <Filter>Scene\EngineDebug</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\input\Input.cpp">
-      <Filter>CLEYERA\input</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp">
       <Filter>CLEYERA\Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
-      <Filter>CLEYERA\TexManager</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\Title\Title.cpp">
-      <Filter>Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\GameBase\GameBase.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\WorldTransform\worldTransform.cpp">
       <Filter>Game\WorldTransform</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\Manager\GameSceneManager.cpp">
-      <Filter>Scene\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,12 +173,6 @@
     <ClInclude Include="CLEYERA\Vector\VectorTransform.h">
       <Filter>CLEYERA\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="scene\EngineDebug\EngineDebug.h">
-      <Filter>Scene\EngineDebug</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\input\Input.h">
-      <Filter>CLEYERA\input</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h">
       <Filter>CLEYERA\Matrix</Filter>
     </ClInclude>
@@ -227,29 +185,11 @@
     <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h">
       <Filter>CLEYERA\Matrix</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\TexManager\TexManager.h">
-      <Filter>CLEYERA\TexManager</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\Title\Title.h">
-      <Filter>Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\GameBase\GameBase.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h">
       <Filter>Game\WorldTransform</Filter>
     </ClInclude>
-    <ClInclude Include="scene\Manager\GameSceneManager.h">
-      <Filter>Scene\Manager</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\SpriteObject3d.VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Shader\SpriteObject3d.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="Shader\ShapeObject3d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -258,9 +198,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader\SpriteObject3d.hlsli">
-      <Filter>Shader</Filter>
-    </None>
     <None Include="CLEYERA\config\.editorconfig">
       <Filter>CLEYERA\config</Filter>
     </None>
