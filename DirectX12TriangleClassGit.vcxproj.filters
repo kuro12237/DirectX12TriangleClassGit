@@ -34,9 +34,6 @@
     <Filter Include="CLEYERA\ImGui\ex">
       <UniqueIdentifier>{82ff4388-4b83-4217-ba48-4d00f156cfb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{a17759c4-8826-4e5d-9703-85ae3d802c23}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Log">
       <UniqueIdentifier>{80cd8ea6-4d72-4e30-885b-4e4b620ca1e1}</UniqueIdentifier>
     </Filter>
@@ -55,7 +52,7 @@
     <Filter Include="CLEYERA\config">
       <UniqueIdentifier>{99e9f466-6500-409d-ab44-7e6040484eef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\WorldTransform">
+    <Filter Include="CLEYERA\WorldTransform">
       <UniqueIdentifier>{9a9b8cca-2e5a-475f-982b-84875dca5385}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -112,7 +109,7 @@
       <Filter>CLEYERA\Matrix</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\WorldTransform\worldTransform.cpp">
-      <Filter>Game\WorldTransform</Filter>
+      <Filter>CLEYERA\WorldTransform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +183,7 @@
       <Filter>CLEYERA\Matrix</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\WorldTransform\WorldTransform.h">
-      <Filter>Game\WorldTransform</Filter>
+      <Filter>CLEYERA\WorldTransform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
