@@ -168,7 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;CLEYERA\Win;CLEYERA\DX;CLEYERA\LogManager;CLEYERA\Matrix;CLEYERA\Camera;CLEYERA\ImGui;CLEYERA\Models;CLEYERA\Vector;CLEYERA\WorldTransform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;CLEYERA\Win;CLEYERA\DX;CLEYERA\LogManager;CLEYERA\Matrix;CLEYERA\Camera;CLEYERA\ImGui;CLEYERA\Models;CLEYERA\Vector;CLEYERA\WorldTransform;CLEYERA\externals\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -190,7 +190,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;CLEYERA\Win;CLEYERA\DX;CLEYERA\LogManager;CLEYERA\Matrix;CLEYERA\Camera;CLEYERA\ImGui;CLEYERA\Models;CLEYERA\Vector;CLEYERA\WorldTransform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;CLEYERA\Win;CLEYERA\DX;CLEYERA\LogManager;CLEYERA\Matrix;CLEYERA\Camera;CLEYERA\ImGui;CLEYERA\Models;CLEYERA\Vector;CLEYERA\WorldTransform;CLEYERA\externals\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
