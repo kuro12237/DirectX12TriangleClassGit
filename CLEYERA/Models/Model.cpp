@@ -333,7 +333,7 @@ Vector4 Model::ColorCodeAdapter(unsigned int color)
 }
 
 
-void Model::Draw(Vector3 position, int size,unsigned int ColorCode, WorldTransform worldTransform,ResourcePeroperty Resource)
+void Model::Draw(Vector3 position,float size,unsigned int ColorCode, WorldTransform worldTransform,ResourcePeroperty Resource)
 {
 	Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
@@ -343,11 +343,12 @@ void Model::Draw(Vector3 position, int size,unsigned int ColorCode, WorldTransfo
 	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
+	
 
 	Vector3 left =
 	{ 
-	  position.x -size,
-	  position.y -size,
+	  position.x - size,
+	  position.y - size,
 	  position.z  
 	};
 	
@@ -364,7 +365,6 @@ void Model::Draw(Vector3 position, int size,unsigned int ColorCode, WorldTransfo
 		position.y + size,
 		position.z  
 	};
-
 
 	//ç¿ïW
 	//ç∂â∫

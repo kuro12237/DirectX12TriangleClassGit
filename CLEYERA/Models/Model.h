@@ -160,7 +160,7 @@ public:
 	/// <param name="Resource"></param>
 	static void Draw(
 		Vector3 position,
-		int size,
+		float size,
 		unsigned int Color, 
 		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
