@@ -114,22 +114,23 @@ void Cleyera::Finalize()
 
 }
 
-ResourcePeroperty  Cleyera::CreateResource()
-{
-	ResourcePeroperty resultResource;
-	resultResource=Model::GetInstance()->CreateResource();
-	return resultResource;
-}
+//ResourcePeroperty  Cleyera::CreateResource()
+//{
+//	//ResourcePeroperty resultResource;
+//	//resultResource=Model::GetInstance()->CreateResource();
+//	//return resultResource;
+//}
 
 void Cleyera::ResourceRelease(ResourcePeroperty Resource)
 {
-	Model::ResourceRelease(Resource);
+	Resource;
+	//Model::ResourceRelease(Resource);
 }
 
 void Cleyera::TriangleDraw(Vector3 position, float size, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
 {
 	//ÉJÉÅÉâ
 	worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
-
-	Model::Draw(position,size,ColorCode,worldTransform, Resource);
+	position, size, ColorCode, Resource;
+	//Model::Draw(position,size,ColorCode,worldTransform, Resource);
 }

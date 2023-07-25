@@ -1,6 +1,5 @@
 #include"Cleyera.h"
-
-
+#define TRIANGLE_MAX 2
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 
@@ -13,16 +12,42 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 	MatrixTransform *matrixTransform_ = new MatrixTransform();
 
+	Model* model[TRIANGLE_MAX];
 
-	Vector3 pos_ = { 0,0,0 };
-	ResourcePeroperty resource_=Cleyera::CreateResource();
-	unsigned int color_=BLACK;
-	WorldTransform worldTransform_;
+	Vector3 pos_[TRIANGLE_MAX];
+	WorldTransform worldTransform_[TRIANGLE_MAX];
+
+	pos_[0] = {-0.5f,0.3f,0};
+	pos_[1] = { 0.5f,0.3f,0 };
+
+
+	//model
+	for (int i = 0; i < TRIANGLE_MAX; i++)
+	{
+		model[i] = new Model();
+
+		model[i]->Initialize();
+	}
+
+	//Trans
+	for (int i = 0; i < TRIANGLE_MAX; i++)
+	{
+		worldTransform_[i].matWorld_ = matrixTransform_->Identity();
+		worldTransform_[i].scale_={ 1,1,1 };
+
+		worldTransform_[i].UpdateMatrix();
+
+	}
+
+	for (int i = 0; i < TRIANGLE_MAX; i++)
+	{
+		model[i]->SetWorldTransform(worldTransform_[i]);
+		model[i]->SetPos(pos_[i]);
+		model[i]->SetSize(0.5f);
+	}
 	
-	worldTransform_.matWorld_=matrixTransform_->Identity();
-	float size = 1.0f;
-
 	MSG msg{};
+
 	//ゲーム更新処理
 	while (msg.message != WM_QUIT)
 	{
@@ -39,25 +64,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		
 	
 		
-		worldTransform_.UpdateMatrix();
 		//更新終了
 
 		//描画
-		Cleyera::TriangleDraw(
-			pos_,
-			size,
-			color_,
-			worldTransform_, 
-			resource_);
+
 		
+		for (int i = 0; i < TRIANGLE_MAX; i++)
+		{
+			model[i]->Draw();
+		}
 		//描画終了
 
 		Cleyera::EndFlame();
 	}
 
 	//頂点などのゲームシーンの解放処理
-	Cleyera::ResourceRelease(resource_);
-
+	for (int i = 0; i < TRIANGLE_MAX; i++)
+	{
+		model[i]->ResourceRelease();
+	}
 
 	Cleyera::Finalize();
 	return 0;

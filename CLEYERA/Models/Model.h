@@ -144,13 +144,10 @@ public:
 
 #pragma region 三角形
 
-
 	/// <summary>
-	/// Resource生成
+	/// 三角形の数値の初期化
 	/// </summary>
-	/// <returns></returns>
-	static ResourcePeroperty  CreateResource();
-
+	void Initialize();
 
 	/// <summary>
 	/// 表示
@@ -158,23 +155,35 @@ public:
 	/// <param name="position"></param>
 	/// <param name="Color"></param>
 	/// <param name="Resource"></param>
-	static void Draw(
-		Vector3 position,
-		float size,
-		unsigned int Color, 
-		WorldTransform worldTransform,
-		ResourcePeroperty Resource);
+	void Draw();
 
 	/// <summary>
 	/// Resourceの解放処理
 	/// </summary>
 	/// <param name="Resource"></param>
-	static void ResourceRelease(ResourcePeroperty Resource);
+	void ResourceRelease();
 
+	/// <summary>
+	/// Transformのセッター
+	/// </summary>
+	/// <param name="worldTransform"></param>
+	void SetWorldTransform(WorldTransform worldTransform);
 	
+	void SetPos(Vector3 pos);
+
+	void SetSize(float size);
 #pragma endregion
 
 private:
+
+
+
+	/// <summary>
+	/// Resource生成
+	/// </summary>
+	/// <returns></returns>
+	void CreateResource();
+
 
 	/// <summary>
     /// 色変換
@@ -234,6 +243,11 @@ private:
 	PSOProperty Sprite;
 
 
+	Vector3 pos_;
+	float size_;
+	unsigned int color_;
+	ResourcePeroperty resource_;
+	WorldTransform worldTransform_;
 	
 };
 

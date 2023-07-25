@@ -301,16 +301,19 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte, ID3D12Resour
 
 }
 
-ResourcePeroperty  Model::CreateResource()
+void  Model::CreateResource()
 {
-	ResourcePeroperty resultResource;
-	ID3D12Device* device = Model::GetInstance()->device;
-	resultResource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
-	resultResource.Material = CreateBufferResource(device, sizeof(Vector4));
-	resultResource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
-	resultResource.BufferView = CreateBufferView(sizeof(Vector4) * 3,resultResource.Vertex);
-	Model::GetInstance()->device = device;
-	return resultResource;
+	
+	ID3D12Device* device_ = Model::GetInstance()->device;
+	resource_.Vertex = CreateBufferResource(device_, sizeof(Vector4) * 3);
+	resource_.Material = CreateBufferResource(device_, sizeof(Vector4));
+	resource_.wvpResource = CreateBufferResource(device_, sizeof(Matrix4x4));
+	resource_.BufferView = CreateBufferView(sizeof(Vector4) * 3,resource_.Vertex);
+	
+
+
+	Model::GetInstance()->device = device_;
+	//return resultResource;
 
 }
 
@@ -333,37 +336,54 @@ Vector4 Model::ColorCodeAdapter(unsigned int color)
 }
 
 
-void Model::Draw(Vector3 position,float size,unsigned int ColorCode, WorldTransform worldTransform,ResourcePeroperty Resource)
+void Model::Initialize()
+{
+	pos_ = { 0,0,0 };
+	size_ = 1;
+	color_ = BLACK;
+	CreateResource();
+	worldTransform_.matWorld_= {
+		1.0f,0.0f,0.0f,0.0f,
+		0.0f,1.0f,0.0f,0.0f,
+		0.0f,0.0f,1.0f,0.0f,
+		0.0f,0.0f,0.0f,1.0f
+
+	};
+
+
+}
+
+void Model::Draw()
 {
 	Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
 	Matrix4x4* wvpData = nullptr;
 	//書き込むためのアドレスを取得
-	Resource.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
-	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
+	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
+	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
 	
 
 	Vector3 left =
 	{ 
-	  position.x - size,
-	  position.y - size,
-	  position.z  
+	  pos_.x - size_,
+	  pos_.y - size_,
+	  pos_.z
 	};
 	
 	Vector3 right = 
 	{
-	   position.x + size,
-	   position.y - size,
-	   position.z 
+	   pos_.x + size_,
+	   pos_.y - size_,
+	   pos_.z
 	};
 	
 	Vector3 top =
 	{  
-		position.x ,
-		position.y + size,
-		position.z  
+		pos_.x ,
+		pos_.y + size_,
+		pos_.z
 	};
 
 	//座標
@@ -377,15 +397,15 @@ void Model::Draw(Vector3 position,float size,unsigned int ColorCode, WorldTransf
 	vertexData[2] = { right.x,right.y,right.z,1.0f};
 
 	//マテリアル
-	Vector4 colorData = ColorCodeAdapter(ColorCode);
+	Vector4 colorData = ColorCodeAdapter(color_);
 
 	*MaterialData = colorData;
 
 	//行列の変換
 	
-	*wvpData = worldTransform.matWorld_;
+	*wvpData = worldTransform_.matWorld_;
 	
-	DrawCommand(Model::GetInstance()->commands,Resource, Model::GetInstance()->Shape);
+	DrawCommand(Model::GetInstance()->commands,resource_, Model::GetInstance()->Shape);
 
 }
 
@@ -413,16 +433,29 @@ void Model::DrawCommand(Commands commands, ResourcePeroperty Resource,PSOPropert
 
 }
 
-void Model::ResourceRelease(ResourcePeroperty Resource)
+void Model::ResourceRelease()
 {
 
-	Resource.Vertex->Release();
-	Resource.Material->Release();
-	Resource.wvpResource->Release();
+	resource_.Vertex->Release();
+	resource_.Material->Release();
+	resource_.wvpResource->Release();
 	
 }
 
+void Model::SetWorldTransform(WorldTransform worldTransform)
+{
+	worldTransform_ = worldTransform;
+}
 
+void Model::SetPos(Vector3 pos)
+{
+	pos_ = pos;
+}
+
+void Model::SetSize(float size)
+{
+	size_ = size;
+}
 
 void Model::PSORelese(PSOProperty PSO)
 {
