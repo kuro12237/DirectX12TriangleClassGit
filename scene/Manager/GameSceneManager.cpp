@@ -13,6 +13,7 @@ GameSceneManager* GameSceneManager::GetInstance()
 
 void GameSceneManager::Initialize()
 {
+
 	//Engine‰Šú‰»
 	Cleyera::Initialize(
 		GameSceneManager::GetInstance()->kClientWidth,
