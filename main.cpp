@@ -35,7 +35,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		///ゲームシーン
 		//更新
-		worldTransform_.scale_.x = 0.5f;
+		
+	
 		
 		worldTransform_.UpdateMatrix();
 		//更新終了
