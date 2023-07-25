@@ -48,8 +48,6 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 
 	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXSetup::GetInstance());
 
-
-
 	///ƒ‚ƒfƒ‹‚Ì‰Šú‰»
 
 	//DX‚Å‚Â‚­‚Á‚½‚à‚Ì‚ğ“]‘—
@@ -106,8 +104,8 @@ void Cleyera::Finalize()
 
 	ImGuiManager::Finalize();
 	
-	
 	Model::Finalize();
+
 	DirectXSetup::Finalize();
 	
 	WinApp::Finalize();

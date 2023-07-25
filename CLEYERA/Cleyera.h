@@ -38,8 +38,6 @@ public:
 
 	static void EndFlame();
 		  
-	
-
 
 #pragma region 三角形
 

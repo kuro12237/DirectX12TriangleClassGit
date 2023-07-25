@@ -373,13 +373,13 @@ void Model::Draw(Vector3 position, unsigned int ColorCode, WorldTransform worldT
 	
 	*wvpData = worldTransform.matWorld_;
 	
-	ShapeDrawCommands(Model::GetInstance()->commands,Resource, Model::GetInstance()->Shape);
+	DrawCommand(Model::GetInstance()->commands,Resource, Model::GetInstance()->Shape);
 
 }
 
 
 
-void Model::ShapeDrawCommands(Commands commands, ResourcePeroperty Resource,PSOProperty PSO)
+void Model::DrawCommand(Commands commands, ResourcePeroperty Resource,PSOProperty PSO)
 {
 
 

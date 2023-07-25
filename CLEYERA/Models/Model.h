@@ -24,7 +24,6 @@
 #include"../Matrix/Matrix4x4.h"
 #include"../Matrix/MatrixTransform.h"
 
-
 #include"../Vector/Vector2.h"
 #include"../WorldTransform/WorldTransform.h"
 
@@ -205,7 +204,7 @@ private:
     /// ShapeCommands
     /// </summary>
     /// <param name="commands"></param>
-	static void ShapeDrawCommands(
+	static void DrawCommand(
 		Commands commands,
 		ResourcePeroperty Resource,
 		PSOProperty Shape);
