@@ -59,7 +59,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	Model::dxcInitialize();
 	//Compileするための対応処理
 
-	Model::InitializeDfIncludeHandler();
+	Model::DefaultIncludeHandlerInitialize();
 
 	///シェーダーコンパイル処理
 	Model::CompileShaders();
@@ -114,7 +114,6 @@ void Cleyera::Finalize()
 
 }
 
-
 ResourcePeroperty  Cleyera::CreateResource()
 {
 	ResourcePeroperty resultResource;
@@ -130,7 +129,7 @@ void Cleyera::ResourceRelease(ResourcePeroperty Resource)
 void Cleyera::TriangleDraw(Vector3 position, int size, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
 {
 	//カメラ
-	//worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
+	worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
 
 	Model::Draw(position,size,ColorCode,worldTransform, Resource);
 }

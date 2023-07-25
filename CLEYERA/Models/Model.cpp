@@ -9,9 +9,6 @@ Model* Model::GetInstance()
 	static Model instance;
 	return &instance;
 }
-void Model::Initialize()
-{
-}
 
 void Model::SetDevice(ID3D12Device*device_)
 {
@@ -37,7 +34,7 @@ void Model::dxcInitialize()
 
 }
 
-void Model::InitializeDfIncludeHandler()
+void Model::DefaultIncludeHandlerInitialize()
 {
 	HRESULT hr = Model::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&Model::GetInstance()->includeHandler);
 	assert(SUCCEEDED(hr));
@@ -254,9 +251,7 @@ void Model::ShaderRelease()
 void Model::Finalize()
 {
 	//図形
-	PSORelese(Model::GetInstance()->Shape);
-
-	
+	PSORelese(Model::GetInstance()->Shape);	
 }
 
 ID3D12Resource* Model::CreateBufferResource(ID3D12Device* device, size_t sizeInbyte)
@@ -398,8 +393,6 @@ void Model::Draw(Vector3 position, int size,unsigned int ColorCode, WorldTransfo
 
 void Model::DrawCommand(Commands commands, ResourcePeroperty Resource,PSOProperty PSO)
 {
-
-
 	commands.List->SetGraphicsRootSignature(PSO.rootSignature);
 	commands.List->SetPipelineState(PSO.GraphicsPipelineState);//
 
@@ -417,7 +410,6 @@ void Model::DrawCommand(Commands commands, ResourcePeroperty Resource,PSOPropert
 
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);
-
 
 }
 

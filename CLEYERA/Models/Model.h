@@ -89,16 +89,14 @@ public:
 	static Model*GetInstance();
 
 #pragma region èâä˙âª
-	void Initialize();
 
 	
-
 	static void SetDevice(ID3D12Device* device_);
 	static void SetCommands(Commands command);
 
 	static void dxcInitialize();
 
-	static void InitializeDfIncludeHandler();
+	static void DefaultIncludeHandlerInitialize();
 
 
 	/// <summary>
