@@ -1,6 +1,6 @@
 #pragma once
-#include"../Vector/Vector3.h"
-#include"../Matrix/MatrixTransform.h"
+#include"Vector3.h"
+#include"MatrixTransform.h"
 
 struct WorldTransform
 {

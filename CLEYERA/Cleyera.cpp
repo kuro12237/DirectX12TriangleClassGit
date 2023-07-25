@@ -127,10 +127,10 @@ void Cleyera::ResourceRelease(ResourcePeroperty Resource)
 	Model::ResourceRelease(Resource);
 }
 
-void Cleyera::TriangleDraw(Vector3 position, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
+void Cleyera::TriangleDraw(Vector3 position, int size, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
 {
 	//ÉJÉÅÉâ
-	worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
+	//worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
 
-	Model::Draw(position, ColorCode,worldTransform, Resource);
+	Model::Draw(position,size,ColorCode,worldTransform, Resource);
 }

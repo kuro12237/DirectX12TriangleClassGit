@@ -1,6 +1,6 @@
 #pragma once
-#include"../Matrix/MatrixTransform.h"
-#include"../Vector/VectorTransform.h"
+#include"MatrixTransform.h"
+#include"VectorTransform.h"
 
 struct SCameraPeloperty
 {

@@ -1,4 +1,4 @@
-#include"CLEYERA/Cleyera.h"
+#include"Cleyera.h"
 
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -15,6 +15,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	MSG msg{};
 
 	Vector3 pos_ = { 0,0,0 };
+	int size = 1;
 	ResourcePeroperty resource_=Cleyera::CreateResource();
 	unsigned int color_=BLACK;
 	WorldTransform worldTransform_;
@@ -40,7 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		//更新終了
 
 		//描画
-		Cleyera::TriangleDraw(pos_, color_, worldTransform_, resource_);
+		Cleyera::TriangleDraw(pos_,size,color_, worldTransform_, resource_);
 		
 		//描画終了
 

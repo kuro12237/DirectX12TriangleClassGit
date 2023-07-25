@@ -15,17 +15,18 @@
 
 #include<cassert>
 
-#include"../LogManager/Log.h"
-#include"../DX/DirectXSetup.h"
+#include"Log.h"
+#include"DirectXSetup.h"
 
-#include"../Vector/Vector4.h"
-#include"../Vector/Vector3.h"
 
-#include"../Matrix/Matrix4x4.h"
-#include"../Matrix/MatrixTransform.h"
+#include"Vector2.h"
+#include"Vector3.h"
+#include"Vector4.h"
 
-#include"../Vector/Vector2.h"
-#include"../WorldTransform/WorldTransform.h"
+#include"Matrix4x4.h"
+#include"MatrixTransform.h"
+
+#include"WorldTransform.h"
 
 #define WHITE 0xFFFFFFFF
 #define BLACK 0x000000FF
@@ -160,7 +161,9 @@ public:
 	/// <param name="Color"></param>
 	/// <param name="Resource"></param>
 	static void Draw(
-		Vector3 position, unsigned int Color, 
+		Vector3 position,
+		int size,
+		unsigned int Color, 
 		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
 

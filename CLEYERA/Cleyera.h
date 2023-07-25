@@ -1,12 +1,12 @@
 ﻿#pragma once
 #include<format>
-#include"Win/WinApp.h"
-#include"DX/DirectXSetup.h"
 
-#include"Models/Model.h"
+#include"Model.h"
+#include"ImGuiManager.h"
+#include"Camera.h"
+#include"WinApp.h"
+#include"DirectXSetup.h"
 
-#include"ImGui/ImGuiManager.h"
-#include"Camera/Camera.h"
 
 class Cleyera
 {
@@ -61,7 +61,9 @@ public:
 	/// <param name="worldTransform"></param>
 	/// <param name="Resource"></param>
 	static void TriangleDraw(
-        Vector3 position,unsigned int Color,
+        Vector3 position,
+		int size,
+		unsigned int Color,
 		WorldTransform worldTransform,
 		ResourcePeroperty Resource);
 

@@ -1,6 +1,6 @@
 #pragma once
-#include"../DX/DirectXSetup.h"
-#include"../Win/WinApp.h"
+#include"DirectXSetup.h"
+#include"WinApp.h"
 #include"../externals/imgui/imgui.h"
 #include"../externals/imgui/imgui_impl_dx12.h"
 #include"../externals/imgui/imgui_impl_win32.h"
