@@ -339,18 +339,21 @@ Vector4 Model::ColorCodeAdapter(unsigned int color)
 void Model::Initialize()
 {
 	pos_ = { 0,0,0 };
+	
 	size_ = 1;
+	
 	color_ = BLACK;
+	
 	CreateResource();
-	worldTransform_.matWorld_= {
+
+	worldTransform_.matWorld_= 
+	{
 		1.0f,0.0f,0.0f,0.0f,
 		0.0f,1.0f,0.0f,0.0f,
 		0.0f,0.0f,1.0f,0.0f,
 		0.0f,0.0f,0.0f,1.0f
 
 	};
-
-
 }
 
 void Model::Draw()
