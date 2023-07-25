@@ -10,9 +10,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const int32_t kClientHeight = 720;
 
 	Cleyera::Initialize(kClientWidth, kClientHeight);
+	
 	MatrixTransform *matrixTransform_ = new MatrixTransform();
 
-	MSG msg{};
 
 	Vector3 pos_ = { 0,0,0 };
 	ResourcePeroperty resource_=Cleyera::CreateResource();
@@ -22,6 +22,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	worldTransform_.matWorld_=matrixTransform_->Identity();
 	float size = 1;
 
+	MSG msg{};
 	//ƒQ[ƒ€XVˆ—
 	while (msg.message != WM_QUIT)
 	{
