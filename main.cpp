@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	WorldTransform worldTransform_;
 	
 	worldTransform_.matWorld_=matrixTransform_->Identity();
-	float size = 1;
+	float size = 1.0f;
 
 	MSG msg{};
 	//ƒQ[ƒ€XVˆ—
