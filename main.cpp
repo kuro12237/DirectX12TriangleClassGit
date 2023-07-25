@@ -23,6 +23,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	worldTransform_.matWorld_=matrixTransform_->Identity();
 
 
+
 	//ƒQ[ƒ€XVˆ—
 	while (msg.message != WM_QUIT)
 	{
