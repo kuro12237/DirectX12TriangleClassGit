@@ -21,7 +21,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	pos_[0] = {-0.5f,0.0f,0};
 	pos_[1] = { 0.5f,0.0f,0};
 
-
 	//model
 	for (int i = 0; i < TRIANGLE_MAX; i++)
 	{
