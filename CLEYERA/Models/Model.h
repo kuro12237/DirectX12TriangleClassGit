@@ -152,9 +152,6 @@ public:
 	/// <summary>
 	/// •\Ž¦
 	/// </summary>
-	/// <param name="position"></param>
-	/// <param name="Color"></param>
-	/// <param name="Resource"></param>
 	void Draw();
 
 	/// <summary>

@@ -18,8 +18,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Vector3 pos_[TRIANGLE_MAX];
 	WorldTransform worldTransform_[TRIANGLE_MAX];
 
-	pos_[0] = {-0.5f,0.3f,0};
-	pos_[1] = { 0.5f,0.3f,0};
+	pos_[0] = {-0.5f,0.0f,0};
+	pos_[1] = { 0.5f,0.0f,0};
 
 
 	//model
