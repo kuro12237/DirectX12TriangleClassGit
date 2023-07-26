@@ -48,15 +48,15 @@ struct Commands
 };
 
 
-class DirectXSetup
+class DirectXCommon
 {
 public:
 	
-	DirectXSetup();
-	~DirectXSetup();
+	DirectXCommon();
+	~DirectXCommon();
 
 
-	static DirectXSetup* GetInstance();
+	static DirectXCommon* GetInstance();
 
 #pragma region Initialize‚Åg‚¤ŠÖ”
 

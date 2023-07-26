@@ -16,7 +16,7 @@
 #include<cassert>
 
 #include"Log.h"
-#include"DirectXSetup.h"
+#include"DirectXCommon.h"
 
 
 #include"Vector2.h"

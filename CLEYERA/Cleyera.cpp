@@ -16,44 +16,44 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	
 	///ファクトリー作成
 	
-	DirectXSetup::CreateDxgiFactory();
+	DirectXCommon::CreateDxgiFactory();
 
 	///デバイス作成
-	DirectXSetup::CreateDevice();
+	DirectXCommon::CreateDevice();
 
 #ifdef _DEBUG
 
-	DirectXSetup::debugErrorInfoQueue();
+	DirectXCommon::debugErrorInfoQueue();
 
 #endif // _DEBUG
 
 	///コマンドリストの生成
-	DirectXSetup::CreateCommands();
+	DirectXCommon::CreateCommands();
 
 	//swapChain
-	DirectXSetup::CreateSwapChain(kClientWidth, kClientHeight, WinApp::GetInstance()->GetHwnd());
+	DirectXCommon::CreateSwapChain(kClientWidth, kClientHeight, WinApp::GetInstance()->GetHwnd());
 	
 	//rtvDescritor
-	DirectXSetup::CreatertvDescritorHeap();
+	DirectXCommon::CreatertvDescritorHeap();
 	
 	//swapChainを引っ張る
-	DirectXSetup::CreateSwapChainResorce();
+	DirectXCommon::CreateSwapChainResorce();
 	
 	//RTVの設定と作成
-	DirectXSetup::SettingandCreateRTV();
+	DirectXCommon::SettingandCreateRTV();
 
 	//フェンスの生成
-	DirectXSetup::CreateFence();
+	DirectXCommon::CreateFence();
 
 
-	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXSetup::GetInstance());
+	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXCommon::GetInstance());
 
 	///モデルの初期化
 
 	//DXでつくったものを転送
 	
-	Model::SetDevice(DirectXSetup::GetInstance()->GetDevice());
-	Model::SetCommands(DirectXSetup::GetInstance()->GetCommands());
+	Model::SetDevice(DirectXCommon::GetInstance()->GetDevice());
+	Model::SetCommands(DirectXCommon::GetInstance()->GetCommands());
 
 	//DXCの初期化
 	Model::dxcInitialize();
@@ -84,17 +84,17 @@ void Cleyera::WinMSG(MSG msg)
 
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
-	ImGuiManager::BeginFlame(DirectXSetup::GetInstance());
+	ImGuiManager::BeginFlame(DirectXCommon::GetInstance());
 
-	DirectXSetup::BeginFlame();
-	DirectXSetup::ScissorViewCommand(kClientWidth, kClientHeight);
+	DirectXCommon::BeginFlame();
+	DirectXCommon::ScissorViewCommand(kClientWidth, kClientHeight);
 }
 
 
 void Cleyera::EndFlame()
 {
-	ImGuiManager::EndFlame(DirectXSetup::GetInstance());
-	DirectXSetup::EndFlame();
+	ImGuiManager::EndFlame(DirectXCommon::GetInstance());
+	DirectXCommon::EndFlame();
 }
 
 
@@ -106,11 +106,11 @@ void Cleyera::Finalize()
 	
 	Model::Finalize();
 
-	DirectXSetup::Finalize();
+	DirectXCommon::Finalize();
 	
 	WinApp::Finalize();
 
-	DirectXSetup::ReleaseChack();
+	DirectXCommon::ReleaseChack();
 
 }
 

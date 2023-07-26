@@ -5,7 +5,7 @@
 #include"ImGuiManager.h"
 #include"Camera.h"
 #include"WinApp.h"
-#include"DirectXSetup.h"
+#include"DirectXCommon.h"
 
 
 class Cleyera
