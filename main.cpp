@@ -12,7 +12,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	Cleyera::Initialize(kClientWidth, kClientHeight);
 	
-	
 	Model* model[TRIANGLE_MAX];
 
 	Vector3 pos_[TRIANGLE_MAX];
