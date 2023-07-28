@@ -1,7 +1,7 @@
-#include "MatrixTransform.h"
+ï»¿#include "MatrixTransform.h"
 
 
-#pragma region OŸŒ³s—ñ
+#pragma region ä¸‰æ¬¡å…ƒè¡Œåˆ—
 
 #pragma region +-*
 
@@ -52,7 +52,7 @@ Matrix3x3 MatrixTransform::Multiply(const Matrix3x3& m1, const Matrix3x3& m2)
 
 #pragma endregion 
 
-#pragma region ˆÚ“®E‰ñ“]E‘å‚«‚³
+#pragma region ç§»å‹•ãƒ»å›è»¢ãƒ»å¤§ãã•
 
 Matrix3x3 MatrixTransform::MakeTranslate3x3Matrix(Vector2 translate)
 {
@@ -114,7 +114,7 @@ Matrix3x3 MatrixTransform::MakeScaleMatrix(const Vector2 scale)
 
 #pragma endregion
 
-#pragma region s—ñ•ÏŠ·
+#pragma region è¡Œåˆ—å¤‰æ›
 
 Matrix3x3 MatrixTransform::MakeAffineMatrix(const Vector2 translate, float radian, const Vector2 scale)
 {
@@ -338,7 +338,7 @@ Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 	return result;
 }
 
-#pragma region ƒXƒP[ƒ‹EˆÚ“®E‰ñ“]
+#pragma region ã‚¹ã‚±ãƒ¼ãƒ«ãƒ»ç§»å‹•ãƒ»å›è»¢
 Matrix4x4 MatrixTransform::MakeScaleMatrix(const Vector3 scale)
 {
 	Matrix4x4 result;
@@ -391,7 +391,7 @@ Matrix4x4 MatrixTransform::MakeTranslateMatrix(Vector3 translate)
 	return result;
 }
 
-#pragma region ‰ñ“]
+#pragma region å›è»¢
 Matrix4x4 MatrixTransform::MakeRotateXMatrix(float radian)
 {
 	Matrix4x4 result;
@@ -489,7 +489,7 @@ Matrix4x4 MatrixTransform::MakeRotateXYZMatrix(float radianX, float radianY, flo
 #pragma endregion
 
 
-#pragma region s—ñ‚Ì•ÏŠ·
+#pragma region è¡Œåˆ—ã®å¤‰æ›
 Matrix4x4 MatrixTransform::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate)
 {
 	Matrix4x4 result;

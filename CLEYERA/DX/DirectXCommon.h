@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include<windows.h>
 #include<format>
@@ -25,7 +25,7 @@ struct  RTV
 
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
 
-	//RTV‚ğ2‚Âì‚é‚Ì‚ÅƒfƒBƒXƒNƒŠƒvƒ^‚ğ2‚Â—pˆÓ
+	//RTVã‚’2ã¤ä½œã‚‹ã®ã§ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚’2ã¤ç”¨æ„
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 };
 struct SwapChain
@@ -38,12 +38,12 @@ struct SwapChain
 
 struct Commands
 {
-	//ƒRƒ}ƒ“ƒhƒLƒ…[
+	//ã‚³ãƒãƒ³ãƒ‰ã‚­ãƒ¥ãƒ¼
 	ID3D12CommandQueue* Queue;
 	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
-	//ƒRƒ}ƒ“ƒhƒAƒ[ƒP[ƒ^
+	//ã‚³ãƒãƒ³ãƒ‰ã‚¢ãƒ­ãƒ¼ã‚±ãƒ¼ã‚¿
 	ID3D12CommandAllocator* Allocator;
-	//ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	//ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
 	ID3D12GraphicsCommandList* List;
 };
 
@@ -58,30 +58,30 @@ public:
 
 	static DirectXCommon* GetInstance();
 
-#pragma region Initialize‚Åg‚¤ŠÖ”
+#pragma region Initializeã§ä½¿ã†é–¢æ•°
 
 	/// <summary>
-	/// DXGIƒtƒ@ƒNƒgƒŠ[‚Ìì¬
+	/// DXGIãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ã®ä½œæˆ
 	/// </summary>
 	static void CreateDxgiFactory();
 
 	/// <summary>
-	/// ƒfƒoƒCƒX‚Ìì¬
+	/// ãƒ‡ãƒã‚¤ã‚¹ã®ä½œæˆ
 	/// </summary>
 	static void CreateDevice();
 
 	/// <summary>
-	/// windows11‚Å‚ÌDXGIƒfƒoƒbƒOƒŒƒCƒ„[‚ÆDX12ƒfƒoƒbƒOƒŒƒCƒ„[‚Ì‘ŠŒİƒoƒO‚É‚æ‚éƒGƒ‰[ƒ`ƒFƒbƒN
+	/// windows11ã§ã®DXGIãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨DX12ãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç›¸äº’ãƒã‚°ã«ã‚ˆã‚‹ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯
 	/// </summary>
 	static void debugErrorInfoQueue();
 
 	/// <summary>
-    /// ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ì¶¬
+    /// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®ç”Ÿæˆ
     /// </summary>
 	static void CreateCommands();
 
 	/// <summary>
-    /// ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ìİ’è
+    /// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®è¨­å®š
     /// </summary>
 	static void CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_);
 
@@ -90,17 +90,17 @@ public:
 	static void CreatertvDescritorHeap();
 
 	/// <summary>
-	///  ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ì¶¬
+	///  ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®ç”Ÿæˆ
 	/// </summary>
 	static void CreateSwapChainResorce();
 
 	/// <summary>
-	/// RTV‚Ì¶¬
+	/// RTVã®ç”Ÿæˆ
 	/// </summary>
 	static void SettingandCreateRTV();
 
 	/// <summary>
-	/// ƒtƒFƒ“ƒX‚Ì¶¬
+	/// ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
 	/// </summary>
 	static void CreateFence();
 
@@ -108,7 +108,7 @@ public:
 
 
 
-#pragma region ƒQƒbƒ^[
+#pragma region ã‚²ãƒƒã‚¿ãƒ¼
 
 	 ID3D12Device* GetDevice() { return device_; }
 	 Commands GetCommands() { return commands; }
@@ -122,19 +122,19 @@ public:
 #pragma endregion 
 	
 	 /// <summary>
-     /// DirectX‚Ì‰ğ•ú
+     /// DirectXã®è§£æ”¾
      /// </summary>
 	 static void Finalize();
 
 
 	/// <summary>
-	/// ƒŠƒŠ[ƒXƒ`ƒFƒbƒN
+	/// ãƒªãƒªãƒ¼ã‚¹ãƒã‚§ãƒƒã‚¯
 	/// </summary>
 	static void ReleaseChack();
 
 
 
-#pragma region ƒ‹[ƒv
+#pragma region ãƒ«ãƒ¼ãƒ—
 
 	static void BeginFlame();
 
@@ -147,7 +147,7 @@ public:
 
 private:
 
-#pragma region Finalize‚É‘‚­ˆ—
+#pragma region Finalizeã«æ›¸ãå‡¦ç†
 
 
 	static void FeanceReleace(ID3D12Fence* fence, HANDLE fenceEvent);
@@ -159,9 +159,9 @@ private:
 	static void CommandsRelease(Commands commands);
 #pragma endregion 
 
-#pragma region ScissorViewCommand‚É‘‚­ˆ—
+#pragma region ScissorViewCommandã«æ›¸ãå‡¦ç†
 	/// <summary>
-    /// ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+    /// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
     /// </summary>
     /// <param name="kClientWidth"></param>
     /// <param name="kClientHeight"></param>
@@ -169,12 +169,12 @@ private:
 	static D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
 
 	/// <summary>
-	/// ƒVƒU[‚Ìİ’è
+	/// ã‚·ã‚¶ãƒ¼ã®è¨­å®š
 	/// </summary>
 	static D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
 #pragma endregion
 
-	//‚ÅƒoƒbƒN—p
+	//ã§ãƒãƒƒã‚¯ç”¨
 	ID3D12Debug1* debugController_ = nullptr;
 
 	IDXGIFactory7* dxgiFactory_ = nullptr;
@@ -190,7 +190,7 @@ private:
 	RTV rtv;
 	ID3D12DescriptorHeap* srvDescriptorHeap;
 
-	//ƒtƒFƒ“ƒX
+	//ãƒ•ã‚§ãƒ³ã‚¹
 	ID3D12Fence* fence = nullptr;
 	uint64_t fenceValue;
 	HANDLE fenceEvent;

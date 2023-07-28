@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include"Matrix2x2.h"
 #include"Matrix3x3.h"
 #include"Matrix4x4.h"
@@ -22,11 +22,11 @@ public:
 	MatrixTransform();
 	~MatrixTransform();
 
-#pragma region OŸŒ³s—ñ
+#pragma region ä¸‰æ¬¡å…ƒè¡Œåˆ—
 #pragma region +-*
 
 	/// <summary>
-	/// 3x3s—ñ‚Ì‘«‚µZ
+	/// 3x3è¡Œåˆ—ã®è¶³ã—ç®—
 	/// </summary>
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
@@ -34,7 +34,7 @@ public:
 	Matrix3x3 Add(const Matrix3x3& m1, const Matrix3x3& m2);
 
 	/// <summary>
-	/// 3x3s—ñ‚Ìˆø‚«Z
+	/// 3x3è¡Œåˆ—ã®å¼•ãç®—
 	/// </summary>
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
@@ -43,7 +43,7 @@ public:
 
 
 	/// <summary>
-	/// 3x3s—ñ‚ÌŠ|‚¯Z
+	/// 3x3è¡Œåˆ—ã®æ›ã‘ç®—
 	/// </summary>
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
@@ -53,26 +53,26 @@ public:
 
 #pragma endregion 
 
-#pragma region ˆÚ“®E‰ñ“]E‘å‚«‚³
+#pragma region ç§»å‹•ãƒ»å›è»¢ãƒ»å¤§ãã•
 
 
 
 	/// <summary>
-	/// 3x3s—ñ‚Ì•½sˆÚ“®
+	/// 3x3è¡Œåˆ—ã®å¹³è¡Œç§»å‹•
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <returns></returns>
 	Matrix3x3 MakeTranslate3x3Matrix(Vector2 translate);
 
 	/// <summary>
-	/// 3x3s—ñ‰ñ“]
+	/// 3x3è¡Œåˆ—å›è»¢
 	/// </summary>
 	/// <param name="theta"></param>
 	/// <returns></returns>
 	Matrix3x3 MakeRotate3x3Matrix(float radian);
 
 	/// <summary>
-	/// 3x3s—ñ‚Ì‘å‚«‚³
+	/// 3x3è¡Œåˆ—ã®å¤§ãã•
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <returns></returns>
@@ -82,10 +82,10 @@ public:
 
 #pragma endregion
 
-#pragma region s—ñ‚Ì•ÏŠ·
+#pragma region è¡Œåˆ—ã®å¤‰æ›
 
 	/// <summary>
-	/// 3x3‚ÌƒAƒtƒBƒ“•ÏŠ·
+	/// 3x3ã®ã‚¢ãƒ•ã‚£ãƒ³å¤‰æ›
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <param name="radian"></param>
@@ -95,7 +95,7 @@ public:
 
 
 	/// <summary>
-	/// 2ŸŒ³ƒxƒNƒgƒ‹‚ğ3x3s—ñ‚Å•ÏŠ·
+	/// 2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã‚’3x3è¡Œåˆ—ã§å¤‰æ›
 	/// </summary>
 	/// <param name="v"></param>
 	/// <param name="matrix"></param>
@@ -103,21 +103,21 @@ public:
 	Vector2 Transform(Vector2 v, Matrix3x3 matrix);
 
 	/// <summary>
-	/// 3x3‚Ì‹ts—ñ
+	/// 3x3ã®é€†è¡Œåˆ—
 	/// </summary>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
 	Matrix3x3 Inverse(Matrix3x3 matrix);
 
 	/// <summary>
-	/// 3x3‚Ì“]’us—ñ
+	/// 3x3ã®è»¢ç½®è¡Œåˆ—
 	/// </summary>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
 	Matrix3x3 Transpose(Matrix3x3 matrix);
 
 	/// <summary>
-	/// 3x3‚Ì³Ë‰es—ñ
+	/// 3x3ã®æ­£å°„å½±è¡Œåˆ—
 	/// </summary>
 	/// <param name="left"></param>
 	/// <param name="top"></param>
@@ -127,7 +127,7 @@ public:
 	Matrix3x3 MakeOrthographicMatrix(float left, float top, float right, float bottom);
 
 	/// <summary>
-	/// 3x3ƒrƒ…[ƒ|[ƒgs—ñ
+	/// 3x3ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¡Œåˆ—
 	/// </summary>
 	/// <param name="left"></param>
 	/// <param name="top"></param>
@@ -140,12 +140,12 @@ public:
 
 #pragma endregion
 
-#pragma region 4ŸŒ³
+#pragma region 4æ¬¡å…ƒ
 
 #pragma region +-*
 
 	/// <summary>
-	/// 4x4s—ñ‚Ì‘«‚µZ
+	/// 4x4è¡Œåˆ—ã®è¶³ã—ç®—
 	/// </summary>
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
@@ -153,7 +153,7 @@ public:
 	Matrix4x4 Add(const Matrix4x4& m1, const Matrix4x4& m2);
 
 	/// <summary>
-	/// 4x4s—ñ‚Ìˆø‚«Z
+	/// 4x4è¡Œåˆ—ã®å¼•ãç®—
 	/// </summary>
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
@@ -162,7 +162,7 @@ public:
 
 
 	/// <summary>
-	/// 4x4s—ñ‚ÌæZ
+	/// 4x4è¡Œåˆ—ã®ä¹—ç®—
 	/// </summary>
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
@@ -170,46 +170,46 @@ public:
 	Matrix4x4 Multiply(Matrix4x4 m1, Matrix4x4 m2);
 #pragma endregion 
 
-#pragma region s—ñ‚ÌˆÚ“®E‘å‚«‚³E‰ñ“]
+#pragma region è¡Œåˆ—ã®ç§»å‹•ãƒ»å¤§ãã•ãƒ»å›è»¢
 	/// <summary>
-	/// 4x4ƒXƒP[ƒ‹s—ñ
+	/// 4x4ã‚¹ã‚±ãƒ¼ãƒ«è¡Œåˆ—
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <returns></returns>
 	Matrix4x4 MakeScaleMatrix(const Vector3 scale);
 
 	/// <summary>
-	/// 4x4•½sˆÚ“®s—ñ
+	/// 4x4å¹³è¡Œç§»å‹•è¡Œåˆ—
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <returns></returns>
 	Matrix4x4 MakeTranslateMatrix(Vector3 translate);
 
-#pragma region ‰ñ“]
+#pragma region å›è»¢
 	/// <summary>
-	/// 4x4Y²‚Ì‰ñ“]
+	/// 4x4Yè»¸ã®å›è»¢
 	/// </summary>
-	/// <param name="Šp“x"></param>
+	/// <param name="è§’åº¦"></param>
 	/// <returns></returns>
 	Matrix4x4 MakeRotateXMatrix(float radian);
 
 	/// <summary>
-	/// 4x4X²‚Ì‰ñ“]
+	/// 4x4Xè»¸ã®å›è»¢
 	/// </summary>
-	/// <param name="Šp“x"></param>
+	/// <param name="è§’åº¦"></param>
 	/// <returns></returns>
 	Matrix4x4 MakeRotateYMatrix(float radian);
 
 	/// <summary>
-	/// 4x4Z²‚Ì‰ñ“]
+	/// 4x4Zè»¸ã®å›è»¢
 	/// </summary>
-	/// <param name="Šp“x"></param>
+	/// <param name="è§’åº¦"></param>
 	/// <returns></returns>
 	Matrix4x4 MakeRotateZMatrix(float radian);
 
 
 	/// <summary>
-	/// XYZ‚·‚×‚Ä‚Ì‰ñ“]
+	/// XYZã™ã¹ã¦ã®å›è»¢
 	/// </summary>
 	/// <param name="Xradian"></param>
 	/// <param name="Yradian"></param>
@@ -220,10 +220,10 @@ public:
 
 #pragma endregion
 
-#pragma region s—ñ‚Ì•ÏŠ·
+#pragma region è¡Œåˆ—ã®å¤‰æ›
 
 	/// <summary>
-	/// 4x4ƒAƒtƒBƒ“•ÏŠ·s—ñ
+	/// 4x4ã‚¢ãƒ•ã‚£ãƒ³å¤‰æ›è¡Œåˆ—
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <param name="rotate"></param>
@@ -232,28 +232,28 @@ public:
 	Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
 
 	/// <summary>
-	/// 4x4“]Š·s—ñ
+	/// 4x4è»¢æ›è¡Œåˆ—
 	/// </summary>
 	/// <param name="m"></param>
 	/// <returns></returns>
 	Matrix4x4 Transpose(const Matrix4x4 m);
 
 	/// <summary>
-	/// 4x4‹ts—ñ
+	/// 4x4é€†è¡Œåˆ—
 	/// </summary>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
 	Matrix4x4 Inverse(Matrix4x4& matrix);
 
 	/// <summary>
-	/// 4x4’PˆÊs—ñ
+	/// 4x4å˜ä½è¡Œåˆ—
 	/// </summary>
 	/// <returns></returns>
 	Matrix4x4 Identity();
 
 
 	/// <summary>
-	/// 4x4³Ë‰es—ñ
+	/// 4x4æ­£å°„å½±è¡Œåˆ—
 	/// </summary>
 	/// <param name="left"></param>
 	/// <param name="top"></param>
@@ -265,7 +265,7 @@ public:
 	Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float neaCrlip, float farClip);
 
 	/// <summary>
-	/// 4x4ƒrƒ…[ƒ|[ƒgs—ñ
+	/// 4x4ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¡Œåˆ—
 	/// </summary>
 	/// <param name="left"></param>
 	/// <param name="top"></param>
@@ -277,14 +277,14 @@ public:
 	Matrix4x4 MakeViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth);
 
 	/// <summary>
-	/// —]Ú
+	/// ä½™æ¥
 	/// </summary>
 	/// <param name="theta"></param>
 	/// <returns></returns>
 	static float Cot(float theta);
 
 	/// <summary>
-	/// “§‹“Š‰es—ñ
+	/// é€è¦–æŠ•å½±è¡Œåˆ—
 	/// </summary>
 	/// <param name="fovY"></param>
 	/// <param name="aspectRatio"></param>

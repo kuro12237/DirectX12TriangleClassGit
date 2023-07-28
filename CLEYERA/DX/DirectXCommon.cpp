@@ -1,4 +1,4 @@
-
+ï»¿
 
 #include"DirectXCommon.h"
 
@@ -40,7 +40,7 @@ void DirectXCommon::CreateDxgiFactory()
 	DirectXCommon::GetInstance()->debugController_ = debugController;
 #endif
 
-	//DXGIƒtƒ@ƒNƒgƒŠ[‚Ì¶¬
+	//DXGIãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ã®ç”Ÿæˆ
 	dxgiFactory = nullptr;
 	
 
@@ -50,7 +50,7 @@ void DirectXCommon::CreateDxgiFactory()
 
 	//Adapter
 
-	//‚¢‚¢‡‚ÉƒAƒ_ƒvƒ^‚ğ—Š‚Ş
+	//ã„ã„é †ã«ã‚¢ãƒ€ãƒ—ã‚¿ã‚’é ¼ã‚€
 	for (UINT i = 0;dxgiFactory->EnumAdapterByGpuPreference(i,
 		DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&useAdapter)) !=
 		DXGI_ERROR_NOT_FOUND; i++)
@@ -89,7 +89,7 @@ void DirectXCommon::CreateDevice()
 	};
 	const char* featureLevelStrings[] = { "12.2","12.1","12.0" };
 
-	//‚‚¢‡‚É¶¬‚Å‚«‚é‚©‚µ‚Ä‚¢‚­
+	//é«˜ã„é †ã«ç”Ÿæˆã§ãã‚‹ã‹è©¦ã—ã¦ã„ã
 	for (size_t i = 0; i < _countof(featureLevels); i++)
 	{
 
@@ -119,28 +119,28 @@ void DirectXCommon::debugErrorInfoQueue()
 
 	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
 	{
-		//‚â‚Î‚¢ƒGƒ‰[‚É~‚Ü‚é
+		//ã‚„ã°ã„ã‚¨ãƒ©ãƒ¼æ™‚ã«æ­¢ã¾ã‚‹
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
 
-		//ƒGƒ‰[‚É~‚Ü‚é
+		//ã‚¨ãƒ©ãƒ¼æ™‚ã«æ­¢ã¾ã‚‹
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
 
-		//Œx‚É~‚Ü‚é
+		//è­¦å‘Šæ™‚ã«æ­¢ã¾ã‚‹
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
 
 		//
-		//ƒGƒ‰[‚ÆŒx‚Ì—}§
+		//ã‚¨ãƒ©ãƒ¼ã¨è­¦å‘Šã®æŠ‘åˆ¶
 
 
 		D3D12_MESSAGE_ID denyIds[] =
 		{
-			//windows11‚Å‚ÌDXGIƒfƒoƒbƒOƒŒƒCƒ„[‚ÆDX12ƒfƒoƒbƒOƒŒƒCƒ„[‚Ì‘ŠŒİƒoƒO‚É‚æ‚éƒGƒ‰[ƒƒbƒZ[ƒW
+			//windows11ã§ã®DXGIãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨DX12ãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç›¸äº’ãƒã‚°ã«ã‚ˆã‚‹ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 			//https:,,stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
 
 			D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
 		};
 
-		//—}§‚·‚éƒŒƒxƒ‹
+		//æŠ‘åˆ¶ã™ã‚‹ãƒ¬ãƒ™ãƒ«
 		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
 		D3D12_INFO_QUEUE_FILTER filter{};
 
@@ -149,10 +149,10 @@ void DirectXCommon::debugErrorInfoQueue()
 		filter.DenyList.NumSeverities = _countof(severities);
 		filter.DenyList.pSeverityList = severities;
 
-		//w’è‚µ‚½ƒƒbƒZ[ƒW‚Ì•\¦‚ğ—}§‚·‚é
+		//æŒ‡å®šã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¡¨ç¤ºã‚’æŠ‘åˆ¶ã™ã‚‹
 		infoQueue->PushStorageFilter(&filter);
 
-		//‰ğ•ú
+		//è§£æ”¾
 		infoQueue->Release();
 	}
 	DirectXCommon::GetInstance()->device_ = device;
@@ -163,17 +163,17 @@ void DirectXCommon::CreateCommands()
 	ID3D12Device* device = DirectXCommon::GetInstance()->device_;
 	Commands commands = DirectXCommon::GetInstance()->commands;
 	///commands
-    //ƒRƒ}ƒ“ƒhƒLƒ…[‚Ì¶¬
+    //ã‚³ãƒãƒ³ãƒ‰ã‚­ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	commands.Queue = nullptr;
 	HRESULT hr = device->CreateCommandQueue(&commands.QueueDesc, IID_PPV_ARGS(&commands.Queue));
 	assert(SUCCEEDED(hr));
 
-	//ƒAƒ[ƒP[ƒ^[‚Ì¶¬
+	//ã‚¢ãƒ­ãƒ¼ã‚±ãƒ¼ã‚¿ãƒ¼ã®ç”Ÿæˆ
     commands.Allocator = nullptr;
 	hr = device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commands.Allocator));
 	assert(SUCCEEDED(hr));
 
-	//ƒŠƒXƒg‚Ìì¬
+	//ãƒªã‚¹ãƒˆã®ä½œæˆ
 	commands.List = nullptr;
 	hr = device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT,
 		commands.Allocator, nullptr,
@@ -190,7 +190,7 @@ void DirectXCommon::CreateSwapChain(const int32_t Width, const int32_t Height, H
 
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 
-	//ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ìİ’è
+	//ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®è¨­å®š
 	swapChainDesc.Width = Width;
 	swapChainDesc.Height = Height;
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -200,7 +200,7 @@ void DirectXCommon::CreateSwapChain(const int32_t Width, const int32_t Height, H
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
 	
-	//ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ì¶¬
+	//ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®ç”Ÿæˆ
 	HRESULT hr = DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXCommon::GetInstance()->commands.Queue, hwnd_, &swapChainDesc,
 		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&DirectXCommon::GetInstance()->swapChain.swapChain));
 	assert(SUCCEEDED(hr));
@@ -275,7 +275,7 @@ void DirectXCommon::CreateFence()
 	uint64_t fenceValue = DirectXCommon::GetInstance()->fenceValue;
 	HANDLE fenceEvent = DirectXCommon::GetInstance()->fenceEvent;
 
-	//ƒtƒFƒ“ƒX‚Ìì¬
+	//ãƒ•ã‚§ãƒ³ã‚¹ã®ä½œæˆ
 	fence = nullptr;
 	fenceValue = 0;
 	HRESULT hr = DirectXCommon::GetInstance()->device_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
@@ -298,12 +298,12 @@ void DirectXCommon::BeginFlame()
 	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
 	Commands commands = DirectXCommon::GetInstance()->commands;
 
-	//‘‚«‚ŞƒXƒƒbƒvƒ`ƒF[ƒ“‚Ìindex‚ğ‚Æ‚é
+	//æ›¸ãè¾¼ã‚€ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®indexã‚’ã¨ã‚‹
 	UINT backBufferIndex = swapChain.swapChain->GetCurrentBackBufferIndex();
 
 
 	D3D12_RESOURCE_BARRIER barrier{};
-	//ƒoƒŠƒA
+	//ãƒãƒªã‚¢
     barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
     barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
     barrier.Transition.pResource = swapChain.Resource[backBufferIndex];
@@ -312,7 +312,7 @@ void DirectXCommon::BeginFlame()
 
 	commands.List->ResourceBarrier(1, &barrier);
 	DirectXCommon::GetInstance()->barrier = barrier;
-	//•`‰ææ‚ÌRTY‚ğİ’è
+	//æç”»å…ˆã®RTYã‚’è¨­å®š
 	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], false, nullptr);
 
 	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
@@ -349,10 +349,10 @@ void DirectXCommon::EndFlame()
 	swapChain.swapChain->Present(0, 1);
 
 
-	//Fence”’l‰ÁZ
+	//Fenceæ•°å€¤åŠ ç®—
     fenceValue++;
 
-	//GPU‚ÉƒVƒOƒiƒ‹
+	//GPUã«ã‚·ã‚°ãƒŠãƒ«
 	commands.Queue->Signal(fence, fenceValue);
 
 
@@ -391,11 +391,11 @@ void DirectXCommon::ScissorViewCommand(const int32_t kClientWidth, const int32_t
 
 	viewport = viewportSetting(kClientWidth, kClientHeight);
 
-	//ƒVƒU[‹éŒ`
+	//ã‚·ã‚¶ãƒ¼çŸ©å½¢
 	D3D12_RECT scissorRect{};
 	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
 
-	//ƒRƒ}ƒ“ƒh‚ğÏ‚Ş
+	//ã‚³ãƒãƒ³ãƒ‰ã‚’ç©ã‚€
 	Commands commands = DirectXCommon::GetInstance()->commands;
 
     commands.List->RSSetViewports(1, &viewport); //
@@ -475,7 +475,7 @@ D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kCli
 
 	D3D12_VIEWPORT viewport;
 
-	//ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ÌƒTƒCƒY‚ğˆê‚É‚µ‚Ä‰æ–Ê‘S‘Ì‚É•\¦
+	//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®ã‚µã‚¤ã‚ºã‚’ä¸€ç·’ã«ã—ã¦ç”»é¢å…¨ä½“ã«è¡¨ç¤º
 	viewport.Width = float(kClientWidth);
 	viewport.Height = float(kClientHeight);
 	viewport.TopLeftX = 0;
@@ -490,10 +490,10 @@ D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kCli
 
 D3D12_RECT DirectXCommon::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
 {
-	//ƒVƒU[‹éŒ`
+	//ã‚·ã‚¶ãƒ¼çŸ©å½¢
 	D3D12_RECT scissorRect{};
 
-	//Šî–{“I‚Éƒrƒ…[ƒ|[ƒg‚Æ“¯‚¶‹éŒ`‚ª\¬‚³‚ê‚é‚æ‚¤‚É‚·‚é
+	//åŸºæœ¬çš„ã«ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã¨åŒã˜çŸ©å½¢ãŒæ§‹æˆã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹
 	scissorRect.left = 0;
 	scissorRect.right = kClientWidth;
 	scissorRect.top = 0;

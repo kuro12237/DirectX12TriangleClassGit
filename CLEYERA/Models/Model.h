@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include<windows.h>
 #include<format>
@@ -89,7 +89,7 @@ public:
 
 	static Model*GetInstance();
 
-#pragma region ‰Šú‰»
+#pragma region åˆæœŸåŒ–
 
 	
 	static void SetDevice(ID3D12Device* device_);
@@ -101,7 +101,7 @@ public:
 
 
 	/// <summary>
-    /// ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹ŠÖ”
+    /// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«é–¢æ•°
     /// </summary>
     /// <param name="filePath"></param>
     /// <param name="profile"></param>
@@ -117,25 +117,25 @@ public:
 		IDxcIncludeHandler* includeHandler);
 
 	/// <summary>
-	/// ÀÛ‚ÉƒRƒ“ƒpƒCƒ‹‚·‚é
+	/// å®Ÿéš›ã«ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹
 	/// </summary>
 	static void CompileShaders();
 
 	/// <summary>
-	/// F‚Ì}Œ`‚ÌPSO¶¬
+	/// è‰²ã®å›³å½¢ã®PSOç”Ÿæˆ
 	/// </summary>
 	static void ShapeCreatePSO();
 
 
 	/// <summary>
-	/// ƒRƒ“ƒpƒCƒ‹‚µ‚½ƒVƒF[ƒ_[‚ÌƒŠƒŠ[ƒX
+	/// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã—ãŸã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒªãƒªãƒ¼ã‚¹
 	/// </summary>
 	static void ShaderRelease();
 
 
 
 	/// <summary>
-	/// PSO‚È‚Ç‚ÌƒŠƒŠ[ƒX
+	/// PSOãªã©ã®ãƒªãƒªãƒ¼ã‚¹
 	/// </summary>
 	static void Finalize();
 
@@ -143,26 +143,26 @@ public:
 #pragma endregion
 
 
-#pragma region OŠpŒ`
+#pragma region ä¸‰è§’å½¢
 
 	/// <summary>
-	/// OŠpŒ`‚Ì”’l‚Ì‰Šú‰»
+	/// ä¸‰è§’å½¢ã®æ•°å€¤ã®åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// •\¦
+	/// è¡¨ç¤º
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// Resource‚Ì‰ğ•úˆ—
+	/// Resourceã®è§£æ”¾å‡¦ç†
 	/// </summary>
 	/// <param name="Resource"></param>
 	void ResourceRelease();
 
 	/// <summary>
-	/// Transform‚ÌƒZƒbƒ^[
+	/// Transformã®ã‚»ãƒƒã‚¿ãƒ¼
 	/// </summary>
 	/// <param name="worldTransform"></param>
 	void SetWorldTransform(WorldTransform worldTransform);
@@ -179,14 +179,14 @@ private:
 
 
 	/// <summary>
-	/// Resource¶¬
+	/// Resourceç”Ÿæˆ
 	/// </summary>
 	/// <returns></returns>
 	void CreateResource();
 
 
 	/// <summary>
-    /// F•ÏŠ·
+    /// è‰²å¤‰æ›
     /// </summary>
     /// <param name="color"></param>
     /// <returns></returns>
@@ -194,7 +194,7 @@ private:
 
 
 	/// <summary>
-	/// Resource‚ğì¬
+	/// Resourceã‚’ä½œæˆ
 	/// </summary>
 	/// <param name="device"></param>
 	/// <param name="sizeInbyte"></param>
@@ -202,7 +202,7 @@ private:
 	static ID3D12Resource* CreateBufferResource(ID3D12Device* device, size_t sizeInbyte);
 
 	/// <summary>
-	/// BufferView‚ğì¬
+	/// BufferViewã‚’ä½œæˆ
 	/// </summary>
 	/// <param name="sizeInbyte"></param>
 	/// <param name="Resource"></param>
@@ -221,12 +221,12 @@ private:
 
 
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“‚Ì‰ğ•ú
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã®è§£æ”¾
 	/// </summary>
 	static void PSORelese(PSOProperty PSO);
 
 	/// <summary>
-	/// ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è§£æ”¾
 	/// </summary>
 	static void FancShaderRelease(Mode shader);
 

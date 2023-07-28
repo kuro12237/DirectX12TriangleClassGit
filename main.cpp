@@ -1,12 +1,12 @@
-#include"Cleyera.h"
+ï»¿#include"Cleyera.h"
 #define TRIANGLE_MAX 2
 
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 
-	///‰Šú‰»
-	//ƒEƒCƒ“ƒhƒEƒTƒCƒY‚Ìİ’è
+	///åˆæœŸåŒ–
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã®è¨­å®š
 	const int32_t kClientWidth = 1280;
 	const int32_t kClientHeight = 720;
 
@@ -41,7 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	model[1]->SetColor(RED);
 	MSG msg{};
 
-	//ƒQ[ƒ€XVˆ—
+	//ã‚²ãƒ¼ãƒ æ›´æ–°å‡¦ç†
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -52,26 +52,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Cleyera::BeginFlame(kClientWidth,kClientHeight);
 
 
-		///ƒQ[ƒ€ƒV[ƒ“
-		//XV
+		///ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
+		//æ›´æ–°
 		
 	
 		
-		//XVI—¹
+		//æ›´æ–°çµ‚äº†
 
-		//•`‰æ
+		//æç”»
 
 		
 		for (int i = 0; i < TRIANGLE_MAX; i++)
 		{
 			model[i]->Draw();
 		}
-		//•`‰æI—¹
+		//æç”»çµ‚äº†
 
 		Cleyera::EndFlame();
 	}
 
-	//’¸“_‚È‚Ç‚Ì‚Ì‰ğ•úˆ—
+	//é ‚ç‚¹ãªã©ã®ã®è§£æ”¾å‡¦ç†
 	for (int i = 0; i < TRIANGLE_MAX; i++)
 	{
 		model[i]->ResourceRelease();

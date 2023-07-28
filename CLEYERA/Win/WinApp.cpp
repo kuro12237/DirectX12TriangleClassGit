@@ -1,4 +1,4 @@
-#include"WinApp.h"
+ï»¿#include"WinApp.h"
 
 WinApp::WinApp(){}
 
@@ -18,12 +18,12 @@ LRESULT CALLBACK WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM l
 	{
 		return true;
 	}
-	//ƒƒbƒZ[ƒW‚É‚¨‚¢‚ÄŒÅ—L‚Ì“®ì‚ğs‚¤
+	//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«ãŠã„ã¦å›ºæœ‰ã®å‹•ä½œã‚’è¡Œã†
 	switch (msg)
 	{
-		//ƒEƒCƒ“ƒhƒE‚ª”jŠü
+		//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒç ´æ£„
 	case WM_DESTROY:
-		//OS‚É‘Î‚µƒAƒvƒŠI—¹‚ğ“`‚¦‚é
+		//OSã«å¯¾ã—ã‚¢ãƒ—ãƒªçµ‚äº†ã‚’ä¼ãˆã‚‹
 		PostQuitMessage(0);
 		return 0;
 	}
@@ -36,31 +36,31 @@ void WinApp::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeigh
 	WNDCLASS wc_{};
 
 	HWND hwnd;
-	//ƒEƒCƒ“ƒhƒEƒvƒ[ƒWƒƒ[
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ãƒ¼ã‚¸ãƒ£ãƒ¼
 	//wc_.lpfnWndProc = WindowProc;
 	wc_.lpfnWndProc = WinApp::WindowProc;
 
-	//ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX–¼
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹å
 	//wc_.lpszClassName = L"CLEYERA";
     wc_.lpszClassName = L"CLEYERA";
 
-	//ƒCƒ“ƒXƒ^ƒ“ƒX
+	//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	wc_.hInstance = GetModuleHandle(nullptr);
 	//wc_.hInstance = GetModuleHandle(nullptr);
-	//ƒJ[ƒ\ƒ‹
+	//ã‚«ãƒ¼ã‚½ãƒ«
 	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
 
 
 	RegisterClass(&wc_);
 
 
-	//ƒNƒ‰ƒCƒAƒ“ƒg‚Ì—Ìˆæİ’è
+	//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®é ˜åŸŸè¨­å®š
 	RECT wrc = { 0,0,kClientWidth,kClientHeight };
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
 
 
-	//ƒEƒCƒ“ƒhƒE‚Ì¶¬
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç”Ÿæˆ
 	hwnd = CreateWindow(
 		wc_.lpszClassName,
 		L"CLEYERA",

@@ -1,4 +1,4 @@
-#include"Log.h"
+﻿#include"Log.h"
 
 
 std::wstring ConvertString(const std::string& str)

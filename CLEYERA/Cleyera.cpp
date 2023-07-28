@@ -1,4 +1,4 @@
-#include"CLEYERA.h"
+ï»¿#include"CLEYERA.h"
 
 Cleyera::Cleyera(){}
 
@@ -6,19 +6,19 @@ Cleyera::~Cleyera(){}
 
 void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
-	//WinApp‚Ì‰Šú‰»
+	//WinAppã®åˆæœŸåŒ–
 	
 	WinApp::Initialize(kClientWidth, kClientHeight);
 
 	//
-	////DirectX‚Ì‰Šú‰»
+	////DirectXã®åˆæœŸåŒ–
 	//
 	
-	///ƒtƒ@ƒNƒgƒŠ[ì¬
+	///ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ä½œæˆ
 	
 	DirectXCommon::CreateDxgiFactory();
 
-	///ƒfƒoƒCƒXì¬
+	///ãƒ‡ãƒã‚¤ã‚¹ä½œæˆ
 	DirectXCommon::CreateDevice();
 
 #ifdef _DEBUG
@@ -27,7 +27,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 
 #endif // _DEBUG
 
-	///ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ì¶¬
+	///ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®ç”Ÿæˆ
 	DirectXCommon::CreateCommands();
 
 	//swapChain
@@ -36,42 +36,42 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	//rtvDescritor
 	DirectXCommon::CreatertvDescritorHeap();
 	
-	//swapChain‚ğˆø‚Á’£‚é
+	//swapChainã‚’å¼•ã£å¼µã‚‹
 	DirectXCommon::CreateSwapChainResorce();
 	
-	//RTV‚Ìİ’è‚Æì¬
+	//RTVã®è¨­å®šã¨ä½œæˆ
 	DirectXCommon::SettingandCreateRTV();
 
-	//ƒtƒFƒ“ƒX‚Ì¶¬
+	//ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
 	DirectXCommon::CreateFence();
 
 
 	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXCommon::GetInstance());
 
-	///ƒ‚ƒfƒ‹‚Ì‰Šú‰»
+	///ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–
 
-	//DX‚Å‚Â‚­‚Á‚½‚à‚Ì‚ğ“]‘—
+	//DXã§ã¤ãã£ãŸã‚‚ã®ã‚’è»¢é€
 	
 	Model::SetDevice(DirectXCommon::GetInstance()->GetDevice());
 	Model::SetCommands(DirectXCommon::GetInstance()->GetCommands());
 
-	//DXC‚Ì‰Šú‰»
+	//DXCã®åˆæœŸåŒ–
 	Model::dxcInitialize();
-	//Compile‚·‚é‚½‚ß‚Ì‘Î‰ˆ—
+	//Compileã™ã‚‹ãŸã‚ã®å¯¾å¿œå‡¦ç†
 
 	Model::DefaultIncludeHandlerInitialize();
 
-	///ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹ˆ—
+	///ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«å‡¦ç†
 	Model::CompileShaders();
 	
-	//}Œ`•`‰æ‚ÌƒpƒCƒvƒ‰ƒCƒ“
+	//å›³å½¢æç”»ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³
 	Model::ShapeCreatePSO();
 	
 	
-	//ƒRƒ“ƒpƒCƒ‹‚µ‚½ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	//ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã—ãŸã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è§£æ”¾
 	Model::ShaderRelease();
 	
-	//ƒJƒƒ‰‚Ì‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåŒ–
 	Camera::Initialize(kClientWidth,kClientHeight);
 }
 
@@ -129,7 +129,7 @@ void Cleyera::ResourceRelease(ResourcePeroperty Resource)
 
 void Cleyera::TriangleDraw(Vector3 position, float size, unsigned int ColorCode, WorldTransform worldTransform, ResourcePeroperty Resource)
 {
-	//ƒJƒƒ‰
+	//ã‚«ãƒ¡ãƒ©
 	worldTransform.matWorld_ = Camera::worldViewProjectionMatrixFanc(worldTransform.matWorld_);
 	position, size, ColorCode, Resource;
 	//Model::Draw(position,size,ColorCode,worldTransform, Resource);
