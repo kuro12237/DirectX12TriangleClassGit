@@ -368,36 +368,39 @@ void Model::Draw()
 
 	
 
-	Vector3 left =
+	Vector4 left =
 	{ 
 	  pos_.x - size_,
 	  pos_.y - size_,
-	  pos_.z
+	  pos_.z,
+	  pos_.w
 	};
 	
-	Vector3 right = 
+	Vector4 right = 
 	{
 	   pos_.x + size_,
 	   pos_.y - size_,
-	   pos_.z
+	   pos_.z,
+	  pos_.w
 	};
 	
-	Vector3 top =
+	Vector4 top =
 	{  
 		pos_.x ,
 		pos_.y + size_,
-		pos_.z
+		pos_.z,
+	  pos_.w
 	};
 
 	//座標
 	//左下
-	vertexData[0] = { left.x,left.y,left.z , 1.0f};
+	vertexData[0] = { left.x,left.y,left.z , left.w};
 
 	//上
-	vertexData[1] = { top.x,top.y,top.z,1.0f};
+	vertexData[1] = { top.x,top.y,top.z,top.w};
 
 	//右上
-	vertexData[2] = { right.x,right.y,right.z,1.0f};
+	vertexData[2] = { right.x,right.y,right.z,top.w};
 
 	//マテリアル
 	Vector4 colorData = ColorCodeAdapter(color_);
@@ -450,7 +453,7 @@ void Model::SetWorldTransform(WorldTransform worldTransform)
 	worldTransform_ = worldTransform;
 }
 
-void Model::SetPos(Vector3 pos)
+void Model::SetPos(Vector4 pos)
 {
 	pos_ = pos;
 }

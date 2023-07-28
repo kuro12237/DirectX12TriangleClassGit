@@ -14,11 +14,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 	Model* model[TRIANGLE_MAX];
 
-	Vector3 pos_[TRIANGLE_MAX];
+	Vector4 pos_[TRIANGLE_MAX];
 	WorldTransform worldTransform_[TRIANGLE_MAX];
 
-	pos_[0] = {-0.5f,0.0f,0};
-	pos_[1] = { 0.5f,0.0f,0};
+	pos_[0] = { -0.5f,0.0f,0.0f,1.0f };
+	pos_[1] = { 0.5f,0.0f,0.0f,1.0f };
 
 	//model
 	for (int i = 0; i < TRIANGLE_MAX; i++)

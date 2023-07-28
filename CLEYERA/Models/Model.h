@@ -166,7 +166,7 @@ public:
 	/// <param name="worldTransform"></param>
 	void SetWorldTransform(WorldTransform worldTransform);
 	
-	void SetPos(Vector3 pos);
+	void SetPos(Vector4 pos);
 
 	void SetSize(float size);
 #pragma endregion
@@ -240,7 +240,7 @@ private:
 	PSOProperty Sprite;
 
 
-	Vector3 pos_;
+	Vector4 pos_;
 	float size_;
 	unsigned int color_;
 	ResourcePeroperty resource_;
