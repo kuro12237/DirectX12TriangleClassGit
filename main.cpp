@@ -37,6 +37,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		model[i]->SetSize(0.5f);
 	}
 	
+	Vector4 RED = { 1.0f,0.0f,0.0f,1.0f };
+	model[1]->SetColor(RED);
 	MSG msg{};
 
 	//ƒQ[ƒ€XVˆ—

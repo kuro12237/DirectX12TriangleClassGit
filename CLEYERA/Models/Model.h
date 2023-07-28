@@ -169,6 +169,8 @@ public:
 	void SetPos(Vector4 pos);
 
 	void SetSize(float size);
+
+	void SetColor(Vector4 color);
 #pragma endregion
 
 private:
@@ -239,10 +241,11 @@ private:
 	PSOProperty Shape;
 	PSOProperty Sprite;
 
+	Vector4 color_;
 
 	Vector4 pos_;
 	float size_;
-	unsigned int color_;
+	//unsigned int color_;
 	ResourcePeroperty resource_;
 	WorldTransform worldTransform_;
 	

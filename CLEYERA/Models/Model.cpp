@@ -342,7 +342,7 @@ void Model::Initialize()
 	
 	size_ = 1;
 	
-	color_ = BLACK;
+	color_ = { 1.0f,1.0f,1.0f,1.0f };
 	
 	CreateResource();
 
@@ -381,7 +381,7 @@ void Model::Draw()
 	   pos_.x + size_,
 	   pos_.y - size_,
 	   pos_.z,
-	  pos_.w
+	   pos_.w
 	};
 	
 	Vector4 top =
@@ -389,7 +389,7 @@ void Model::Draw()
 		pos_.x ,
 		pos_.y + size_,
 		pos_.z,
-	  pos_.w
+	    pos_.w
 	};
 
 	//座標
@@ -403,7 +403,7 @@ void Model::Draw()
 	vertexData[2] = { right.x,right.y,right.z,top.w};
 
 	//マテリアル
-	Vector4 colorData = ColorCodeAdapter(color_);
+	Vector4 colorData = color_;//ColorCodeAdapter(color_);
 
 	*MaterialData = colorData;
 
@@ -461,6 +461,11 @@ void Model::SetPos(Vector4 pos)
 void Model::SetSize(float size)
 {
 	size_ = size;
+}
+
+void Model::SetColor(Vector4 color)
+{
+	color_ = color;
 }
 
 void Model::PSORelese(PSOProperty PSO)
