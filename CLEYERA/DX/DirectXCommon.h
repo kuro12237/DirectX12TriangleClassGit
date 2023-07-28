@@ -15,7 +15,7 @@
 
 #include<cassert>
 
-#include"../LogManager/Log.h"
+#include"Log.h"
 
 
 struct  RTV
