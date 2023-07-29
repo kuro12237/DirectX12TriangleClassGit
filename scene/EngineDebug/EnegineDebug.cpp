@@ -37,9 +37,12 @@ void EngineDebug::Update(Game* game)
 	game;
 
 	ImGui::Begin("ShapeModel");
+	ImGui::Text("pos");
 	ImGui::SliderFloat3("leftPos", &triangle[0].position.left.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("TopPos", &triangle[0].position.top.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("RightPos", &triangle[0].position.right.x, -5.0f, 5.0f);
+	ImGui::Text("rotate");
+	
 	ImGui::SliderFloat3("Color", &triangle[0].Color.x, 0.0f, 1.0f);
 	ImGui::End();
 
