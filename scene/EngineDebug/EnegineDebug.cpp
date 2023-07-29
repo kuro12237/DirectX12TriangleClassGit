@@ -27,7 +27,7 @@ void EngineDebug::Initialize(Game* game)
 	triangle[1].matrix = matrixTransform_->Identity();
 
 
-	texHandule = Cleyera::LoadTex("CLEYERA/DefaultResources/uvChecker.png");
+	texHandule = Cleyera::LoadTex("Resource/uvChecker.png");
 
 	for (int i = 0; i < TriangleMax; i++)
 	{
