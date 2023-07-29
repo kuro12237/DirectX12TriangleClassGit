@@ -29,7 +29,12 @@ void EngineDebug::Initialize(Game* game)
 
 	texHandule = Cleyera::LoadTex("CLEYERA/DefaultResources/uvChecker.png");
 
-
+	for (int i = 0; i < TriangleMax; i++)
+	{
+		scale_[i] = { 1.0f,1.0f,1.0f };
+		rotate_[i] = { 0.0f,0.0f,0.0f };
+		translate_[i] = {0.0f,0.0f,0.0f};
+	}
 }
 
 void EngineDebug::Update(Game* game)
@@ -41,16 +46,36 @@ void EngineDebug::Update(Game* game)
 	ImGui::SliderFloat3("leftPos", &triangle[0].position.left.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("TopPos", &triangle[0].position.top.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("RightPos", &triangle[0].position.right.x, -5.0f, 5.0f);
-	ImGui::Text("rotate");
-	
 	ImGui::SliderFloat3("Color", &triangle[0].Color.x, 0.0f, 1.0f);
+	ImGui::ColorPicker4("Color", (float*)&triangle[0].Color);
+	ImGui::Text("WorldTransform");
+	ImGui::SliderFloat3("Translate", &translate_[0].x, -5.0f, 5.0f);
+	ImGui::SliderFloat3("Rotate", &rotate_[0].x, -5.0f, 5.0f);
+	ImGui::SliderFloat3("Scale", &scale_[0].x, -5.0f, 5.0f);
+	
+	
 	ImGui::End();
+
+
+
 
 	ImGui::Begin("TexModel");
 	ImGui::SliderFloat3("leftPos", &triangle[1].position.left.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("TopPos", &triangle[1].position.top.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("RightPos", &triangle[1].position.right.x, -5.0f, 5.0f);
+	ImGui::Text("WorldTransform");
+	ImGui::SliderFloat3("Translate", &translate_[1].x, -5.0f, 5.0f);
+	ImGui::SliderFloat3("Rotate", &rotate_[1].x, -5.0f, 5.0f);
+	ImGui::SliderFloat3("Scale", &scale_[1].x, -5.0f, 5.0f);
+
 	ImGui::End();
+
+	for (int i = 0; i < TriangleMax; i++)
+	{
+
+		triangle[i].matrix = matrixTransform_->MakeAffineMatrix(scale_[i], rotate_[i], translate_[i]);
+
+	}
 
 
 }

@@ -39,5 +39,9 @@ private:
 
 	MODE mode;
 
+	Vector3 scale_[TriangleMax];
+	Vector3 rotate_[TriangleMax];
+	Vector3 translate_[TriangleMax];
+
 };
 
