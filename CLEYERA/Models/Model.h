@@ -175,7 +175,7 @@ public:
 	/// <param name="Color"></param>
 	/// <param name="Resource"></param>
 	static void ShapeDraw(
-		Position position, unsigned int Color, 
+		Position position, Vector4 Color, 
 		Matrix4x4 matrix,
 		ResourcePeroperty Resource);
 
@@ -206,11 +206,7 @@ public:
 
 	static void TriangleSpriteResourceRelease(ResourcePeroperty &Resource,texResourceProperty &tex);
 	
-	static void Triangle3DSpriteDraw(
-		Position position, unsigned int color,
-		Matrix4x4 worldTransform,
-		ResourcePeroperty Resource,
-		texResourceProperty tex);
+
 #pragma endregion
 
 

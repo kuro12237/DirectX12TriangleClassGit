@@ -170,14 +170,15 @@ void Cleyera::TriangleResourceRelease(ResourcePeroperty Resource)
 }
 
 
-void Cleyera::TriangleDraw(Position position, unsigned int ColorCode, Matrix4x4 worldTransform, ResourcePeroperty Resource)
+void Cleyera::TriangleDraw(Position position, Vector4 color, Matrix4x4 worldTransform, ResourcePeroperty Resource)
 {
 	Matrix4x4 m = Camera::worldViewProjectionMatrixFanc(worldTransform);
-	Model::ShapeDraw(position, ColorCode,m, Resource);
+	Model::ShapeDraw(position, color,m, Resource);
 }
 
 
 void Cleyera::SpriteTriangleDraw(Position position, unsigned int color, Matrix4x4 worldTransform, ResourcePeroperty Resource, texResourceProperty tex)
 {
-	Model::TriangleSpriteDraw(position, color, worldTransform, Resource, tex);
+	Matrix4x4 m = Camera::worldViewProjectionMatrixFanc(worldTransform);
+	Model::TriangleSpriteDraw(position, color, m, Resource, tex);
 }

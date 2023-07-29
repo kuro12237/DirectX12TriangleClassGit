@@ -9,6 +9,12 @@
 
 #define TriangleMax 3
 
+enum MODE
+{
+	Tex,
+	Shape
+};
+
 class EngineDebug:public GameScene
 {
 public:
@@ -30,5 +36,8 @@ private:
 	
 	texResourceProperty texHandule;
 	int StateTimer = 300;
+
+	MODE mode;
+
 };
 

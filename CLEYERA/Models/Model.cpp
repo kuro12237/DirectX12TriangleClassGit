@@ -532,7 +532,7 @@ ResourcePeroperty Model::CreateTriangleSpriteResource()
 
 }
 
-void Model::ShapeDraw(Position position, unsigned int ColorCode, Matrix4x4 worldTransform,ResourcePeroperty Resource)
+void Model::ShapeDraw(Position position, Vector4 color, Matrix4x4 worldTransform,ResourcePeroperty Resource)
 {
 	Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
@@ -553,9 +553,9 @@ void Model::ShapeDraw(Position position, unsigned int ColorCode, Matrix4x4 world
 	vertexData[2] = { position.right.x,position.right.y,position.right.z,1.0f};
 
 	//マテリアル
-	Vector4 colorData = ColorCodeAdapter(ColorCode);
+	//Vector4 colorData = ColorCodeAdapter(ColorCode);
 
-	*MaterialData = colorData;
+	*MaterialData = color;
 
 	//行列の変換
 	

@@ -14,7 +14,7 @@ struct Triangle
 {
 	Position position;
 	ResourcePeroperty Resources;
-	unsigned int Color;
+	Vector4 Color;
 	Matrix4x4 matrix;
 };
 
@@ -86,7 +86,7 @@ public:
 	/// <param name="worldTransform"></param>
 	/// <param name="Resource"></param>
 	static void TriangleDraw(
-		Position position,unsigned int Color,
+		Position position,Vector4 color,
 		Matrix4x4 worldTransform,
 		ResourcePeroperty Resource);
 
