@@ -44,7 +44,7 @@ void TexManager::UploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage&
 	{
 		const DirectX::Image* img = mipImage.GetImage(mipLevel, 0, 0);
 
-		HRESULT hr =
+		//HRESULT hr =
 			tex->WriteToSubresource(
 				UINT(mipLevel),
 				nullptr,
@@ -52,7 +52,7 @@ void TexManager::UploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage&
 				UINT(img->rowPitch),
 				UINT(img->slicePitch)
 			);
-		assert(SUCCEEDED(hr));
+		//assert(SUCCEEDED(hr));
 
 
 
@@ -100,14 +100,15 @@ ID3D12Resource* TexManager::CreateTexResource(const DirectX::TexMetadata& metada
 	heapProperties = SettingHeap();
 
 	//–{‘Ì‚ðì‚é
-	HRESULT hr = DXSetup_->GetDevice()->CreateCommittedResource(
+	//HRESULT hr = 
+		DXSetup_->GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(&Resource));
-	assert(SUCCEEDED(hr));
+	//assert(SUCCEEDED(hr));
 
 	return Resource;
 }

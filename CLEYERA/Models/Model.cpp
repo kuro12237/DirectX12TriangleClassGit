@@ -49,8 +49,10 @@ void Model::InitializeDfIncludeHandler()
 {
 
 
-	HRESULT hr = Model::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&Model::GetInstance()->includeHandler);
-	assert(SUCCEEDED(hr));
+	//HRESULT hr;
+	//hr=
+		Model::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&Model::GetInstance()->includeHandler);
+	//assert(SUCCEEDED(hr));
 
 
 

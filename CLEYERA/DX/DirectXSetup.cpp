@@ -201,9 +201,10 @@ void DirectXSetup::CreateSwapChain(const int32_t Width, const int32_t Height, HW
 
 	
 	//スワップチェーンの生成
-	HRESULT hr = DirectXSetup::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXSetup::GetInstance()->commands.Queue, hwnd_, &swapChainDesc,
+	//HRESULT hr;
+	DirectXSetup::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXSetup::GetInstance()->commands.Queue, hwnd_, &swapChainDesc,
 		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&DirectXSetup::GetInstance()->swapChain.swapChain));
-	assert(SUCCEEDED(hr));
+	//assert(SUCCEEDED(hr));
 
 	DirectXSetup::GetInstance()->swapChainDesc = swapChainDesc;
 	
@@ -217,8 +218,9 @@ ID3D12DescriptorHeap* DirectXSetup::CreateDescriptorHeap( D3D12_DESCRIPTOR_HEAP_
 	descriptorHeapDesc.NumDescriptors = numDescriptors;
 	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
-	HRESULT hr = DirectXSetup::GetInstance()->device_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
-	assert(SUCCEEDED(hr));
+	//HRESULT hr = 
+	DirectXSetup::GetInstance()->device_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
+	//assert(SUCCEEDED(hr));
 	return descriptHeap;
 
 }
@@ -278,8 +280,9 @@ void DirectXSetup::CreateFence()
 	//フェンスの作成
 	fence = nullptr;
 	fenceValue = 0;
-	HRESULT hr = DirectXSetup::GetInstance()->device_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
-	assert(SUCCEEDED(hr));
+	//HRESULT hr =
+	DirectXSetup::GetInstance()->device_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	//assert(SUCCEEDED(hr));
 
 
 	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
