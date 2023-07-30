@@ -47,7 +47,8 @@ void EngineDebug::Update(Game* game)
 	ImGui::SliderFloat3("TopPos", &triangle[0].position.top.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("RightPos", &triangle[0].position.right.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("Color", &triangle[0].Color.x, 0.0f, 1.0f);
-	ImGui::ColorPicker4("Color", (float*)&triangle[0].Color);
+	//ImGui::ColorPicker4("Color", (float*)&triangle[0].Color);
+	ImGui::ColorEdit3("Color", (float*)&triangle[0].Color);
 	ImGui::Text("WorldTransform");
 	ImGui::SliderFloat3("Translate", &translate_[0].x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("Rotate", &rotate_[0].x, -5.0f, 5.0f);
