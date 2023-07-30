@@ -74,7 +74,8 @@ struct  Position
 	Vector3 top;
 	Vector3 left;
 	Vector3 right;
-
+	Vector3 back;
+	Vector3 Flont;
 };
 
 struct ResourcePeroperty
@@ -207,6 +208,18 @@ public:
 	static void TriangleSpriteResourceRelease(ResourcePeroperty &Resource,texResourceProperty &tex);
 	
 
+	static ResourcePeroperty CreateTriangleSprite3dResource();
+
+	static void TriangleSprite3dDraw(
+		Position position, unsigned int color,
+		Matrix4x4 worldTransform,
+		ResourcePeroperty Resource,
+		texResourceProperty tex);
+
+	static void TriangleSprite3dResourceRelease(ResourcePeroperty& Resource);
+
+
+
 #pragma endregion
 
 
@@ -254,6 +267,12 @@ private:
 		ResourcePeroperty Resource, 
 		texResourceProperty tex, 
 		Commands commands, PSOProperty PSO);
+
+	static void Sprite3dDrawCommands(
+		ResourcePeroperty Resource,
+		texResourceProperty tex,
+		Commands commands, PSOProperty PSO
+	);
 
 	/// <summary>
 	/// パイプラインの解放

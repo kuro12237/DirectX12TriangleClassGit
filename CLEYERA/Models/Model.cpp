@@ -667,6 +667,32 @@ void Model::SpriteDrawCommands(ResourcePeroperty Resource, texResourceProperty t
 
 }
 
+void Model::Sprite3dDrawCommands(ResourcePeroperty Resource, texResourceProperty tex, Commands commands, PSOProperty PSO)
+{
+
+	commands.List->SetGraphicsRootSignature(PSO.rootSignature);
+	commands.List->SetPipelineState(PSO.GraphicsPipelineState);//
+
+	commands.List->IASetVertexBuffers(0, 1, &Resource.BufferView);
+
+	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
+	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//マテリアルCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(0, Resource.Material->GetGPUVirtualAddress());
+
+
+	//wvp用のCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(1, Resource.wvpResource->GetGPUVirtualAddress());
+
+	//
+	commands.List->SetGraphicsRootDescriptorTable(2, tex.SrvHandleGPU);
+
+
+	//描画(DrawCall/ドローコール)。
+	commands.List->DrawInstanced(6, 1, 0, 0);
+}
+
 void Model::PSORelese(PSOProperty PSO)
 {
 	PSO.GraphicsPipelineState->Release();
@@ -696,4 +722,66 @@ void Model::TriangleSpriteResourceRelease(ResourcePeroperty &Resource, texResour
 
     tex.Resource->Release();
 	
+}
+
+ResourcePeroperty Model::CreateTriangleSprite3dResource()
+{
+	ResourcePeroperty resultResource;
+	ID3D12Device* device = Model::GetInstance()->device;
+	resultResource.Vertex = CreateBufferResource(device, sizeof(VertexData) * 6);
+	resultResource.Material = CreateBufferResource(device, sizeof(Vector4));
+	resultResource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
+	resultResource.BufferView = CreateBufferView(sizeof(VertexData) * 6, resultResource.Vertex);
+	Model::GetInstance()->device = device;
+
+	return resultResource;
+
+}
+
+void Model::TriangleSprite3dDraw(Position position, unsigned int color, Matrix4x4 worldTransform, ResourcePeroperty Resource, texResourceProperty tex)
+{
+
+	VertexData* vertexData = nullptr;
+	//Vector4* vertexData = nullptr;
+	Vector4* MaterialData = nullptr;
+	Matrix4x4* wvpData = nullptr;
+	//書き込むためのアドレスを取得
+	Resource.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
+	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
+
+	vertexData[0].position = { position.left.x,position.left.y,position.left.z,1.0f };
+
+	vertexData[0].texcoord = { 0.0f,1.0f };
+	////上
+	vertexData[1].position = { position.top.x, position.top.y, position.top.z, 1.0f };
+	vertexData[1].texcoord = { 0.5f,0.0f };
+	////右
+	vertexData[2].position = { position.right.x,position.right.y,position.right.z,1.0f };
+	vertexData[2].texcoord = { 1.0f,1.0f };
+
+	//奥
+	vertexData[3].position = { position.back.x,position.back.y,position.back.z,1.0f };
+	vertexData[3].texcoord = { 0.0f,1.0f };
+	//上
+	vertexData[4].position = { position.top.x, position.top.y, position.top.z, 1.0f };
+	vertexData[4].texcoord = { 0.5f,0.0f };
+	//手前
+	vertexData[5].position = { position.Flont.x,position.Flont.y,position.Flont.z,1.0f };
+	vertexData[6].texcoord = { 1.0f,1.0f };
+
+
+	//マテリアル
+	Vector4 colorData = ColorCodeAdapter(color);
+	
+	*MaterialData = colorData;
+
+	//行列の変換
+
+	*wvpData = worldTransform;
+
+	
+	Sprite3dDrawCommands(Resource, tex, Model::GetInstance()->commands, Model::GetInstance()->Sprite);
+
+
 }
