@@ -58,9 +58,6 @@ void EngineDebug::Update(Game* game)
 	ImGui::SliderFloat3("Scale", &scale_[0].x, -5.0f, 5.0f);
 	ImGui::End();
 
-
-	
-
 	ImGui::Begin("TexModel");
 	ImGui::SliderFloat3("leftPos", &triangle[1].position.left.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("TopPos", &triangle[1].position.top.x, -5.0f, 5.0f);
