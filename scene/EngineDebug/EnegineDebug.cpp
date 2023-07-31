@@ -11,19 +11,24 @@ void EngineDebug::Initialize(Game* game)
 
 	//t,l,r
 	triangle[0].position =
-	{ {0.0f,0.0,0.0f},{-0.5f,-1.0f,0.0f},{0.5f,-1.0f,0.0f } };
+	{ {0.0f,0.5,0.0f},{-0.5f,-0.5f,0.0f},{0.5f,-0.5f,0.0f } };
 	triangle[0].Resources = Cleyera::CreateShapeResource();
 	triangle[0].Color={0.0f,0.0f,0.0f,1.0f};
 	triangle[0].matrix = matrixTransform_->Identity();
 
+	triangle[2].position =
+	{ {0.0f,0.5,0.0f},{-0.5f,-0.5f,0.0f},{0.5f,-0.5f,0.0f } };
+	triangle[2].Resources = Cleyera::CreateShapeResource();
+	triangle[2].Color = { 0.0f,0.0f,0.0f,1.0f };
+	triangle[2].matrix = matrixTransform_->Identity();
+
+
 	triangle[1].position =
 	{
-	{ 0.5f, 1.0f, 0.0f},
-	{ 0.0f,0.0f,0.0f },
-	{ 1.0f,-0.0f,0.0f} };
+	{0.0f,0.5,0.0f},{-0.5f,-0.5f,0.0f},{0.5f,-0.5f,0.0f } 
+	};
 	triangle[1].Resources = Cleyera::CreateSpriteResource();
 	triangle[1].Color = {0.0f,0.0f,0.0f,0.0f};
-	
 	triangle[1].matrix = matrixTransform_->Identity();
 
 
@@ -41,7 +46,7 @@ void EngineDebug::Update(Game* game)
 {
 	game;
 
-	ImGui::Begin("ShapeModel");
+	ImGui::Begin("ShapeModel_1");
 	ImGui::Text("pos");
 	ImGui::SliderFloat3("leftPos", &triangle[0].position.left.x, -5.0f, 5.0f);
 	ImGui::SliderFloat3("TopPos", &triangle[0].position.top.x, -5.0f, 5.0f);
@@ -54,7 +59,7 @@ void EngineDebug::Update(Game* game)
 	ImGui::End();
 
 
-
+	
 
 	ImGui::Begin("TexModel");
 	ImGui::SliderFloat3("leftPos", &triangle[1].position.left.x, -5.0f, 5.0f);
@@ -93,6 +98,11 @@ void EngineDebug::Draw(Game* game)
 		Cleyera::TriangleDraw(triangle[0].position,
 			triangle[0].Color, triangle[0].matrix,
 			triangle[0].Resources);
+
+
+		Cleyera::TriangleDraw(triangle[2].position,
+			triangle[2].Color, triangle[2].matrix,
+			triangle[2].Resources);
 
 
 
