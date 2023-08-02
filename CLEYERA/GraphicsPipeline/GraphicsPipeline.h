@@ -2,6 +2,14 @@
 #include"DirectXCommon.h"
 
 
+struct Shaders
+{
+	IDxcBlob* vertexBlob;
+	IDxcBlob* pixelBlob;
+
+};
+
+
 struct PSOProperty
 {
 	ID3D12PipelineState* GraphicsPipelineState = nullptr;

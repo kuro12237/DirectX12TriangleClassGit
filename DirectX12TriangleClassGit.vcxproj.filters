@@ -52,6 +52,9 @@
     <Filter Include="ソース ファイル\CLEYERA\math\GliphicPipline">
       <UniqueIdentifier>{7c21a3ea-d93d-4456-9ffa-6d3e37c845b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{46e0bcb1-d396-4666-857c-2a27f74fdba6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -177,5 +180,22 @@
     <None Include="CLEYERA\config\.editorconfig">
       <Filter>ソース ファイル</Filter>
     </None>
+    <None Include="Shader\SpriteObject3d.hlsli">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\ShapeObject3d.PS.hlsl">
+      <Filter>ソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\ShapeObject3d.VS.hlsl">
+      <Filter>ソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\SpriteObject3d.PS.hlsl">
+      <Filter>ソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\SpriteObject3d.VS.hlsl">
+      <Filter>ソース ファイル\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

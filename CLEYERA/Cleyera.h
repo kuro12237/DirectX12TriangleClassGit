@@ -4,8 +4,8 @@
 #include"DirectXCommon.h"
 #include"ImGuiManager.h"
 
-#include"GraphicsPipeline/GraphicsPipeline.h"
-
+#include"GraphicsPipeline.h"
+#include"Model.h"
 class Cleyera
 {
 public:

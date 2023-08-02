@@ -63,7 +63,10 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 
 	GraphicsPipeline::Initialize(device, commands);
 
-	
+	//Mode‚Ì‰Šú‰»
+	Model::CompileShader();
+
+
 
 	DirectXCommon::GetInstance()->SetDevice(device);
 	DirectXCommon::GetInstance()->Setcommands(commands);

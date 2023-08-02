@@ -1,6 +1,6 @@
 #pragma once
 #include"WorldTransform.h"
-
+#include"GraphicsPipeline.h"
 
 
 class Model
@@ -11,13 +11,16 @@ public:
 
 	static Model* GetInstance();
 
-	static void Initialize();
+	static void CompileShader();
 
+	void Initialize();
 
-	static void Draw();
+	void Draw();
 private:
 
 	WorldTransform worldTransform_;
+
+	Shaders shape_ = { nullptr,nullptr };
 
 };
 
