@@ -13,10 +13,83 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA">
+      <UniqueIdentifier>{9696cb2b-49f0-4323-b005-472549ead4dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Win">
+      <UniqueIdentifier>{ecc61218-9774-416e-8046-0c2a3887ed59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\externals">
+      <UniqueIdentifier>{201f075e-6d8e-4a6b-8225-e1048d856f03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Cleyera.cpp">
+      <Filter>ソース ファイル\CLEYERA</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\base\Win\WinApp.cpp">
+      <Filter>ソース ファイル\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLEYERA\Cleyera.h">
+      <Filter>ソース ファイル\CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\base\Win\WinApp.h">
+      <Filter>ソース ファイル\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imconfig.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_dx12.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_win32.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_internal.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_rectpack.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h">
+      <Filter>ソース ファイル\externals</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CLEYERA\externals\imgui\LICENSE.txt">
+      <Filter>ソース ファイル\externals</Filter>
+    </Text>
   </ItemGroup>
 </Project>
