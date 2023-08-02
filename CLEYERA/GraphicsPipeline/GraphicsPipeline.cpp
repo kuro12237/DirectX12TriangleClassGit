@@ -53,15 +53,18 @@ void GraphicsPipeline::DfIncludeHandlerSetting()
 ////CompileShader関数
 IDxcBlob* GraphicsPipeline::CompilerShader(
 	const std::wstring& filePath,
-	const wchar_t* profile,
-	IDxcUtils* dxcUtils,
-	IDxcCompiler3* dxcCompiler,
-	IDxcIncludeHandler* includeHandler) {
+	const wchar_t* profile
+) {
+	IDxcUtils* dxcUtils = GraphicsPipeline::GetInstance()->dxc.Utils;
+	IDxcCompiler3* dxcCompiler = GraphicsPipeline::GetInstance()->dxc.Compiler;
+	IDxcIncludeHandler* includeHandler = GraphicsPipeline::GetInstance()->includeHandler;
+
 	//1.hlslファイルを読む
 	Log(ConvertString(std::format(L"Begin CompileShader,path:{},profile:{}\n", filePath, profile)));
 	//hlslファイルを読む
 	IDxcBlobEncoding* shaderSource = nullptr;
-	HRESULT hr = dxcUtils->LoadFile(filePath.c_str(), nullptr, &shaderSource);
+	HRESULT hr = 
+		dxcUtils->LoadFile(filePath.c_str(), nullptr, &shaderSource);
 	//読めなかったら止める
 	assert(SUCCEEDED(hr));
 	//読み込んだファイルの内容を設定する

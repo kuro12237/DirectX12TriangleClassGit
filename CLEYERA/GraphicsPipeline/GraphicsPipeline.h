@@ -26,6 +26,11 @@ public:
 
 	static GraphicsPipeline* GetInstance();
 
+	/// <summary>
+	/// パイプラインの初期化
+	/// </summary>
+	/// <param name="device"></param>
+	/// <param name="commands"></param>
 	static void Initialize(ID3D12Device*device,Commands commands);
 
 
@@ -40,10 +45,8 @@ public:
     /// <returns></returns>
 	static IDxcBlob* CompilerShader(
 		const std::wstring& filePath,
-		const wchar_t* profile,
-		IDxcUtils* dxcUtils,
-		IDxcCompiler3* dxcCompiler,
-		IDxcIncludeHandler* includeHandler);
+		const wchar_t* profile
+	);
 
 
 private:
