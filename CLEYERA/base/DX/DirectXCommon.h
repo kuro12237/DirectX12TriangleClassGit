@@ -15,7 +15,7 @@
 
 #include<cassert>
 
-#include"../LogManager/Log.h"
+#include"Log.h"
 
 
 struct  RTV
@@ -48,15 +48,15 @@ struct Commands
 };
 
 
-class DirectXSetup
+class DirectXCommon
 {
 public:
 	
-	DirectXSetup();
-	~DirectXSetup();
+	DirectXCommon();
+	~DirectXCommon();
 
 
-	static DirectXSetup* GetInstance();
+	static DirectXCommon* GetInstance();
 
 #pragma region InitializeÇ≈égÇ§ä÷êî
 

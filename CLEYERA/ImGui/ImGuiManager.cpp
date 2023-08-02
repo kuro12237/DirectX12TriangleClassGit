@@ -6,7 +6,7 @@ ImGuiManager::ImGuiManager()
 {
 }
 
-void ImGuiManager::Initialize(WinApp* WinSetup_, DirectXSetup* DXSetup_)
+void ImGuiManager::Initialize(WinApp* WinSetup_, DirectXCommon* DXSetup_)
 {
 
 	IMGUI_CHECKVERSION();
@@ -24,7 +24,7 @@ void ImGuiManager::Initialize(WinApp* WinSetup_, DirectXSetup* DXSetup_)
 	);
 }
 
-void ImGuiManager::BeginFlame(DirectXSetup* DXSetup_)
+void ImGuiManager::BeginFlame(DirectXCommon* DXSetup_)
 {
 
 	ImGui_ImplDX12_NewFrame();
@@ -36,9 +36,9 @@ void ImGuiManager::BeginFlame(DirectXSetup* DXSetup_)
 
 }
 
-void ImGuiManager::EndFlame(DirectXSetup* DXSetup_)
+void ImGuiManager::EndFlame(DirectXCommon* DXSetup_)
 {
-	//ImGui::ShowDemoWindow();
+	ImGui::ShowDemoWindow();
 
 	ImGui::Render();
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DXSetup_->GetCommands().List);

@@ -1,28 +1,28 @@
 
 
-#include"DirectXSetup.h"
+#include"DirectXCommon.h"
 
-DirectXSetup::DirectXSetup()
+DirectXCommon::DirectXCommon()
 {
 }
 
-DirectXSetup::~DirectXSetup()
+DirectXCommon::~DirectXCommon()
 {
 }
 
-DirectXSetup* DirectXSetup::GetInstance()
+DirectXCommon* DirectXCommon::GetInstance()
 {
-	static DirectXSetup instance;
+	static DirectXCommon instance;
 	return &instance;
 }
 
 
-void DirectXSetup::CreateDxgiFactory()
+void DirectXCommon::CreateDxgiFactory()
 {
 
-	IDXGIFactory7* dxgiFactory = DirectXSetup::GetInstance()->dxgiFactory_;
-	IDXGIAdapter4* useAdapter = DirectXSetup::GetInstance()->useAdapter_;
-	ID3D12Device* device = DirectXSetup::GetInstance()->device_;
+	IDXGIFactory7* dxgiFactory = DirectXCommon::GetInstance()->dxgiFactory_;
+	IDXGIAdapter4* useAdapter = DirectXCommon::GetInstance()->useAdapter_;
+	ID3D12Device* device = DirectXCommon::GetInstance()->device_;
 
 #ifdef _DEBUG
 
@@ -76,12 +76,12 @@ void DirectXSetup::CreateDxgiFactory()
 	assert(useAdapter != nullptr);
 
 
-	DirectXSetup::GetInstance()->dxgiFactory_ = dxgiFactory;
-	DirectXSetup::GetInstance()->useAdapter_ = useAdapter;
-	DirectXSetup::GetInstance()->device_ = device;
+	DirectXCommon::GetInstance()->dxgiFactory_ = dxgiFactory;
+	DirectXCommon::GetInstance()->useAdapter_ = useAdapter;
+	DirectXCommon::GetInstance()->device_ = device;
 }
 
-void DirectXSetup::CreateDevice()
+void DirectXCommon::CreateDevice()
 {
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
@@ -94,9 +94,9 @@ void DirectXSetup::CreateDevice()
 	{
 
 		HRESULT hr = D3D12CreateDevice(
-			DirectXSetup::GetInstance()->useAdapter_,
+			DirectXCommon::GetInstance()->useAdapter_,
 			featureLevels[i],
-			IID_PPV_ARGS(&DirectXSetup::GetInstance()->device_)
+			IID_PPV_ARGS(&DirectXCommon::GetInstance()->device_)
 		);
 
 
@@ -109,13 +109,13 @@ void DirectXSetup::CreateDevice()
 		}
 	}
 
-	assert(DirectXSetup::GetInstance()->device_ != nullptr);
+	assert(DirectXCommon::GetInstance()->device_ != nullptr);
 }
 
-void DirectXSetup::debugErrorInfoQueue()
+void DirectXCommon::debugErrorInfoQueue()
 {
 	ID3D12InfoQueue* infoQueue = nullptr;
-	ID3D12Device* device = DirectXSetup::GetInstance()->device_;
+	ID3D12Device* device = DirectXCommon::GetInstance()->device_;
 
 	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
 	{
@@ -155,13 +155,13 @@ void DirectXSetup::debugErrorInfoQueue()
 		//解放
 		infoQueue->Release();
 	}
-	DirectXSetup::GetInstance()->device_ = device;
+	DirectXCommon::GetInstance()->device_ = device;
 }
 
-void DirectXSetup::CreateCommands()
+void DirectXCommon::CreateCommands()
 {
-	ID3D12Device* device = DirectXSetup::GetInstance()->device_;
-	Commands commands = DirectXSetup::GetInstance()->commands;
+	ID3D12Device* device = DirectXCommon::GetInstance()->device_;
+	Commands commands = DirectXCommon::GetInstance()->commands;
 	///commands
     //コマンドキューの生成
 	commands.Queue = nullptr;
@@ -180,13 +180,13 @@ void DirectXSetup::CreateCommands()
 		IID_PPV_ARGS(&commands.List));
 	assert(SUCCEEDED(hr));
 
-	DirectXSetup::GetInstance()->commands = commands;
-	DirectXSetup::GetInstance()->device_ = device;
+	DirectXCommon::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->device_ = device;
 }
 
-void DirectXSetup::CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_)
+void DirectXCommon::CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_)
 {
-	DirectXSetup::GetInstance()->swapChain.swapChain = nullptr;
+	DirectXCommon::GetInstance()->swapChain.swapChain = nullptr;
 
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 
@@ -202,15 +202,15 @@ void DirectXSetup::CreateSwapChain(const int32_t Width, const int32_t Height, HW
 	
 	//スワップチェーンの生成
 	//HRESULT hr;
-	DirectXSetup::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXSetup::GetInstance()->commands.Queue, hwnd_, &swapChainDesc,
-		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&DirectXSetup::GetInstance()->swapChain.swapChain));
+	DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXCommon::GetInstance()->commands.Queue, hwnd_, &swapChainDesc,
+		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&DirectXCommon::GetInstance()->swapChain.swapChain));
 	//assert(SUCCEEDED(hr));
 
-	DirectXSetup::GetInstance()->swapChainDesc = swapChainDesc;
+	DirectXCommon::GetInstance()->swapChainDesc = swapChainDesc;
 	
 }
 
-ID3D12DescriptorHeap* DirectXSetup::CreateDescriptorHeap( D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)
+ID3D12DescriptorHeap* DirectXCommon::CreateDescriptorHeap( D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)
 {
 	ID3D12DescriptorHeap* descriptHeap = nullptr;
 	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
@@ -219,38 +219,38 @@ ID3D12DescriptorHeap* DirectXSetup::CreateDescriptorHeap( D3D12_DESCRIPTOR_HEAP_
 	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
 	//HRESULT hr = 
-	DirectXSetup::GetInstance()->device_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
+	DirectXCommon::GetInstance()->device_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
 	//assert(SUCCEEDED(hr));
 	return descriptHeap;
 
 }
 
-void DirectXSetup::CreatertvDescritorHeap()
+void DirectXCommon::CreatertvDescritorHeap()
 {
-	DirectXSetup::GetInstance()->rtv.DescritorHeap =
+	DirectXCommon::GetInstance()->rtv.DescritorHeap =
 		CreateDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, false);
-	DirectXSetup::GetInstance()->srvDescriptorHeap = 
+	DirectXCommon::GetInstance()->srvDescriptorHeap = 
 		CreateDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
 }
 
-void DirectXSetup::CreateSwapChainResorce()
+void DirectXCommon::CreateSwapChainResorce()
 {
-	HRESULT hr = DirectXSetup::GetInstance()->swapChain.swapChain->GetBuffer(0, IID_PPV_ARGS(&DirectXSetup::GetInstance()->swapChain.Resource[0]));
+	HRESULT hr = DirectXCommon::GetInstance()->swapChain.swapChain->GetBuffer(0, IID_PPV_ARGS(&DirectXCommon::GetInstance()->swapChain.Resource[0]));
 
 
 	assert(SUCCEEDED(hr));
 
-	hr = DirectXSetup::GetInstance()->swapChain.swapChain->GetBuffer(1, IID_PPV_ARGS(&DirectXSetup::GetInstance()->swapChain.Resource[1]));
+	hr = DirectXCommon::GetInstance()->swapChain.swapChain->GetBuffer(1, IID_PPV_ARGS(&DirectXCommon::GetInstance()->swapChain.Resource[1]));
 
 	assert(SUCCEEDED(hr));
 }
 
-void DirectXSetup::SettingandCreateRTV()
+void DirectXCommon::SettingandCreateRTV()
 {
-	RTV rtv = DirectXSetup::GetInstance()->rtv;
-	ID3D12Device* device = DirectXSetup::GetInstance()->device_;
+	RTV rtv = DirectXCommon::GetInstance()->rtv;
+	ID3D12Device* device = DirectXCommon::GetInstance()->device_;
 
-	SwapChain swapChain = DirectXSetup::GetInstance()->swapChain;
+	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
 
 
     rtv.rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
@@ -266,40 +266,40 @@ void DirectXSetup::SettingandCreateRTV()
 
 	device->CreateRenderTargetView(swapChain.Resource[1], &rtv.rtvDesc, rtv.rtvHandles[1]);
 
-	DirectXSetup::GetInstance()->swapChain = swapChain;
-	DirectXSetup::GetInstance()->rtv = rtv;
-	DirectXSetup::GetInstance()->device_ = device;
+	DirectXCommon::GetInstance()->swapChain = swapChain;
+	DirectXCommon::GetInstance()->rtv = rtv;
+	DirectXCommon::GetInstance()->device_ = device;
 }
 
-void DirectXSetup::CreateFence()
+void DirectXCommon::CreateFence()
 {
-	ID3D12Fence* fence = DirectXSetup::GetInstance()->fence;
-	uint64_t fenceValue = DirectXSetup::GetInstance()->fenceValue;
-	HANDLE fenceEvent = DirectXSetup::GetInstance()->fenceEvent;
+	ID3D12Fence* fence = DirectXCommon::GetInstance()->fence;
+	uint64_t fenceValue = DirectXCommon::GetInstance()->fenceValue;
+	HANDLE fenceEvent = DirectXCommon::GetInstance()->fenceEvent;
 
 	//フェンスの作成
 	fence = nullptr;
 	fenceValue = 0;
 	//HRESULT hr =
-	DirectXSetup::GetInstance()->device_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	DirectXCommon::GetInstance()->device_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 	//assert(SUCCEEDED(hr));
 
 
 	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	assert(fenceEvent != nullptr);
 
-	DirectXSetup::GetInstance()->fence = fence;
-	DirectXSetup::GetInstance()->fenceEvent = fenceEvent;
-	DirectXSetup::GetInstance()->fenceValue = fenceValue;
+	DirectXCommon::GetInstance()->fence = fence;
+	DirectXCommon::GetInstance()->fenceEvent = fenceEvent;
+	DirectXCommon::GetInstance()->fenceValue = fenceValue;
 }
 
 
 
 
-void DirectXSetup::BeginFlame()
+void DirectXCommon::BeginFlame()
 {
-	SwapChain swapChain = DirectXSetup::GetInstance()->swapChain;
-	Commands commands = DirectXSetup::GetInstance()->commands;
+	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
+	Commands commands = DirectXCommon::GetInstance()->commands;
 
 	//書き込むスワップチェーンのindexをとる
 	UINT backBufferIndex = swapChain.swapChain->GetCurrentBackBufferIndex();
@@ -314,28 +314,28 @@ void DirectXSetup::BeginFlame()
     barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 
 	commands.List->ResourceBarrier(1, &barrier);
-	DirectXSetup::GetInstance()->barrier = barrier;
+	DirectXCommon::GetInstance()->barrier = barrier;
 	//描画先のRTYを設定
-	commands.List->OMSetRenderTargets(1, &DirectXSetup::GetInstance()->rtv.rtvHandles[backBufferIndex], false, nullptr);
+	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], false, nullptr);
 
 	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
 	//float clearColor[] = { 1.0f,0.0f,0.0f,1.0f };
-	commands.List->ClearRenderTargetView(DirectXSetup::GetInstance()->rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
+	commands.List->ClearRenderTargetView(DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
-	DirectXSetup::GetInstance()->commands = commands;
-	DirectXSetup::GetInstance()->swapChain = swapChain;
+	DirectXCommon::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->swapChain = swapChain;
 
 }
 
-void DirectXSetup::EndFlame()
+void DirectXCommon::EndFlame()
 {
-	Commands commands = DirectXSetup::GetInstance()->commands;
-	D3D12_RESOURCE_BARRIER barrier = DirectXSetup::GetInstance()->barrier;
+	Commands commands = DirectXCommon::GetInstance()->commands;
+	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier;
 
-	ID3D12Fence* fence = DirectXSetup::GetInstance()->fence;
-	uint64_t fenceValue = DirectXSetup::GetInstance()->fenceValue;
-	HANDLE fenceEvent = DirectXSetup::GetInstance()->fenceEvent;
-	SwapChain swapChain = DirectXSetup::GetInstance()->swapChain;
+	ID3D12Fence* fence = DirectXCommon::GetInstance()->fence;
+	uint64_t fenceValue = DirectXCommon::GetInstance()->fenceValue;
+	HANDLE fenceEvent = DirectXCommon::GetInstance()->fenceEvent;
+	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
 
 
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -346,7 +346,7 @@ void DirectXSetup::EndFlame()
 	assert(SUCCEEDED(hr));
 
 
-	ID3D12CommandList* commandLists[] = { DirectXSetup::GetInstance()->commands.List };
+	ID3D12CommandList* commandLists[] = { DirectXCommon::GetInstance()->commands.List };
 
 	commands.Queue->ExecuteCommandLists(1, commandLists);
 	swapChain.swapChain->Present(0, 1);
@@ -378,17 +378,17 @@ void DirectXSetup::EndFlame()
 	hr =commands.List->Reset(commands.Allocator, nullptr);
 	assert(SUCCEEDED(hr));
 
-	DirectXSetup::GetInstance()->swapChain = swapChain;
+	DirectXCommon::GetInstance()->swapChain = swapChain;
 
-	DirectXSetup::GetInstance()->barrier = barrier;
-	DirectXSetup::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->barrier = barrier;
+	DirectXCommon::GetInstance()->commands = commands;
 
-	DirectXSetup::GetInstance()->fence = fence;
-	DirectXSetup::GetInstance()->fenceEvent = fenceEvent;
-	DirectXSetup::GetInstance()->fenceValue = fenceValue;
+	DirectXCommon::GetInstance()->fence = fence;
+	DirectXCommon::GetInstance()->fenceEvent = fenceEvent;
+	DirectXCommon::GetInstance()->fenceValue = fenceValue;
 }
 
-void DirectXSetup::ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight)
+void DirectXCommon::ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 	D3D12_VIEWPORT viewport{};
 
@@ -399,29 +399,29 @@ void DirectXSetup::ScissorViewCommand(const int32_t kClientWidth, const int32_t 
 	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
 
 	//コマンドを積む
-	Commands commands = DirectXSetup::GetInstance()->commands;
+	Commands commands = DirectXCommon::GetInstance()->commands;
 
     commands.List->RSSetViewports(1, &viewport); //
     commands.List->RSSetScissorRects(1, &scissorRect);
 
-	DirectXSetup::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->commands = commands;
 }
 
 
-void DirectXSetup::FeanceReleace(ID3D12Fence* fence, HANDLE fenceEvent)
+void DirectXCommon::FeanceReleace(ID3D12Fence* fence, HANDLE fenceEvent)
 {
 	CloseHandle(fenceEvent);
 	fence->Release();
 }
 
-void DirectXSetup::DescripterRelease(RTV rtv, ID3D12DescriptorHeap* srvDescriptorHeap)
+void DirectXCommon::DescripterRelease(RTV rtv, ID3D12DescriptorHeap* srvDescriptorHeap)
 {
 
 	rtv.DescritorHeap->Release();
 	srvDescriptorHeap->Release();
 }
 
-void DirectXSetup::SwapChainRelease(SwapChain swapChain)
+void DirectXCommon::SwapChainRelease(SwapChain swapChain)
 {
 	swapChain.Resource[0]->Release();
 	swapChain.Resource[1]->Release();
@@ -429,27 +429,27 @@ void DirectXSetup::SwapChainRelease(SwapChain swapChain)
 
 }
 
-void DirectXSetup::CommandsRelease(Commands commands)
+void DirectXCommon::CommandsRelease(Commands commands)
 {
 	commands.List->Release();
 	commands.Allocator->Release();
 	commands.Queue->Release();
 }
 
-void DirectXSetup::Finalize()
+void DirectXCommon::Finalize()
 {
-	FeanceReleace(DirectXSetup::GetInstance()->fence,
-		DirectXSetup::GetInstance()->fenceEvent);
+	FeanceReleace(DirectXCommon::GetInstance()->fence,
+		DirectXCommon::GetInstance()->fenceEvent);
 
-	DescripterRelease(DirectXSetup::GetInstance()->rtv, 
-		DirectXSetup::GetInstance()->srvDescriptorHeap);
+	DescripterRelease(DirectXCommon::GetInstance()->rtv, 
+		DirectXCommon::GetInstance()->srvDescriptorHeap);
 
-	SwapChainRelease(DirectXSetup::GetInstance()->swapChain);
-	CommandsRelease(DirectXSetup::GetInstance()->commands);
+	SwapChainRelease(DirectXCommon::GetInstance()->swapChain);
+	CommandsRelease(DirectXCommon::GetInstance()->commands);
 
-	DirectXSetup::GetInstance()->device_->Release();
-	DirectXSetup::GetInstance()->useAdapter_->Release();
-	DirectXSetup::GetInstance()->dxgiFactory_->Release();
+	DirectXCommon::GetInstance()->device_->Release();
+	DirectXCommon::GetInstance()->useAdapter_->Release();
+	DirectXCommon::GetInstance()->dxgiFactory_->Release();
 #ifdef _DEBUG
 
 	DirectXSetup::GetInstance()->debugController_->Release();
@@ -459,7 +459,7 @@ void DirectXSetup::Finalize()
 	
 }
 
-void DirectXSetup::ReleaseChack()
+void DirectXCommon::ReleaseChack()
 {
 	IDXGIDebug1* debug;
 	if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(&debug))))
@@ -473,7 +473,7 @@ void DirectXSetup::ReleaseChack()
 
 }
 
-D3D12_VIEWPORT DirectXSetup::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
+D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
 {
 
 	D3D12_VIEWPORT viewport;
@@ -491,7 +491,7 @@ D3D12_VIEWPORT DirectXSetup::viewportSetting(int32_t kClientWidth, int32_t kClie
 	return viewport;
 }
 
-D3D12_RECT DirectXSetup::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
+D3D12_RECT DirectXCommon::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
 {
 	//シザー矩形
 	D3D12_RECT scissorRect{};
