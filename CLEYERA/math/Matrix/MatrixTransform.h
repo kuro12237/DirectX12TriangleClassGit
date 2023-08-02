@@ -2,10 +2,10 @@
 #include"Matrix2x2.h"
 #include"Matrix3x3.h"
 #include"Matrix4x4.h"
-#include"../Vector/Vector4.h"
-#include"../Vector/Vector3.h"
+#include"Vector4.h"
+#include"Vector3.h"
 
-#include"../Vector/Vector2.h"
+#include"Vector2.h"
 
 #include<cmath>
 
@@ -169,7 +169,7 @@ public:
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
 	/// <returns></returns>
-	Matrix4x4 Multiply(Matrix4x4 m1, Matrix4x4 m2);
+	static Matrix4x4 Multiply(Matrix4x4 m1, Matrix4x4 m2);
 #pragma endregion 
 
 #pragma region s—ñ‚ÌˆÚ“®E‘å‚«‚³E‰ñ“]
@@ -178,14 +178,14 @@ public:
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeScaleMatrix(const Vector3 scale);
+	static Matrix4x4 MakeScaleMatrix(const Vector3 scale);
 
 	/// <summary>
 	/// 4x4•½sˆÚ“®s—ñ
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeTranslateMatrix(Vector3 translate);
+	static Matrix4x4 MakeTranslateMatrix(Vector3 translate);
 
 #pragma region ‰ñ“]
 	/// <summary>
@@ -193,21 +193,21 @@ public:
 	/// </summary>
 	/// <param name="Šp“x"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeRotateXMatrix(float radian);
+	static Matrix4x4 MakeRotateXMatrix(float radian);
 
 	/// <summary>
 	/// 4x4X²‚Ì‰ñ“]
 	/// </summary>
 	/// <param name="Šp“x"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeRotateYMatrix(float radian);
+	static Matrix4x4 MakeRotateYMatrix(float radian);
 
 	/// <summary>
 	/// 4x4Z²‚Ì‰ñ“]
 	/// </summary>
 	/// <param name="Šp“x"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeRotateZMatrix(float radian);
+	static Matrix4x4 MakeRotateZMatrix(float radian);
 
 
 	/// <summary>
@@ -217,7 +217,7 @@ public:
 	/// <param name="Yradian"></param>
 	/// <param name="Zradian"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeRotateXYZMatrix(float Xradian, float radianY, float Zradian);
+	static Matrix4x4 MakeRotateXYZMatrix(float Xradian, float radianY, float Zradian);
 #pragma endregion
 
 #pragma endregion
@@ -231,7 +231,7 @@ public:
 	/// <param name="rotate"></param>
 	/// <param name="translate"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
+	static Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
 
 	/// <summary>
 	/// 4x4“]Š·s—ñ
@@ -251,7 +251,7 @@ public:
 	/// 4x4’PˆÊs—ñ
 	/// </summary>
 	/// <returns></returns>
-	Matrix4x4 Identity();
+	static Matrix4x4 Identity();
 
 
 	/// <summary>

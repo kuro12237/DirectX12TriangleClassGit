@@ -4,7 +4,7 @@
 #include"DirectXCommon.h"
 #include"ImGuiManager.h"
 
-
+#include"GraphicsPipeline/GraphicsPipeline.h"
 
 class Cleyera
 {

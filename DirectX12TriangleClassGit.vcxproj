@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLEYERA\3d\Model.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
@@ -29,11 +30,15 @@
     <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.cpp" />
     <ClCompile Include="CLEYERA\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="CLEYERA\LogManager\Log.cpp" />
+    <ClCompile Include="CLEYERA\math\Matrix\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\math\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLEYERA\3d\Model.h" />
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
@@ -45,8 +50,14 @@
     <ClInclude Include="CLEYERA\externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.h" />
     <ClInclude Include="CLEYERA\ImGui\ImGuiManager.h" />
     <ClInclude Include="CLEYERA\LogManager\Log.h" />
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix2x2.h" />
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix3x3.h" />
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix4x4.h" />
+    <ClInclude Include="CLEYERA\math\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\math\WorldTransform\WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
@@ -142,7 +153,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/gitnore::4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -166,7 +177,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/gitnore::4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>

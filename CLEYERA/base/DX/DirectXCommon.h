@@ -104,14 +104,20 @@ public:
 	/// </summary>
 	static void CreateFence();
 
+#pragma region セッター
+	void SetDevice(ID3D12Device* device) { device_ = device;}
 
+	void Setcommands(Commands commands) { commands_ = commands; }
+
+
+#pragma endregion
 
 
 
 #pragma region ゲッター
 
 	 ID3D12Device* GetDevice() { return device_; }
-	 Commands GetCommands() { return commands; }
+	 Commands GetCommands() { return commands_; }
 
 	 DXGI_SWAP_CHAIN_DESC1 GeSwapChainDesc() { return swapChainDesc; }
 
@@ -181,7 +187,7 @@ private:
 	IDXGIAdapter4* useAdapter_ = nullptr;
     ID3D12Device* device_ = nullptr;
 
-	Commands commands;
+	Commands commands_;
 
 	SwapChain swapChain;
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};

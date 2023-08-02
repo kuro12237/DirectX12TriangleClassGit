@@ -26,7 +26,7 @@ void DirectXCommon::CreateDxgiFactory()
 
 #ifdef _DEBUG
 
-	ID3D12Debug1* debugController = DirectXSetup::GetInstance()->debugController_;
+	ID3D12Debug1* debugController = DirectXCommon::GetInstance()->debugController_;
 
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
@@ -37,7 +37,7 @@ void DirectXCommon::CreateDxgiFactory()
 		debugController->SetEnableGPUBasedValidation(TRUE);
 
 	}
-	DirectXSetup::GetInstance()->debugController_ = debugController;
+	DirectXCommon::GetInstance()->debugController_ = debugController;
 #endif
 
 	//DXGIファクトリーの生成
@@ -161,7 +161,7 @@ void DirectXCommon::debugErrorInfoQueue()
 void DirectXCommon::CreateCommands()
 {
 	ID3D12Device* device = DirectXCommon::GetInstance()->device_;
-	Commands commands = DirectXCommon::GetInstance()->commands;
+	Commands commands = DirectXCommon::GetInstance()->commands_;
 	///commands
     //コマンドキューの生成
 	commands.Queue = nullptr;
@@ -180,7 +180,7 @@ void DirectXCommon::CreateCommands()
 		IID_PPV_ARGS(&commands.List));
 	assert(SUCCEEDED(hr));
 
-	DirectXCommon::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->commands_ = commands;
 	DirectXCommon::GetInstance()->device_ = device;
 }
 
@@ -202,7 +202,7 @@ void DirectXCommon::CreateSwapChain(const int32_t Width, const int32_t Height, H
 	
 	//スワップチェーンの生成
 	//HRESULT hr;
-	DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXCommon::GetInstance()->commands.Queue, hwnd_, &swapChainDesc,
+	DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(DirectXCommon::GetInstance()->commands_.Queue, hwnd_, &swapChainDesc,
 		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&DirectXCommon::GetInstance()->swapChain.swapChain));
 	//assert(SUCCEEDED(hr));
 
@@ -299,7 +299,7 @@ void DirectXCommon::CreateFence()
 void DirectXCommon::BeginFlame()
 {
 	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
-	Commands commands = DirectXCommon::GetInstance()->commands;
+	Commands commands = DirectXCommon::GetInstance()->commands_;
 
 	//書き込むスワップチェーンのindexをとる
 	UINT backBufferIndex = swapChain.swapChain->GetCurrentBackBufferIndex();
@@ -322,14 +322,14 @@ void DirectXCommon::BeginFlame()
 	//float clearColor[] = { 1.0f,0.0f,0.0f,1.0f };
 	commands.List->ClearRenderTargetView(DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
-	DirectXCommon::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->commands_ = commands;
 	DirectXCommon::GetInstance()->swapChain = swapChain;
 
 }
 
 void DirectXCommon::EndFlame()
 {
-	Commands commands = DirectXCommon::GetInstance()->commands;
+	Commands commands = DirectXCommon::GetInstance()->commands_;
 	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier;
 
 	ID3D12Fence* fence = DirectXCommon::GetInstance()->fence;
@@ -346,7 +346,7 @@ void DirectXCommon::EndFlame()
 	assert(SUCCEEDED(hr));
 
 
-	ID3D12CommandList* commandLists[] = { DirectXCommon::GetInstance()->commands.List };
+	ID3D12CommandList* commandLists[] = { DirectXCommon::GetInstance()->commands_.List };
 
 	commands.Queue->ExecuteCommandLists(1, commandLists);
 	swapChain.swapChain->Present(0, 1);
@@ -381,7 +381,7 @@ void DirectXCommon::EndFlame()
 	DirectXCommon::GetInstance()->swapChain = swapChain;
 
 	DirectXCommon::GetInstance()->barrier = barrier;
-	DirectXCommon::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->commands_ = commands;
 
 	DirectXCommon::GetInstance()->fence = fence;
 	DirectXCommon::GetInstance()->fenceEvent = fenceEvent;
@@ -399,12 +399,12 @@ void DirectXCommon::ScissorViewCommand(const int32_t kClientWidth, const int32_t
 	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
 
 	//コマンドを積む
-	Commands commands = DirectXCommon::GetInstance()->commands;
+	Commands commands = DirectXCommon::GetInstance()->commands_;
 
     commands.List->RSSetViewports(1, &viewport); //
     commands.List->RSSetScissorRects(1, &scissorRect);
 
-	DirectXCommon::GetInstance()->commands = commands;
+	DirectXCommon::GetInstance()->commands_ = commands;
 }
 
 
@@ -445,14 +445,14 @@ void DirectXCommon::Finalize()
 		DirectXCommon::GetInstance()->srvDescriptorHeap);
 
 	SwapChainRelease(DirectXCommon::GetInstance()->swapChain);
-	CommandsRelease(DirectXCommon::GetInstance()->commands);
+	CommandsRelease(DirectXCommon::GetInstance()->commands_);
 
 	DirectXCommon::GetInstance()->device_->Release();
 	DirectXCommon::GetInstance()->useAdapter_->Release();
 	DirectXCommon::GetInstance()->dxgiFactory_->Release();
 #ifdef _DEBUG
 
-	DirectXSetup::GetInstance()->debugController_->Release();
+	DirectXCommon::GetInstance()->debugController_->Release();
 
 #endif // _DEBUG
 

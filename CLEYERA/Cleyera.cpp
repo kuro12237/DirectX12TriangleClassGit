@@ -30,7 +30,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 
 #ifdef _DEBUG
 
-	DirectXSetup::debugErrorInfoQueue();
+	DirectXCommon::debugErrorInfoQueue();
 
 #endif // _DEBUG
 
@@ -51,11 +51,22 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 
 	//ƒtƒFƒ“ƒX‚Ì¶¬
 	DirectXCommon::CreateFence();
+	
 
-
+	//IGui‚Ì‰Šú‰»
 	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXCommon::GetInstance());
 
+	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
+	//Pipeline‚Ì‰Šú‰»
+
+	GraphicsPipeline::Initialize(device, commands);
+
+	
+
+	DirectXCommon::GetInstance()->SetDevice(device);
+	DirectXCommon::GetInstance()->Setcommands(commands);
 }
 
 

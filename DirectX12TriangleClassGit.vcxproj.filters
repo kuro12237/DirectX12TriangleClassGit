@@ -34,6 +34,24 @@
     <Filter Include="ソース ファイル\CLEYERA\LogManager">
       <UniqueIdentifier>{9b8695b3-5b22-43d2-9705-2dfc1c098f48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\math">
+      <UniqueIdentifier>{c0dbca15-d6f5-4c7d-9421-012ad0631d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\math\Matrix">
+      <UniqueIdentifier>{da10b8e8-fbdb-4312-80fb-06a2e0d6d5dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\math\WorldTransform">
+      <UniqueIdentifier>{baf7e12f-0aa5-492a-9517-e02df72d1fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\2d">
+      <UniqueIdentifier>{28ad8289-6575-4362-8f4b-7082c56557c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\3d">
+      <UniqueIdentifier>{4daec607-9f96-4324-8ad9-b943f6ff79d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\math\GliphicPipline">
+      <UniqueIdentifier>{7c21a3ea-d93d-4456-9ffa-6d3e37c845b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,6 +93,18 @@
     <ClCompile Include="CLEYERA\LogManager\Log.cpp">
       <Filter>ソース ファイル\CLEYERA\LogManager</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\math\Matrix\MatrixTransform.cpp">
+      <Filter>ソース ファイル\CLEYERA\math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\WorldTransform\WorldTransform.cpp">
+      <Filter>ソース ファイル\CLEYERA\math\WorldTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\3d\Model.cpp">
+      <Filter>ソース ファイル\CLEYERA\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.cpp">
+      <Filter>ソース ファイル\CLEYERA\math\GliphicPipline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Cleyera.h">
@@ -115,6 +145,27 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\LogManager\Log.h">
       <Filter>ソース ファイル\CLEYERA\LogManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix2x2.h">
+      <Filter>ソース ファイル\CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix3x3.h">
+      <Filter>ソース ファイル\CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix4x4.h">
+      <Filter>ソース ファイル\CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix\MatrixTransform.h">
+      <Filter>ソース ファイル\CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\WorldTransform\WorldTransform.h">
+      <Filter>ソース ファイル\CLEYERA\math\WorldTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\3d\Model.h">
+      <Filter>ソース ファイル\CLEYERA\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.h">
+      <Filter>ソース ファイル\CLEYERA\math\GliphicPipline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
