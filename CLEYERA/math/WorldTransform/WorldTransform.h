@@ -35,5 +35,6 @@ struct WorldTransform
 
 	void Initialize();
 
+	void UpdateMatrix();
 
 };

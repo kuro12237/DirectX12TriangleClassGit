@@ -23,6 +23,7 @@
     <ClCompile Include="CLEYERA\3d\Model.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\base\Win\WinApp.cpp" />
+    <ClCompile Include="CLEYERA\Camera\Camera.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="CLEYERA\3d\Model.h" />
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\base\Win\WinApp.h" />
+    <ClInclude Include="CLEYERA\Camera\Camera.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imconfig.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imgui.h" />

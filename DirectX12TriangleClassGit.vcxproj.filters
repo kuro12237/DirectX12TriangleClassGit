@@ -49,11 +49,14 @@
     <Filter Include="ソース ファイル\CLEYERA\3d">
       <UniqueIdentifier>{4daec607-9f96-4324-8ad9-b943f6ff79d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CLEYERA\math\GliphicPipline">
-      <UniqueIdentifier>{7c21a3ea-d93d-4456-9ffa-6d3e37c845b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Shader">
       <UniqueIdentifier>{46e0bcb1-d396-4666-857c-2a27f74fdba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\Camera">
+      <UniqueIdentifier>{28c55cbe-614d-49f7-9b0e-810ec3c2343c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\GraphicPipline">
+      <UniqueIdentifier>{7c21a3ea-d93d-4456-9ffa-6d3e37c845b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,10 +109,13 @@
       <Filter>ソース ファイル\CLEYERA\3d</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.cpp">
-      <Filter>ソース ファイル\CLEYERA\math\GliphicPipline</Filter>
+      <Filter>ソース ファイル\CLEYERA\GraphicPipline</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\2d\Mesh.cpp">
       <Filter>ソース ファイル\CLEYERA\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Camera\Camera.cpp">
+      <Filter>ソース ファイル\CLEYERA\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,10 +177,13 @@
       <Filter>ソース ファイル\CLEYERA\3d</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.h">
-      <Filter>ソース ファイル\CLEYERA\math\GliphicPipline</Filter>
+      <Filter>ソース ファイル\CLEYERA\GraphicPipline</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\2d\Mesh.h">
       <Filter>ソース ファイル\CLEYERA\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Camera\Camera.h">
+      <Filter>ソース ファイル\CLEYERA\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

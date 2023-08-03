@@ -25,6 +25,11 @@ void Mesh::Initialize(WorldTransform worldTransform,Vector4 pos)
 	worldTransform_ = worldTransform;
 }
 
+void Mesh::TransferMatrix(Matrix4x4 m)
+{
+	worldTransform_.matWorld = m;
+}
+
 ResourcePeroperty Mesh::CreateResource()
 {
 	ResourcePeroperty result;

@@ -25,6 +25,8 @@ public:
 	static Mesh* GetInstance();
 
 	void Initialize(WorldTransform worldTransform,Vector4 pos);
+	
+	void TransferMatrix(Matrix4x4 m);
 
 	void Draw();
 
