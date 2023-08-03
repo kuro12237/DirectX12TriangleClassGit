@@ -1,101 +1,62 @@
-#include "Camera.h"
-
+#include"Camera.h"
 
 Camera::Camera()
 {
+
 }
 
 Camera::~Camera()
 {
+
 }
 
-Camera *Camera::GetInstance()
+Camera* Camera::GetInstance()
 {
 	static Camera instance;
-
 	return &instance;
 }
 
-void Camera::Initialize(const int32_t kClientWidth,const int32_t kClientHeight)
+void Camera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
 {
-	Camera::GetInstance()->worldTransform_.Initialize();
-	Camera::GetInstance()->worldTransform_.translation_ = { 0.0f,0.0f,-5.0f };
-	Camera::GetInstance()->worldTransform_.matWorld =
-		MatrixTransform::Identity();
 
-	Camera::GetInstance()->viewProjection_.aspectRatio =
-		float(kClientWidth / kClientHeight);
+	Camera::GetInstance()->transform = {
+		{ 1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f}
+	};
 
-	Camera::GetInstance()->viewProjection_.fov = 0.45f;
-	Camera::GetInstance()->viewProjection_.nearClip = 0.1f;
-	Camera::GetInstance()->viewProjection_.farClip = 100.0f;
+	//“ŠŽ‘•ÏŠ·s—ñ
+	Camera::GetInstance()->aspectRatio = float(kClientWidth) / float(kClientHeight);
+	Camera::GetInstance()->viewProjection.matProjection =
+		MatrixTransform::MakePerspectiveFovMatrix(0.45f, Camera::GetInstance()->aspectRatio, 0.1f, 100.0f);
 
-	Camera::GetInstance()->viewProjection_.matProjection =
-		MatrixTransform::MakePerspectiveFovMatrix(
-			Camera::GetInstance()->viewProjection_.fov,
-			Camera::GetInstance()->viewProjection_.aspectRatio,
-			Camera::GetInstance()->viewProjection_.nearClip,
-			Camera::GetInstance()->viewProjection_.farClip
-		);
 
+}
+
+
+void Camera::SetPosition(Transform Transform)
+{
+	Camera::GetInstance()->transform = Transform;
+
+}
+
+
+
+Matrix4x4 Camera::worldViewProjectionMatrixFanc(Matrix4x4 matrix)
+{
 	
-}
+	Matrix4x4 Matrix = MatrixTransform::MakeAffineMatrix(
+		Camera::GetInstance()->transform.Scale,
+		Camera::GetInstance()->transform.rotate,
+		Camera::GetInstance()->transform.translate);
 
-void Camera::Update(WorldTransform worldTransform)
-{
-	//t
-	Camera::GetInstance()->worldTransform_.translation_ =
-	  VectorTransform::Add(
-		  Camera::GetInstance()->worldTransform_.translation_,
-		  worldTransform.translation_
-	 );
-	//r
-	Camera::GetInstance()->worldTransform_.rotate_ =
-		VectorTransform::Add(
-			Camera::GetInstance()->worldTransform_.rotate_,
-			worldTransform.rotate_
-		);
-	//s
-	Camera::GetInstance()->worldTransform_.scale_ =
-		VectorTransform::Add(
-			Camera::GetInstance()->worldTransform_.scale_,
-			worldTransform.scale_
-		);
+	Matrix4x4 viewMatrix = MatrixTransform::Inverse(Matrix);
 
-	Camera::GetInstance()->worldTransform_.matWorld =
-		MatrixTransform::MakeAffineMatrix(
-			Camera::GetInstance()->worldTransform_.scale_,
-			Camera::GetInstance()->worldTransform_.rotate_,
-			Camera::GetInstance()->worldTransform_.translation_
-		);
-
-
-}
-
-Matrix4x4 Camera::worldViewProjectionmatrixFanc(Matrix4x4 m)
-{
-	ViewProjection viewProjection = 
-		Camera::GetInstance()->viewProjection_;
-
-	WorldTransform worldTransform = 
-		Camera::GetInstance()->worldTransform_;
-
-	Matrix4x4 cworldMatrix = MatrixTransform::MakeAffineMatrix(
-		worldTransform.scale_,
-		worldTransform.rotate_,
-		worldTransform.translation_);
-
-	Matrix4x4 viewMatrix =  
-		MatrixTransform::Inverse(cworldMatrix);
-
-	Matrix4x4 worldVPMatrix =
-		MatrixTransform::Multiply(
-			m,
+	Matrix4x4 worldViewProjectionMatrix =
+		MatrixTransform::Multiply(matrix, 
 			MatrixTransform::Multiply(viewMatrix,
-			Camera::GetInstance()->viewProjection_.matProjection)
-		);
-	
+				Camera::GetInstance()->viewProjection.matProjection));
 
-	return worldVPMatrix;
+	return worldViewProjectionMatrix;
+
 
 }
+

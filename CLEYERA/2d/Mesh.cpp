@@ -55,19 +55,17 @@ void Mesh::Draw()
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
+
 	//座標
 	//左下
-	vertexData[0] = {-0.5f,0.0f,0.0f,1.0f};
+	vertexData[0] = { -0.5f,0.0f,0.0f,1.0f };
 	//{ CenterPos_.x - size,CenterPos_.y - size,CenterPos_.z,1.0f };
 
 	//上
-	vertexData[1] = { 0.0f,0.5f,0.0f,1.0f };
-	//{ CenterPos_.x,CenterPos_.y + size,CenterPos_.z,1.0f };
+	vertexData[1] = { 0.0f,0.5f,0.0f,1.0f };//{ CenterPos_.x,CenterPos_.y + size,CenterPos_.z,1.0f };
 
 	//右上
-	vertexData[2] = { 0.5f,0.0f,0.0f,1.0f };
-	//{ CenterPos_.x + size,CenterPos_.y - size,CenterPos_.z,1.0f };
-	CenterPos_, size;
+	vertexData[2] = { 0.5f,0.0f,0.0f,1.0f };//{ CenterPos_.x + size,CenterPos_.y - size,CenterPos_.z,1.0f };
 	//マテリアル
 	Vector4 colorData = Color_;
 

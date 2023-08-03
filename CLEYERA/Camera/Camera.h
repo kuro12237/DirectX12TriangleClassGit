@@ -6,7 +6,6 @@
 #include"WorldTransform.h"
 #include"VectorTransform.h"
 
-
 class Camera
 {
 public:
@@ -15,16 +14,21 @@ public:
 
 	static Camera* GetInstance();
 
-	static void Initialize(const int32_t kClientWidth, const int32_t kClientHeight);
+	static void Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight);
 
-	static void Update(WorldTransform worldTransform);
+	static void Finalize();
 
-	static Matrix4x4 worldViewProjectionmatrixFanc(Matrix4x4 m);
+	static void SetPosition(Transform Transform);
+
+	static void Update(Transform Transform);
+
+	static Matrix4x4 worldViewProjectionMatrixFanc(Matrix4x4 matrix);
+
+
 
 private:
 
-	ViewProjection viewProjection_;
-
-	WorldTransform worldTransform_;
+	ViewProjection viewProjection;
+	float aspectRatio;
+	Transform transform;
 };
-
