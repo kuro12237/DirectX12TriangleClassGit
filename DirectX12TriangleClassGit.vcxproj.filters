@@ -108,6 +108,9 @@
     <ClCompile Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.cpp">
       <Filter>ソース ファイル\CLEYERA\math\GliphicPipline</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\2d\Mesh.cpp">
+      <Filter>ソース ファイル\CLEYERA\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Cleyera.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.h">
       <Filter>ソース ファイル\CLEYERA\math\GliphicPipline</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\2d\Mesh.h">
+      <Filter>ソース ファイル\CLEYERA\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

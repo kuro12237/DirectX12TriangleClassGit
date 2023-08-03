@@ -14,17 +14,61 @@ GraphicsPipeline* GraphicsPipeline::GetInstance()
 	return &instance;
 }
 
-void GraphicsPipeline::Initialize(ID3D12Device* device, Commands commands)
+void GraphicsPipeline::Initialize()
 {
-	//deviceとcommandをうけとる
-	GraphicsPipeline::GetInstance()->device = device;
-	GraphicsPipeline::GetInstance()->commands = commands;
-
 	//dxcを作る
 	GraphicsPipeline::GetInstance()->dxcCreate();
 	//includeの対応設定
 	GraphicsPipeline::GetInstance()->DfIncludeHandlerSetting();
+}
 
+void GraphicsPipeline::Finalize()
+{
+	//PSOの解放
+	PSORelease(GraphicsPipeline::GetInstance()->pso_.shape);
+
+	//シェーダーの解放
+	ShaderRelease(GraphicsPipeline::GetInstance()->shader_.shape);
+	ShaderRelease(GraphicsPipeline::GetInstance()->shader_.sprite);
+
+}
+
+void GraphicsPipeline::ShaderCompile()
+{
+	ShaderMode shape, sprite;
+
+	//
+	shape.vertexBlob =
+		GraphicsPipeline::CompilerShaderFanc(
+			L"Shader/ShapeObject3d.VS.hlsl",
+			L"vs_6_0"
+		);
+	shape.pixelBlob =
+		GraphicsPipeline::CompilerShaderFanc(
+			L"Shader/ShapeObject3d.PS.hlsl",
+			L"ps_6_0"
+		);
+	//スプライト
+	sprite.vertexBlob =
+		GraphicsPipeline::CompilerShaderFanc(
+			L"Shader/SpriteObject3d.VS.hlsl",
+			L"vs_6_0"
+		);
+	sprite.pixelBlob =
+		GraphicsPipeline::CompilerShaderFanc(
+			L"Shader/SpriteObject3d.PS.hlsl",
+			L"ps_6_0"
+		);
+
+	GraphicsPipeline::GetInstance()->shader_.shape = shape;
+	GraphicsPipeline::GetInstance()->shader_.sprite = sprite;
+
+}
+
+void GraphicsPipeline::PSOCreate()
+{
+
+	ShapePSO();
 
 
 }
@@ -50,8 +94,142 @@ void GraphicsPipeline::DfIncludeHandlerSetting()
 
 }
 
+void GraphicsPipeline::ShapePSO()
+{
+
+	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+
+	PSOProperty ShapePSO;
+	
+	ShaderMode shader = GraphicsPipeline::GetInstance()->shader_.shape;
+
+	//RootSignature作成
+	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
+
+	descriptionRootSignature.Flags =
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+
+	//Material設定
+	D3D12_ROOT_PARAMETER rootParameters[2] = {};
+	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[0].Descriptor.ShaderRegister = 0;
+	//VertexのTransform
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[1].Descriptor.ShaderRegister = 0;
+
+
+	descriptionRootSignature.pParameters = rootParameters;
+	descriptionRootSignature.NumParameters = _countof(rootParameters);
+
+
+
+	//シリアライズしてバイナリにする
+
+	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
+		D3D_ROOT_SIGNATURE_VERSION_1, &ShapePSO.signatureBlob, &ShapePSO.errorBlob);
+	if (FAILED(hr))
+	{
+		Log(reinterpret_cast<char*>(ShapePSO.errorBlob->GetBufferPointer()));
+		assert(false);
+	}
+
+	//バイナリを元に生成
+
+	hr = device->CreateRootSignature(
+		0,
+		ShapePSO.signatureBlob->GetBufferPointer(),
+		ShapePSO.signatureBlob->GetBufferSize(),
+		IID_PPV_ARGS(&ShapePSO.rootSignature)
+	);
+	assert(SUCCEEDED(hr));
+
+
+
+
+	//InputLayoutの設定
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1] = {};
+	inputElementDescs[0].SemanticName = "POSITION";
+	inputElementDescs[0].SemanticIndex = 0;
+	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[0].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
+	inputLayoutDesc.pInputElementDescs = inputElementDescs;
+	inputLayoutDesc.NumElements = _countof(inputElementDescs);
+
+
+	//BlendStateの設定を行う
+	D3D12_BLEND_DESC blendDesc{};
+	//すべての色要素を書き込む
+	blendDesc.RenderTarget[0].RenderTargetWriteMask =
+		D3D12_COLOR_WRITE_ENABLE_ALL;
+
+
+	//RasterrizerStateぼ設定
+	D3D12_RASTERIZER_DESC rasterizerDesc{};
+
+	//裏面（時計回り）を表示しない
+	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
+	//三角形の中を塗りつぶす
+	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
+
+
+	//PSOの生成
+	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
+
+	graphicsPipelineStateDesc.pRootSignature = ShapePSO.rootSignature; //RootSignature
+	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
+	graphicsPipelineStateDesc.VS = { shader.vertexBlob->GetBufferPointer(),
+	shader.vertexBlob->GetBufferSize() }; //VertexShader
+	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
+	shader.pixelBlob->GetBufferSize() }; //PixeShader
+	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
+	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
+
+
+	//書き込むRTVの情報
+	graphicsPipelineStateDesc.NumRenderTargets = 1;
+	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+
+	//利用するトポロジ(形状)のタイプ。三角形
+	graphicsPipelineStateDesc.PrimitiveTopologyType =
+		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+
+	//どのように画面に色を打ち込むかの設定(気にしなくて良い)
+	graphicsPipelineStateDesc.SampleDesc.Count = 1;
+	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
+
+	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
+		IID_PPV_ARGS(&ShapePSO.GraphicsPipelineState));
+	assert(SUCCEEDED(hr));
+
+	GraphicsPipeline::GetInstance()->pso_.shape = ShapePSO;
+
+
+}
+
+void GraphicsPipeline::ShaderRelease(ShaderMode shader)
+{
+	shader.pixelBlob->Release();
+	shader.vertexBlob->Release();
+}
+
+void GraphicsPipeline::PSORelease(PSOProperty pso)
+{
+	pso.GraphicsPipelineState->Release();
+	pso.signatureBlob->Release();
+	if (pso.errorBlob)
+	{
+		pso.errorBlob->Release();
+	}
+	pso.rootSignature->Release();
+
+}
+
 ////CompileShader関数
-IDxcBlob* GraphicsPipeline::CompilerShader(
+IDxcBlob* GraphicsPipeline::CompilerShaderFanc(
 	const std::wstring& filePath,
 	const wchar_t* profile
 ) {

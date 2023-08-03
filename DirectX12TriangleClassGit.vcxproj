@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLEYERA\2d\Mesh.cpp" />
     <ClCompile Include="CLEYERA\3d\Model.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\base\Win\WinApp.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLEYERA\2d\Mesh.h" />
     <ClInclude Include="CLEYERA\3d\Model.h" />
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\base\Win\WinApp.h" />
@@ -172,7 +174,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/gitnore::4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;$(SolutionDir)/CLEYERA/2d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -196,7 +198,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/gitnore::4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;$(SolutionDir)/CLEYERA/2d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>

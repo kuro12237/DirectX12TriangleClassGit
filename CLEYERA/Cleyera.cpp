@@ -56,20 +56,18 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	//IGuiの初期化
 	ImGuiManager::Initialize(WinApp::GetInstance(), DirectXCommon::GetInstance());
 
-	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
 	//Pipelineの初期化
+	GraphicsPipeline::Initialize();
 
-	GraphicsPipeline::Initialize(device, commands);
+	//シェーダーをコンパイル
+	GraphicsPipeline::ShaderCompile();
 
-	//Modeの初期化
-	Model::CompileShader();
+	//Pipelineの作成
+	GraphicsPipeline::PSOCreate();
 
 
 
-	DirectXCommon::GetInstance()->SetDevice(device);
-	DirectXCommon::GetInstance()->Setcommands(commands);
 }
 
 
@@ -98,9 +96,13 @@ void Cleyera::EndFlame()
 void Cleyera::Finalize()
 {
 
+	GraphicsPipeline::Finalize();
+
 	ImGuiManager::Finalize();
+
 	DirectXCommon::Finalize();
 	WinApp::Finalize();
+
 	DirectXCommon::ReleaseChack();
 
 }
