@@ -2,7 +2,6 @@
 
 void WorldTransform::Initialize()
 {
-
 	matWorld = MatrixTransform::Identity();
 }
 

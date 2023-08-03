@@ -42,8 +42,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 		for (int i = 0; i < 2; i++)
 		{
-
-
 			mesh[i]->Draw();
 		}
 		
