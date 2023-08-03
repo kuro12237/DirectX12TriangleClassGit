@@ -33,7 +33,7 @@ public:
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
 	/// <returns></returns>
-	Matrix3x3 Add(const Matrix3x3& m1, const Matrix3x3& m2);
+	static Matrix3x3 Add(const Matrix3x3& m1, const Matrix3x3& m2);
 
 	/// <summary>
 	/// 3x3行列の引き算
@@ -41,7 +41,7 @@ public:
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
 	/// <returns></returns>
-	Matrix3x3 Subract(const Matrix3x3& m1, const Matrix3x3& m2);
+	static Matrix3x3 Subract(const Matrix3x3& m1, const Matrix3x3& m2);
 
 
 	/// <summary>
@@ -50,7 +50,7 @@ public:
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
 	/// <returns></returns>
-	Matrix3x3 Multiply(const Matrix3x3& m1, const Matrix3x3& m2);
+	static Matrix3x3 Multiply(const Matrix3x3& m1, const Matrix3x3& m2);
 
 
 #pragma endregion 
@@ -64,21 +64,21 @@ public:
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeTranslate3x3Matrix(Vector2 translate);
+	static Matrix3x3 MakeTranslate3x3Matrix(Vector2 translate);
 
 	/// <summary>
 	/// 3x3行列回転
 	/// </summary>
 	/// <param name="theta"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeRotate3x3Matrix(float radian);
+	static Matrix3x3 MakeRotate3x3Matrix(float radian);
 
 	/// <summary>
 	/// 3x3行列の大きさ
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeScaleMatrix(const Vector2 scale);
+	static Matrix3x3 MakeScaleMatrix(const Vector2 scale);
 
 
 
@@ -93,7 +93,7 @@ public:
 	/// <param name="radian"></param>
 	/// <param name="scale"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeAffineMatrix(const Vector2 translate, float radian, const Vector2 scale);
+	static Matrix3x3 MakeAffineMatrix(const Vector2 translate, float radian, const Vector2 scale);
 
 
 	/// <summary>
@@ -102,21 +102,21 @@ public:
 	/// <param name="v"></param>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Vector2 Transform(Vector2 v, Matrix3x3 matrix);
+	static Vector2 Transform(Vector2 v, Matrix3x3 matrix);
 
 	/// <summary>
 	/// 3x3の逆行列
 	/// </summary>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Matrix3x3 Inverse(Matrix3x3 matrix);
+	static Matrix3x3 Inverse(Matrix3x3 matrix);
 
 	/// <summary>
 	/// 3x3の転置行列
 	/// </summary>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Matrix3x3 Transpose(Matrix3x3 matrix);
+	static Matrix3x3 Transpose(Matrix3x3 matrix);
 
 	/// <summary>
 	/// 3x3の正射影行列
@@ -126,7 +126,7 @@ public:
 	/// <param name="right"></param>
 	/// <param name="bottom"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeOrthographicMatrix(float left, float top, float right, float bottom);
+	static Matrix3x3 MakeOrthographicMatrix(float left, float top, float right, float bottom);
 
 	/// <summary>
 	/// 3x3ビューポート行列
@@ -136,7 +136,7 @@ public:
 	/// <param name="width"></param>
 	/// <param name="height"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeviewportMatrix(float left, float top, float width, float height);
+	static Matrix3x3 MakeviewportMatrix(float left, float top, float width, float height);
 #pragma endregion
 
 
@@ -152,7 +152,7 @@ public:
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
 	/// <returns></returns>
-	Matrix4x4 Add(const Matrix4x4& m1, const Matrix4x4& m2);
+	static Matrix4x4 Add(const Matrix4x4& m1, const Matrix4x4& m2);
 
 	/// <summary>
 	/// 4x4行列の引き算
@@ -160,7 +160,7 @@ public:
 	/// <param name="m1"></param>
 	/// <param name="m2"></param>
 	/// <returns></returns>
-	Matrix4x4 Subract(const Matrix4x4& m1, const Matrix4x4& m2);
+	static Matrix4x4 Subract(const Matrix4x4& m1, const Matrix4x4& m2);
 
 
 	/// <summary>
@@ -238,14 +238,14 @@ public:
 	/// </summary>
 	/// <param name="m"></param>
 	/// <returns></returns>
-	Matrix4x4 Transpose(const Matrix4x4 m);
+	static Matrix4x4 Transpose(const Matrix4x4 m);
 
 	/// <summary>
 	/// 4x4逆行列
 	/// </summary>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Matrix4x4 Inverse(Matrix4x4& matrix);
+	static Matrix4x4 Inverse(Matrix4x4& matrix);
 
 	/// <summary>
 	/// 4x4単位行列
@@ -264,7 +264,7 @@ public:
 	/// <param name="neaCrlip"></param>
 	/// <param name="farClip"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float neaCrlip, float farClip);
+	static Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float neaCrlip, float farClip);
 
 	/// <summary>
 	/// 4x4ビューポート行列
@@ -276,7 +276,7 @@ public:
 	/// <param name="minDepth"></param>
 	/// <param name="maxDepth"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth);
+	static Matrix4x4 MakeViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth);
 
 	/// <summary>
 	/// 余接
@@ -293,9 +293,9 @@ public:
 	/// <param name="nearClip"></param>
 	/// <param name="farClip"></param>
 	/// <returns></returns>
-	Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip);
+	static Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip);
 
-	Matrix4x4 toDeviceSpace(Matrix4x4 worldViewProjectionMatrix, int32_t kWindowWidth, int32_t kWindowHeight);
+	static Matrix4x4 toDeviceSpace(Matrix4x4 worldViewProjectionMatrix, int32_t kWindowWidth, int32_t kWindowHeight);
 #pragma endregion 
 
 

@@ -57,14 +57,17 @@ void Mesh::Draw()
 
 	//座標
 	//左下
-	vertexData[0] = { CenterPos_.x - size,CenterPos_.y - size,CenterPos_.z,1.0f };
+	vertexData[0] = {-0.5f,0.0f,0.0f,1.0f};
+	//{ CenterPos_.x - size,CenterPos_.y - size,CenterPos_.z,1.0f };
 
 	//上
-	vertexData[1] = { CenterPos_.x,CenterPos_.y + size,CenterPos_.z,1.0f };
+	vertexData[1] = { 0.0f,0.5f,0.0f,1.0f };
+	//{ CenterPos_.x,CenterPos_.y + size,CenterPos_.z,1.0f };
 
 	//右上
-	vertexData[2] = { CenterPos_.x + size,CenterPos_.y - size,CenterPos_.z,1.0f };
-
+	vertexData[2] = { 0.5f,0.0f,0.0f,1.0f };
+	//{ CenterPos_.x + size,CenterPos_.y - size,CenterPos_.z,1.0f };
+	CenterPos_, size;
 	//マテリアル
 	Vector4 colorData = Color_;
 

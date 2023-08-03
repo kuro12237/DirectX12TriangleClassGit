@@ -36,6 +36,8 @@
     <ClCompile Include="CLEYERA\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="CLEYERA\LogManager\Log.cpp" />
     <ClCompile Include="CLEYERA\math\Matrix\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp" />
+    <ClCompile Include="CLEYERA\math\ViewProjection\ViewProjection.cpp" />
     <ClCompile Include="CLEYERA\math\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -61,6 +63,11 @@
     <ClInclude Include="CLEYERA\math\Matrix\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\math\Matrix\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\math\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\math\Vector\Vector2.h" />
+    <ClInclude Include="CLEYERA\math\Vector\Vector3.h" />
+    <ClInclude Include="CLEYERA\math\Vector\Vector4.h" />
+    <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h" />
+    <ClInclude Include="CLEYERA\math\ViewProjection\ViewProjection.h" />
     <ClInclude Include="CLEYERA\math\WorldTransform\WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +183,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/gitnore::4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;$(SolutionDir)/CLEYERA/2d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;$(SolutionDir)/CLEYERA/2d;$(SolutionDir)/CLEYERA/math/ViewProjection;$(SolutionDir)/CLEYERA/Camera;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -200,7 +207,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/gitnore::4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;$(SolutionDir)/CLEYERA/2d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)CLEYERA;$(SolutionDir)/CLEYERA/externals/imgui/;$(SolutionDir)/CLEYERA/base/DX;$(SolutionDir)/CLEYERA/base/Win;$(SolutionDir)/CLEYERA/config;$(SolutionDir)/CLEYERA/ImGui;$(SolutionDir)/CLEYERA/LogManager;$(SolutionDir)/CLEYERA/math;$(SolutionDir)/CLEYERA/math/Matrix;$(SolutionDir)/CLEYERA/math/Vector;$(SolutionDir)/CLEYERA/math/WorldTransform;$(SolutionDir)/CLEYERA/GraphicsPipeline;$(SolutionDir)/CLEYERA/3d;$(SolutionDir)/CLEYERA/2d;$(SolutionDir)/CLEYERA/math/ViewProjection;$(SolutionDir)/CLEYERA/Camera;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>

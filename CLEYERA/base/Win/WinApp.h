@@ -62,4 +62,8 @@ private:
 	WNDCLASS wc_{};
 
 	HWND hwnd;
+
+	int32_t kClientWidth = 0;
+
+	int32_t kClientHeight = 0;
 };

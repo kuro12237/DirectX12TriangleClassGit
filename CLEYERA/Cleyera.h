@@ -7,6 +7,7 @@
 #include"GraphicsPipeline.h"
 #include"Model.h"
 #include"Mesh.h"
+#include"Camera.h"
 
 class Cleyera
 {

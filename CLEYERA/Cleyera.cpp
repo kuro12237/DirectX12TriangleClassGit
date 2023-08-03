@@ -66,6 +66,9 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	//Pipeline‚Ìì¬
 	GraphicsPipeline::PSOCreate();
 
+	//Camera‚Ì‰Šú‰»
+	Camera::Initialize(kClientWidth, kClientHeight);
+
 
 
 }

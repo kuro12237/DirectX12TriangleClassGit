@@ -36,11 +36,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ImGui::SliderFloat3("trans", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
 		ImGui::End();
 
-		worldTransform_[0].matWorld = matrix->MakeAffineMatrix(worldTransform_[0].scale_, worldTransform_[0].rotate_, worldTransform_[0].translation_);
+		//worldTransform_[0].matWorld = matrix->MakeAffineMatrix(worldTransform_[0].scale_, worldTransform_[0].rotate_, worldTransform_[0].translation_);
+
+		worldTransform_[0].matWorld = Camera::worldViewProjectionmatrixFanc(worldTransform_[0].matWorld);
 
 		mesh[0]->TransferMatrix(worldTransform_[0].matWorld);
 	
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			mesh[i]->Draw();
 		}

@@ -58,6 +58,12 @@
     <Filter Include="ソース ファイル\CLEYERA\GraphicPipline">
       <UniqueIdentifier>{7c21a3ea-d93d-4456-9ffa-6d3e37c845b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\math\ViewProjection">
+      <UniqueIdentifier>{2f8fbb36-2c76-4f90-adea-dbd053358909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\math\Vector">
+      <UniqueIdentifier>{f8000cd5-1795-43be-8655-1928f8e9872b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Camera\Camera.cpp">
       <Filter>ソース ファイル\CLEYERA\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\ViewProjection\ViewProjection.cpp">
+      <Filter>ソース ファイル\CLEYERA\math\ViewProjection</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
+      <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +196,21 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Camera\Camera.h">
       <Filter>ソース ファイル\CLEYERA\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\ViewProjection\ViewProjection.h">
+      <Filter>ソース ファイル\CLEYERA\math\ViewProjection</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector\Vector2.h">
+      <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector\Vector3.h">
+      <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector\Vector4.h">
+      <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
+      <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
