@@ -31,6 +31,12 @@ void Camera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeigh
 
 }
 
+void Camera::Finalize()
+{
+	
+
+}
+
 
 void Camera::SetPosition(Transform Transform)
 {

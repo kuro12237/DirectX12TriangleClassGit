@@ -39,12 +39,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ImGui::SliderFloat3("Cameratrans", &transform.translate.x, -5.0f, 5.0f);
 		ImGui::End();
 
-		//Camera::SetTransform(transform);
+		Camera::SetPosition(transform);
 
-		worldTransform_[0].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[0].scale_, worldTransform_[0].rotate_, worldTransform_[0].translation_);
 		worldTransform_[0].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[0].matWorld);
 
+		worldTransform_[0].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[0].scale_, worldTransform_[0].rotate_, worldTransform_[0].translation_);
 		
+		mesh[0]->TransferMatrix(worldTransform_[0].matWorld);
 		
 		for (int i = 0; i < 1; i++)
 		{
