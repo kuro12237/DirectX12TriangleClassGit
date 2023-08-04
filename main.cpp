@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Cleyera::BeginFlame(kClientWidth, kClientHeight);
 		
 		ImGui::Begin("Mesh1");
-		ImGui::SliderFloat3("trans", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("Meshtrans", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
 		ImGui::SliderFloat3("Cameratrans", &transform.translate.x, -5.0f, 5.0f);
 		ImGui::End();
 
