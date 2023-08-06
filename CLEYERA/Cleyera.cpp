@@ -11,11 +11,11 @@ Cleyera::~Cleyera()
 }
 
 
-void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
+void Cleyera::Initialize()
 {
 	//WinApp‚Ì‰Šú‰»
 	
-	WinApp::Initialize(kClientWidth, kClientHeight);
+	WinApp::Initialize();
 
 	//
 	////DirectX‚Ì‰Šú‰»
@@ -38,7 +38,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	DirectXCommon::CreateCommands();
 
 	//swapChain
-	DirectXCommon::CreateSwapChain(kClientWidth, kClientHeight, WinApp::GetInstance()->GetHwnd());
+	DirectXCommon::CreateSwapChain();
 	
 	//rtvDescritor
 	DirectXCommon::CreatertvDescritorHeap();
@@ -67,7 +67,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	GraphicsPipeline::PSOCreate();
 
 	//Camera‚Ì‰Šú‰»
-	Camera::Initialize(kClientWidth, kClientHeight);
+	Camera::Initialize();
 
 	TexManager::Initialize();
 

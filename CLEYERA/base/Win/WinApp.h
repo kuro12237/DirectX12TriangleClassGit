@@ -29,7 +29,7 @@ public:
 	/// </summary>
 	/// <param name="Width"></param>
 	/// <param name="Height"></param>
-	static void Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight);
+	static void Initialize();
 
 	/// <summary>
 	///ウインドウメッセージ処理 
@@ -44,6 +44,8 @@ public:
 	static void Finalize();
 
 
+
+
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 	HWND GetHwnd()
@@ -56,6 +58,12 @@ public:
 		return wc_;
 	}
 
+	static const int32_t GetkClinentWidth() 
+	{ return WinApp::GetInstance()->kClinentWidth; }
+
+	static const int32_t GetkClinentHeight() 
+	{ return WinApp::GetInstance()->kClinentHeight; }
+
 private:
 
 	//ウインドウクラス
@@ -63,7 +71,8 @@ private:
 
 	HWND hwnd;
 
-	int32_t kClientWidth = 0;
+	static const int32_t kClinentWidth = 1280;
+	static const int32_t kClinentHeight = 720;
 
-	int32_t kClientHeight = 0;
+
 };

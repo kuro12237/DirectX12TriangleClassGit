@@ -25,8 +25,12 @@ public:
 
 	void Draw();
 
+	void Release();
 private:
 
+	 void CommandCall();
+
+	 static void Releace(ID3D12Resource *resource);
 
 	/// <summary>
 	/// ResourceÇçÏê¨
@@ -53,5 +57,7 @@ private:
 	texResourceProperty tex_;
 	ResourcePeroperty resource_;
 
+	Vector4 color_ = {1,1,1,1};
+	float size_ = 0.1f;
 	SpriteMode mode_;
 };

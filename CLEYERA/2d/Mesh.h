@@ -17,6 +17,7 @@ struct ResourcePeroperty
 	ID3D12Resource* Vertex;
 	ID3D12Resource* Material;
 	ID3D12Resource* wvpResource;
+	ID3D12Resource* depthStencilResource;
 };
 
 class Mesh
@@ -58,6 +59,8 @@ private:
 	/// <param name="Resource"></param>
 	/// <returns></returns>
 	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource,int size);
+
+	static ID3D12Resource* CreateDepthStencilTextureResource(ID3D12Device* device);
 
 	/// <summary>
 	/// コマンド呼び出し

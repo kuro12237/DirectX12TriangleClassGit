@@ -45,16 +45,105 @@ void Sprite::SetTexProperty(texResourceProperty NewTex)
 
 void Sprite::Draw()
 {
+	switch (mode_)
+	{
+	case Triangle:
+
+
+		VertexData* vertexData = nullptr;
+		//Vector4* vertexData = nullptr;
+		Vector4* MaterialData = nullptr;
+		Matrix4x4* wvpData = nullptr;
+		//書き込むためのアドレスを取得
+		resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
+		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
+
+		vertexData[0].position = { centerPos_.x-size_, centerPos_.y - size_,
+			 centerPos_.z,  centerPos_.w}; //{ centerPos_.x-size_,centerPos_.y-size_,centerPos_.z,centerPos_.w };
+
+		vertexData[0].texcoord = { 0.0f,1.0f };
+		////上
+		vertexData[1].position = { centerPos_.x , centerPos_.y + size_,
+			 centerPos_.z, centerPos_.w };//{ centerPos_.x ,centerPos_.y + size_,centerPos_.z,centerPos_.w };
+		vertexData[1].texcoord = { 0.5f,0.0f };
+		////右
+		vertexData[2].position = { centerPos_.x + size_, centerPos_.y - size_,
+			 centerPos_.z, centerPos_.w };//{ centerPos_.x + size_,centerPos_.y - size_,centerPos_.z,centerPos_.w };
+		vertexData[2].texcoord = { 1.0f,1.0f };
+
+		//マテリアル
+
+		*MaterialData = color_;
+
+		//行列の変換
+
+		*wvpData = worldTransform_.matWorld;
+
+		CommandCall();
+		break;
+
+
+	//case Box:
+		//break;
+
+	}
+
 }
+
+void Sprite::Release()
+{
+	Sprite::Releace(resource_.Material);
+	Sprite::Releace(resource_.Vertex);
+	Sprite::Releace(resource_.wvpResource);
+}
+
+void Sprite::Releace(ID3D12Resource* resource)
+{
+	resource->Release();
+}
+
+void Sprite::CommandCall()
+{
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().sprite;
+
+	commands.List->SetGraphicsRootSignature(
+	                        PSO.rootSignature);
+
+	commands.List->SetPipelineState(
+		PSO.GraphicsPipelineState);//
+
+	commands.List->IASetVertexBuffers(0, 1, &resource_.BufferView);
+
+	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
+	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//マテリアルCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+
+
+	//wvp用のCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
+
+	//
+	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
+
+
+	//描画(DrawCall/ドローコール)。
+	commands.List->DrawInstanced(3, 1, 0, 0);
+
+}
+
 
 ResourcePeroperty Sprite::CreateResource(const int NumVertex)
 {
 	 ResourcePeroperty result;
-
-	 result.Vertex = CreateBufferResource(sizeof(VertexData) * NumVertex);
+	
+	 result.Vertex = CreateBufferResource(sizeof(VertexData) * 3);
 	 result.Material = CreateBufferResource(sizeof(Vector4));
 	 result.wvpResource = CreateBufferResource(sizeof(Matrix4x4));
-	 result.BufferView = CreateBufferView(sizeof(VertexData) * NumVertex * NumVertex, result.Vertex,NumVertex);
+	 result.BufferView = CreateBufferView(sizeof(VertexData) * NumVertex, result.Vertex, NumVertex);
 
 	 return result;
 }

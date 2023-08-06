@@ -38,6 +38,7 @@ ResourcePeroperty Mesh::CreateResource()
 	result.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
 	result.Material = CreateBufferResource(device, sizeof(Vector4));
 	result.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
+	result.depthStencilResource = CreateDepthStencilTextureResource(device);
 	result.BufferView = CreateBufferView(sizeof(Vector4) * 3, result.Vertex,3);
 
 
@@ -58,14 +59,14 @@ void Mesh::Draw()
 
 	//座標
 	//左下
-	vertexData[0] = { -0.5f,0.0f,0.0f,1.0f };
-	//{ CenterPos_.x - size,CenterPos_.y - size,CenterPos_.z,1.0f };
+	vertexData[0] = //{ -0.5f,0.0f,0.0f,1.0f };
+	{ CenterPos_.x - size,CenterPos_.y - size,CenterPos_.z,CenterPos_.w };
 
 	//上
-	vertexData[1] = { 0.0f,0.5f,0.0f,1.0f };//{ CenterPos_.x,CenterPos_.y + size,CenterPos_.z,1.0f };
+	vertexData[1] = { CenterPos_.x,CenterPos_.y + size,CenterPos_.z,CenterPos_.w };
 
 	//右上
-	vertexData[2] = { 0.5f,0.0f,0.0f,1.0f };//{ CenterPos_.x + size,CenterPos_.y - size,CenterPos_.z,1.0f };
+	vertexData[2] ={ CenterPos_.x + size,CenterPos_.y - size,CenterPos_.z,CenterPos_.w };
 	//マテリアル
 	Vector4 colorData = Color_;
 
@@ -130,6 +131,47 @@ D3D12_VERTEX_BUFFER_VIEW Mesh::CreateBufferView(size_t sizeInbyte, ID3D12Resourc
 	//1頂点あたりのサイズ
 	resultBufferView.StrideInBytes = UINT(sizeInbyte / size);
 	return resultBufferView;
+}
+
+ID3D12Resource* Mesh::CreateDepthStencilTextureResource(ID3D12Device*device)
+{
+	D3D12_RESOURCE_DESC resourceDesc{};
+
+	resourceDesc.Width = WinApp::GetInstance()->GetkClinentWidth();
+	resourceDesc.Height = WinApp::GetInstance()->GetkClinentHeight();
+	resourceDesc.MipLevels = 1;
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	resourceDesc.SampleDesc.Count = 1;
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+
+	D3D12_HEAP_PROPERTIES heapProperties;
+
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+	D3D12_CLEAR_VALUE depthClearValue = {};
+	depthClearValue.DepthStencil.Depth = 1.0f;
+	depthClearValue.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	
+	//上の処理一回のみでいい説あり
+
+	ID3D12Resource* result = nullptr;
+
+	HRESULT hr = device->CreateCommittedResource(
+
+		&heapProperties,
+		D3D12_HEAP_FLAG_NONE,
+		&resourceDesc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,
+		&depthClearValue,
+		IID_PPV_ARGS(&result)
+		);
+	assert(SUCCEEDED(hr));
+
+
+	return result;
+
 }
 
 void Mesh::ComanndCall(ResourcePeroperty resource)

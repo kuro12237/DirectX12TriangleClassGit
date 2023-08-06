@@ -16,7 +16,7 @@
 #include<cassert>
 
 #include"Log.h"
-
+#include"WinApp.h"
 
 struct  RTV
 {
@@ -83,7 +83,7 @@ public:
 	/// <summary>
     /// スワップチェーンの設定
     /// </summary>
-	static void CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_);
+	static void CreateSwapChain();
 
 	static ID3D12DescriptorHeap* CreateDescriptorHeap( D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
 

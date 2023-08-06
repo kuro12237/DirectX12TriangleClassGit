@@ -21,7 +21,7 @@ public:
 	/// </summary>
 	/// <param name="kClientWidth"></param>
 	/// <param name="kClientHeight"></param>
-	static void Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight);
+	static void Initialize();
 
 	/// <summary>
 	/// 解放

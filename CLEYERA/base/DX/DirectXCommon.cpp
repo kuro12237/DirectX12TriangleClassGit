@@ -184,15 +184,16 @@ void DirectXCommon::CreateCommands()
 	DirectXCommon::GetInstance()->device_ = device;
 }
 
-void DirectXCommon::CreateSwapChain(const int32_t Width, const int32_t Height, HWND hwnd_)
+void DirectXCommon::CreateSwapChain()
 {
 	DirectXCommon::GetInstance()->swapChain.swapChain = nullptr;
+	HWND hwnd_ = WinApp::GetInstance()->GetHwnd();
 
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 
 	//スワップチェーンの設定
-	swapChainDesc.Width = Width;
-	swapChainDesc.Height = Height;
+	swapChainDesc.Width = WinApp::GetInstance()->GetkClinentWidth();
+	swapChainDesc.Height = WinApp::GetInstance()->GetkClinentHeight();
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;

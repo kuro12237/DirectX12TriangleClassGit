@@ -37,7 +37,7 @@ LRESULT CALLBACK WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM l
 }
 
 
-void WinApp::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
+void WinApp::Initialize()
 {
 	WNDCLASS wc_{};
 
@@ -61,7 +61,9 @@ void WinApp::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeigh
 
 
 	//クライアントの領域設定
-	RECT wrc = { 0,0,kClientWidth,kClientHeight };
+	RECT wrc = { 0,0,
+		WinApp::GetInstance()->kClinentWidth,
+	WinApp::GetInstance()->kClinentHeight};
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
 

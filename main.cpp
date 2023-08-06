@@ -5,7 +5,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const int32_t kClientWidth = 1280;
 	const int32_t kClientHeight = 720;
 
-	Cleyera::Initialize(kClientWidth, kClientHeight);
+	Cleyera::Initialize();
 
 	MSG msg{};
 
@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	tex = TexManager::LoadTexture("Resource/Enemy.png");
 
 	Sprite* sprite = new Sprite();
-	sprite->Initialize({ 0,0,0 }, tex, Triangle);
+	sprite->Initialize({ 0,0,0,1 }, tex, Triangle);
 
 
 	while (msg.message != WM_QUIT)
@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			mesh[i]->Draw();
 		}
-		
+		sprite->Draw();
 	
 		Cleyera::EndFlame();
 
@@ -65,8 +65,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	mesh[0]->Release();
 	mesh[1]->Release();
+	
 
 	tex = TexManager::Release(tex);
+	sprite->Release();
 
 	Cleyera::Finalize();
 

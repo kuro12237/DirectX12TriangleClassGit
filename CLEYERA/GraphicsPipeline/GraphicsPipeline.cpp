@@ -273,6 +273,7 @@ void GraphicsPipeline::SpritePSO()
 
 	//シリアライズしてバイナリにする
 
+
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &SpritePSO.signatureBlob, &SpritePSO.errorBlob);
 	if (FAILED(hr))
@@ -286,6 +287,7 @@ void GraphicsPipeline::SpritePSO()
 	hr = device->CreateRootSignature(0, SpritePSO.signatureBlob->GetBufferPointer(),
 		SpritePSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&SpritePSO.rootSignature));
 	assert(SUCCEEDED(hr));
+
 
 
 

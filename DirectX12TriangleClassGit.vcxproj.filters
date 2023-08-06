@@ -67,6 +67,15 @@
     <Filter Include="ソース ファイル\CLEYERA\TexManager">
       <UniqueIdentifier>{95ec2bd7-0978-4cfb-9b1e-c0fd9770b7c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite">
+      <UniqueIdentifier>{e4a9c349-9d5d-4d3d-969f-5ce0ccbadb5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite\Box">
+      <UniqueIdentifier>{b61ea5eb-a261-4b54-8949-0783e0895c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite\Triangle">
+      <UniqueIdentifier>{8269f397-ae5f-48ad-b571-21a7260d923a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -132,11 +141,11 @@
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp">
-      <Filter>ソース ファイル\CLEYERA\2d</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
       <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp">
+      <Filter>ソース ファイル\CLEYERA\2d\Sirite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +234,7 @@
       <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\2d\Sprite\Sprite.h">
-      <Filter>ソース ファイル\CLEYERA\2d</Filter>
+      <Filter>ソース ファイル\CLEYERA\2d\Sirite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ public:
 
 	static Camera* GetInstance();
 
-	static void Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight);
+	static void Initialize();
 
 	static void Finalize();
 

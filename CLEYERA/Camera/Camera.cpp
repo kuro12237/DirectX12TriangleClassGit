@@ -16,7 +16,7 @@ Camera* Camera::GetInstance()
 	return &instance;
 }
 
-void Camera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeight)
+void Camera::Initialize()
 {
 
 	Camera::GetInstance()->transform = {
@@ -24,7 +24,11 @@ void Camera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeigh
 	};
 
 	//“ŠŽ‘•ÏŠ·s—ñ
-	Camera::GetInstance()->viewProjection.aspectRatio = float(kClientWidth) / float(kClientHeight);
+	Camera::GetInstance()->viewProjection.aspectRatio = 
+		float(WinApp::GetInstance()->GetkClinentWidth()) 
+		/
+		float(WinApp::GetInstance()->GetkClinentHeight());
+
 	Camera::GetInstance()->viewProjection.nearClip = 0.1f;
 	Camera::GetInstance()->viewProjection.farClip = 100.0f;
 	Camera::GetInstance()->viewProjection.fov = 0.45f;
