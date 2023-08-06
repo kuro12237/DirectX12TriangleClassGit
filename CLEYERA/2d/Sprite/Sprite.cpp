@@ -10,7 +10,7 @@ Sprite::~Sprite()
 
 
 
-void Sprite::Initialize(Vector4 pos, texResourceProperty texResource,const SpriteMode mode)
+void Sprite::Initialize(Vector4 pos, WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode)
 {
 	centerPos_ = pos;
 
@@ -21,7 +21,7 @@ void Sprite::Initialize(Vector4 pos, texResourceProperty texResource,const Sprit
 		const int NumVertex = 3;
 		mode_ = mode;
 		resource_ = CreateResource(NumVertex);
-		worldTransform_.Initialize();
+		worldTransform_ = worldTransform;
 		tex_ = texResource;
 
 		break;
@@ -33,7 +33,7 @@ void Sprite::Initialize(Vector4 pos, texResourceProperty texResource,const Sprit
 
 }
 
-void Sprite::TranferMatrix(Matrix4x4 m)
+void Sprite::TransferMatrix(Matrix4x4 m)
 {
 	worldTransform_.matWorld = m;
 }

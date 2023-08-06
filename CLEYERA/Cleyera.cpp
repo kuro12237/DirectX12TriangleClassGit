@@ -82,9 +82,10 @@ void Cleyera::WinMSG(MSG msg)
 
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
+	DirectXCommon::BeginFlame();
 	ImGuiManager::BeginFlame(DirectXCommon::GetInstance());
 
-	DirectXCommon::BeginFlame();
+
 	DirectXCommon::ScissorViewCommand(kClientWidth, kClientHeight);
 }
 

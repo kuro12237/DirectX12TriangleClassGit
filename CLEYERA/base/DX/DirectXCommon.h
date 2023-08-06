@@ -21,12 +21,13 @@
 struct  RTV
 {
 	ID3D12DescriptorHeap* DescritorHeap;
+
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
-
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
-
 	//RTVを2つ作るのでディスクリプタを2つ用意
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
+
+
 };
 struct SwapChain
 {
@@ -125,6 +126,8 @@ public:
 
 	 ID3D12DescriptorHeap* GetSrvDescripterHeap() { return srvDescriptorHeap; }
 
+	 static ID3D12DescriptorHeap* GetDescriptorHeaps() { return DirectXCommon::GetInstance()->dsvDescripterHeap; }
+
 #pragma endregion 
 	
 	 /// <summary>
@@ -153,12 +156,15 @@ public:
 
 private:
 
+	static ID3D12Resource* CreateDepthStencilTextureResource(ID3D12Device* device);
+
+
 #pragma region Finalizeに書く処理
 
 
 	static void FeanceReleace(ID3D12Fence* fence, HANDLE fenceEvent);
 
-	static void DescripterRelease(RTV rtv, ID3D12DescriptorHeap* srvDescriptorHeap);
+	static void DescripterRelease(ID3D12DescriptorHeap* DescritorHeap);
 
 	static void SwapChainRelease(SwapChain swapChain);
 
@@ -195,7 +201,8 @@ private:
 	//DescriptorHeap
 	RTV rtv;
 	ID3D12DescriptorHeap* srvDescriptorHeap;
-
+	ID3D12Resource* DepthResource = nullptr;
+	ID3D12DescriptorHeap* dsvDescripterHeap;
 	//フェンス
 	ID3D12Fence* fence = nullptr;
 	uint64_t fenceValue;

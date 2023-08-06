@@ -177,6 +177,12 @@ void GraphicsPipeline::ShapePSO()
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 
+	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
+	despthStencilDesc.DepthEnable = true;
+	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+
+
 	//PSO‚Ì¶¬
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
@@ -188,7 +194,9 @@ void GraphicsPipeline::ShapePSO()
 	shader.pixelBlob->GetBufferSize() }; //PixeShader
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
-
+	
+	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	//‘‚«‚ŞRTV‚Ìî•ñ
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
@@ -325,6 +333,13 @@ void GraphicsPipeline::SpritePSO()
 	//OŠpŒ`‚Ì’†‚ğ“h‚è‚Â‚Ô‚·
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
+	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
+	despthStencilDesc.DepthEnable = true;
+	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+
+
+
 	//PSO‚Ì¶¬
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
@@ -336,6 +351,8 @@ void GraphicsPipeline::SpritePSO()
 	shader.pixelBlob->GetBufferSize() }; //PixeShader
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
+	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 
 	//‘‚«‚ŞRTV‚Ìî•ñ

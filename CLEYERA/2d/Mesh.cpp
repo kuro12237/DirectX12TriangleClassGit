@@ -18,9 +18,10 @@ Mesh* Mesh::GetInstance()
 
 
 
-void Mesh::Initialize(WorldTransform worldTransform,Vector4 pos)
+void Mesh::Initialize(WorldTransform worldTransform,Vector4 pos,Vector4 Color)
 {
 	resource_ = Mesh::CreateResource();
+	Color_ = Color;
 	CenterPos_ = pos;
 	worldTransform_ = worldTransform;
 }
@@ -38,12 +39,9 @@ ResourcePeroperty Mesh::CreateResource()
 	result.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
 	result.Material = CreateBufferResource(device, sizeof(Vector4));
 	result.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
-	result.depthStencilResource = CreateDepthStencilTextureResource(device);
 	result.BufferView = CreateBufferView(sizeof(Vector4) * 3, result.Vertex,3);
 
-
 	return result;
-
 }
 
 void Mesh::Draw()
@@ -133,51 +131,11 @@ D3D12_VERTEX_BUFFER_VIEW Mesh::CreateBufferView(size_t sizeInbyte, ID3D12Resourc
 	return resultBufferView;
 }
 
-ID3D12Resource* Mesh::CreateDepthStencilTextureResource(ID3D12Device*device)
-{
-	D3D12_RESOURCE_DESC resourceDesc{};
-
-	resourceDesc.Width = WinApp::GetInstance()->GetkClinentWidth();
-	resourceDesc.Height = WinApp::GetInstance()->GetkClinentHeight();
-	resourceDesc.MipLevels = 1;
-	resourceDesc.DepthOrArraySize = 1;
-	resourceDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	resourceDesc.SampleDesc.Count = 1;
-	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-
-	D3D12_HEAP_PROPERTIES heapProperties;
-
-	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-
-	D3D12_CLEAR_VALUE depthClearValue = {};
-	depthClearValue.DepthStencil.Depth = 1.0f;
-	depthClearValue.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	
-	//上の処理一回のみでいい説あり
-
-	ID3D12Resource* result = nullptr;
-
-	HRESULT hr = device->CreateCommittedResource(
-
-		&heapProperties,
-		D3D12_HEAP_FLAG_NONE,
-		&resourceDesc,
-		D3D12_RESOURCE_STATE_DEPTH_WRITE,
-		&depthClearValue,
-		IID_PPV_ARGS(&result)
-		);
-	assert(SUCCEEDED(hr));
-
-
-	return result;
-
-}
-
 void Mesh::ComanndCall(ResourcePeroperty resource)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().shape;
+
 
 	commands.List->SetGraphicsRootSignature(PSO.rootSignature);
 	commands.List->SetPipelineState(PSO.GraphicsPipelineState);//
@@ -189,7 +147,6 @@ void Mesh::ComanndCall(ResourcePeroperty resource)
 
 	//マテリアルCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource.Material->GetGPUVirtualAddress());
-
 
 	//wvp用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(1, resource.wvpResource->GetGPUVirtualAddress());

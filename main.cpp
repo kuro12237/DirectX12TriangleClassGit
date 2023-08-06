@@ -13,13 +13,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	mesh[0] = new Mesh();
 	mesh[1] = new Mesh();
 
-	WorldTransform worldTransform_[2];
+	WorldTransform worldTransform_[3];
 	worldTransform_[0].Initialize();
 	worldTransform_[1].Initialize();
+	worldTransform_[2].Initialize();
 
-
-	mesh[0]->Initialize(worldTransform_[0], Vector4(0, 0, 0, 1));
-	mesh[1]->Initialize(worldTransform_[1], Vector4(0, 0, 0, 1));
+	mesh[0]->Initialize(worldTransform_[0], Vector4(0, 0, 0, 1),Vector4(1,1,1,1));
+	mesh[1]->Initialize(worldTransform_[1], Vector4(0, 0, 0, 1),Vector4(0,0,1,1));
 
 	Transform transform = { {1,1,1},{0,0,0},{0,0,-5.0f} };
 
@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	tex = TexManager::LoadTexture("Resource/Enemy.png");
 
 	Sprite* sprite = new Sprite();
-	sprite->Initialize({ 0,0,0,1 }, tex, Triangle);
+	sprite->Initialize({ 0,0,0,1 },worldTransform_[2], tex, Triangle);
 
 
 	while (msg.message != WM_QUIT)
@@ -40,7 +40,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Cleyera::BeginFlame(kClientWidth, kClientHeight);
 		
 		ImGui::Begin("Mesh1");
-		ImGui::SliderFloat3("Meshtrans", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("MeshTrans_1", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("MeshRotate_1", &worldTransform_[0].rotate_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("MeshTrans_2", &worldTransform_[1].translation_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("MeshRotate_2", &worldTransform_[1].rotate_.x, -1.0f, 1.0f);
 		ImGui::SliderFloat3("Cameratrans", &transform.translate.x, -5.0f, 5.0f);
 		ImGui::End();
 
@@ -52,8 +55,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		worldTransform_[0].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[0].matWorld);
 
 		mesh[0]->TransferMatrix(worldTransform_[0].matWorld);
-		
-		for (int i = 0; i < 1; i++)
+
+		worldTransform_[1].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[1].scale_, worldTransform_[1].rotate_, worldTransform_[1].translation_);
+
+		worldTransform_[1].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[1].matWorld);
+
+		mesh[1]->TransferMatrix(worldTransform_[1].matWorld);
+
+		worldTransform_[2].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[2].scale_, worldTransform_[2].rotate_, worldTransform_[2].translation_);
+
+		worldTransform_[2].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[2].matWorld);
+
+		sprite->TransferMatrix(worldTransform_[2].matWorld);
+
+		for (int i = 0; i < 2; i++)
 		{
 			mesh[i]->Draw();
 		}
