@@ -27,6 +27,7 @@ struct PSOProperty
 struct PSO
 {
 	PSOProperty shape;
+	PSOProperty sprite;
 
 };
 
@@ -92,6 +93,8 @@ private:
 
 
 	static void ShapePSO();
+
+	static void SpritePSO();
 
 	static void ShaderRelease(ShaderMode shader);
 

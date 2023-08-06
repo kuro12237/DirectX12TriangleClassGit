@@ -29,6 +29,5 @@ public:
 private:
 
 	ViewProjection viewProjection;
-	float aspectRatio;
 	Transform transform;
 };

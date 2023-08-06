@@ -8,6 +8,9 @@ struct  VertexData
 	Vector2 texcoord;
 };
 
+
+
+
 struct ResourcePeroperty
 {
 	D3D12_VERTEX_BUFFER_VIEW BufferView;
@@ -65,8 +68,7 @@ private:
 	static void resourceRelease(ID3D12Resource *resource);
 
 
-	ID3D12Device* device_;
-	Commands commands_;
+
 
 	ResourcePeroperty resource_;
 	WorldTransform worldTransform_;

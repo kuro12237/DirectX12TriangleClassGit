@@ -8,6 +8,7 @@
 #include"Model.h"
 #include"Mesh.h"
 #include"Camera.h"
+#include"TexManager.h"
 
 class Cleyera
 {

@@ -64,6 +64,9 @@
     <Filter Include="ソース ファイル\CLEYERA\math\Vector">
       <UniqueIdentifier>{f8000cd5-1795-43be-8655-1928f8e9872b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\TexManager">
+      <UniqueIdentifier>{95ec2bd7-0978-4cfb-9b1e-c0fd9770b7c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp">
+      <Filter>ソース ファイル\CLEYERA\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
+      <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +220,12 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
       <Filter>ソース ファイル\CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\TexManager\TexManager.h">
+      <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\2d\Sprite\Sprite.h">
+      <Filter>ソース ファイル\CLEYERA\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

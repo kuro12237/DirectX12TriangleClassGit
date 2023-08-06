@@ -24,11 +24,18 @@ void Camera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeigh
 	};
 
 	//“ŠŽ‘•ÏŠ·s—ñ
-	Camera::GetInstance()->aspectRatio = float(kClientWidth) / float(kClientHeight);
+	Camera::GetInstance()->viewProjection.aspectRatio = float(kClientWidth) / float(kClientHeight);
+	Camera::GetInstance()->viewProjection.nearClip = 0.1f;
+	Camera::GetInstance()->viewProjection.farClip = 100.0f;
+	Camera::GetInstance()->viewProjection.fov = 0.45f;
+
 	Camera::GetInstance()->viewProjection.matProjection =
-		MatrixTransform::MakePerspectiveFovMatrix(0.45f, Camera::GetInstance()->aspectRatio, 0.1f, 100.0f);
-
-
+		MatrixTransform::MakePerspectiveFovMatrix(
+			Camera::GetInstance()->viewProjection.fov,
+			Camera::GetInstance()->viewProjection.aspectRatio,
+			Camera::GetInstance()->viewProjection.nearClip,
+			Camera::GetInstance()->viewProjection.farClip
+		);
 }
 
 void Camera::Finalize()

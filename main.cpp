@@ -1,5 +1,4 @@
 #include"Cleyera.h"
-#include"MatrixTransform.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -24,6 +23,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	Transform transform = { {1,1,1},{0,0,0},{0,0,-5.0f} };
 
+	texResourceProperty tex;
+	tex = TexManager::LoadTexture("Resource/Enemy.png");
 
 	while (msg.message != WM_QUIT)
 	{

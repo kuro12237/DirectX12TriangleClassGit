@@ -31,7 +31,7 @@ struct WorldTransform
 	/// <summary>
 	/// çsóÒ
 	/// </summary>
-	Matrix4x4 matWorld;
+	Matrix4x4 matWorld = {0};
 
 	void Initialize();
 

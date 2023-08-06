@@ -69,7 +69,7 @@ void Cleyera::Initialize(const int32_t  kClientWidth, const int32_t  kClientHeig
 	//Camera‚Ì‰Šú‰»
 	Camera::Initialize(kClientWidth, kClientHeight);
 
-
+	TexManager::Initialize();
 
 }
 
@@ -98,6 +98,7 @@ void Cleyera::EndFlame()
 
 void Cleyera::Finalize()
 {
+	TexManager::Finalize();
 
 	GraphicsPipeline::Finalize();
 
