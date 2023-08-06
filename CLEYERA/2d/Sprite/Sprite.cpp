@@ -27,7 +27,6 @@ void Sprite::Initialize(Vector4 pos, WorldTransform worldTransform, texResourceP
 		break;
 
 
-
 	}
 
 
