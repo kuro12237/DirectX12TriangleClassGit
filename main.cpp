@@ -17,14 +17,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	worldTransform_[0].Initialize();
 	worldTransform_[1].Initialize();
 
-	
+
 	mesh[0]->Initialize(worldTransform_[0], Vector4(0, 0, 0, 1));
-	mesh[1]->Initialize(worldTransform_[1],Vector4(0, 0, 0, 1));
+	mesh[1]->Initialize(worldTransform_[1], Vector4(0, 0, 0, 1));
 
 	Transform transform = { {1,1,1},{0,0,0},{0,0,-5.0f} };
 
 	texResourceProperty tex;
 	tex = TexManager::LoadTexture("Resource/Enemy.png");
+
+	Sprite* sprite = new Sprite();
+	sprite->Initialize({ 0,0,0 }, tex, Triangle);
+
 
 	while (msg.message != WM_QUIT)
 	{
@@ -61,6 +65,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	mesh[0]->Release();
 	mesh[1]->Release();
+
+	tex = TexManager::Release(tex);
 
 	Cleyera::Finalize();
 

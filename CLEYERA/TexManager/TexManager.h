@@ -21,6 +21,22 @@ public:
 	static void Finalize();
 
 
+
+
+	/// <summary>
+	/// é¿ç€Ç…égÇ§èàóù
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
+	static texResourceProperty LoadTexture(const std::string& filePath);
+
+	static texResourceProperty Release(texResourceProperty tex);
+
+
+private:
+
+	static ID3D12Resource* CreateTexResource(const DirectX::TexMetadata& metadata);
+
 	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);
 
 	static void UploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage& mipImage);
@@ -40,21 +56,6 @@ public:
 	/// <returns></returns>
 	static D3D12_HEAP_PROPERTIES SettingHeap();
 
-
-	static ID3D12Resource* CreateTexResource(const DirectX::TexMetadata& metadata);
-
-
-	/// <summary>
-	/// é¿ç€Ç…égÇ§èàóù
-	/// </summary>
-	/// <param name="filePath"></param>
-	/// <returns></returns>
-	static texResourceProperty LoadTexture(const std::string& filePath);
-
-
-
-
-private:
 
 };
 

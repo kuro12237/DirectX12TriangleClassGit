@@ -17,7 +17,7 @@ public:
 	~Sprite();
 
 
-	void Initialize(Vector3 pos, texResourceProperty texResource,const SpriteMode mode);
+	void Initialize(Vector4 pos, texResourceProperty texResource,const SpriteMode mode);
 
 	void TranferMatrix(Matrix4x4 m);
 

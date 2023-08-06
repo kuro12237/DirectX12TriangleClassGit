@@ -140,3 +140,10 @@ texResourceProperty TexManager::LoadTexture(const std::string& filePath)
 
 	return tex;
 }
+
+texResourceProperty TexManager::Release(texResourceProperty tex)
+{
+	tex.Resource->Release();
+	
+	return tex;
+}

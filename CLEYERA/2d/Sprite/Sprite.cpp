@@ -10,9 +10,9 @@ Sprite::~Sprite()
 
 
 
-void Sprite::Initialize(Vector3 pos, texResourceProperty texResource,const SpriteMode mode)
+void Sprite::Initialize(Vector4 pos, texResourceProperty texResource,const SpriteMode mode)
 {
-	centerPos_ = { pos.x,pos.y,pos.z,1.0f };
+	centerPos_ = pos;
 
 	switch (mode)
 	{
