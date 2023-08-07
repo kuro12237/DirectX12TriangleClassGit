@@ -43,8 +43,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		Cleyera::BeginFlame(kClientWidth, kClientHeight);
 		
-
-
 		//«shape
 		worldTransform_[0].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[0].scale_, worldTransform_[0].rotate_, worldTransform_[0].translation_);
 		
@@ -107,7 +105,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	mesh[0]->Release();
 	mesh[1]->Release();
 	
-
 	tex = TexManager::Release(tex);
 	sprite[0]->Release();
 	sprite[1]->Release();
