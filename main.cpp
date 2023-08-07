@@ -60,8 +60,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		worldTransform_[2].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[2].scale_, worldTransform_[2].rotate_, worldTransform_[2].translation_);
 
 		worldTransform_[2].matWorld =
-			//Camera::worldOthographicMatrix(worldTransform_[2].matWorld);
-			Camera::worldViewProjectionMatrixFanc(worldTransform_[2].matWorld);
+			Camera::worldOthographicMatrix(worldTransform_[2].matWorld);
+			//Camera::worldViewProjectionMatrixFanc(worldTransform_[2].matWorld);
 
 		sprite[1]->TransferMatrix(worldTransform_[2].matWorld);
 
