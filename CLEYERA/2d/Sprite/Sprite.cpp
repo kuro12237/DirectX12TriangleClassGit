@@ -13,21 +13,26 @@ Sprite::~Sprite()
 void Sprite::Initialize(Vector4 pos, WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode)
 {
 	centerPos_ = pos;
-
+	worldTransform_ = worldTransform;
+	tex_ = texResource;
+	const int TriangleNumVertex = 3;
+	const int BoxNumVertex = 6;
 	switch (mode)
 	{
 	case Triangle:
 
-		const int NumVertex = 3;
+	
 		mode_ = mode;
-		resource_ = CreateResource(NumVertex);
-		worldTransform_ = worldTransform;
-		tex_ = texResource;
-
+		resource_ = CreateResource(TriangleNumVertex);
+	
 		break;
 
+	case Box:
 
-
+		resource_ = CreateResource(BoxNumVertex);
+		mode_ = mode;
+		
+		break;
 	}
 
 
@@ -45,31 +50,39 @@ void Sprite::SetTexProperty(texResourceProperty NewTex)
 
 void Sprite::Draw()
 {
+	VertexData* vertexData = nullptr;
+	Vector4* MaterialData = nullptr;
+	Matrix4x4* wvpData = nullptr;
+
+
+	const int TriangleNum = 3;
+	const int BoxNum = 6;
+
 	switch (mode_)
 	{
 	case Triangle:
-
-
-		VertexData* vertexData = nullptr;
-		//Vector4* vertexData = nullptr;
-		Vector4* MaterialData = nullptr;
-		Matrix4x4* wvpData = nullptr;
 		//書き込むためのアドレスを取得
 		resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
-		vertexData[0].position = { centerPos_.x-size_, centerPos_.y - size_,
-			 centerPos_.z,  centerPos_.w}; //{ centerPos_.x-size_,centerPos_.y-size_,centerPos_.z,centerPos_.w };
+		vertexData[0].position = { 
+			centerPos_.x-size_, centerPos_.y - size_,
+			centerPos_.z,  centerPos_.w
+		}; 
 
 		vertexData[0].texcoord = { 0.0f,1.0f };
 		////上
-		vertexData[1].position = { centerPos_.x , centerPos_.y + size_,
-			 centerPos_.z, centerPos_.w };//{ centerPos_.x ,centerPos_.y + size_,centerPos_.z,centerPos_.w };
+		vertexData[1].position = { 
+			centerPos_.x , centerPos_.y + size_,
+			 centerPos_.z, centerPos_.w 
+		};
 		vertexData[1].texcoord = { 0.5f,0.0f };
 		////右
-		vertexData[2].position = { centerPos_.x + size_, centerPos_.y - size_,
-			 centerPos_.z, centerPos_.w };//{ centerPos_.x + size_,centerPos_.y - size_,centerPos_.z,centerPos_.w };
+		vertexData[2].position = {
+			centerPos_.x + size_, centerPos_.y - size_,
+			centerPos_.z, centerPos_.w 
+		};
 		vertexData[2].texcoord = { 1.0f,1.0f };
 
 		//マテリアル
@@ -80,12 +93,65 @@ void Sprite::Draw()
 
 		*wvpData = worldTransform_.matWorld;
 
-		CommandCall();
+		CommandCall(TriangleNum);
 		break;
 
+	case Box:
 
-	//case Box:
-		//break;
+		//書き込むためのアドレスを取得
+		resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
+		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
+		///一枚目
+		//←↓
+		vertexData[0].position = {
+			centerPos_.x - size_, centerPos_.y - size_,
+			centerPos_.z,  centerPos_.w
+		};
+		vertexData[0].texcoord = { 0.0f,1.0f };
+		//←↑
+		vertexData[1].position = { 
+			centerPos_.x- size_ , centerPos_.y + size_,
+		    centerPos_.z, centerPos_.w 
+		};
+		vertexData[1].texcoord = { 0.0f,0.0f };
+		//→↓
+		vertexData[2].position = { 
+			centerPos_.x +size_, centerPos_.y - size_,
+			centerPos_.z, centerPos_.w 
+		};
+		vertexData[2].texcoord = { 1.0f,1.0f };
+		///二枚目
+		//←↑
+		vertexData[3].position = { 
+			centerPos_.x - size_, centerPos_.y + size_,
+			centerPos_.z, centerPos_.w 
+		};
+		vertexData[3].texcoord = { 0.0f,0.0f };
+		//→↑
+		vertexData[4].position = {
+			centerPos_.x + size_, centerPos_.y + size_,
+			centerPos_.z, centerPos_.w
+		};
+		vertexData[4].texcoord = { 1.0f,0.0f };
+		//→↑
+		vertexData[5].position = {
+			centerPos_.x + size_, centerPos_.y - size_,
+			centerPos_.z, centerPos_.w
+		};
+		vertexData[5].texcoord = { 1.0f,1.0f };
+
+
+
+		//マテリアル
+
+		*MaterialData = color_;
+
+		* wvpData = worldTransform_.matWorld;
+
+		CommandCall(BoxNum);
+
+		break;
 
 	}
 
@@ -103,7 +169,7 @@ void Sprite::Releace(ID3D12Resource* resource)
 	resource->Release();
 }
 
-void Sprite::CommandCall()
+void Sprite::CommandCall(const int Num)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().sprite;
@@ -119,19 +185,19 @@ void Sprite::CommandCall()
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+	//wvp用のCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
+
 	//マテリアルCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-
-	//wvp用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 
 	//
 	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 
 
 	//描画(DrawCall/ドローコール)。
-	commands.List->DrawInstanced(3, 1, 0, 0);
+	commands.List->DrawInstanced(Num, 1, 0, 0);
 
 }
 
@@ -140,7 +206,7 @@ ResourcePeroperty Sprite::CreateResource(const int NumVertex)
 {
 	 ResourcePeroperty result;
 	
-	 result.Vertex = CreateBufferResource(sizeof(VertexData) * 3);
+	 result.Vertex = CreateBufferResource(sizeof(VertexData) * NumVertex);
 	 result.Material = CreateBufferResource(sizeof(Vector4));
 	 result.wvpResource = CreateBufferResource(sizeof(Matrix4x4));
 	 result.BufferView = CreateBufferView(sizeof(VertexData) * NumVertex, result.Vertex, NumVertex);
@@ -181,7 +247,7 @@ ID3D12Resource* Sprite::CreateBufferResource(size_t sizeInbyte)
 }
 D3D12_VERTEX_BUFFER_VIEW Sprite::CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource,const int size)
 {
-	D3D12_VERTEX_BUFFER_VIEW resultBufferView;
+	D3D12_VERTEX_BUFFER_VIEW resultBufferView = {};
 
 	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 

@@ -28,7 +28,7 @@ public:
 	void Release();
 private:
 
-	 void CommandCall();
+	 void CommandCall(const int Num);
 
 	 static void Releace(ID3D12Resource *resource);
 

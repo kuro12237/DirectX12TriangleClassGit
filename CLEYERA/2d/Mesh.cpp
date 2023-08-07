@@ -33,7 +33,7 @@ void Mesh::TransferMatrix(Matrix4x4 m)
 
 ResourcePeroperty Mesh::CreateResource()
 {
-	ResourcePeroperty result;
+	ResourcePeroperty result = {};
 	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
 
 	result.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
@@ -119,7 +119,7 @@ ID3D12Resource* Mesh::CreateBufferResource(ID3D12Device* device, size_t sizeInby
 
 D3D12_VERTEX_BUFFER_VIEW Mesh::CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource,int size)
 {
-	D3D12_VERTEX_BUFFER_VIEW resultBufferView;
+	D3D12_VERTEX_BUFFER_VIEW resultBufferView = {};
 
 	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 

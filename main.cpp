@@ -26,9 +26,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	texResourceProperty tex;
 	tex = TexManager::LoadTexture("Resource/Enemy.png");
 
-	Sprite* sprite = new Sprite();
-	sprite->Initialize({ 0,0,0,1 },worldTransform_[2], tex, Triangle);
-
+	Sprite* sprite[2];
+		sprite[0] = new Sprite();
+		sprite[1] = new Sprite();
+	sprite[0]->Initialize({0,0,0,1}, worldTransform_[2], tex, Triangle);
+	sprite[1]->Initialize({ 0,0,0,1 }, worldTransform_[2], tex, Box);
 
 	while (msg.message != WM_QUIT)
 	{
@@ -62,17 +64,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		mesh[1]->TransferMatrix(worldTransform_[1].matWorld);
 
+
 		worldTransform_[2].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[2].scale_, worldTransform_[2].rotate_, worldTransform_[2].translation_);
 
-		worldTransform_[2].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[2].matWorld);
+		worldTransform_[2].matWorld =
+			Camera::worldOthographicMatrix(worldTransform_[2].matWorld);
+			//Camera::worldViewProjectionMatrixFanc(worldTransform_[2].matWorld);
 
-		sprite->TransferMatrix(worldTransform_[2].matWorld);
+		sprite[1]->TransferMatrix(worldTransform_[2].matWorld);
+
+
 
 		for (int i = 0; i < 2; i++)
 		{
 			mesh[i]->Draw();
 		}
-		sprite->Draw();
+		//sprite[0]->Draw();
+		sprite[1]->Draw();
 	
 		Cleyera::EndFlame();
 
@@ -83,7 +91,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 
 	tex = TexManager::Release(tex);
-	sprite->Release();
+	sprite[0]->Release();
+	sprite[1]->Release();
+
 
 	Cleyera::Finalize();
 

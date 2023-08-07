@@ -6,6 +6,12 @@
 #include"WorldTransform.h"
 #include"VectorTransform.h"
 
+enum CameraMode
+{
+	Orthographic,
+	PerspectiveFov
+};
+
 class Camera
 {
 public:
@@ -20,9 +26,11 @@ public:
 
 	static void SetPosition(Transform Transform);
 
-	static void Update(Transform Transform);
+	//static void Update(Transform Transform);
 
 	static Matrix4x4 worldViewProjectionMatrixFanc(Matrix4x4 matrix);
+
+	static Matrix4x4 worldOthographicMatrix(Matrix4x4 matrix);
 
 
 
