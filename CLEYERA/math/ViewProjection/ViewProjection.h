@@ -6,6 +6,7 @@ struct  ViewProjection
 	Matrix4x4 matProjection;
 	Matrix4x4 viewMatrix;
 
+	Matrix4x4 OthographicMatrix;
 	Vector3 scale = { 1,1,1 };
 	Vector3 translate;
 	Vector3 rotate;

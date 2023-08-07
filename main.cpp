@@ -92,10 +92,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			worldTransform_[2].matWorld.m[3][1],
 			worldTransform_[2].matWorld.m[3][2]);
 		ImGui::SliderFloat3("spriteTrans", &worldTransform_[2].translation_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("spriteRotate", &worldTransform_[2].rotate_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("spriteScale", &worldTransform_[2].scale_.x, -2.0f, 2.0f);
 		ImGui::End();
 
 		ImGui::Begin("Camera");
-		ImGui::SliderFloat3("Camera", &CameraTransform.translate.x, -100.0f, 100.0f);
+		ImGui::SliderFloat3("Camera", &CameraTransform.translate.x, -1.0f, 1.0f);
 		ImGui::End();
 		Camera::SetPosition(CameraTransform);
 

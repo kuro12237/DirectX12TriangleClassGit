@@ -126,7 +126,7 @@ public:
 	/// <param name="right"></param>
 	/// <param name="bottom"></param>
 	/// <returns></returns>
-	static Matrix3x3 MakeOrthographicMatrix(float left, float top, float right, float bottom);
+	//static Matrix3x3 MakeOrthographicMatrix(float left, float top, float right, float bottom);
 
 	/// <summary>
 	/// 3x3ビューポート行列

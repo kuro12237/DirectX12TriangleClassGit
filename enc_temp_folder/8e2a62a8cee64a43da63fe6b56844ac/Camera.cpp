@@ -91,7 +91,12 @@ Matrix4x4 Camera::worldOthographicMatrix(Matrix4x4 matrix)
 		0, 0, 1280.0f, 720.0f, 0.0f, 100.0f
 	);
 
-
+	//	0.0f, 0.0f,
+	//	float(WinApp::GetkClinentWidth()),
+	//	float(WinApp::GetkClinentHeight()),
+	//	0.0f,
+	//	100.0f
+	//);
 	
 
 	Matrix4x4 worldViewProjectionMatrix =
