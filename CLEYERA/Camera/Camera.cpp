@@ -65,6 +65,7 @@ Matrix4x4 Camera::worldViewProjectionMatrixFanc(Matrix4x4 matrix)
 		Camera::GetInstance()->transform.rotate,
 		Camera::GetInstance()->transform.translate);
 
+	
 	Matrix4x4 viewMatrix = MatrixTransform::Inverse(Matrix);
 
 	Matrix4x4 worldViewProjectionMatrix =
@@ -80,8 +81,12 @@ Matrix4x4 Camera::worldViewProjectionMatrixFanc(Matrix4x4 matrix)
 Matrix4x4 Camera::worldOthographicMatrix(Matrix4x4 matrix)
 {
 
-	Matrix4x4 viewMatrix = MatrixTransform::Identity();
-	
+	Matrix4x4 viewMatrix = MatrixTransform::MakeAffineMatrix(
+		Camera::GetInstance()->transform.Scale,
+		Camera::GetInstance()->transform.rotate,
+		Camera::GetInstance()->transform.translate);
+
+
 	Matrix4x4 OrthographicMatrix = MatrixTransform::MakeOrthographicMatrix(
 		0.0f, 0.0f,
 		float(WinApp::GetkClinentWidth()),

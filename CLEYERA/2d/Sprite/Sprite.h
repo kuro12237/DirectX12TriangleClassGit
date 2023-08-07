@@ -23,6 +23,7 @@ public:
 
 	void SetTexProperty(texResourceProperty NewTex);
 
+	Matrix4x4 GetWorldTransform() { return worldTransform_.matWorld; }
 	void Draw();
 
 	void Release();
@@ -52,7 +53,7 @@ private:
 	ResourcePeroperty CreateResource(const int NumVertex);
 
 	WorldTransform worldTransform_;
-	Vector4 centerPos_;
+	Vector4 centerPos_ = {0,0,0,1};
 
 	texResourceProperty tex_;
 	ResourcePeroperty resource_;
