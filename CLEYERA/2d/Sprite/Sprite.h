@@ -1,14 +1,21 @@
 #pragma once
 #include"Mesh.h"
-
 #include"TexManager.h"
+#include"Camera.h"
 
 enum SpriteMode
 {
    Triangle,
    Box
 };
+struct BoxPosition
+{
+	Vector4 leftTop;
+	Vector4 rightTop;
+	Vector4 leftBottom;
+	Vector4 rightBottom;
 
+};
 
 class Sprite
 {
@@ -17,7 +24,7 @@ public:
 	~Sprite();
 
 
-	void Initialize(Vector4 pos, WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode);
+	void Initialize(Vector2 leftpos,float size,WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode);
 
 	void TransferMatrix(Matrix4x4 m);
 
@@ -32,6 +39,7 @@ private:
 	 void CommandCall(const int Num);
 
 	 static void Releace(ID3D12Resource *resource);
+
 
 	/// <summary>
 	/// ResourceÇçÏê¨
@@ -53,12 +61,14 @@ private:
 	ResourcePeroperty CreateResource(const int NumVertex);
 
 	WorldTransform worldTransform_;
-	Vector4 centerPos_ = {0,0,0,1};
-
+	
 	texResourceProperty tex_;
 	ResourcePeroperty resource_;
 
 	Vector4 color_ = {1,1,1,1};
-	float size_ = 0.1f;
+
+	
+	BoxPosition pos_;
+
 	SpriteMode mode_;
 };

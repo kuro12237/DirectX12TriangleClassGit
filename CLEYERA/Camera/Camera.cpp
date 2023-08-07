@@ -40,9 +40,6 @@ void Camera::Initialize()
 			Camera::GetInstance()->viewProjection.nearClip,
 			Camera::GetInstance()->viewProjection.farClip
 		);
-
-	Camera::GetInstance()->viewProjection.OthographicMatrix =
-		MatrixTransform::MakeOrthographicMatrix(0, 0, float(WinApp::GetkClinentWidth()), float(WinApp::GetkClinentHeight()), 0.0f, 100.0f);
 }
 
 void Camera::Finalize()
@@ -85,19 +82,14 @@ Matrix4x4 Camera::worldOthographicMatrix(Matrix4x4 matrix)
 {
 
 	Matrix4x4 viewMatrix = MatrixTransform::Identity();
-	
-	
 	Matrix4x4 OrthographicMatrix = MatrixTransform::MakeOrthographicMatrix(
-		0, 0, 1280.0f, 720.0f, 0.0f, 100.0f
+		0, 0, float(WinApp::GetkClinentWidth()),float( WinApp::GetkClinentHeight()), 0.0f, 100.0f
 	);
-
-
-	
 
 	Matrix4x4 worldViewProjectionMatrix =
 		MatrixTransform::Multiply(matrix,
 			MatrixTransform::Multiply(viewMatrix,
-	     OrthographicMatrix));
+				OrthographicMatrix));
 
 	return worldViewProjectionMatrix;
 

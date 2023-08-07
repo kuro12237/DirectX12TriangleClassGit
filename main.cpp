@@ -29,8 +29,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Sprite* sprite[2];
 		sprite[0] = new Sprite();
 		sprite[1] = new Sprite();
-	sprite[0]->Initialize({0,0,0,1}, worldTransform_[2], tex, Triangle);
-	sprite[1]->Initialize({ 0,0,0,1 }, worldTransform_[2], tex, Box);
+
+		Vector2 pos = {0.0f,0.0f};
+	sprite[0]->Initialize(pos,320.0f,worldTransform_[2], tex, Triangle);
+	sprite[1]->Initialize(pos, 320.0f,worldTransform_[2], tex, Box);
 
 	while (msg.message != WM_QUIT)
 	{
@@ -59,12 +61,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		///«Sprite
 		worldTransform_[2].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[2].scale_, worldTransform_[2].rotate_, worldTransform_[2].translation_);
 
-		worldTransform_[2].matWorld =
-			Camera::worldOthographicMatrix(worldTransform_[2].matWorld);
-			//Camera::worldViewProjectionMatrixFanc(worldTransform_[2].matWorld);
-
 		sprite[1]->TransferMatrix(worldTransform_[2].matWorld);
 
+		//sprite[0]->TransferMatrix(worldTransform_[2].matWorld);
 
 
 		for (int i = 0; i < 2; i++)
@@ -91,7 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			worldTransform_[2].matWorld.m[3][0],
 			worldTransform_[2].matWorld.m[3][1],
 			worldTransform_[2].matWorld.m[3][2]);
-		ImGui::SliderFloat3("spriteTrans", &worldTransform_[2].translation_.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("spriteTrans", &worldTransform_[2].translation_.x, -1000.0f, 1000.0f);
 		ImGui::SliderFloat3("spriteRotate", &worldTransform_[2].rotate_.x, -1.0f, 1.0f);
 		ImGui::SliderFloat3("spriteScale", &worldTransform_[2].scale_.x, -2.0f, 2.0f);
 		ImGui::End();

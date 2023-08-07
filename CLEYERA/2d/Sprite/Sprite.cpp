@@ -10,13 +10,18 @@ Sprite::~Sprite()
 
 
 
-void Sprite::Initialize(Vector4 pos, WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode)
+void Sprite::Initialize(Vector2 leftpos, float size,WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode)
 {
-	centerPos_ = pos;
 	worldTransform_ = worldTransform;
 	tex_ = texResource;
 	const int TriangleNumVertex = 3;
 	const int BoxNumVertex = 6;
+
+	pos_.leftTop = { leftpos.x,leftpos.y,0.0f,1.0f };
+	pos_.rightTop = { leftpos.x + size,leftpos.y,0.0f,1.0f };
+	pos_.leftBottom = { leftpos.x,leftpos.y + size,0.0f,1.0f };
+	pos_.rightBottom = { leftpos.x + size,leftpos.y + size,0.0f,1.0f };
+
 	switch (mode)
 	{
 	case Triangle:
@@ -66,23 +71,14 @@ void Sprite::Draw()
 		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
-		vertexData[0].position = { 
-			centerPos_.x-size_, centerPos_.y - size_,
-			centerPos_.z,  centerPos_.w
-		}; 
+		vertexData[0].position = { pos_.leftBottom};
 
 		vertexData[0].texcoord = { 0.0f,1.0f };
 		////上
-		vertexData[1].position = { 
-			centerPos_.x , centerPos_.y + size_,
-			 centerPos_.z, centerPos_.w 
-		};
-		vertexData[1].texcoord = { 0.5f,0.0f };
+		vertexData[1].position = { pos_.leftTop };
+		vertexData[1].texcoord = { 0.0f,0.0f };
 		////右
-		vertexData[2].position = {
-			centerPos_.x + size_, centerPos_.y - size_,
-			centerPos_.z, centerPos_.w 
-		};
+		vertexData[2].position = { pos_.rightBottom };
 		vertexData[2].texcoord = { 1.0f,1.0f };
 
 		//マテリアル
@@ -90,6 +86,8 @@ void Sprite::Draw()
 		*MaterialData = color_;
 
 		//行列の変換
+
+		worldTransform_.matWorld = Camera::worldOthographicMatrix(worldTransform_.matWorld);
 
 		*wvpData = worldTransform_.matWorld;
 
@@ -104,50 +102,38 @@ void Sprite::Draw()
 		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 		///一枚目
 		//←↓
-		vertexData[0].position = {
-			centerPos_.x - size_, centerPos_.y - size_,
-			centerPos_.z,  centerPos_.w
-		};
+		vertexData[0].position = { pos_.leftBottom };
+	
 		vertexData[0].texcoord = { 0.0f,1.0f };
 		//←↑
-		vertexData[1].position = { 
-			centerPos_.x- size_ , centerPos_.y + size_,
-		    centerPos_.z, centerPos_.w 
-		};
+		vertexData[1].position = { pos_.leftTop };
+	
 		vertexData[1].texcoord = { 0.0f,0.0f };
 		//→↓
-		vertexData[2].position = { 
-			centerPos_.x +size_, centerPos_.y - size_,
-			centerPos_.z, centerPos_.w 
-		};
+		vertexData[2].position = {pos_.rightBottom};
+
 		vertexData[2].texcoord = { 1.0f,1.0f };
 		///二枚目
 		//←↑
-		vertexData[3].position = { 
-			centerPos_.x - size_, centerPos_.y + size_,
-			centerPos_.z, centerPos_.w 
-		};
+		vertexData[3].position = {pos_.leftTop};
+
 		vertexData[3].texcoord = { 0.0f,0.0f };
 		//→↑
-		vertexData[4].position = {
-			centerPos_.x + size_, centerPos_.y + size_,
-			centerPos_.z, centerPos_.w
-		};
+		vertexData[4].position = {pos_.rightTop};
+	
 		vertexData[4].texcoord = { 1.0f,0.0f };
 		//→↑
-		vertexData[5].position = {
-			centerPos_.x + size_, centerPos_.y - size_,
-			centerPos_.z, centerPos_.w
-		};
+		vertexData[5].position = {pos_.rightBottom};
+	
 		vertexData[5].texcoord = { 1.0f,1.0f };
-
-
 
 		//マテリアル
 
 		*MaterialData = color_;
 
-		* wvpData = worldTransform_.matWorld;
+		worldTransform_.matWorld=Camera::worldOthographicMatrix(worldTransform_.matWorld);
+
+		*wvpData = worldTransform_.matWorld;
 
 		CommandCall(BoxNum);
 
@@ -185,12 +171,12 @@ void Sprite::CommandCall(const int Num)
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+
 	//wvp用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 
 	//マテリアルCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
-
 
 	//
 	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
