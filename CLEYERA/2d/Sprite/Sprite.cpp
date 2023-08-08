@@ -145,12 +145,12 @@ void Sprite::Draw()
 
 void Sprite::Release()
 {
-	Sprite::Releace(resource_.Material);
-	Sprite::Releace(resource_.Vertex);
-	Sprite::Releace(resource_.wvpResource);
+	Sprite::Release(resource_.Material);
+	Sprite::Release(resource_.Vertex);
+	Sprite::Release(resource_.wvpResource);
 }
 
-void Sprite::Releace(ID3D12Resource* resource)
+void Sprite::Release(ID3D12Resource* resource)
 {
 	resource->Release();
 }

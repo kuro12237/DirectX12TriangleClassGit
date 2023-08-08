@@ -9,7 +9,7 @@
 #include"Mesh.h"
 #include"Camera.h"
 #include"TexManager.h"
-#include"Sprite/Sprite.h"
+#include"Sprite.h"
 class Cleyera
 {
 public:

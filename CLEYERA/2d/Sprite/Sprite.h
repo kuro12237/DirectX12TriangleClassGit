@@ -38,7 +38,7 @@ private:
 
 	 void CommandCall(const int Num);
 
-	 static void Releace(ID3D12Resource *resource);
+	 static void Release(ID3D12Resource *resource);
 
 
 	/// <summary>

@@ -67,14 +67,17 @@
     <Filter Include="ソース ファイル\CLEYERA\TexManager">
       <UniqueIdentifier>{95ec2bd7-0978-4cfb-9b1e-c0fd9770b7c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite">
+    <Filter Include="ソース ファイル\CLEYERA\2d\Sprite">
       <UniqueIdentifier>{e4a9c349-9d5d-4d3d-969f-5ce0ccbadb5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite\Box">
+    <Filter Include="ソース ファイル\CLEYERA\2d\Sprite\Box">
       <UniqueIdentifier>{b61ea5eb-a261-4b54-8949-0783e0895c2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite\Triangle">
+    <Filter Include="ソース ファイル\CLEYERA\2d\Sprite\Triangle">
       <UniqueIdentifier>{8269f397-ae5f-48ad-b571-21a7260d923a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\2d\Mesh">
+      <UniqueIdentifier>{2c5a4111-9035-47e6-977e-5748390a3a52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +132,6 @@
     <ClCompile Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.cpp">
       <Filter>ソース ファイル\CLEYERA\GraphicPipline</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\2d\Mesh.cpp">
-      <Filter>ソース ファイル\CLEYERA\2d</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Camera\Camera.cpp">
       <Filter>ソース ファイル\CLEYERA\Camera</Filter>
     </ClCompile>
@@ -145,7 +145,10 @@
       <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp">
-      <Filter>ソース ファイル\CLEYERA\2d\Sirite</Filter>
+      <Filter>ソース ファイル\CLEYERA\2d\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\2d\Mesh\Mesh.cpp">
+      <Filter>ソース ファイル\CLEYERA\2d\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +212,6 @@
     <ClInclude Include="CLEYERA\GraphicsPipeline\GraphicsPipeline.h">
       <Filter>ソース ファイル\CLEYERA\GraphicPipline</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\2d\Mesh.h">
-      <Filter>ソース ファイル\CLEYERA\2d</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Camera\Camera.h">
       <Filter>ソース ファイル\CLEYERA\Camera</Filter>
     </ClInclude>
@@ -234,7 +234,10 @@
       <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\2d\Sprite\Sprite.h">
-      <Filter>ソース ファイル\CLEYERA\2d\Sirite</Filter>
+      <Filter>ソース ファイル\CLEYERA\2d\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\2d\Mesh\Mesh.h">
+      <Filter>ソース ファイル\CLEYERA\2d\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
