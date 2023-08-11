@@ -30,9 +30,9 @@ private:
 	WorldTransform workdTransform_ = {};
 	Vector4 color_ = {1,1,1,1};
 	Vector4 centerPos_ = { 0,0,0,0 };
-	float size_ = 0;
+	float radious_ = 0;
 	texResourceProperty tex_ = {};
-	const int VertexNum = 16;
+	const int VertexNum_ = 16;
 };
 
 

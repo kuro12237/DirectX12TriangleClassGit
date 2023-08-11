@@ -2,10 +2,10 @@
 
 void StateSphere::Initialize(Vector4 pos, float size, WorldTransform worldTransform, texResourceProperty tex)
 {
-	resource_ = CreateResources::VertexDataCreateResource(VertexNum * VertexNum * 6);
+	resource_ = CreateResources::VertexDataCreateResource(VertexNum_ * VertexNum_ * 6);
 
 	centerPos_ = pos;
-	size_ = size;
+	radious_ = size;
 	workdTransform_ = worldTransform;
 	tex_ = tex;
 }
@@ -21,53 +21,53 @@ void StateSphere::Draw()
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
 
-	const float LON_EVERY = float(std::numbers::pi) * 2.0f / float(VertexNum);
+	const float LON_EVERY = float(std::numbers::pi) * 2.0f / float(VertexNum_);
 	//緯度分割1つ分の角度θd
-	const float LAT_EVERY = float(std::numbers::pi) / float(VertexNum);
+	const float LAT_EVERY = float(std::numbers::pi) / float(VertexNum_);
 	{
 		//緯度の方向に分割
-		for (int latIndex = 0; latIndex < VertexNum; ++latIndex) {
+		for (int latIndex = 0; latIndex < VertexNum_; ++latIndex) {
 			//θ
 			float lat = -float(std::numbers::pi) / 2.0f + LAT_EVERY * latIndex;
 			//経度の方向に分割しながら線を描く
-			for (int lonIndex = 0; lonIndex < VertexNum; ++lonIndex) {
-				uint32_t start = (latIndex * VertexNum + lonIndex) * 6;
+			for (int lonIndex = 0; lonIndex < VertexNum_; ++lonIndex) {
+				uint32_t start = (latIndex * VertexNum_ + lonIndex) * 6;
 
 				//texcoord専用のxy座標
-				float u = float(lonIndex) / float(VertexNum);
+				float u = float(lonIndex) / float(VertexNum_);
 				//下から0上が1になっていたので「1.0f-～」にして逆にする
-				float v = 1.0f - float(latIndex) / float(VertexNum);
+				float v = 1.0f - float(latIndex) / float(VertexNum_);
 
 				float lon = lonIndex * LON_EVERY;
 				//頂点にデータを入力する。基準点a
 				//点間の距離
-				float length = 1.0f / VertexNum;
+				float length = 1.0f / VertexNum_;
 
 #pragma region 三角形１枚目 
 				//左上(点B)が原点
 				//abc
 				//資料通りだとここは点a(左下)
-				vertexData[start].position.x = size_ * (cos(lat) * cos(lon));
-				vertexData[start].position.y = size_ * (sin(lat));
-				vertexData[start].position.z = size_ * (cos(lat) * sin(lon));
+				vertexData[start].position.x = radious_ * (cos(lat) * cos(lon));
+				vertexData[start].position.y = radious_ * (sin(lat));
+				vertexData[start].position.z = radious_ * (cos(lat) * sin(lon));
 				vertexData[start].position.w = 1.0f;
 				//分割分移動
 				vertexData[start].texcoord.x = u;
 				vertexData[start].texcoord.y = v + length;
 
 				//点b(左上)
-				vertexData[start + 1].position.x = size_ * (cos(lat + LAT_EVERY)) * cos(lon);
-				vertexData[start + 1].position.y = size_ * (sin(lat + LAT_EVERY));
-				vertexData[start + 1].position.z = size_ * (cos(lat + LAT_EVERY)) * sin(lon);
+				vertexData[start + 1].position.x = radious_ * (cos(lat + LAT_EVERY)) * cos(lon);
+				vertexData[start + 1].position.y = radious_ * (sin(lat + LAT_EVERY));
+				vertexData[start + 1].position.z = radious_ * (cos(lat + LAT_EVERY)) * sin(lon);
 				vertexData[start + 1].position.w = 1.0f;
 				vertexData[start + 1].texcoord.x = u;
 				vertexData[start + 1].texcoord.y = v;
 
 
 				//点c(右下)
-				vertexData[start + 2].position.x = size_ * (cos(lat) * cos(lon + LON_EVERY));
-				vertexData[start + 2].position.y = size_ * (sin(lat));
-				vertexData[start + 2].position.z = size_ * (cos(lat) * sin(lon + LON_EVERY));
+				vertexData[start + 2].position.x = radious_ * (cos(lat) * cos(lon + LON_EVERY));
+				vertexData[start + 2].position.y = radious_ * (sin(lat));
+				vertexData[start + 2].position.z = radious_ * (cos(lat) * sin(lon + LON_EVERY));
 				vertexData[start + 2].position.w = 1.0f;
 				vertexData[start + 2].texcoord.x = u + length;
 				vertexData[start + 2].texcoord.y = v + length;
@@ -77,17 +77,17 @@ void StateSphere::Draw()
 #pragma region 三角形２枚目
 				//bcd
 				//点d(右上)
-				vertexData[start + 3].position.x = size_ * (cos(lat + LAT_EVERY) * cos(lon + LON_EVERY));
-				vertexData[start + 3].position.y = size_ * (sin(lat + LAT_EVERY));
-				vertexData[start + 3].position.z = size_ * (cos(lat + LAT_EVERY) * sin(lon + LON_EVERY));
+				vertexData[start + 3].position.x = radious_ * (cos(lat + LAT_EVERY) * cos(lon + LON_EVERY));
+				vertexData[start + 3].position.y = radious_ * (sin(lat + LAT_EVERY));
+				vertexData[start + 3].position.z = radious_ * (cos(lat + LAT_EVERY) * sin(lon + LON_EVERY));
 				vertexData[start + 3].position.w = 1.0f;
 				vertexData[start + 3].texcoord.x = u + length;
 				vertexData[start + 3].texcoord.y = v;
 
 				//点c(右下)
-				vertexData[start + 4].position.x = size_ * (cos(lat) * cos(lon + LON_EVERY));
-				vertexData[start + 4].position.y = size_ * (sin(lat));
-				vertexData[start + 4].position.z = size_ * (cos(lat) * sin(lon + LON_EVERY));
+				vertexData[start + 4].position.x = radious_ * (cos(lat) * cos(lon + LON_EVERY));
+				vertexData[start + 4].position.y = radious_ * (sin(lat));
+				vertexData[start + 4].position.z = radious_ * (cos(lat) * sin(lon + LON_EVERY));
 				vertexData[start + 4].position.w = 1.0f;
 				vertexData[start + 4].texcoord.x = u + length;
 				vertexData[start + 4].texcoord.y = v + length;
@@ -95,9 +95,9 @@ void StateSphere::Draw()
 
 
 				//点b(左上)
-				vertexData[start + 5].position.x = size_ * (cos(lat + LAT_EVERY) * cos(lon));
-				vertexData[start + 5].position.y = size_ * (sin(lat + LAT_EVERY));
-				vertexData[start + 5].position.z = size_ * (cos(lat + LAT_EVERY) * sin(lon));
+				vertexData[start + 5].position.x = radious_ * (cos(lat + LAT_EVERY) * cos(lon));
+				vertexData[start + 5].position.y = radious_ * (sin(lat + LAT_EVERY));
+				vertexData[start + 5].position.z = radious_ * (cos(lat + LAT_EVERY) * sin(lon));
 				vertexData[start + 5].position.w = 1.0f;
 				vertexData[start + 5].texcoord.x = u;
 				vertexData[start + 5].texcoord.y = v;
@@ -160,6 +160,6 @@ void StateSphere::CommandCall()
 
 
 	//描画(DrawCall/ドローコール)。
-	commands.List->DrawInstanced(VertexNum*VertexNum*6, 1, 0, 0);
+	commands.List->DrawInstanced(VertexNum_*VertexNum_*6, 1, 0, 0);
 
 }
