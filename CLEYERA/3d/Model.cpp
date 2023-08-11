@@ -20,7 +20,6 @@ void Model::Initialize(Vector4 pos,float size, WorldTransform worldTransform, te
 		state_ = new StateSphere;
 
 		break;
-
 	}
 
 	state_->Initialize(pos, size, worldTransform, tex);
