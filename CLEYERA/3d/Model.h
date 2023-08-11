@@ -31,8 +31,7 @@ public:
 
 private:
 
-	WorldTransform worldTransform_;
-
+	
 	Shaders shape_ = { nullptr,nullptr };
 
 	IModelState* state_ = nullptr;
