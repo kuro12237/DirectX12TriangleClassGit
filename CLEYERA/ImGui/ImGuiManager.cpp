@@ -38,7 +38,7 @@ void ImGuiManager::BeginFlame(DirectXCommon* DXSetup_)
 
 void ImGuiManager::EndFlame(DirectXCommon* DXSetup_)
 {
-	ImGui::ShowDemoWindow();
+	//ImGui::ShowDemoWindow();
 
 	ImGui::Render();
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DXSetup_->GetCommands().List);

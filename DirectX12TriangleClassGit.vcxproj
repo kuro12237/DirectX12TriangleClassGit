@@ -21,7 +21,10 @@
   <ItemGroup>
     <ClCompile Include="CLEYERA\2d\Mesh.cpp" />
     <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp" />
+    <ClCompile Include="CLEYERA\3d\CreateResources\CreateResources.cpp" />
     <ClCompile Include="CLEYERA\3d\Model.cpp" />
+    <ClCompile Include="CLEYERA\3d\State\IModelState.cpp" />
+    <ClCompile Include="CLEYERA\3d\State\Sphere\StateSphere.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Camera\Camera.cpp" />
@@ -46,7 +49,10 @@
   <ItemGroup>
     <ClInclude Include="CLEYERA\2d\Mesh.h" />
     <ClInclude Include="CLEYERA\2d\Sprite\Sprite.h" />
+    <ClInclude Include="CLEYERA\3d\CreateResources\CreateResources.h" />
     <ClInclude Include="CLEYERA\3d\Model.h" />
+    <ClInclude Include="CLEYERA\3d\State\IModelState.h" />
+    <ClInclude Include="CLEYERA\3d\State\Sphere\StateSphere.h" />
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Camera\Camera.h" />

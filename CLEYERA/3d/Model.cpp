@@ -8,19 +8,41 @@ Model::~Model()
 {
 }
 
-Model* Model::GetInstance()
+void Model::Initialize(Vector4 pos,float size, WorldTransform worldTransform, texResourceProperty tex,SlectModel select)
 {
-	static Model instance;
 
-	return &instance;
+	switch (select)
+	{
+	case Cube:
+
+		break;
+	case Sphere:
+		state_ = new StateSphere;
+
+		break;
+
+	}
+
+	state_->Initialize(pos, size, worldTransform, tex);
+
 }
 
-void Model::CompileShader()
+void Model::Draw()
 {
-
-
+	state_->Draw();
 }
 
-void Model::Initialize()
+void Model::Release()
 {
+	state_->Release();
+}
+
+void Model::TransferMatrix(Matrix4x4 m)
+{
+	state_->TransferMatrix(m);
+}
+
+void Model::SetTexProperty(texResourceProperty NewTex)
+{
+	state_->SetTexProperty(NewTex);
 }

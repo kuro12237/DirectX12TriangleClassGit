@@ -2,6 +2,7 @@
 #include"Mesh.h"
 #include"TexManager.h"
 #include"Camera.h"
+#include"CreateResources/CreateResources.h"
 
 enum SpriteMode
 {

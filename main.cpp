@@ -1,5 +1,6 @@
 #include"Cleyera.h"
 
+#include"Model.h"
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	const int32_t kClientWidth = 1280;
@@ -24,7 +25,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Transform CameraTransform = { {1,1,1},{0,0,0},{0,0,-5.0f} };
 
 	texResourceProperty tex;
-	tex = TexManager::LoadTexture("Resource/Enemy.png");
+	tex = TexManager::LoadTexture("Resource/uvChecker.png");
 
 	Sprite* sprite[2];
 		sprite[0] = new Sprite();
@@ -33,6 +34,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Vector2 pos = {0.0f,0.0f};
 	sprite[0]->Initialize(pos,320.0f,worldTransform_[2], tex, Triangle);
 	sprite[1]->Initialize(pos, 320.0f,worldTransform_[2], tex, Box);
+
+	Model* model = new Model();
+
+	Vector4 SpherePos = { 0.0f,0.0f,0.0f,1.0f };
+	float size = 3.0f;
+	WorldTransform SphereWorldTransform;
+	SphereWorldTransform.Initialize();
+	SphereWorldTransform.translation_ = { 0,0,+5.0f };
+
+	model->Initialize(
+		SpherePos, 
+		size,
+		SphereWorldTransform,
+		tex,
+		Sphere);
+
 
 	while (msg.message != WM_QUIT)
 	{
@@ -70,10 +87,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			mesh[i]->Draw();
 		}
-		//sprite[0]->Draw();
+		sprite[0]->Draw();
 		sprite[1]->Draw();
-	
-		ImGui::Begin("Mesh1");
+		Matrix4x4 matrix = MatrixTransform::MakeAffineMatrix(
+			SphereWorldTransform.scale_,SphereWorldTransform.rotate_, SphereWorldTransform.translation_);
+
+		matrix = Camera::worldViewProjectionMatrixFanc(matrix);
+		model->TransferMatrix(matrix);
+
+		model->Draw();
+		ImGui::Begin("Sphere");
+		ImGui::SliderFloat3("Trans_", &SphereWorldTransform.translation_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("Rotate", &SphereWorldTransform.rotate_.x, -10.0f, 10.0f);
+		ImGui::End();
+
+		ImGui::Begin("Mesh_1");
 		ImGui::SliderFloat3("MeshTrans_1", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
 		ImGui::SliderFloat3("MeshRotate_1", &worldTransform_[0].rotate_.x, -1.0f, 1.0f);
 		ImGui::End();
@@ -96,7 +124,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ImGui::End();
 
 		ImGui::Begin("Camera");
-		ImGui::SliderFloat3("Camera", &CameraTransform.translate.x, -1.0f, 1.0f);
+		ImGui::SliderFloat3("Camera", &CameraTransform.translate.x, -50.0f, 50.0f);
 		ImGui::End();
 		Camera::SetPosition(CameraTransform);
 
@@ -112,6 +140,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	sprite[0]->Release();
 	sprite[1]->Release();
 
+	model->Release();
 
 	Cleyera::Finalize();
 
