@@ -38,6 +38,6 @@ private:
 	WorldTransform worldTransform_;
 	Vector4 CenterPos_ = {0.0f,0.0f,0.0f};
 	Vector4 Color_ = { 0.0f,0.0f,1.0f,1.0f };
-	const float size = 0.1f;
+	const float radious_ = 0.1f;
 };
 
