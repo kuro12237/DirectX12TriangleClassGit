@@ -8,10 +8,21 @@ TexManager::~TexManager()
 {
 }
 
+static DescriptorSize descripterSize_;
+
+static uint32_t indexTex;
 
 void TexManager::Initialize()
 {
 	CoInitializeEx(0, COINIT_MULTITHREADED);
+
+	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
+
+
+	descripterSize_.SRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	descripterSize_.RTV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	descripterSize_.DSV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+	indexTex = 0;
 
 }
 
@@ -54,6 +65,19 @@ void TexManager::UploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage&
 		);
 	}
 
+}
+D3D12_CPU_DESCRIPTOR_HANDLE TexManager::GetCPUDescriptorHandle(ID3D12DescriptorHeap* descripterHeap, uint32_t desiripterSize, uint32_t index)
+{
+	D3D12_CPU_DESCRIPTOR_HANDLE handleCPU = descripterHeap->GetCPUDescriptorHandleForHeapStart();
+	handleCPU.ptr += (desiripterSize * index);
+	return handleCPU;
+
+}
+D3D12_GPU_DESCRIPTOR_HANDLE TexManager::GetGPUDescriptorHandle(ID3D12DescriptorHeap* descripterHeap, uint32_t desiripterSize, uint32_t index)
+{
+	D3D12_GPU_DESCRIPTOR_HANDLE handleGPU = descripterHeap->GetGPUDescriptorHandleForHeapStart();
+	handleGPU.ptr += (desiripterSize * index);
+	return handleGPU;
 }
 D3D12_RESOURCE_DESC TexManager::SettingResource(const DirectX::TexMetadata& metadata)
 {
@@ -121,9 +145,17 @@ texResourceProperty TexManager::LoadTexture(const std::string& filePath)
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+	//«ŠÖ”‰»
+	//D3D12_CPU_DESCRIPTOR_HANDLE texSrvHandleCPU = DirectXCommon::GetInstance()->GetSrvDescripterHeap()->GetCPUDescriptorHandleForHeapStart();
+	//D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU = DirectXCommon::GetInstance()->GetSrvDescripterHeap()->GetGPUDescriptorHandleForHeapStart();
 
-	D3D12_CPU_DESCRIPTOR_HANDLE texSrvHandleCPU = DirectXCommon::GetInstance()->GetSrvDescripterHeap()->GetCPUDescriptorHandleForHeapStart();
-	D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU = DirectXCommon::GetInstance()->GetSrvDescripterHeap()->GetGPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE texSrvHandleCPU = GetCPUDescriptorHandle(
+		DirectXCommon::GetInstance()->GetSrvDescripterHeap(), descripterSize_.SRV, indexTex
+	);
+	D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU = GetGPUDescriptorHandle(
+		DirectXCommon::GetInstance()->GetSrvDescripterHeap(), descripterSize_.SRV, indexTex
+	);
+
 
 	texSrvHandleCPU.ptr += DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
@@ -131,7 +163,7 @@ texResourceProperty TexManager::LoadTexture(const std::string& filePath)
 	DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(texResource, &srvDesc, texSrvHandleCPU);
 
 
-
+	indexTex++;
 
 	texResourceProperty tex;
 

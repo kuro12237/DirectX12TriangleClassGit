@@ -3,6 +3,7 @@
 #include"Model.h"
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+
 	const int32_t kClientWidth = 1280;
 	const int32_t kClientHeight = 720;
 
@@ -10,46 +11,37 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	MSG msg{};
 
-	Mesh* mesh[2];
-	mesh[0] = new Mesh();
-	mesh[1] = new Mesh();
+	Transform camera;
+	camera.Scale = { 1,1,1 };
+	camera.translate = { 0,0,-5 };
+	camera.rotate = { 0,0,0 };
 
 	WorldTransform worldTransform_[3];
 	worldTransform_[0].Initialize();
 	worldTransform_[1].Initialize();
 	worldTransform_[2].Initialize();
 
-	mesh[0]->Initialize(worldTransform_[0], Vector4(0, 0, 0, 1),Vector4(1,1,1,1));
-	mesh[1]->Initialize(worldTransform_[1], Vector4(0, 0, 0, 1),Vector4(0,0,1,1));
+	Model* model = new Model;
 
-	Transform CameraTransform = { {1,1,1},{0,0,0},{0,0,-5.0f} };
+	Vector4 pos = { 0,0,0,1 };
+	float size = 1;
 
-	texResourceProperty tex;
-	tex = TexManager::LoadTexture("Resource/uvChecker.png");
+	texResourceProperty texUV =
+		TexManager::LoadTexture("Resource/uvChecker.png");
+	texResourceProperty texEnemy =
+		TexManager::LoadTexture("Resource/Enemy.png");
+	texResourceProperty texBlock =
+		TexManager::LoadTexture("Resource/block.png");
+	texResourceProperty texMonster =
+		TexManager::LoadTexture("Resource/monsterBall.png");
 
-	Sprite* sprite[2];
-		sprite[0] = new Sprite();
-		sprite[1] = new Sprite();
+	model->Initialize(pos, size, worldTransform_[0], texUV, Sphere);
 
-		Vector2 pos = {0.0f,0.0f};
-	sprite[0]->Initialize(pos,320.0f,worldTransform_[2], tex, Triangle);
-	sprite[1]->Initialize(pos, 320.0f,worldTransform_[2], tex, Box);
+	Sprite * sprite = new Sprite;
 
-	Model* model = new Model();
-
-	Vector4 SpherePos = { 0.0f,0.0f,0.0f,1.0f };
-	float size = 3.0f;
-	WorldTransform SphereWorldTransform;
-	SphereWorldTransform.Initialize();
-	SphereWorldTransform.translation_ = { 0,0,+5.0f };
-
-	model->Initialize(
-		SpherePos, 
-		size,
-		SphereWorldTransform,
-		tex,
-		Sphere);
-
+	sprite->Initialize({ 0,0 }, 320, worldTransform_[1], texBlock, Box);
+	
+	bool texFlag = false;
 
 	while (msg.message != WM_QUIT)
 	{
@@ -62,86 +54,64 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		
 
 
-		//«shape
-		worldTransform_[0].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[0].scale_, worldTransform_[0].rotate_, worldTransform_[0].translation_);
+		ImGui::Begin("sphere");
+		ImGui::SliderFloat3("Trans", &worldTransform_[0].translation_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[0].rotate_.x, -10.0f, 10.0f);
+		ImGui::Checkbox("tex", & texFlag);
+		ImGui::End();
 		
-		worldTransform_[0].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[0].matWorld);
-
-		mesh[0]->TransferMatrix(worldTransform_[0].matWorld);
-
-		worldTransform_[1].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[1].scale_, worldTransform_[1].rotate_, worldTransform_[1].translation_);
-
-		worldTransform_[1].matWorld = Camera::worldViewProjectionMatrixFanc(worldTransform_[1].matWorld);
-
-		mesh[1]->TransferMatrix(worldTransform_[1].matWorld);
-
-		///«Sprite
-		worldTransform_[2].matWorld = MatrixTransform::MakeAffineMatrix(worldTransform_[2].scale_, worldTransform_[2].rotate_, worldTransform_[2].translation_);
-
-		sprite[1]->TransferMatrix(worldTransform_[2].matWorld);
-
-		//sprite[0]->TransferMatrix(worldTransform_[2].matWorld);
-
-
-		for (int i = 0; i < 2; i++)
+		if (texFlag)
 		{
-			mesh[i]->Draw();
+			model->SetTexProperty(texMonster);
 		}
-		sprite[0]->Draw();
-		sprite[1]->Draw();
-		Matrix4x4 matrix = MatrixTransform::MakeAffineMatrix(
-			SphereWorldTransform.scale_,SphereWorldTransform.rotate_, SphereWorldTransform.translation_);
+		else
+		{
+			model->SetTexProperty(texUV);
+		}
 
-		matrix = Camera::worldViewProjectionMatrixFanc(matrix);
-		model->TransferMatrix(matrix);
 
+		Matrix4x4 ShereWorldMatrix = MatrixTransform::MakeAffineMatrix(
+			worldTransform_[0].scale_,
+			worldTransform_[0].rotate_,
+			worldTransform_[0].translation_);
+
+		ShereWorldMatrix = Camera::worldViewProjectionMatrixFanc(ShereWorldMatrix);
+
+		model->TransferMatrix(ShereWorldMatrix);
 		model->Draw();
-		ImGui::Begin("Sphere");
-		ImGui::SliderFloat3("Trans_", &SphereWorldTransform.translation_.x, -10.0f, 10.0f);
-		ImGui::SliderFloat3("Rotate", &SphereWorldTransform.rotate_.x, -10.0f, 10.0f);
+
+
+		ImGui::Begin("camera");
+
+		ImGui::DragFloat3("trans", &camera.translate.x, -10.0f, 10.0f);
+
 		ImGui::End();
 
-		ImGui::Begin("Mesh_1");
-		ImGui::SliderFloat3("MeshTrans_1", &worldTransform_[0].translation_.x, -1.0f, 1.0f);
-		ImGui::SliderFloat3("MeshRotate_1", &worldTransform_[0].rotate_.x, -1.0f, 1.0f);
-		ImGui::End();
-		
-		ImGui::Begin("Mesh_2");
-		ImGui::SliderFloat3("MeshTrans_2", &worldTransform_[1].translation_.x, -1.0f, 1.0f);
-		ImGui::SliderFloat3("MeshRotate_2", &worldTransform_[1].rotate_.x, -1.0f, 1.0f);
-		ImGui::End();
+		Camera::SetPosition(camera);
 
-		worldTransform_[2].matWorld = sprite[1]->GetWorldTransform();
+	
 
-		ImGui::Begin("SpriteBOX");
-		ImGui::Text("x::%f  y::%f  z::%f", 
-			worldTransform_[2].matWorld.m[3][0],
-			worldTransform_[2].matWorld.m[3][1],
-			worldTransform_[2].matWorld.m[3][2]);
-		ImGui::SliderFloat3("spriteTrans", &worldTransform_[2].translation_.x, -1000.0f, 1000.0f);
-		ImGui::SliderFloat3("spriteRotate", &worldTransform_[2].rotate_.x, -1.0f, 1.0f);
-		ImGui::SliderFloat3("spriteScale", &worldTransform_[2].scale_.x, -2.0f, 2.0f);
+		ImGui::Begin("sprite");
+		ImGui::SliderFloat3("Trans", &worldTransform_[1].translation_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[1].rotate_.x, -10.0f, 10.0f);
 		ImGui::End();
+		Matrix4x4 spriteWorldMatrix = MatrixTransform::MakeAffineMatrix(worldTransform_[1].scale_, worldTransform_[1].rotate_, worldTransform_[1].translation_);
+		sprite->TransferMatrix(spriteWorldMatrix);
 
-		ImGui::Begin("Camera");
-		ImGui::SliderFloat3("Camera", &CameraTransform.translate.x, -50.0f, 50.0f);
-		ImGui::End();
-		Camera::SetPosition(CameraTransform);
+		sprite->Draw();
 
 		Cleyera::EndFlame();
 
 	}
 
-	mesh[0]->Release();
-	mesh[1]->Release();
-	
+	texUV = TexManager::Release(texUV);
+	texBlock = TexManager::Release(texBlock);
+	texEnemy = TexManager::Release(texEnemy);
+	texMonster = TexManager::Release(texMonster);
 
-	tex = TexManager::Release(tex);
-	sprite[0]->Release();
-	sprite[1]->Release();
 
 	model->Release();
-
+	sprite->Release();
 	Cleyera::Finalize();
 
 

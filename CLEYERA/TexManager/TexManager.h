@@ -10,6 +10,13 @@ struct texResourceProperty
 
 };
 
+struct DescriptorSize 
+{
+	uint32_t SRV;
+	uint32_t RTV;
+	uint32_t DSV;
+};
+
 class TexManager
 {
 public:
@@ -19,9 +26,6 @@ public:
 	static void Initialize();
 
 	static void Finalize();
-
-
-
 
 	/// <summary>
 	/// é¿ç€Ç…égÇ§èàóù
@@ -41,6 +45,9 @@ private:
 
 	static void UploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage& mipImage);
 
+	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ID3D12DescriptorHeap* descripterHeap, uint32_t desiripterSize, uint32_t index);
+
+	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ID3D12DescriptorHeap* descripterHeap, uint32_t desiripterSize, uint32_t index);
 
 
 	/// <summary>
@@ -57,5 +64,6 @@ private:
 	static D3D12_HEAP_PROPERTIES SettingHeap();
 
 
+	
 };
 
