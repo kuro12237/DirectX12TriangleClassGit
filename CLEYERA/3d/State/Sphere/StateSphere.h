@@ -33,6 +33,7 @@ private:
 	float size_ = 0;
 	texResourceProperty tex_ = {};
 	const int VertexNum = 16;
+	Vector3 directionPos = { 0.0f,-1.0f,0.0f };
 };
 
 

@@ -56,7 +56,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		ImGui::Begin("sphere");
 		ImGui::SliderFloat3("Trans", &worldTransform_[0].translation_.x, -10.0f, 10.0f);
-		ImGui::SliderFloat3("rotate", &worldTransform_[0].rotate_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[0].rotate_.x, -2.0f, 2.0f);
 		ImGui::Checkbox("tex", & texFlag);
 		ImGui::End();
 		
@@ -93,7 +93,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		ImGui::Begin("sprite");
 		ImGui::SliderFloat3("Trans", &worldTransform_[1].translation_.x, -10.0f, 10.0f);
-		ImGui::SliderFloat3("rotate", &worldTransform_[1].rotate_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[1].rotate_.x, -2.0f, 2.0f);
 		ImGui::End();
 		Matrix4x4 spriteWorldMatrix = MatrixTransform::MakeAffineMatrix(worldTransform_[1].scale_, worldTransform_[1].rotate_, worldTransform_[1].translation_);
 		sprite->TransferMatrix(spriteWorldMatrix);

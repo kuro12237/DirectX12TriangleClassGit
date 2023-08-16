@@ -26,7 +26,8 @@ ResourcePeroperty CreateResources::VertexDataCreateResource(const int Num)
 
 	result.Vertex = CreateBufferResource(device, sizeof(VertexData) * Num);
 	result.Material = CreateBufferResource(device, sizeof(Vector4) * 3);
-	result.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
+	result.Light = CreateBufferResource(device, sizeof(LightData));
+	result.wvpResource = CreateBufferResource(device, sizeof(TransformationMatrix));
 	result.BufferView = CreateBufferView(sizeof(VertexData) * Num, result.Vertex, Num);
 
 	return result;

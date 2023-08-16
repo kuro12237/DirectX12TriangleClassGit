@@ -11,6 +11,7 @@ struct Shaders
 {
 	ShaderMode shape;
 	ShaderMode sprite;
+	ShaderMode DirectionalLight;
 
 };
 
@@ -28,7 +29,7 @@ struct PSO
 {
 	PSOProperty shape;
 	PSOProperty sprite;
-
+	PSOProperty directionalLight;
 };
 
 struct DXCProperty
@@ -95,6 +96,8 @@ private:
 	static void ShapePSO();
 
 	static void SpritePSO();
+
+	static void DirectionalLightPSO();
 
 	static void ShaderRelease(ShaderMode shader);
 

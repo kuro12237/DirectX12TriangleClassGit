@@ -14,33 +14,30 @@ void StateSphere::Draw()
 {
 	VertexData* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
-	Matrix4x4* wvpData = nullptr;
+	TransformationMatrix* MatrixData = nullptr;
+	LightData* lightData = nullptr;
 
 	//書き込むためのアドレスを取得
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
-	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
-
+	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&MatrixData));
+	resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+	
 	const float LON_EVERY = float(std::numbers::pi) * 2.0f / float(VertexNum);
-	//緯度分割1つ分の角度θd
+
 	const float LAT_EVERY = float(std::numbers::pi) / float(VertexNum);
 	{
-		//緯度の方向に分割
 		for (int latIndex = 0; latIndex < VertexNum; ++latIndex) {
 			//θ
 			float lat = -float(std::numbers::pi) / 2.0f + LAT_EVERY * latIndex;
-			//経度の方向に分割しながら線を描く
+			
 			for (int lonIndex = 0; lonIndex < VertexNum; ++lonIndex) {
 				uint32_t start = (latIndex * VertexNum + lonIndex) * 6;
 
-				//texcoord専用のxy座標
 				float u = float(lonIndex) / float(VertexNum);
-				//下から0上が1になっていたので「1.0f-～」にして逆にする
 				float v = 1.0f - float(latIndex) / float(VertexNum);
 
 				float lon = lonIndex * LON_EVERY;
-				//頂点にデータを入力する。基準点a
-				//点間の距離
 				float length = 1.0f / VertexNum;
 
 #pragma region 三角形１枚目 
@@ -54,6 +51,11 @@ void StateSphere::Draw()
 				//分割分移動
 				vertexData[start].texcoord.x = u;
 				vertexData[start].texcoord.y = v + length;
+				vertexData[start].normal.x = vertexData[start].position.x;
+				vertexData[start].normal.y = vertexData[start].position.y;
+				vertexData[start].normal.z = vertexData[start].position.z;
+
+
 
 				//点b(左上)
 				vertexData[start + 1].position.x = size_ * (cos(lat + LAT_EVERY)) * cos(lon);
@@ -62,7 +64,9 @@ void StateSphere::Draw()
 				vertexData[start + 1].position.w = 1.0f;
 				vertexData[start + 1].texcoord.x = u;
 				vertexData[start + 1].texcoord.y = v;
-
+				vertexData[start + 1].normal.x = vertexData[start + 1].position.x;
+				vertexData[start + 1].normal.y = vertexData[start + 1].position.y;
+				vertexData[start + 1].normal.z = vertexData[start + 1].position.z;
 
 				//点c(右下)
 				vertexData[start + 2].position.x = size_ * (cos(lat) * cos(lon + LON_EVERY));
@@ -71,7 +75,9 @@ void StateSphere::Draw()
 				vertexData[start + 2].position.w = 1.0f;
 				vertexData[start + 2].texcoord.x = u + length;
 				vertexData[start + 2].texcoord.y = v + length;
-
+				vertexData[start + 2].normal.x = vertexData[start + 2].position.x;
+				vertexData[start + 2].normal.y = vertexData[start + 2].position.y;
+				vertexData[start + 2].normal.z = vertexData[start + 2].position.z;
 #pragma endregion
 
 #pragma region 三角形２枚目
@@ -83,7 +89,9 @@ void StateSphere::Draw()
 				vertexData[start + 3].position.w = 1.0f;
 				vertexData[start + 3].texcoord.x = u + length;
 				vertexData[start + 3].texcoord.y = v;
-
+				vertexData[start + 3].normal.x = vertexData[start + 3].position.x;
+				vertexData[start + 3].normal.y = vertexData[start + 3].position.y;
+				vertexData[start + 3].normal.z = vertexData[start + 3].position.z;
 				//点c(右下)
 				vertexData[start + 4].position.x = size_ * (cos(lat) * cos(lon + LON_EVERY));
 				vertexData[start + 4].position.y = size_ * (sin(lat));
@@ -91,7 +99,9 @@ void StateSphere::Draw()
 				vertexData[start + 4].position.w = 1.0f;
 				vertexData[start + 4].texcoord.x = u + length;
 				vertexData[start + 4].texcoord.y = v + length;
-
+				vertexData[start + 4].normal.x = vertexData[start + 4].position.x;
+				vertexData[start + 4].normal.y = vertexData[start + 4].position.y;
+				vertexData[start + 4].normal.z = vertexData[start + 4].position.z;
 
 
 				//点b(左上)
@@ -101,11 +111,26 @@ void StateSphere::Draw()
 				vertexData[start + 5].position.w = 1.0f;
 				vertexData[start + 5].texcoord.x = u;
 				vertexData[start + 5].texcoord.y = v;
+				vertexData[start + 5].normal.x = vertexData[start + 5].position.x;
+				vertexData[start + 5].normal.y = vertexData[start + 5].position.y;
+				vertexData[start + 5].normal.z = vertexData[start + 5].position.z;
 #pragma endregion
 			}
 		}
 	}
-	*wvpData = workdTransform_.matWorld;
+	vertexData[0].normal = { 0.0f,0.0f,-1.0f };
+
+	
+	MatrixData->WVP = workdTransform_.matWorld;
+	MatrixData->world = MatrixTransform::Identity();
+	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
+	lightData->direction = directionPos;
+
+	ImGui::Begin("LightDirection");
+	ImGui::SliderFloat3("pos", &directionPos.x, -1.0f, 1.0f);
+	ImGui::End();
+
+	lightData->intensity = 1.0f;
 
 	*MaterialData = color_;
 
@@ -117,6 +142,7 @@ void StateSphere::Release()
 	CreateResources::Release(resource_.wvpResource);
 	CreateResources::Release(resource_.Material);
 	CreateResources::Release(resource_.Vertex);
+	CreateResources::Release(resource_.Light);
 }
 
 void StateSphere::TransferMatrix(Matrix4x4 m)
@@ -137,7 +163,7 @@ Matrix4x4 StateSphere::GetWorldTransform()
 void StateSphere::CommandCall()
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().sprite;
+	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().directionalLight;
 
 
 	commands.List->SetGraphicsRootSignature(PSO.rootSignature);
@@ -158,6 +184,7 @@ void StateSphere::CommandCall()
 	//
 	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 
+	commands.List->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
 
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(VertexNum*VertexNum*6, 1, 0, 0);
