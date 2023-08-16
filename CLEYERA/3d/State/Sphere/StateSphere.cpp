@@ -118,11 +118,12 @@ void StateSphere::Draw()
 			}
 		}
 	}
-	vertexData[0].normal = { 0.0f,0.0f,-1.0f };
+	//vertexData[0].normal = { 0.0f,0.0f,-1.0f };
 
 	
 	MatrixData->WVP = workdTransform_.matWorld;
 	MatrixData->world = MatrixTransform::Identity();
+
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->direction = directionPos;
 
