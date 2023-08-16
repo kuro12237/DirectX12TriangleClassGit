@@ -471,7 +471,6 @@ void GraphicsPipeline::DirectionalLightPSO()
 		DirectionalLightPSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&DirectionalLightPSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
-
 	//InputLayoutÇÃê›íË
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
