@@ -24,7 +24,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Model* model = new Model;
 
 	Vector4 pos = { 0,0,0,1 };
-	float size = 1;
+	float size = 0.5f;
 
 	texResourceProperty texUV =
 		TexManager::LoadTexture("Resource/uvChecker.png");

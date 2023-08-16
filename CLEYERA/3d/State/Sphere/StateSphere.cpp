@@ -23,6 +23,8 @@ void StateSphere::Draw()
 	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&MatrixData));
 	resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 	
+
+	//‹…‚ÌÀ•Wˆ—
 	const float LON_EVERY = float(std::numbers::pi) * 2.0f / float(VertexNum);
 
 	const float LAT_EVERY = float(std::numbers::pi) / float(VertexNum);
@@ -118,9 +120,7 @@ void StateSphere::Draw()
 			}
 		}
 	}
-	//vertexData[0].normal = { 0.0f,0.0f,-1.0f };
 
-	
 	MatrixData->WVP = workdTransform_.matWorld;
 	MatrixData->world = MatrixTransform::Identity();
 
