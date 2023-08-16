@@ -472,9 +472,6 @@ void GraphicsPipeline::DirectionalLightPSO()
 	assert(SUCCEEDED(hr));
 
 
-
-
-
 	//InputLayout‚Ìİ’è
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
@@ -492,7 +489,10 @@ void GraphicsPipeline::DirectionalLightPSO()
 	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-
+	//MORMAL‚Å‹N‚«‚½ƒoƒOFormat‚ÌŒ^‚ğŠÔˆá‚¦‚Ä‚¢‚½
+	//Vector3‚Ìê‡=DXGI_FORMAT_R32G32B32_FLOAT
+	//Vector2‚Ìê‡=DXGI_FORMAT_R32G32_FLOAT
+	//RGBA‚Å‚ª‘‚¦‚Ä‚¢‚­
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
