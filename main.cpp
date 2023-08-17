@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ImGui::Begin("sphere");
 		ImGui::SliderFloat3("Trans", &worldTransform_[0].translation_.x, -10.0f, 10.0f);
 		ImGui::SliderFloat3("rotate", &worldTransform_[0].rotate_.x, -2.0f, 2.0f);
-		ImGui::Checkbox("tex", & texFlag);
+		ImGui::Checkbox("texChange", & texFlag);
 		ImGui::End();
 		
 		if (texFlag)
