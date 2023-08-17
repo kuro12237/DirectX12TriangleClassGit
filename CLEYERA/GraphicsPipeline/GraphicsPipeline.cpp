@@ -122,10 +122,7 @@ void GraphicsPipeline::dxcCreate()
 
 void GraphicsPipeline::DfIncludeHandlerSetting()
 {
-	
 	GraphicsPipeline::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&GraphicsPipeline::GetInstance()->includeHandler);
-
-
 }
 
 void GraphicsPipeline::ShapePSO()
