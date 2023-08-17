@@ -37,13 +37,10 @@ public:
 	/// <param name="msg"></param>
 	static void Msg(MSG& msg);
 
-
 	/// <summary>
 	/// Close
 	/// </summary>
 	static void Finalize();
-
-
 
 
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
