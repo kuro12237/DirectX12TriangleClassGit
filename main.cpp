@@ -3,6 +3,8 @@
 #include"Model.h"
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	const uint32_t kClientWidth = 720;
+	const uint32_t kClientHeight = 1280;
 
 	Cleyera::Initialize();
 
