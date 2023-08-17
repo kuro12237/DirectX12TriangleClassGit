@@ -120,6 +120,7 @@ void StateSphere::Draw()
 			}
 		}
 	}
+	vertexData[0].normal = { 0.0f,0.0f,0.5f };
 
 	MatrixData->WVP = workdTransform_.matWorld;
 	MatrixData->world = MatrixTransform::Identity();
@@ -164,7 +165,7 @@ Matrix4x4 StateSphere::GetWorldTransform()
 void StateSphere::CommandCall()
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().directionalLight;
+	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().indirectLight;
 
 
 	commands.List->SetGraphicsRootSignature(PSO.rootSignature);

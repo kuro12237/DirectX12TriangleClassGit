@@ -51,12 +51,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 
 		Cleyera::BeginFlame(kClientWidth, kClientHeight);
-		
-
-
 		ImGui::Begin("sphere");
 		ImGui::SliderFloat3("Trans", &worldTransform_[0].translation_.x, -10.0f, 10.0f);
-		ImGui::SliderFloat3("rotate", &worldTransform_[0].rotate_.x, -2.0f, 2.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[0].rotate_.x, -5.0f, 5.0f);
 		ImGui::Checkbox("texChange", & texFlag);
 		ImGui::End();
 		

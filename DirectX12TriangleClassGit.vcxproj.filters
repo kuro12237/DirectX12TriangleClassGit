@@ -276,6 +276,9 @@
     <None Include="Shader\DirectionalLightObject.hlsli">
       <Filter>ソース ファイル\Shader</Filter>
     </None>
+    <None Include="Shader\IndirectLightObject.hlsli">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\ShapeObject3d.PS.hlsl">
@@ -294,6 +297,12 @@
       <Filter>ソース ファイル\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Shader\DirectionalLightObject.VS.hlsl">
+      <Filter>ソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\IndirectLightObject.VS.hlsl">
+      <Filter>ソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\IndirectLightObject.PS.hlsl">
       <Filter>ソース ファイル\Shader</Filter>
     </FxCompile>
   </ItemGroup>
