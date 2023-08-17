@@ -471,16 +471,15 @@ ID3D12Resource* DirectXCommon::CreateDepthStencilTextureResource(ID3D12Device* d
 
 	//Resourceの作成
 	ID3D12Resource* resource = nullptr;
-	HRESULT hr = device->CreateCommittedResource(
+	 device->CreateCommittedResource(
 		&heapProperties,					//Heapの設定 
 		D3D12_HEAP_FLAG_NONE,				//Heapの特殊な設定。特になし。
 		&resourceDesc,						//Resourceの設定
 		D3D12_RESOURCE_STATE_DEPTH_WRITE,	//深度値を書き込む状態にしておく
 		&depthClearValue,					//Clear最適値
 		IID_PPV_ARGS(&resource));			//作成するResourceポインタへのポインタ
-	assert(SUCCEEDED(hr));
-
-
+	
+	
 	return resource;
 
 

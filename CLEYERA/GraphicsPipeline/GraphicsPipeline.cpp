@@ -122,9 +122,8 @@ void GraphicsPipeline::dxcCreate()
 
 void GraphicsPipeline::DfIncludeHandlerSetting()
 {
-	HRESULT hr = 
-		GraphicsPipeline::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&GraphicsPipeline::GetInstance()->includeHandler);
-	assert(SUCCEEDED(hr));
+	
+	GraphicsPipeline::GetInstance()->dxc.Utils->CreateDefaultIncludeHandler(&GraphicsPipeline::GetInstance()->includeHandler);
 
 
 }
