@@ -1,4 +1,4 @@
-#include "Sprite.h"
+ï»¿#include "Sprite.h"
 
 Sprite::Sprite()
 {
@@ -65,8 +65,9 @@ void Sprite::Draw()
 
 	switch (mode_)
 	{
+
 	case Triangle:
-		//‘‚«‚Ş‚½‚ß‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		//æ›¸ãè¾¼ã‚€ãŸã‚ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
@@ -74,18 +75,18 @@ void Sprite::Draw()
 		vertexData[0].position = { pos_.leftBottom};
 
 		vertexData[0].texcoord = { 0.0f,1.0f };
-		////ã
+		////ä¸Š
 		vertexData[1].position = { pos_.leftTop };
 		vertexData[1].texcoord = { 0.0f,0.0f };
-		////‰E
+		////å³
 		vertexData[2].position = { pos_.rightBottom };
 		vertexData[2].texcoord = { 1.0f,1.0f };
 
-		//ƒ}ƒeƒŠƒAƒ‹
+		//ãƒãƒ†ãƒªã‚¢ãƒ«
 
 		*MaterialData = color_;
 
-		//s—ñ‚Ì•ÏŠ·
+		//è¡Œåˆ—ã®å¤‰æ›
 
 		worldTransform_.matWorld = Camera::worldOthographicMatrix(worldTransform_.matWorld);
 
@@ -96,38 +97,38 @@ void Sprite::Draw()
 
 	case Box:
 
-		//‘‚«‚Ş‚½‚ß‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		//æ›¸ãè¾¼ã‚€ãŸã‚ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
-		///ˆê–‡–Ú
-		//©«
+		///ä¸€æšç›®
+		//â†â†“
 		vertexData[0].position = { pos_.leftBottom };
 	
 		vertexData[0].texcoord = { 0.0f,1.0f };
-		//©ª
+		//â†â†‘
 		vertexData[1].position = { pos_.leftTop };
 	
 		vertexData[1].texcoord = { 0.0f,0.0f };
-		//¨«
+		//â†’â†“
 		vertexData[2].position = {pos_.rightBottom};
 
 		vertexData[2].texcoord = { 1.0f,1.0f };
-		///“ñ–‡–Ú
-		//©ª
+		///äºŒæšç›®
+		//â†â†‘
 		vertexData[3].position = {pos_.leftTop};
 
 		vertexData[3].texcoord = { 0.0f,0.0f };
-		//¨ª
+		//â†’â†‘
 		vertexData[4].position = {pos_.rightTop};
 	
 		vertexData[4].texcoord = { 1.0f,0.0f };
-		//¨ª
+		//â†’â†‘
 		vertexData[5].position = {pos_.rightBottom};
 	
 		vertexData[5].texcoord = { 1.0f,1.0f };
 
-		//ƒ}ƒeƒŠƒAƒ‹
+		//ãƒãƒ†ãƒªã‚¢ãƒ«
 
 		*MaterialData = color_;
 
@@ -168,21 +169,21 @@ void Sprite::CommandCall(const int Num)
 
 	commands.List->IASetVertexBuffers(0, 1, &resource_.BufferView);
 
-	//Œ`ó‚ğİ’èBPSO‚Éİ’è‚µ‚Ä‚¢‚é‚à‚Ì‚Æ‚Í‚Ü‚½•ÊB“¯‚¶‚à‚Ì‚ğİ’è‚·‚é‚Æl‚¦‚Ä‚¨‚¯‚Î—Ç‚¢
+	//å½¢çŠ¶ã‚’è¨­å®šã€‚PSOã«è¨­å®šã—ã¦ã„ã‚‹ã‚‚ã®ã¨ã¯ã¾ãŸåˆ¥ã€‚åŒã˜ã‚‚ã®ã‚’è¨­å®šã™ã‚‹ã¨è€ƒãˆã¦ãŠã‘ã°è‰¯ã„
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 
-	//wvp—p‚ÌCBuffer‚ÌêŠ‚ğİ’è
+	//wvpç”¨ã®CBufferã®å ´æ‰€ã‚’è¨­å®š
 	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 
-	//ƒ}ƒeƒŠƒAƒ‹CBuffer‚ÌêŠ‚ğİ’è
+	//ãƒãƒ†ãƒªã‚¢ãƒ«CBufferã®å ´æ‰€ã‚’è¨­å®š
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	//
 	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 
 
-	//•`‰æ(DrawCall/ƒhƒ[ƒR[ƒ‹)B
+	//æç”»(DrawCall/ãƒ‰ãƒ­ãƒ¼ã‚³ãƒ¼ãƒ«)ã€‚
 	commands.List->DrawInstanced(Num, 1, 0, 0);
 
 }
@@ -204,25 +205,25 @@ ID3D12Resource* Sprite::CreateBufferResource(size_t sizeInbyte)
 	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
 
 	ID3D12Resource* RssultResource;
-	//’¸“_ƒŠƒ\[ƒX—p‚Ìƒq[ƒv‚Ìİ’è
+	//é ‚ç‚¹ãƒªã‚½ãƒ¼ã‚¹ç”¨ã®ãƒ’ãƒ¼ãƒ—ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeap‚ğg‚¤
+	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapã‚’ä½¿ã†
 
-	//’¸“_ƒŠƒ\[ƒX‚Ìİ’è
+	//é ‚ç‚¹ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š
 	D3D12_RESOURCE_DESC ResourceDesc{};
 
-	//ƒoƒbƒtƒ@ƒŠƒ\[ƒXBƒeƒNƒXƒ`ƒƒ‚Ìê‡‚Í‚Ü‚½•Ê‚Ìİ’è‚ğ‚·‚é
+	//ãƒãƒƒãƒ•ã‚¡ãƒªã‚½ãƒ¼ã‚¹ã€‚ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å ´åˆã¯ã¾ãŸåˆ¥ã®è¨­å®šã‚’ã™ã‚‹
 	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	ResourceDesc.Width = sizeInbyte; //ƒŠƒ\[ƒX‚ÌƒTƒCƒYB¡‰ñ‚Ívector4‚ğ3’¸“_•ª
+	ResourceDesc.Width = sizeInbyte; //ãƒªã‚½ãƒ¼ã‚¹ã®ã‚µã‚¤ã‚ºã€‚ä»Šå›ã¯vector4ã‚’3é ‚ç‚¹åˆ†
 
-	//ƒoƒbƒtƒ@‚Ìê‡‚Í‚±‚ê‚ç‚Í1‚É‚·‚éŒˆ‚Ü‚è
+	//ãƒãƒƒãƒ•ã‚¡ã®å ´åˆã¯ã“ã‚Œã‚‰ã¯1ã«ã™ã‚‹æ±ºã¾ã‚Š
 	ResourceDesc.Height = 1;
 	ResourceDesc.DepthOrArraySize = 1;
 	ResourceDesc.MipLevels = 1;
 	ResourceDesc.SampleDesc.Count = 1;
 
-	//ƒoƒbƒtƒ@‚Ìê‡‚Í‚±‚ê‚É‚·‚éŒˆ‚Ü‚è
+	//ãƒãƒƒãƒ•ã‚¡ã®å ´åˆã¯ã“ã‚Œã«ã™ã‚‹æ±ºã¾ã‚Š
 	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 	HRESULT hr;
 	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
@@ -237,10 +238,10 @@ D3D12_VERTEX_BUFFER_VIEW Sprite::CreateBufferView(size_t sizeInbyte, ID3D12Resou
 
 	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 
-	//g—p‚·‚éƒŠƒ\[ƒX‚ÌƒTƒCƒY‚Í’¸“_3‚Â•ª‚ÌƒTƒCƒY
+	//ä½¿ç”¨ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã®ã‚µã‚¤ã‚ºã¯é ‚ç‚¹3ã¤åˆ†ã®ã‚µã‚¤ã‚º
 	resultBufferView.SizeInBytes = UINT(sizeInbyte);
 
-	//1’¸“_‚ ‚½‚è‚ÌƒTƒCƒY
+	//1é ‚ç‚¹ã‚ãŸã‚Šã®ã‚µã‚¤ã‚º
 	resultBufferView.StrideInBytes = UINT(sizeInbyte / size);
 	return resultBufferView;
 }

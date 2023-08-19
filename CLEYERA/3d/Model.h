@@ -1,14 +1,16 @@
-#pragma once
+﻿#pragma once
 #include"WorldTransform.h"
 #include"GraphicsPipeline.h"
 #include"TexManager.h"
 #include"State/Sphere/StateSphere.h"
 
 #include"State/IModelState.h"
+
 enum SlectModel
 {
 	Cube,
-	Sphere
+	Sphere,
+
 };
 
 class Model

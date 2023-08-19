@@ -21,6 +21,7 @@ void Model::Initialize(Vector4 pos,float size, WorldTransform worldTransform, te
 
 		break;
 
+
 	}
 
 	state_->Initialize(pos, size, worldTransform, tex);

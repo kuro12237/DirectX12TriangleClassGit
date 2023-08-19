@@ -176,7 +176,6 @@ void StateSphere::CommandCall()
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-
 	//wvp用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 

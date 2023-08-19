@@ -15,11 +15,11 @@ public:
 
 	void Release()override;
 
-	virtual void TransferMatrix(Matrix4x4 m)override;
+    void TransferMatrix(Matrix4x4 m)override;
 
-	virtual void SetTexProperty(texResourceProperty NewTex)override;
+    void SetTexProperty(texResourceProperty NewTex)override;
 
-	virtual Matrix4x4 GetWorldTransform()override;
+	Matrix4x4 GetWorldTransform()override;
 
 private:
 

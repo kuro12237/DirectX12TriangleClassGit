@@ -23,6 +23,7 @@
     <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp" />
     <ClCompile Include="CLEYERA\3d\CreateResources\CreateResources.cpp" />
     <ClCompile Include="CLEYERA\3d\Model.cpp" />
+    <ClCompile Include="CLEYERA\3d\State\Box\StateBox.cpp" />
     <ClCompile Include="CLEYERA\3d\State\IModelState.cpp" />
     <ClCompile Include="CLEYERA\3d\State\Sphere\StateSphere.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />

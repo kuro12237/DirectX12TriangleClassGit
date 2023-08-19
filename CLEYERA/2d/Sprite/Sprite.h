@@ -8,6 +8,7 @@ enum SpriteMode
 {
    Triangle,
    Box
+ 
 };
 struct BoxPosition
 {
