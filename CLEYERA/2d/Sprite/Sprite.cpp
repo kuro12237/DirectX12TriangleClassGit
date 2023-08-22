@@ -94,17 +94,8 @@ void Sprite::Draw()
 		vertexData[3].position = {pos_.rightTop};
 
 		vertexData[3].texcoord = { 0.0f,0.0f };
-		//→↑
-		//vertexData[4].position = {pos_.rightTop};
 	
-		//vertexData[4].texcoord = { 1.0f,0.0f };
-		//→↑
-		//vertexData[5].position = {pos_.rightBottom};
-	
-		//vertexData[5].texcoord = { 1.0f,1.0f };
-
 		//マテリアル
-
 		*MaterialData = color_;
 
 		worldTransform_.matWorld=Camera::worldOthographicMatrix(worldTransform_.matWorld);
