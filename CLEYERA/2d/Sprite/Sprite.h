@@ -6,7 +6,7 @@
 
 enum SpriteMode
 {
-   Triangle,
+  
    Box
  
 };
@@ -59,17 +59,23 @@ private:
 	/// <returns></returns>
 	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource,const int size);
 
+	/// <summary>
+	/// index‚ÌBufferView
+	/// </summary>
+	/// <param name="NumVertex"></param>
+	/// <returns></returns>
+	static D3D12_INDEX_BUFFER_VIEW IndexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource);
+
 
 	ResourcePeroperty CreateResource(const int NumVertex);
 
-	WorldTransform worldTransform_;
-	
+
+
+
+	WorldTransform worldTransform_;	
 	texResourceProperty tex_;
 	ResourcePeroperty resource_;
-
 	Vector4 color_ = {1,1,1,1};
-
-	
 	BoxPosition pos_;
 
 	SpriteMode mode_;

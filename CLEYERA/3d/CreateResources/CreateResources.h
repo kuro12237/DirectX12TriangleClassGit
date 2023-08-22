@@ -22,6 +22,8 @@ struct LightData
 struct ResourcePeroperty
 {
 	D3D12_VERTEX_BUFFER_VIEW BufferView;
+	D3D12_INDEX_BUFFER_VIEW IndexBufferView;
+	ID3D12Resource* Index;
 	ID3D12Resource* Vertex;
 	ID3D12Resource* Material;
 	ID3D12Resource* wvpResource;
