@@ -24,8 +24,6 @@ void Sprite::Initialize(Vector2 leftpos, float size,WorldTransform worldTransfor
 
 	switch (mode)
 	{
-
-
 	case Box:
 
 		resource_ = CreateResource(BoxNumVertex);
