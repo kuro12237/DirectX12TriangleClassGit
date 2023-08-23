@@ -550,7 +550,6 @@ void DirectXCommon::ReleaseChack()
 		debug->Release();
 	}
 
-
 }
 
 D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
