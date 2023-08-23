@@ -4,12 +4,7 @@
 #include"Camera.h"
 #include"CreateResources/CreateResources.h"
 
-enum SpriteMode
-{
-  
-   Box
- 
-};
+
 struct BoxPosition
 {
 	Vector4 leftTop;
@@ -26,57 +21,31 @@ public:
 	~Sprite();
 
 
-	void Initialize(Vector2 leftpos,float size,WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode);
+	void Initialize(Vector2 leftpos,float size,WorldTransform worldTransform, texResourceProperty texResource);
+	
+	void Draw();
+
+	void Release();
 
 	void TransferMatrix(Matrix4x4 m);
 
 	void SetTexProperty(texResourceProperty NewTex);
 
 	Matrix4x4 GetWorldTransform() { return worldTransform_.matWorld; }
-	void Draw();
 
-	void Release();
 private:
 
-	 void CommandCall(const int Num);
+	void CommandCall(const int Num);
 
-	 static void Releace(ID3D12Resource *resource);
+    static void Releace(ID3D12Resource *resource);
 
-
-	/// <summary>
-	/// ResourceÇçÏê¨
-	/// </summary>
-	/// <param name="device"></param>
-	/// <param name="sizeInbyte"></param>
-	/// <returns></returns>
-	static ID3D12Resource* CreateBufferResource( size_t sizeInbyte);
-
-	/// <summary>
-	/// BufferViewÇçÏê¨
-	/// </summary>
-	/// <param name="sizeInbyte"></param>
-	/// <param name="Resource"></param>
-	/// <returns></returns>
-	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource,const int size);
-
-	/// <summary>
-	/// indexÇÃBufferView
-	/// </summary>
-	/// <param name="NumVertex"></param>
-	/// <returns></returns>
-	static D3D12_INDEX_BUFFER_VIEW IndexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource);
+	ResourcePeroperty CreateResource(const int NumVertex, const int NumIndex);
 
 
-	ResourcePeroperty CreateResource(const int NumVertex);
-
-
-
-
-	WorldTransform worldTransform_;	
-	texResourceProperty tex_;
-	ResourcePeroperty resource_;
+	WorldTransform worldTransform_ = {};
+	texResourceProperty tex_ = {};
+	ResourcePeroperty resource_ = {};
 	Vector4 color_ = {1,1,1,1};
-	BoxPosition pos_;
+	BoxPosition pos_ = {};
 
-	SpriteMode mode_;
 };

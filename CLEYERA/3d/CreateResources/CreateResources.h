@@ -5,18 +5,26 @@
 #include"Matrix4x4.h"
 #include"Vector2.h"
 #include"Vector3.h"
+
+
 struct  VertexData
 {
 	Vector4 position;
 	Vector2 texcoord;
 	Vector3 normal;
 };
+
 struct LightData
 {
 	Vector4 color;
 	Vector3 direction;
 	float intensity;
 	
+};
+
+struct TransformationMatrix {
+	Matrix4x4 WVP;
+	Matrix4x4 world;
 };
 
 struct ResourcePeroperty
@@ -30,10 +38,7 @@ struct ResourcePeroperty
 	ID3D12Resource* Light;
 };
 
-struct TransformationMatrix {
-	Matrix4x4 WVP;
-	Matrix4x4 world;
-};
+
 
 class CreateResources
 {
@@ -50,6 +55,9 @@ public:
 
 	static ResourcePeroperty VertexDataCreateResource(const int Num);
 
+
+
+
 	static void Release(ID3D12Resource* resource);
 
 	/// <summary>
@@ -58,7 +66,7 @@ public:
 	/// <param name="device"></param>
 	/// <param name="sizeInbyte"></param>
 	/// <returns></returns>
-	static ID3D12Resource* CreateBufferResource(ID3D12Device* device, size_t sizeInbyte);
+	static ID3D12Resource* CreateBufferResource( size_t sizeInbyte);
 
 	/// <summary>
 	/// BufferViewÇçÏê¨
@@ -66,7 +74,13 @@ public:
 	/// <param name="sizeInbyte"></param>
 	/// <param name="Resource"></param>
 	/// <returns></returns>
-	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size);
+	static D3D12_VERTEX_BUFFER_VIEW VertexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size);
+	/// <summary>
+    /// indexÇÃBufferView
+    /// </summary>
+    /// <param name="NumVertex"></param>
+    /// <returns></returns>
+	static D3D12_INDEX_BUFFER_VIEW IndexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource);
 
 private:
 

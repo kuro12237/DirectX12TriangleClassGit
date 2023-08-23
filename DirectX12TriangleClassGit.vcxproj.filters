@@ -70,12 +70,6 @@
     <Filter Include="ソース ファイル\CLEYERA\2d\Sirite">
       <UniqueIdentifier>{e4a9c349-9d5d-4d3d-969f-5ce0ccbadb5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite\Box">
-      <UniqueIdentifier>{b61ea5eb-a261-4b54-8949-0783e0895c2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\CLEYERA\2d\Sirite\Triangle">
-      <UniqueIdentifier>{8269f397-ae5f-48ad-b571-21a7260d923a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\CLEYERA\3d\State">
       <UniqueIdentifier>{13cc58c2-74c2-4147-b15c-87706c77b736}</UniqueIdentifier>
     </Filter>

@@ -8,34 +8,20 @@ Sprite::~Sprite()
 {
 }
 
-
-
-void Sprite::Initialize(Vector2 leftpos, float size,WorldTransform worldTransform, texResourceProperty texResource,const SpriteMode mode)
+void Sprite::Initialize(Vector2 leftpos, float size,WorldTransform worldTransform, texResourceProperty texResource)
 {
 	worldTransform_ = worldTransform;
 	tex_ = texResource;
 
-	const int BoxNumVertex = 4;
+	const int NumVertex = 4;
+	const int NumIndex = 6;
 
 	pos_.leftTop = { leftpos.x,leftpos.y,0.0f,1.0f };
 	pos_.rightTop = { leftpos.x + size,leftpos.y,0.0f,1.0f };
 	pos_.leftBottom = { leftpos.x,leftpos.y + size,0.0f,1.0f };
 	pos_.rightBottom = { leftpos.x + size,leftpos.y + size,0.0f,1.0f };
 
-	switch (mode)
-	{
-
-
-	case Box:
-
-		resource_ = CreateResource(BoxNumVertex);
-		
-		mode_ = mode;
-		
-		break;
-	}
-
-
+	resource_ = CreateResource(NumVertex,NumIndex);
 }
 
 void Sprite::TransferMatrix(Matrix4x4 m)
@@ -55,58 +41,43 @@ void Sprite::Draw()
 	Matrix4x4* wvpData = nullptr;
 	uint32_t* indexData = nullptr;
 
-	const int BoxNum = 6;
-
-	switch (mode_)
-	{
-
-
-	case Box:
-
-		//書き込むためのアドレスを取得
-		resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-		resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
-		resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
-		resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
-
-		indexData[0] = 0;
-        indexData[1] = 1;
-		indexData[2] = 2;
-		indexData[3] = 1;
-		indexData[4] = 3;
-		indexData[5] = 2;
-
-		///一枚目
-		//←↓
-		vertexData[0].position = { pos_.leftBottom };
 	
-		vertexData[0].texcoord = { 0.0f,1.0f };
-		//←↑
-		vertexData[1].position = { pos_.leftTop };
+	const int IndexNum = 6;
+
+	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
+	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
+	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 	
-		vertexData[1].texcoord = { 0.0f,0.0f };
-		//→↓
-		vertexData[2].position = {pos_.rightBottom};
+	//index
+	//1
+	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
+	//2
+	indexData[3] = 1; indexData[4] = 3; indexData[5] = 2;
 
-		vertexData[2].texcoord = { 1.0f,1.0f };
-		///二枚目
-		//←↑
-		vertexData[3].position = {pos_.rightTop};
-
-		vertexData[3].texcoord = { 0.0f,0.0f };
+	//pos
+	vertexData[0].position = { pos_.leftBottom };
+	vertexData[0].texcoord = { 0.0f,1.0f };
 	
-		//マテリアル
-		*MaterialData = color_;
+	vertexData[1].position = { pos_.leftTop };
+    vertexData[1].texcoord = { 0.0f,0.0f };
+	
+	vertexData[2].position = {pos_.rightBottom};
+	vertexData[2].texcoord = { 1.0f,1.0f };
 
-		worldTransform_.matWorld=Camera::worldOthographicMatrix(worldTransform_.matWorld);
+	vertexData[3].position = {pos_.rightTop};
+	vertexData[3].texcoord = { 0.0f,0.0f };
 
-		*wvpData = worldTransform_.matWorld;
 
-		CommandCall(BoxNum);
+	//material
+	*MaterialData = color_;
 
-		break;
+	//matrix
+	worldTransform_.matWorld=Camera::worldOthographicMatrix(worldTransform_.matWorld);
+	*wvpData = worldTransform_.matWorld;
 
-	}
+	//call
+	CommandCall(IndexNum);
 
 }
 
@@ -128,105 +99,38 @@ void Sprite::CommandCall(const int Num)
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().sprite;
 
-	commands.List->SetGraphicsRootSignature(
-	                        PSO.rootSignature);
-
-	commands.List->SetPipelineState(
-		PSO.GraphicsPipelineState);//
+	commands.List->SetGraphicsRootSignature(PSO.rootSignature);
+	commands.List->SetPipelineState(PSO.GraphicsPipelineState);
 
 	commands.List->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-
+	
+	//materialBufferAddress
+	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 	//wvp用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
-
-	//マテリアルCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
-
-	//
+	//tex
 	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 
-	Num;
-	//描画(DrawCall/ドローコール)。
-	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
-	//commands.List->DrawInstanced(Num, 1, 0, 0);
-
+	//IndexDrawCall
+	commands.List->DrawIndexedInstanced(Num, 1, 0, 0, 0);
+	
 }
 
 
-ResourcePeroperty Sprite::CreateResource(const int NumVertex)
+ResourcePeroperty Sprite::CreateResource(const int NumVertex, const int NumIndex)
 {
 	 ResourcePeroperty result;
-	
-	 result.Vertex = CreateBufferResource(sizeof(VertexData) * NumVertex);
-	 result.Material = CreateBufferResource(sizeof(Vector4));
-	 result.Index = CreateBufferResource(sizeof(uint32_t) * 6);
-	 result.wvpResource = CreateBufferResource(sizeof(Matrix4x4));
-	 result.BufferView = CreateBufferView(sizeof(VertexData) * NumVertex, result.Vertex, NumVertex);
-	 result.IndexBufferView = IndexCreateBufferView(sizeof(uint32_t) * 6, result.Index);
+
+	 result.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * NumVertex);
+	 result.Material = CreateResources::CreateBufferResource(sizeof(Vector4));
+	 result.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * NumIndex);
+	 result.wvpResource = CreateResources::CreateBufferResource(sizeof(Matrix4x4));
+	 result.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * NumVertex, result.Vertex, NumVertex);
+	 result.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * NumIndex, result.Index);
 
 	 return result;
-}
-ID3D12Resource* Sprite::CreateBufferResource(size_t sizeInbyte)
-{
-	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
-
-	ID3D12Resource* RssultResource;
-	//頂点リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
-
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapを使う
-
-	//頂点リソースの設定
-	D3D12_RESOURCE_DESC ResourceDesc{};
-
-	//バッファリソース。テクスチャの場合はまた別の設定をする
-	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	ResourceDesc.Width = sizeInbyte; //リソースのサイズ。今回はvector4を3頂点分
-
-	//バッファの場合はこれらは1にする決まり
-	ResourceDesc.Height = 1;
-	ResourceDesc.DepthOrArraySize = 1;
-	ResourceDesc.MipLevels = 1;
-	ResourceDesc.SampleDesc.Count = 1;
-
-	//バッファの場合はこれにする決まり
-	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-	HRESULT hr;
-	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&ResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&RssultResource));
-	assert(SUCCEEDED(hr));
-
-	return RssultResource;
-}
-D3D12_VERTEX_BUFFER_VIEW Sprite::CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource,const int size)
-{
-	D3D12_VERTEX_BUFFER_VIEW resultBufferView = {};
-
-	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
-
-	//使用するリソースのサイズは頂点3つ分のサイズ
-	resultBufferView.SizeInBytes = UINT(sizeInbyte);
-
-	//1頂点あたりのサイズ
-	resultBufferView.StrideInBytes = UINT(sizeInbyte / size);
-	return resultBufferView;
-}
-D3D12_INDEX_BUFFER_VIEW Sprite::IndexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource)
-{
-	D3D12_INDEX_BUFFER_VIEW resultBufferView = {};
-
-	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
-
-	//使用するリソースのサイズは頂点3つ分のサイズ
-	resultBufferView.SizeInBytes = UINT(sizeInbyte);
-
-	//1頂点あたりのサイズ
-	resultBufferView.Format = DXGI_FORMAT_R32_UINT;
-
-	return resultBufferView;
 }

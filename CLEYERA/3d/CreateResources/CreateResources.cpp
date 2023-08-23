@@ -9,12 +9,11 @@ CreateResources* CreateResources::GetInstance()
 ResourcePeroperty CreateResources::Vector4CreateResource(const int Num)
 {
 	ResourcePeroperty result = {};
-	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
-
-	result.Vertex = CreateBufferResource(device, sizeof(Vector4) * Num);
-	result.Material = CreateBufferResource(device, sizeof(Vector4)*3);
-	result.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
-	result.BufferView = CreateBufferView(sizeof(Vector4) * Num, result.Vertex, Num);
+	
+	result.Vertex = CreateBufferResource(sizeof(Vector4) * Num);
+	result.Material = CreateBufferResource(sizeof(Vector4)*3);
+	result.wvpResource = CreateBufferResource(sizeof(Matrix4x4));
+	result.BufferView = VertexCreateBufferView(sizeof(Vector4) * Num, result.Vertex, Num);
 
 	return result;
 }
@@ -22,13 +21,12 @@ ResourcePeroperty CreateResources::Vector4CreateResource(const int Num)
 ResourcePeroperty CreateResources::VertexDataCreateResource(const int Num)
 {
 	ResourcePeroperty result = {};
-	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
 
-	result.Vertex = CreateBufferResource(device, sizeof(VertexData) * Num);
-	result.Material = CreateBufferResource(device, sizeof(Vector4) * 3);
-	result.Light = CreateBufferResource(device, sizeof(LightData));
-	result.wvpResource = CreateBufferResource(device, sizeof(TransformationMatrix));
-	result.BufferView = CreateBufferView(sizeof(VertexData) * Num, result.Vertex, Num);
+	result.Vertex = CreateBufferResource(sizeof(VertexData) * Num);
+	result.Material = CreateBufferResource(sizeof(Vector4) * 3);
+	result.Light = CreateBufferResource(sizeof(LightData));
+	result.wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
+	result.BufferView = VertexCreateBufferView(sizeof(VertexData) * Num, result.Vertex, Num);
 
 	return result;
 }
@@ -40,8 +38,9 @@ void CreateResources::Release(ID3D12Resource* resource)
 
 }
 
-ID3D12Resource* CreateResources::CreateBufferResource(ID3D12Device* device, size_t sizeInbyte)
+ID3D12Resource* CreateResources::CreateBufferResource(size_t sizeInbyte)
 {
+	ID3D12Device* device = DirectXCommon::GetInstance()->GetDevice();
 	ID3D12Resource* RssultResource;
 	//頂点リソース用のヒープの設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
@@ -71,7 +70,7 @@ ID3D12Resource* CreateResources::CreateBufferResource(ID3D12Device* device, size
 	return RssultResource;
 }
 
-D3D12_VERTEX_BUFFER_VIEW CreateResources::CreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size)
+D3D12_VERTEX_BUFFER_VIEW CreateResources::VertexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size)
 {
 
 	D3D12_VERTEX_BUFFER_VIEW resultBufferView = {};
@@ -83,5 +82,20 @@ D3D12_VERTEX_BUFFER_VIEW CreateResources::CreateBufferView(size_t sizeInbyte, ID
 
 	//1頂点あたりのサイズ
 	resultBufferView.StrideInBytes = UINT(sizeInbyte / size);
+	return resultBufferView;
+}
+
+D3D12_INDEX_BUFFER_VIEW CreateResources::IndexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource)
+{
+	D3D12_INDEX_BUFFER_VIEW resultBufferView = {};
+
+	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
+
+	//使用するリソースのサイズは頂点3つ分のサイズ
+	resultBufferView.SizeInBytes = UINT(sizeInbyte);
+
+	//1頂点あたりのサイズ
+	resultBufferView.Format = DXGI_FORMAT_R32_UINT;
+
 	return resultBufferView;
 }

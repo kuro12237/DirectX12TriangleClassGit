@@ -38,8 +38,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	model->Initialize(pos, size, worldTransform_[0], texUV, Sphere);
 
 	Sprite * sprite = new Sprite;
+	Mesh* mesh = new Mesh;
+	mesh->Initialize(worldTransform_[1], { 0,0,0,1 }, { 1,1,1,1 });
 
-	sprite->Initialize({ 0,0 }, 320, worldTransform_[1], texBlock, Box);
+	sprite->Initialize({ 0,0 }, 320, worldTransform_[1], texBlock);
 	
 	bool texFlag = false;
 
@@ -75,7 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ShereWorldMatrix = Camera::worldViewProjectionMatrixFanc(ShereWorldMatrix);
 
 		model->TransferMatrix(ShereWorldMatrix);
-		model->Draw();
+		//model->Draw();
 
 
 		ImGui::Begin("camera");
@@ -97,6 +99,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		sprite->Draw();
 
+		mesh->TransferMatrix(ShereWorldMatrix);
+		mesh->Draw();
 		Cleyera::EndFlame();
 
 	}
@@ -106,7 +110,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	texEnemy = TexManager::Release(texEnemy);
 	texMonster = TexManager::Release(texMonster);
 
-
+	mesh->Release();
 	model->Release();
 	sprite->Release();
 	Cleyera::Finalize();
