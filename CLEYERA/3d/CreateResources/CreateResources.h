@@ -5,7 +5,7 @@
 #include"Matrix4x4.h"
 #include"Vector2.h"
 #include"Vector3.h"
-
+#include"Matrix3x3.h"
 
 struct  VertexData
 {
@@ -38,7 +38,12 @@ struct ResourcePeroperty
 	ID3D12Resource* Light;
 };
 
+struct  Material
+{
+	Vector4 color;
+	Matrix3x3 uvTransform;
 
+};
 
 class CreateResources
 {

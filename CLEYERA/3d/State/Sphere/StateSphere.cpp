@@ -129,6 +129,7 @@ void StateSphere::Release()
 	CreateResources::Release(resource_.wvpResource);
 	CreateResources::Release(resource_.Material);
 	CreateResources::Release(resource_.Vertex);
+	CreateResources::Release(resource_.Index);
 	CreateResources::Release(resource_.Light);
 }
 
