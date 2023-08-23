@@ -16,19 +16,19 @@ void StateSphere::Initialize(Vector4 pos, float size, WorldTransform worldTransf
 void StateSphere::Draw()
 {
 	VertexData* vertexData = nullptr;
-	Vector4* MaterialData = nullptr;
-	TransformationMatrix* MatrixData = nullptr;
+	Vector4* materialData = nullptr;
+	TransformationMatrix* matrixData = nullptr;
 	LightData* lightData = nullptr;
-	uint32_t* IndexData = nullptr;
+	uint32_t* indexData = nullptr;
 
-	//書き込むためのアドレスを取得
+	
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
-	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&MatrixData));
+	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
+	resource_.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
 	resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
-	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&IndexData));
+	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
-	//球の座標処理
+#pragma region 球の座標処理
 	const float LON_EVERY = float(std::numbers::pi) * 2.0f / float(VertexNum);
 
 	const float LAT_EVERY = float(std::numbers::pi) / float(VertexNum);
@@ -93,20 +93,22 @@ void StateSphere::Draw()
 				vertexData[Vstart + 3].normal.z = vertexData[Vstart + 3].position.z;
 
 
-				IndexData[Istart] = Vstart;
-				IndexData[Istart + 1] = Vstart + 1;
-				IndexData[Istart + 2] = Vstart + 2;
+				indexData[Istart] = Vstart;
+				indexData[Istart + 1] = Vstart + 1;
+				indexData[Istart + 2] = Vstart + 2;
 				
-				IndexData[Istart + 3] = Vstart + 1;
-				IndexData[Istart + 4] = Vstart + 3;
-				IndexData[Istart + 5] = Vstart + 2;
+				indexData[Istart + 3] = Vstart + 1;
+				indexData[Istart + 4] = Vstart + 3;
+				indexData[Istart + 5] = Vstart + 2;
 			}
 		}
 	}
+#pragma endregion
+
 	vertexData[0].normal = { 0.0f,0.0f,0.5f };
 
-	MatrixData->WVP = workdTransform_.matWorld;
-	MatrixData->world = MatrixTransform::Identity();
+	matrixData->WVP = workdTransform_.matWorld;
+	matrixData->world = MatrixTransform::Identity();
 
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->direction = directionPos;
@@ -117,7 +119,7 @@ void StateSphere::Draw()
 
 	lightData->intensity = 1.0f;
 
-	*MaterialData = color_;
+	*materialData = color_;
 
 	CommandCall();
 }
@@ -150,28 +152,21 @@ void StateSphere::CommandCall()
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	PSOProperty PSO = GraphicsPipeline::GetInstance()->GetPSO().indirectLight;
 
-
 	commands.List->SetGraphicsRootSignature(PSO.rootSignature);
-	commands.List->SetPipelineState(PSO.GraphicsPipelineState);//
+	commands.List->SetPipelineState(PSO.GraphicsPipelineState);
 	
 	commands.List->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-
-	//マテリアルCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-	//
 	commands.List->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
-	//wvp用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 
+	commands.List->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 	commands.List->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
 
-	//描画(DrawCall/ドローコール)。
 	commands.List->DrawIndexedInstanced(VertexNum * VertexNum * 6, 1, 0, 0, 0);
 }
 
