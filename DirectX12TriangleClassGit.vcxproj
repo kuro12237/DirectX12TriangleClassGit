@@ -22,8 +22,8 @@
     <ClCompile Include="CLEYERA\2d\Mesh.cpp" />
     <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp" />
     <ClCompile Include="CLEYERA\3d\CreateResources\CreateResources.cpp" />
+    <ClCompile Include="CLEYERA\3d\Line\Line.cpp" />
     <ClCompile Include="CLEYERA\3d\Model.cpp" />
-    <ClCompile Include="CLEYERA\3d\State\Box\StateBox.cpp" />
     <ClCompile Include="CLEYERA\3d\State\IModelState.cpp" />
     <ClCompile Include="CLEYERA\3d\State\Sphere\StateSphere.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
@@ -51,6 +51,7 @@
     <ClInclude Include="CLEYERA\2d\Mesh.h" />
     <ClInclude Include="CLEYERA\2d\Sprite\Sprite.h" />
     <ClInclude Include="CLEYERA\3d\CreateResources\CreateResources.h" />
+    <ClInclude Include="CLEYERA\3d\Line\Line.h" />
     <ClInclude Include="CLEYERA\3d\Model.h" />
     <ClInclude Include="CLEYERA\3d\State\IModelState.h" />
     <ClInclude Include="CLEYERA\3d\State\Sphere\StateSphere.h" />

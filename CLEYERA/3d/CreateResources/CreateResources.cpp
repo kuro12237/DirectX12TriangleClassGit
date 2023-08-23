@@ -6,15 +6,15 @@ CreateResources* CreateResources::GetInstance()
 	return &instance;
 }
 
-ResourcePeroperty CreateResources::Vector4CreateResource(const int Num)
+ResourcePeroperty CreateResources::Vector4CreateResource(const int VertexNum,const int IndexNum )
 {
 	ResourcePeroperty result = {};
-	
-	result.Vertex = CreateBufferResource(sizeof(Vector4) * Num);
-	result.Material = CreateBufferResource(sizeof(Vector4)*3);
+	IndexNum;
+	result.Vertex = CreateBufferResource(sizeof(Vector4) * VertexNum);
+	result.Material = CreateBufferResource(sizeof(Vector4));
 	result.wvpResource = CreateBufferResource(sizeof(Matrix4x4));
-	result.BufferView = VertexCreateBufferView(sizeof(Vector4) * Num, result.Vertex, Num);
-
+	result.BufferView = VertexCreateBufferView(sizeof(Vector4) * VertexNum, result.Vertex, VertexNum);
+	
 	return result;
 }
 
@@ -23,9 +23,10 @@ ResourcePeroperty CreateResources::VertexDataCreateResource(const int Num)
 	ResourcePeroperty result = {};
 
 	result.Vertex = CreateBufferResource(sizeof(VertexData) * Num);
-	result.Material = CreateBufferResource(sizeof(Vector4) * 3);
+	result.Material = CreateBufferResource(sizeof(Vector4));
 	result.Light = CreateBufferResource(sizeof(LightData));
 	result.wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
+	
 	result.BufferView = VertexCreateBufferView(sizeof(VertexData) * Num, result.Vertex, Num);
 
 	return result;

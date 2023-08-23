@@ -19,7 +19,8 @@ Mesh* Mesh::GetInstance()
 void Mesh::Initialize(WorldTransform worldTransform,Vector4 pos,Vector4 Color)
 {
 	const int Num = 3;
-	resource_ = CreateResources::Vector4CreateResource(Num);
+	Num;
+	//resource_ = CreateResources::Vector4CreateResource(Num);
 	Color_ = Color;
 	CenterPos_ = pos;
 	worldTransform_ = worldTransform;

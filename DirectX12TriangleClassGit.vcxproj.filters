@@ -76,6 +76,9 @@
     <Filter Include="ソース ファイル\CLEYERA\3d\CreateResource">
       <UniqueIdentifier>{13e0312e-f9ea-449f-bc95-4cc66a6d77c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\3d\Line">
+      <UniqueIdentifier>{11e2282c-483f-4d80-8fb0-caecabdede8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -141,9 +144,6 @@
     <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
       <Filter>ソース ファイル\CLEYERA\TexManager</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\2d\Mesh.cpp">
-      <Filter>ソース ファイル\CLEYERA\3d</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\3d\State\IModelState.cpp">
       <Filter>ソース ファイル\CLEYERA\3d\State</Filter>
     </ClCompile>
@@ -156,8 +156,11 @@
     <ClCompile Include="CLEYERA\2d\Sprite\Sprite.cpp">
       <Filter>ソース ファイル\CLEYERA\2d\Sirite</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\3d\State\Box\StateBox.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="CLEYERA\2d\Mesh.cpp">
+      <Filter>ソース ファイル\CLEYERA\3d\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\3d\Line\Line.cpp">
+      <Filter>ソース ファイル\CLEYERA\3d\Line</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +248,6 @@
     <ClInclude Include="CLEYERA\2d\Sprite\Sprite.h">
       <Filter>ソース ファイル\CLEYERA\2d\Sirite</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\2d\Mesh.h">
-      <Filter>ソース ファイル\CLEYERA\3d</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\3d\State\IModelState.h">
       <Filter>ソース ファイル\CLEYERA\3d\State</Filter>
     </ClInclude>
@@ -256,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\3d\CreateResources\CreateResources.h">
       <Filter>ソース ファイル\CLEYERA\3d\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\2d\Mesh.h">
+      <Filter>ソース ファイル\CLEYERA\3d\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\3d\Line\Line.h">
+      <Filter>ソース ファイル\CLEYERA\3d\Line</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-#include"GraphicsPipeline.h"
+ï»¿#include"GraphicsPipeline.h"
 
 GraphicsPipeline::GraphicsPipeline()
 {
@@ -16,20 +16,20 @@ GraphicsPipeline* GraphicsPipeline::GetInstance()
 
 void GraphicsPipeline::Initialize()
 {
-	//dxc‚ğì‚é
+	//dxcã‚’ä½œã‚‹
 	GraphicsPipeline::GetInstance()->dxcCreate();
-	//include‚Ì‘Î‰İ’è
+	//includeã®å¯¾å¿œè¨­å®š
 	GraphicsPipeline::GetInstance()->DfIncludeHandlerSetting();
 }
 
 void GraphicsPipeline::Finalize()
 {
-	//PSO‚Ì‰ğ•ú
+	//PSOã®è§£æ”¾
 	PSORelease(GraphicsPipeline::GetInstance()->pso_.shape);
 	PSORelease(GraphicsPipeline::GetInstance()->pso_.sprite);
 	PSORelease(GraphicsPipeline::GetInstance()->pso_.directionalLight);
 	PSORelease(GraphicsPipeline::GetInstance()->pso_.indirectLight);
-	//ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è§£æ”¾
 
 	ShaderRelease(GraphicsPipeline::GetInstance()->shader_.IndirectLight);
 	ShaderRelease(GraphicsPipeline::GetInstance()->shader_.DirectionalLight);
@@ -53,7 +53,7 @@ void GraphicsPipeline::ShaderCompile()
 			L"Shader/ShapeObject3d.PS.hlsl",
 			L"ps_6_0"
 		);
-	//ƒXƒvƒ‰ƒCƒg
+	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
 	sprite.vertexBlob =
 		GraphicsPipeline::CompilerShaderFanc(
 			L"Shader/SpriteObject3d.VS.hlsl",
@@ -138,18 +138,18 @@ void GraphicsPipeline::ShapePSO()
 	
 	ShaderMode shader = GraphicsPipeline::GetInstance()->shader_.shape;
 
-	//RootSignatureì¬
+	//RootSignatureä½œæˆ
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Materialİ’è
+	//Materialè¨­å®š
 	D3D12_ROOT_PARAMETER rootParameters[2] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
-	//Vertex‚ÌTransform
+	//Vertexã®Transform
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
@@ -160,7 +160,7 @@ void GraphicsPipeline::ShapePSO()
 
 
 
-	//ƒVƒŠƒAƒ‰ƒCƒY‚µ‚ÄƒoƒCƒiƒŠ‚É‚·‚é
+	//ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ã¦ãƒã‚¤ãƒŠãƒªã«ã™ã‚‹
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &ShapePSO.signatureBlob, &ShapePSO.errorBlob);
@@ -170,7 +170,7 @@ void GraphicsPipeline::ShapePSO()
 		assert(false);
 	}
 
-	//ƒoƒCƒiƒŠ‚ğŒ³‚É¶¬
+	//ãƒã‚¤ãƒŠãƒªã‚’å…ƒã«ç”Ÿæˆ
 
 	hr = device->CreateRootSignature(
 		0,
@@ -183,7 +183,7 @@ void GraphicsPipeline::ShapePSO()
 
 
 
-	//InputLayout‚Ìİ’è
+	//InputLayoutã®è¨­å®š
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
@@ -194,19 +194,19 @@ void GraphicsPipeline::ShapePSO()
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 
-	//BlendState‚Ìİ’è‚ğs‚¤
+	//BlendStateã®è¨­å®šã‚’è¡Œã†
 	D3D12_BLEND_DESC blendDesc{};
-	//‚·‚×‚Ä‚ÌF—v‘f‚ğ‘‚«‚Ş
+	//ã™ã¹ã¦ã®è‰²è¦ç´ ã‚’æ›¸ãè¾¼ã‚€
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
 
 
-	//RasterrizerState‚Úİ’è
+	//RasterrizerStateã¼è¨­å®š
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 
-	//— –ÊiŒv‰ñ‚èj‚ğ•\¦‚µ‚È‚¢
-	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	//OŠpŒ`‚Ì’†‚ğ“h‚è‚Â‚Ô‚·
+	//è£é¢ï¼ˆæ™‚è¨ˆå›ã‚Šï¼‰ã‚’è¡¨ç¤ºã—ãªã„
+	rasterizerDesc.CullMode = D3D12_CULL_MODE_NONE;
+	//ä¸‰è§’å½¢ã®ä¸­ã‚’å¡—ã‚Šã¤ã¶ã™
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 
@@ -216,7 +216,7 @@ void GraphicsPipeline::ShapePSO()
 	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 
 
-	//PSO‚Ì¶¬
+	//PSOã®ç”Ÿæˆ
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
 	graphicsPipelineStateDesc.pRootSignature = ShapePSO.rootSignature; //RootSignature
@@ -231,15 +231,15 @@ void GraphicsPipeline::ShapePSO()
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
-	//‘‚«‚ŞRTV‚Ìî•ñ
+	//æ›¸ãè¾¼ã‚€RTVã®æƒ…å ±
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
-	//—˜—p‚·‚éƒgƒ|ƒƒW(Œ`ó)‚Ìƒ^ƒCƒvBOŠpŒ`
+	//åˆ©ç”¨ã™ã‚‹ãƒˆãƒãƒ­ã‚¸(å½¢çŠ¶)ã®ã‚¿ã‚¤ãƒ—ã€‚ä¸‰è§’å½¢
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
-		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+		D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE;
 
-	//‚Ç‚Ì‚æ‚¤‚É‰æ–Ê‚ÉF‚ğ‘Å‚¿‚Ş‚©‚Ìİ’è(‹C‚É‚µ‚È‚­‚Ä—Ç‚¢)
+	//ã©ã®ã‚ˆã†ã«ç”»é¢ã«è‰²ã‚’æ‰“ã¡è¾¼ã‚€ã‹ã®è¨­å®š(æ°—ã«ã—ãªãã¦è‰¯ã„)
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 
@@ -260,20 +260,20 @@ void GraphicsPipeline::SpritePSO()
 	ShaderMode shader = GraphicsPipeline::GetInstance()->shader_.sprite;
 
 
-	//RootSignatureì¬
+	//RootSignatureä½œæˆ
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
 	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Materialİ’è
+	//Materialè¨­å®š
 	D3D12_ROOT_PARAMETER rootParameters[3] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//Vertex‚ÌTransform
+	//Vertexã®Transform
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
@@ -286,14 +286,14 @@ void GraphicsPipeline::SpritePSO()
 	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	//rootPrameter‚É“ü‚ê‚é
+	//rootPrameterã«å…¥ã‚Œã‚‹
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
 
-	//Sampler‚Ìİ’è
+	//Samplerã®è¨­å®š
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -312,7 +312,7 @@ void GraphicsPipeline::SpritePSO()
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
-	//ƒVƒŠƒAƒ‰ƒCƒY‚µ‚ÄƒoƒCƒiƒŠ‚É‚·‚é
+	//ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ã¦ãƒã‚¤ãƒŠãƒªã«ã™ã‚‹
 
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
@@ -323,7 +323,7 @@ void GraphicsPipeline::SpritePSO()
 		assert(false);
 	}
 
-	//ƒoƒCƒiƒŠ‚ğŒ³‚É¶¬
+	//ãƒã‚¤ãƒŠãƒªã‚’å…ƒã«ç”Ÿæˆ
 
 	hr = device->CreateRootSignature(0, SpritePSO.signatureBlob->GetBufferPointer(),
 		SpritePSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&SpritePSO.rootSignature));
@@ -333,7 +333,7 @@ void GraphicsPipeline::SpritePSO()
 
 
 
-	//InputLayout‚Ìİ’è
+	//InputLayoutã®è¨­å®š
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
@@ -351,19 +351,19 @@ void GraphicsPipeline::SpritePSO()
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 
-	//BlendState‚Ìİ’è‚ğs‚¤
+	//BlendStateã®è¨­å®šã‚’è¡Œã†
 	D3D12_BLEND_DESC blendDesc{};
-	//‚·‚×‚Ä‚ÌF—v‘f‚ğ‘‚«‚Ş
+	//ã™ã¹ã¦ã®è‰²è¦ç´ ã‚’æ›¸ãè¾¼ã‚€
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
 
 
-	//RasterrizerState‚Úİ’è
+	//RasterrizerStateã¼è¨­å®š
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 
-	//— –ÊiŒv‰ñ‚èj‚ğ•\¦‚µ‚È‚¢
+	//è£é¢ï¼ˆæ™‚è¨ˆå›ã‚Šï¼‰ã‚’è¡¨ç¤ºã—ãªã„
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	//OŠpŒ`‚Ì’†‚ğ“h‚è‚Â‚Ô‚·
+	//ä¸‰è§’å½¢ã®ä¸­ã‚’å¡—ã‚Šã¤ã¶ã™
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
@@ -373,7 +373,7 @@ void GraphicsPipeline::SpritePSO()
 
 
 
-	//PSO‚Ì¶¬
+	//PSOã®ç”Ÿæˆ
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
 	graphicsPipelineStateDesc.pRootSignature = SpritePSO.rootSignature; //RootSignature
@@ -388,15 +388,15 @@ void GraphicsPipeline::SpritePSO()
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 
-	//‘‚«‚ŞRTV‚Ìî•ñ
+	//æ›¸ãè¾¼ã‚€RTVã®æƒ…å ±
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
-	//—˜—p‚·‚éƒgƒ|ƒƒW(Œ`ó)‚Ìƒ^ƒCƒvBOŠpŒ`
+	//åˆ©ç”¨ã™ã‚‹ãƒˆãƒãƒ­ã‚¸(å½¢çŠ¶)ã®ã‚¿ã‚¤ãƒ—ã€‚ä¸‰è§’å½¢
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
-	//‚Ç‚Ì‚æ‚¤‚É‰æ–Ê‚ÉF‚ğ‘Å‚¿‚Ş‚©‚Ìİ’è(‹C‚É‚µ‚È‚­‚Ä—Ç‚¢)
+	//ã©ã®ã‚ˆã†ã«ç”»é¢ã«è‰²ã‚’æ‰“ã¡è¾¼ã‚€ã‹ã®è¨­å®š(æ°—ã«ã—ãªãã¦è‰¯ã„)
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 
@@ -415,20 +415,20 @@ void GraphicsPipeline::DirectionalLightPSO()
 	ShaderMode shader = GraphicsPipeline::GetInstance()->shader_.DirectionalLight;
 
 
-	//RootSignatureì¬
+	//RootSignatureä½œæˆ
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
 	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Materialİ’è
+	//Materialè¨­å®š
 	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//Vertex‚ÌTransform
+	//Vertexã®Transform
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
@@ -441,19 +441,19 @@ void GraphicsPipeline::DirectionalLightPSO()
 	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	//rootPrameter‚É“ü‚ê‚é
+	//rootPrameterã«å…¥ã‚Œã‚‹
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
-	//rootPrameter‚É“ü‚ê‚é
+	//rootPrameterã«å…¥ã‚Œã‚‹
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[3].Descriptor.ShaderRegister = 1;
 
 
-	//Sampler‚Ìİ’è
+	//Samplerã®è¨­å®š
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -472,7 +472,7 @@ void GraphicsPipeline::DirectionalLightPSO()
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
-	//ƒVƒŠƒAƒ‰ƒCƒY‚µ‚ÄƒoƒCƒiƒŠ‚É‚·‚é
+	//ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ã¦ãƒã‚¤ãƒŠãƒªã«ã™ã‚‹
 
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
@@ -483,14 +483,14 @@ void GraphicsPipeline::DirectionalLightPSO()
 		assert(false);
 	}
 
-	//ƒoƒCƒiƒŠ‚ğŒ³‚É¶¬
+	//ãƒã‚¤ãƒŠãƒªã‚’å…ƒã«ç”Ÿæˆ
 
 	hr = device->CreateRootSignature(0, DirectionalLightPSO.signatureBlob->GetBufferPointer(),
 		DirectionalLightPSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&DirectionalLightPSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
-	//InputLayout‚Ìİ’è
+	//InputLayoutã®è¨­å®š
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
@@ -507,28 +507,28 @@ void GraphicsPipeline::DirectionalLightPSO()
 	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-	//MORMAL‚Å‹N‚«‚½ƒoƒOFormat‚ÌŒ^‚ğŠÔˆá‚¦‚Ä‚¢‚½
-	//Vector3‚Ìê‡=DXGI_FORMAT_R32G32B32_FLOAT
-	//Vector2‚Ìê‡=DXGI_FORMAT_R32G32_FLOAT
-	//RGBA‚Å‚ª‘‚¦‚Ä‚¢‚­
+	//MORMALã§èµ·ããŸãƒã‚°Formatã®å‹ã‚’é–“é•ãˆã¦ã„ãŸ
+	//Vector3ã®å ´åˆ=DXGI_FORMAT_R32G32B32_FLOAT
+	//Vector2ã®å ´åˆ=DXGI_FORMAT_R32G32_FLOAT
+	//RGBAã§ãŒå¢—ãˆã¦ã„ã
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 
-	//BlendState‚Ìİ’è‚ğs‚¤
+	//BlendStateã®è¨­å®šã‚’è¡Œã†
 	D3D12_BLEND_DESC blendDesc{};
-	//‚·‚×‚Ä‚ÌF—v‘f‚ğ‘‚«‚Ş
+	//ã™ã¹ã¦ã®è‰²è¦ç´ ã‚’æ›¸ãè¾¼ã‚€
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
 
 
-	//RasterrizerState‚Úİ’è
+	//RasterrizerStateã¼è¨­å®š
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 
-	//— –ÊiŒv‰ñ‚èj‚ğ•\¦‚µ‚È‚¢
+	//è£é¢ï¼ˆæ™‚è¨ˆå›ã‚Šï¼‰ã‚’è¡¨ç¤ºã—ãªã„
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	//OŠpŒ`‚Ì’†‚ğ“h‚è‚Â‚Ô‚·
+	//ä¸‰è§’å½¢ã®ä¸­ã‚’å¡—ã‚Šã¤ã¶ã™
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
@@ -538,7 +538,7 @@ void GraphicsPipeline::DirectionalLightPSO()
 
 
 
-	//PSO‚Ì¶¬
+	//PSOã®ç”Ÿæˆ
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
 	graphicsPipelineStateDesc.pRootSignature = DirectionalLightPSO.rootSignature; //RootSignature
@@ -553,15 +553,15 @@ void GraphicsPipeline::DirectionalLightPSO()
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 
-	//‘‚«‚ŞRTV‚Ìî•ñ
+	//æ›¸ãè¾¼ã‚€RTVã®æƒ…å ±
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
-	//—˜—p‚·‚éƒgƒ|ƒƒW(Œ`ó)‚Ìƒ^ƒCƒvBOŠpŒ`
+	//åˆ©ç”¨ã™ã‚‹ãƒˆãƒãƒ­ã‚¸(å½¢çŠ¶)ã®ã‚¿ã‚¤ãƒ—ã€‚ä¸‰è§’å½¢
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
-	//‚Ç‚Ì‚æ‚¤‚É‰æ–Ê‚ÉF‚ğ‘Å‚¿‚Ş‚©‚Ìİ’è(‹C‚É‚µ‚È‚­‚Ä—Ç‚¢)
+	//ã©ã®ã‚ˆã†ã«ç”»é¢ã«è‰²ã‚’æ‰“ã¡è¾¼ã‚€ã‹ã®è¨­å®š(æ°—ã«ã—ãªãã¦è‰¯ã„)
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 
@@ -580,20 +580,20 @@ void GraphicsPipeline::IndirectLightPSO()
 	ShaderMode shader = GraphicsPipeline::GetInstance()->shader_.IndirectLight;
 
 
-	//RootSignatureì¬
+	//RootSignatureä½œæˆ
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
 	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Materialİ’è
+	//Materialè¨­å®š
 	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//Vertex‚ÌTransform
+	//Vertexã®Transform
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
@@ -606,19 +606,19 @@ void GraphicsPipeline::IndirectLightPSO()
 	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	//rootPrameter‚É“ü‚ê‚é
+	//rootPrameterã«å…¥ã‚Œã‚‹
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
-	//rootPrameter‚É“ü‚ê‚é
+	//rootPrameterã«å…¥ã‚Œã‚‹
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[3].Descriptor.ShaderRegister = 1;
 
 
-	//Sampler‚Ìİ’è
+	//Samplerã®è¨­å®š
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -637,7 +637,7 @@ void GraphicsPipeline::IndirectLightPSO()
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
-	//ƒVƒŠƒAƒ‰ƒCƒY‚µ‚ÄƒoƒCƒiƒŠ‚É‚·‚é
+	//ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ã¦ãƒã‚¤ãƒŠãƒªã«ã™ã‚‹
 
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
@@ -648,14 +648,14 @@ void GraphicsPipeline::IndirectLightPSO()
 		assert(false);
 	}
 
-	//ƒoƒCƒiƒŠ‚ğŒ³‚É¶¬
+	//ãƒã‚¤ãƒŠãƒªã‚’å…ƒã«ç”Ÿæˆ
 
 	hr = device->CreateRootSignature(0, IndirectLightPSO.signatureBlob->GetBufferPointer(),
 		IndirectLightPSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&IndirectLightPSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
-	//InputLayout‚Ìİ’è
+	//InputLayoutã®è¨­å®š
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
@@ -672,28 +672,28 @@ void GraphicsPipeline::IndirectLightPSO()
 	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-	//MORMAL‚Å‹N‚«‚½ƒoƒOFormat‚ÌŒ^‚ğŠÔˆá‚¦‚Ä‚¢‚½
-	//Vector3‚Ìê‡=DXGI_FORMAT_R32G32B32_FLOAT
-	//Vector2‚Ìê‡=DXGI_FORMAT_R32G32_FLOAT
-	//RGBA‚Å‚ª‘‚¦‚Ä‚¢‚­
+	//MORMALã§èµ·ããŸãƒã‚°Formatã®å‹ã‚’é–“é•ãˆã¦ã„ãŸ
+	//Vector3ã®å ´åˆ=DXGI_FORMAT_R32G32B32_FLOAT
+	//Vector2ã®å ´åˆ=DXGI_FORMAT_R32G32_FLOAT
+	//RGBAã§ãŒå¢—ãˆã¦ã„ã
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 
-	//BlendState‚Ìİ’è‚ğs‚¤
+	//BlendStateã®è¨­å®šã‚’è¡Œã†
 	D3D12_BLEND_DESC blendDesc{};
-	//‚·‚×‚Ä‚ÌF—v‘f‚ğ‘‚«‚Ş
+	//ã™ã¹ã¦ã®è‰²è¦ç´ ã‚’æ›¸ãè¾¼ã‚€
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
 
 
-	//RasterrizerState‚Úİ’è
+	//RasterrizerStateã¼è¨­å®š
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 
-	//— –ÊiŒv‰ñ‚èj‚ğ•\¦‚µ‚È‚¢
+	//è£é¢ï¼ˆæ™‚è¨ˆå›ã‚Šï¼‰ã‚’è¡¨ç¤ºã—ãªã„
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	//OŠpŒ`‚Ì’†‚ğ“h‚è‚Â‚Ô‚·
+	//ä¸‰è§’å½¢ã®ä¸­ã‚’å¡—ã‚Šã¤ã¶ã™
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
@@ -703,7 +703,7 @@ void GraphicsPipeline::IndirectLightPSO()
 
 
 
-	//PSO‚Ì¶¬
+	//PSOã®ç”Ÿæˆ
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
 	graphicsPipelineStateDesc.pRootSignature = IndirectLightPSO.rootSignature; //RootSignature
@@ -718,15 +718,15 @@ void GraphicsPipeline::IndirectLightPSO()
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 
-	//‘‚«‚ŞRTV‚Ìî•ñ
+	//æ›¸ãè¾¼ã‚€RTVã®æƒ…å ±
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
-	//—˜—p‚·‚éƒgƒ|ƒƒW(Œ`ó)‚Ìƒ^ƒCƒvBOŠpŒ`
+	//åˆ©ç”¨ã™ã‚‹ãƒˆãƒãƒ­ã‚¸(å½¢çŠ¶)ã®ã‚¿ã‚¤ãƒ—ã€‚ä¸‰è§’å½¢
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
-	//‚Ç‚Ì‚æ‚¤‚É‰æ–Ê‚ÉF‚ğ‘Å‚¿‚Ş‚©‚Ìİ’è(‹C‚É‚µ‚È‚­‚Ä—Ç‚¢)
+	//ã©ã®ã‚ˆã†ã«ç”»é¢ã«è‰²ã‚’æ‰“ã¡è¾¼ã‚€ã‹ã®è¨­å®š(æ°—ã«ã—ãªãã¦è‰¯ã„)
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 
@@ -756,7 +756,7 @@ void GraphicsPipeline::PSORelease(PSOProperty pso)
 
 }
 
-////CompileShaderŠÖ”
+////CompileShaderé–¢æ•°
 IDxcBlob* GraphicsPipeline::CompilerShaderFanc(
 	const std::wstring & filePath,
 	const wchar_t* profile
@@ -765,21 +765,21 @@ IDxcBlob* GraphicsPipeline::CompilerShaderFanc(
 	IDxcCompiler3* dxcCompiler = GraphicsPipeline::GetInstance()->dxc.Compiler;
 	IDxcIncludeHandler* includeHandler = GraphicsPipeline::GetInstance()->includeHandler;
 
-	//1.hlslƒtƒ@ƒCƒ‹‚ğ“Ç‚Ş
+	//1.hlslãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã‚€
 	Log(ConvertString(std::format(L"Begin CompileShader,path:{},profile:{}\n", filePath, profile)));
-	//hlslƒtƒ@ƒCƒ‹‚ğ“Ç‚Ş
+	//hlslãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã‚€
 	IDxcBlobEncoding* shaderSource = nullptr;
 	HRESULT hr =
 		dxcUtils->LoadFile(filePath.c_str(), nullptr, &shaderSource);
-	//“Ç‚ß‚È‚©‚Á‚½‚ç~‚ß‚é
+	//èª­ã‚ãªã‹ã£ãŸã‚‰æ­¢ã‚ã‚‹
 	assert(SUCCEEDED(hr));
-	//“Ç‚İ‚ñ‚¾ƒtƒ@ƒCƒ‹‚Ì“à—e‚ğİ’è‚·‚é
+	//èª­ã¿è¾¼ã‚“ã ãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹ã‚’è¨­å®šã™ã‚‹
 	DxcBuffer shaderSourceBuffer;
 	shaderSourceBuffer.Ptr = shaderSource->GetBufferPointer();
 	shaderSourceBuffer.Size = shaderSource->GetBufferSize();
 	shaderSourceBuffer.Encoding = DXC_CP_UTF8;
 
-	//2.Compile‚·‚é
+	//2.Compileã™ã‚‹
 	LPCWSTR arguments[] = {
 		filePath.c_str(),
 		L"-E",L"main",
@@ -789,15 +789,15 @@ IDxcBlob* GraphicsPipeline::CompilerShaderFanc(
 		L"-Zpr",
 	};
 
-	//ÀÛ‚ÉShader‚ğƒRƒ“ƒpƒCƒ‹‚·‚é
+	//å®Ÿéš›ã«Shaderã‚’ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹
 	IDxcResult* shaderResult = nullptr;
 	hr = dxcCompiler->Compile(&shaderSourceBuffer, arguments, _countof(arguments), includeHandler, IID_PPV_ARGS(&shaderResult));
-	//ƒRƒ“ƒpƒCƒ‹ƒGƒ‰[‚Å‚Í‚È‚­dxc‚ª‹N“®o—ˆ‚È‚¢‚È‚Ç’v–½“I‚Èó‹µ
+	//ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã‚¨ãƒ©ãƒ¼ã§ã¯ãªãdxcãŒèµ·å‹•å‡ºæ¥ãªã„ãªã©è‡´å‘½çš„ãªçŠ¶æ³
 	assert(SUCCEEDED(hr));
 
 
-	//3.ŒxEƒGƒ‰[‚ªo‚Ä‚¢‚È‚¢‚©‚ğŠm”F‚·‚é
-	//ŒxEƒGƒ‰[‚ªo‚Ä‚½‚çƒƒO‚Éo‚µ‚Ä~‚ß‚é
+	//3.è­¦å‘Šãƒ»ã‚¨ãƒ©ãƒ¼ãŒå‡ºã¦ã„ãªã„ã‹ã‚’ç¢ºèªã™ã‚‹
+	//è­¦å‘Šãƒ»ã‚¨ãƒ©ãƒ¼ãŒå‡ºã¦ãŸã‚‰ãƒ­ã‚°ã«å‡ºã—ã¦æ­¢ã‚ã‚‹
 	IDxcBlobUtf8* shaderError = nullptr;
 	shaderResult->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&shaderError), nullptr);
 	if (shaderError != nullptr && shaderError->GetStringLength() != 0) {
@@ -806,17 +806,17 @@ IDxcBlob* GraphicsPipeline::CompilerShaderFanc(
 	}
 
 
-	//4.CompileŒ‹‰Ê‚ğó‚¯æ‚Á‚Ä•Ô‚·
-	//BLOBEEEBinaryLargeOBject
+	//4.Compileçµæœã‚’å—ã‘å–ã£ã¦è¿”ã™
+	//BLOBãƒ»ãƒ»ãƒ»BinaryLargeOBject
 	IDxcBlob* shaderBlob = nullptr;
 	hr = shaderResult->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shaderBlob), nullptr);
 	assert(SUCCEEDED(hr));
-	//¬Œ÷‚µ‚½ƒƒO‚ğo‚·
+	//æˆåŠŸã—ãŸãƒ­ã‚°ã‚’å‡ºã™
 	Log(ConvertString(std::format(L"Compile Succeeded,path:{},profile:{}\n", filePath, profile)));
-	//‚à‚¤g‚í‚È‚¢ƒŠƒ\[ƒX‚ğ‰ğ•ú
+	//ã‚‚ã†ä½¿ã‚ãªã„ãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾
 	shaderSource->Release();
 	shaderResult->Release();
-	//Às—p‚ÌƒoƒCƒiƒŠ‚ğ•Ô‹p
+	//å®Ÿè¡Œç”¨ã®ãƒã‚¤ãƒŠãƒªã‚’è¿”å´
 	return shaderBlob;
 
 }

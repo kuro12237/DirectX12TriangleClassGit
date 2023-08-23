@@ -51,7 +51,7 @@ public:
     /// Resource‚ÆbufferView‚Ì¶¬
     /// </summary>
     /// <returns></returns>
-	static ResourcePeroperty Vector4CreateResource(const int Num);
+	static ResourcePeroperty Vector4CreateResource(const int VertexNum, const int IndexNum);
 
 	static ResourcePeroperty VertexDataCreateResource(const int Num);
 

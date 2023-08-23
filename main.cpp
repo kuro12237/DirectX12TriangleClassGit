@@ -1,6 +1,8 @@
 #include"Cleyera.h"
 
 #include"Model.h"
+#include"Line/Line.h"
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 
@@ -37,12 +39,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	model->Initialize(pos, size, worldTransform_[0], texUV, Sphere);
 
-	Sprite * sprite = new Sprite;
-	Mesh* mesh = new Mesh;
-	mesh->Initialize(worldTransform_[1], { 0,0,0,1 }, { 1,1,1,1 });
+	Sprite* sprite = new Sprite;
+	
 
 	sprite->Initialize({ 0,0 }, 320, worldTransform_[1], texBlock);
-	
+
 	bool texFlag = false;
 
 	while (msg.message != WM_QUIT)
@@ -68,7 +69,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			model->SetTexProperty(texUV);
 		}
 
-
 		Matrix4x4 ShereWorldMatrix = MatrixTransform::MakeAffineMatrix(
 			worldTransform_[0].scale_,
 			worldTransform_[0].rotate_,
@@ -77,12 +77,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ShereWorldMatrix = Camera::worldViewProjectionMatrixFanc(ShereWorldMatrix);
 
 		model->TransferMatrix(ShereWorldMatrix);
-		//model->Draw();
+		model->Draw();
 
 
 		ImGui::Begin("camera");
 
-		ImGui::DragFloat3("trans", &camera.translate.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("trans", &camera.translate.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &camera.rotate.x, -10.0f, 10.0f);
 
 		ImGui::End();
 
@@ -99,8 +100,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		sprite->Draw();
 
-		mesh->TransferMatrix(ShereWorldMatrix);
-		mesh->Draw();
+
 		Cleyera::EndFlame();
 
 	}
@@ -110,8 +110,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	texEnemy = TexManager::Release(texEnemy);
 	texMonster = TexManager::Release(texMonster);
 
-	mesh->Release();
+	//mesh->Release();
 	model->Release();
+	
 	sprite->Release();
 	Cleyera::Finalize();
 
