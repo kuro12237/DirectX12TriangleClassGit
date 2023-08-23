@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Sprite* sprite = new Sprite;
 	
 
-	sprite->Initialize({ 0,0 }, 320, worldTransform_[1], texBlock);
+	sprite->Initialize({ 0,0 }, 320, worldTransform_[1], texUV);
 
 	bool texFlag = false;
 
@@ -77,7 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ShereWorldMatrix = Camera::worldViewProjectionMatrixFanc(ShereWorldMatrix);
 
 		model->TransferMatrix(ShereWorldMatrix);
-		model->Draw();
+		//model->Draw();
 
 
 		ImGui::Begin("camera");

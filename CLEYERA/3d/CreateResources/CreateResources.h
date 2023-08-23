@@ -41,8 +41,8 @@ struct ResourcePeroperty
 struct  Material
 {
 	Vector4 color;
-	Matrix3x3 uvTransform;
-
+	//float padding[3];
+	Matrix4x4 uvTransform;
 };
 
 class CreateResources

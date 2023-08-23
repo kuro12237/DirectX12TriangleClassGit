@@ -52,7 +52,6 @@ public:
 	/// <returns></returns>
 	static Matrix3x3 Multiply(const Matrix3x3& m1, const Matrix3x3& m2);
 
-
 #pragma endregion 
 
 #pragma region ˆÚ“®E‰ñ“]E‘å‚«‚³

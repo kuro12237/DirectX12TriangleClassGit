@@ -47,5 +47,10 @@ private:
 	ResourcePeroperty resource_ = {};
 	Vector4 color_ = {1,1,1,1};
 	BoxPosition pos_ = {};
+	  Transform uvTranformSprite{
+      {1.0f,1.0f,1.0f},
+      {0.0f,0.0f,0.0f},
+      {0.0f,0.0f,0.0f}
+	};
 
 };

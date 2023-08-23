@@ -48,8 +48,6 @@ Matrix3x3 MatrixTransform::Multiply(const Matrix3x3& m1, const Matrix3x3& m2)
 	return result;
 }
 
-
-
 #pragma endregion 
 
 #pragma region ˆÚ“®E‰ñ“]E‘å‚«‚³

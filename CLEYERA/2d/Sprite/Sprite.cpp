@@ -37,7 +37,7 @@ void Sprite::SetTexProperty(texResourceProperty NewTex)
 void Sprite::Draw()
 {
 	VertexData* vertexData = nullptr;
-	Vector4* MaterialData = nullptr;
+	Material* MaterialData = nullptr;
 	Matrix4x4* wvpData = nullptr;
 	uint32_t* indexData = nullptr;
 
@@ -66,11 +66,23 @@ void Sprite::Draw()
 	vertexData[2].texcoord = { 1.0f,1.0f };
 
 	vertexData[3].position = {pos_.rightTop};
-	vertexData[3].texcoord = { 0.0f,0.0f };
+	vertexData[3].texcoord = { 1.0f,0.0f };
 
 
 	//material
-	*MaterialData = color_;
+	MaterialData->color = color_;
+
+	ImGui::Begin("sprite");
+	ImGui::Text("uv");
+	ImGui::SliderFloat3("t", &uvTranformSprite.translate.x, -4.0f, 4.0f);
+	ImGui::SliderFloat3("s", &uvTranformSprite.Scale.x, -4.0f, 4.0f);
+	ImGui::SliderFloat3("r", &uvTranformSprite.rotate.x, -4.0f, 4.0f);
+	ImGui::End();
+	
+	Matrix4x4 m = MatrixTransform::MakeAffineMatrix(uvTranformSprite.Scale, uvTranformSprite.rotate, uvTranformSprite.translate);
+	MaterialData->uvTransform = m;
+
+
 
 	//matrix
 	worldTransform_.matWorld=Camera::worldOthographicMatrix(worldTransform_.matWorld);
@@ -126,7 +138,7 @@ ResourcePeroperty Sprite::CreateResource(const int NumVertex, const int NumIndex
 	 ResourcePeroperty result;
 
 	 result.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * NumVertex);
-	 result.Material = CreateResources::CreateBufferResource(sizeof(Vector4));
+	 result.Material = CreateResources::CreateBufferResource(sizeof(Material));
 	 result.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * NumIndex);
 	 result.wvpResource = CreateResources::CreateBufferResource(sizeof(Matrix4x4));
 	 result.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * NumVertex, result.Vertex, NumVertex);
