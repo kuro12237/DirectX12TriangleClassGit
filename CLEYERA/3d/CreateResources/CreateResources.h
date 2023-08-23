@@ -49,7 +49,6 @@ class CreateResources
 {
 public:
 
-
 	static CreateResources* GetInstance();
 
 	/// <summary>
