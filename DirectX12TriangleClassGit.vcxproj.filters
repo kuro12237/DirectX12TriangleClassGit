@@ -79,6 +79,9 @@
     <Filter Include="ソース ファイル\CLEYERA\3d\Line">
       <UniqueIdentifier>{11e2282c-483f-4d80-8fb0-caecabdede8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CLEYERA\ObjectManager">
+      <UniqueIdentifier>{6492eb76-af25-4fbd-a13d-7a5aa7aa29fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\3d\Line\Line.cpp">
       <Filter>ソース ファイル\CLEYERA\3d\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\ObjectManager\ObjectManager.cpp">
+      <Filter>ソース ファイル\CLEYERA\ObjectManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\3d\Line\Line.h">
       <Filter>ソース ファイル\CLEYERA\3d\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\ObjectManager\ObjectManager.h">
+      <Filter>ソース ファイル\CLEYERA\ObjectManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 
 #include"Model.h"
 #include"Line/Line.h"
+#include"ObjectManager/ObjectManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -46,6 +47,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	bool texFlag = false;
 
+	ObjectManager* obj = nullptr;
+
+	obj = new ObjectManager;
+	obj->Initialize({0,0,0,0},size,worldTransform_[2],texUV,"Resource","plane.obj");
+
+
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -79,6 +86,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		model->TransferMatrix(ShereWorldMatrix);
 		//model->Draw();
 
+		ImGui::Begin("obj");
+
+		ImGui::SliderFloat3("trans", &worldTransform_[2].translation_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[2].rotate_.x, -10.0f, 10.0f);
+
+		ImGui::End();
+
+		Matrix4x4 objMatrix = MatrixTransform::MakeAffineMatrix(
+			worldTransform_[2].scale_,
+			worldTransform_[2].rotate_,
+			worldTransform_[2].translation_);
+			objMatrix = Camera::worldViewProjectionMatrixFanc(objMatrix);
+
+			obj->Draw(objMatrix);
 
 		ImGui::Begin("camera");
 
@@ -112,7 +133,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//mesh->Release();
 	model->Release();
-	
+	obj->Release();
 	sprite->Release();
 	Cleyera::Finalize();
 

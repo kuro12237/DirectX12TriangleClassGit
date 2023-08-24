@@ -44,6 +44,7 @@
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\math\ViewProjection\ViewProjection.cpp" />
     <ClCompile Include="CLEYERA\math\WorldTransform\WorldTransform.cpp" />
+    <ClCompile Include="CLEYERA\ObjectManager\ObjectManager.cpp" />
     <ClCompile Include="CLEYERA\TexManager\TexManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -80,6 +81,7 @@
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h" />
     <ClInclude Include="CLEYERA\math\ViewProjection\ViewProjection.h" />
     <ClInclude Include="CLEYERA\math\WorldTransform\WorldTransform.h" />
+    <ClInclude Include="CLEYERA\ObjectManager\ObjectManager.h" />
     <ClInclude Include="CLEYERA\TexManager\TexManager.h" />
   </ItemGroup>
   <ItemGroup>
