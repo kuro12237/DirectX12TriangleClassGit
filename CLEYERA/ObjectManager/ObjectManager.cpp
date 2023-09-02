@@ -29,6 +29,8 @@ ModelData ObjectManager::LoadFile(const std::string& directoryPath, const std::s
 		{   //v頂点位置
 			Vector4 position;
 			s >> position.x >> position.y >> position.z;
+			position.x *= -1.0f;
+		
 			position.w = 1.0f;
 			positions.push_back(position);
 		}
@@ -36,12 +38,17 @@ ModelData ObjectManager::LoadFile(const std::string& directoryPath, const std::s
 		{	//vt頂点テクスチャの座標
 			Vector2 texcoord;
 			s >> texcoord.x >> texcoord.y;
+			texcoord.y *= -1.0f;
+			texcoord.x *= -1.0f;
 			texcoords.push_back(texcoord);
 		}
 		else if (identifier == "vn") 
 		{   //vn頂点法線
 			Vector3 normal;
+			
 			s >> normal.x >> normal.y >> normal.z;
+			normal.x *=  -1.0f;
+			
 			normals.push_back(normal);
 		}
 		else if (identifier == "f")
@@ -65,9 +72,42 @@ ModelData ObjectManager::LoadFile(const std::string& directoryPath, const std::s
 				VertexData vertex = { position,texcoord,normal };
 				modelData.vertices.push_back(vertex);
 			}
+		}else if (identifier == "mtllib") {
+			//materialTemplateLibraryファイルの名前を取得する
+			std::string materialFilename;
+			s >> materialFilename;
+			modelData.material = LoadMaterialTemplateFile(directoryPath, materialFilename);
 		}
+	
 	}
+	tex_ = TexManager::LoadTexture(modelData.material.textureFilePath);
+
 	return modelData;
+}
+
+MaterialData ObjectManager::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
+{
+	MaterialData materialData;
+	std::string line;
+	std::ifstream file(directoryPath + "/" + filename);
+	assert(file.is_open());
+	while (std::getline(file,line))
+	{
+		std::string identifier;
+		std::istringstream s(line);
+		s >> identifier;
+
+		if (identifier=="map_Kd")
+		{
+			std::string texfilename;
+			s >> texfilename;
+			materialData.textureFilePath = directoryPath + "/" + texfilename;
+
+		}
+
+	}
+
+	return materialData;
 }
 
 void ObjectManager::Initialize(Vector4 pos, float size, WorldTransform worldTransform, texResourceProperty tex,const std::string& directoryPath, const std::string& filename)
@@ -86,7 +126,7 @@ void ObjectManager::Initialize(Vector4 pos, float size, WorldTransform worldTran
 	Resource_.BufferView.StrideInBytes = sizeof(VertexData);
 
 
-	tex_ = tex;
+	tex;
 	centerPos_ = pos;
 	size_ = size;
 	workdTransform_ = worldTransform;
@@ -113,6 +153,7 @@ void ObjectManager::Draw(Matrix4x4 m)
 	*materialData = { 1,1,1,1 };
 
 	Vector3 directionPos = { 0.0f,-0.0f,0.0f };
+
 
 	lightData->direction = directionPos;
 	lightData->color = { 0,0,0,1, };
@@ -146,7 +187,7 @@ void ObjectManager::Release()
 	Resource_.Material->Release();
 	Resource_.Vertex->Release();
 	Resource_.wvpResource->Release();
-
+	tex_ = TexManager::Release(tex_);
 
 }
 

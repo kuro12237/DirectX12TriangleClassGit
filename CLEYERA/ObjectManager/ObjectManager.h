@@ -8,10 +8,16 @@
 #include"GraphicsPipeline.h"
 #include"TexManager.h"
 
+struct MaterialData
+{
+	std::string textureFilePath;
+};
 struct ModelData
 {
 	std::vector<VertexData> vertices;
+	MaterialData material;
 };
+
 
 class ObjectManager
 {
@@ -23,6 +29,8 @@ public:
 
      ModelData LoadFile(const std::string& directoryPath, const std::string& filename);
 
+	 MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
+
 	 void Initialize(Vector4 pos, float size, WorldTransform worldTransform, texResourceProperty tex, const std::string& directoryPath, const std::string& filename);
 
 	 void Draw(Matrix4x4 m);
@@ -31,6 +39,7 @@ public:
 private:
 
 	ModelData modelData_ = {};
+	MaterialData materialData_ = {};
 	ResourcePeroperty Resource_ = {};
 
 

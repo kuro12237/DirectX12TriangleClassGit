@@ -19,10 +19,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	camera.translate = { 0,0,-5 };
 	camera.rotate = { 0,0,0 };
 
-	WorldTransform worldTransform_[3];
+	WorldTransform worldTransform_[4];
 	worldTransform_[0].Initialize();
 	worldTransform_[1].Initialize();
 	worldTransform_[2].Initialize();
+	worldTransform_[3].Initialize();
 
 	Model* model = new Model;
 
@@ -47,11 +48,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	bool texFlag = false;
 
-	ObjectManager* obj = nullptr;
+	ObjectManager* obj[2];// = nullptr;
 
-	obj = new ObjectManager;
-	obj->Initialize({0,0,0,0},size,worldTransform_[2],texUV,"Resource","plane.obj");
+	obj[0] = new ObjectManager;
+	obj[0]->Initialize({0,0,0,0}, size, worldTransform_[2], texUV, "Resource", "plane.obj");
 
+	obj[1] = new ObjectManager;
+	obj[1]->Initialize({ 0,0,0,0 }, size, worldTransform_[3], texUV, "Resource", "axis.obj");
 
 	while (msg.message != WM_QUIT)
 	{
@@ -92,15 +95,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ImGui::SliderFloat3("rotate", &worldTransform_[2].rotate_.x, -10.0f, 10.0f);
 
 		ImGui::End();
+		ImGui::Begin("obj2");
 
+		ImGui::SliderFloat3("trans", &worldTransform_[3].translation_.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &worldTransform_[3].rotate_.x, -10.0f, 10.0f);
+
+		ImGui::End();
 		Matrix4x4 objMatrix = MatrixTransform::MakeAffineMatrix(
 			worldTransform_[2].scale_,
 			worldTransform_[2].rotate_,
 			worldTransform_[2].translation_);
 			objMatrix = Camera::worldViewProjectionMatrixFanc(objMatrix);
 
-			obj->Draw(objMatrix);
+			Matrix4x4 obj2Matrix = MatrixTransform::MakeAffineMatrix(
+				worldTransform_[3].scale_,
+				worldTransform_[3].rotate_,
+				worldTransform_[3].translation_);
+			obj2Matrix = Camera::worldViewProjectionMatrixFanc(obj2Matrix);
 
+		obj[0]->Draw(objMatrix);
+		obj[1]->Draw(obj2Matrix);
 		ImGui::Begin("camera");
 
 		ImGui::SliderFloat3("trans", &camera.translate.x, -10.0f, 10.0f);
@@ -133,7 +147,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//mesh->Release();
 	model->Release();
-	obj->Release();
+	obj[0]->Release();
+	obj[1]->Release();
 	sprite->Release();
 	Cleyera::Finalize();
 
