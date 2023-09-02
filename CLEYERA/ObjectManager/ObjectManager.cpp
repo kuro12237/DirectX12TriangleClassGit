@@ -182,7 +182,6 @@ void ObjectManager::Draw(Matrix4x4 m)
 
 void ObjectManager::Release()
 {
-
 	Resource_.Light->Release();
 	Resource_.Material->Release();
 	Resource_.Vertex->Release();
