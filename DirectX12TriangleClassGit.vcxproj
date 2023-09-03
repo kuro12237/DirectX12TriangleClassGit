@@ -22,6 +22,7 @@
     <None Include="CLEYERA\Config\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.h</PrecompiledHeaderFile>
@@ -30,6 +31,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
   </ItemGroup>
