@@ -1,6 +1,6 @@
 #include "WinApp.h"
 
-WinApp WinApp::GetInstance()
+WinApp *WinApp::GetInstance()
 {
 	static WinApp instance;
 	return &instance;
