@@ -8,10 +8,45 @@
     <Filter Include="リソース ファイル\config">
       <UniqueIdentifier>{8b599666-8065-4bcf-aaf9-c3c2837290c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA">
+      <UniqueIdentifier>{9ab55b8a-64fe-4d67-8d71-e5b9dee912ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\base">
+      <UniqueIdentifier>{204edb48-7755-42a7-a61d-7d905828b260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\base\Win">
+      <UniqueIdentifier>{43c8fee7-2ab5-42b8-a709-4bed7f6e47b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\base\DX">
+      <UniqueIdentifier>{017f8792-fd1a-4636-a1e8-9cdf1151f7e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility">
+      <UniqueIdentifier>{06f07548-f2dd-4bf5-af1c-efff3fe1d603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\Pch">
+      <UniqueIdentifier>{65d73a79-29d0-48a6-a57a-a34b5eb0662c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
       <Filter>リソース ファイル\config</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
+      <Filter>CLEYERA\Utility\Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Cleyera.cpp">
+      <Filter>CLEYERA</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
+      <Filter>CLEYERA\Utility\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Cleyera.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
