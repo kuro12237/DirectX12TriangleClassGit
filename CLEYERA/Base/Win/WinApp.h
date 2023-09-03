@@ -4,13 +4,17 @@
 class WinApp
 {
 public:
-	WinApp();
-	~WinApp();
+	
+	static WinApp *GetInstance();
 
-	static WinApp*GetInstance();
+
 
 
 private:
+
+	int32_t kCilientWidth = 720;
+
+
 
 };
 
