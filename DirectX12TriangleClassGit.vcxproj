@@ -22,8 +22,10 @@
     <None Include="CLEYERA\Config\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pch.h</PrecompiledHeaderFile>
@@ -31,8 +33,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
+    <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -121,8 +125,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,8 +143,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

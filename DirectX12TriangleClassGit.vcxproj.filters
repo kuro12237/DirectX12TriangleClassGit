@@ -22,6 +22,9 @@
     <Filter Include="CLEYERA\config">
       <UniqueIdentifier>{8b599666-8065-4bcf-aaf9-c3c2837290c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Utility\LogManager">
+      <UniqueIdentifier>{b67d1e82-2147-439b-85b5-dca6f7ac9655}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -39,6 +42,12 @@
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp">
       <Filter>CLEYERA\base\Win</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp">
+      <Filter>CLEYERA\base\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp">
+      <Filter>CLEYERA\Utility\LogManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -49,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h">
       <Filter>CLEYERA\base\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h">
+      <Filter>CLEYERA\base\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h">
+      <Filter>CLEYERA\Utility\LogManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
