@@ -7,7 +7,7 @@ public:
 	WinApp();
 	~WinApp();
 
-	static WinApp GetInstance();
+	static WinApp*GetInstance();
 
 
 private:

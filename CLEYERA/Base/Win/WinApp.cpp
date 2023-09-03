@@ -2,8 +2,6 @@
 
 WinApp WinApp::GetInstance()
 {
-	static WinApp* instance;
-
-
-
+	static WinApp instance;
+	return &instance;
 }
