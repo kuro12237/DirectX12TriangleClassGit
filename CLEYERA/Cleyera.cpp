@@ -21,5 +21,17 @@ void Cleyera::WinMSG(MSG msg)
 
 void Cleyera::Finalize()
 {
+	DirectXCommon::Finalize();
 	WinApp::Finalize();
+}
+
+void Cleyera::BeginFlame()
+{
+	//DirectXCommon::BeginFlame();
+}
+
+void Cleyera::EndFlame()
+{
+	//DirectXCommon::EndFlame();
+
 }

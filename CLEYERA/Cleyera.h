@@ -15,6 +15,10 @@ public:
 
 	static void Finalize();
 
+	static void BeginFlame();
+
+	static void EndFlame();
+
 private:
 
 };

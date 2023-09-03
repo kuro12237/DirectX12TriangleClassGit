@@ -2,6 +2,7 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	D3DResourceLeakChecker leakCheck;
 	Cleyera::Initialize();
 	MSG msg{};
 
@@ -11,6 +12,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			Cleyera::WinMSG(msg);
 		}
+
+		Cleyera::BeginFlame();
+
+		Cleyera::EndFlame();
+
 	}
 	Cleyera::Finalize();
 

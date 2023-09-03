@@ -9,15 +9,135 @@ DirectXCommon* DirectXCommon::GetInstance()
 
 void DirectXCommon::initialize()
 {
+#ifdef _DEBUG
 	
+	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&DirectXCommon::GetInstance()->debugController))))
+	{
+		DirectXCommon::GetInstance()->debugController->EnableDebugLayer();
+		DirectXCommon::GetInstance()->debugController->SetEnableGPUBasedValidation(TRUE);
+	}
+#endif
 	CreateFactory();
 	CreateDevice();
-	DebugErrorinfiQueue();
+
+#ifdef _DEBUG
+	//ID3D12InfoQueue* infoQueue = nullptr;
+	//if (SUCCEEDED(DirectXCommon::GetInstance()->m_pDevice_->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
+	//	//やばいエラー
+	//	infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+	//	//エラー
+	//	infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+	//	//警告
+	//	infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
+	//	//リリース
+	//	//infoQueue->Release();
+	//	//エラーの抑制
+	//	D3D12_MESSAGE_ID denyIds[] = {
+	//		D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
+	//	};
+	//	//抑制レベル
+	//	D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
+	//	D3D12_INFO_QUEUE_FILTER filter{};
+	//	filter.DenyList.NumIDs = _countof(denyIds);
+	//	filter.DenyList.pIDList = denyIds;
+	//	filter.DenyList.NumSeverities = _countof(severities);
+	//	filter.DenyList.pSeverityList = severities;
+	//	infoQueue->PushStorageFilter(&filter);
+	//	infoQueue->Release();
+	//}
+#endif _DEBUG
+
+
 	CreateCommands();
 	CreateSwapChain();
 	CreateDescritorHeap();
 	CreateSwapChainResource();
 	CreateRTV();
+	CreateFence();
+}
+
+void DirectXCommon::Finalize()
+{
+
+	CloseHandle(DirectXCommon::GetInstance()->fenceEvent);
+#ifdef _DEBUG
+	DirectXCommon::GetInstance()->debugController->Release();
+#endif
+}
+
+void DirectXCommon::BeginFlame()
+{
+	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
+	Commands commands = DirectXCommon::GetInstance()->commands;
+
+	UINT backBufferIndex = swapChain.m_pSwapChain->GetCurrentBackBufferIndex();
+	D3D12_RESOURCE_BARRIER barrier{};
+
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = swapChain.m_pResource[backBufferIndex].Get();
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
+	commands.m_pList.Get()->ResourceBarrier(1, &barrier);
+	DirectXCommon::GetInstance()->barrier = barrier;
+
+	commands.m_pList.Get()->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], false, nullptr);
+	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
+	commands.m_pList.Get()->ClearRenderTargetView(DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
+
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart();
+	commands.m_pList.Get()->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], false, &dsvHandle);
+	commands.m_pList.Get()->ClearDepthStencilView(
+		dsvHandle,
+		D3D12_CLEAR_FLAG_DEPTH,
+		1.0f,
+		0,
+		0,
+		nullptr);
+	DirectXCommon::GetInstance()->swapChain = swapChain;
+}
+
+void DirectXCommon::EndFlame()
+{
+	Commands commands = DirectXCommon::GetInstance()->commands;
+	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier;
+
+	ComPtr<ID3D12Fence> fence = DirectXCommon::GetInstance()->m_pFence_;
+	uint64_t fenceValue = DirectXCommon::GetInstance()->fenceValue;
+	HANDLE fenceEvent = DirectXCommon::GetInstance()->fenceEvent;
+	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
+
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+	commands.m_pList->ResourceBarrier(1, &barrier);
+	HRESULT hr = commands.m_pList->Close();
+	assert(SUCCEEDED(hr));
+
+    ID3D12CommandList* commandLists[] = { DirectXCommon::GetInstance()->commands.m_pList.Get()};
+	commands.m_pQueue->ExecuteCommandLists(1, commandLists);
+	swapChain.m_pSwapChain->Present(0, 1);
+
+	fenceValue++;
+
+	commands.m_pQueue->Signal(fence.Get(), fenceValue);
+	if (fence->GetCompletedValue() < fenceValue)
+	{
+		fence->SetEventOnCompletion(fenceValue, fenceEvent);
+		WaitForSingleObject(fenceEvent, INFINITE);
+	}
+	swapChain.m_pSwapChain->Present(1, 0);
+
+	hr = commands.m_pAllocator->Reset();
+	assert(SUCCEEDED(hr));
+	hr = commands.m_pList->Reset(commands.m_pAllocator.Get(), nullptr);
+	assert(SUCCEEDED(hr));
+
+	DirectXCommon::GetInstance()->swapChain = swapChain;
+	DirectXCommon::GetInstance()->barrier = barrier;
+	DirectXCommon::GetInstance()->m_pFence_ = fence;
+	DirectXCommon::GetInstance()->fenceEvent = fenceEvent;
+	DirectXCommon::GetInstance()->fenceValue = fenceValue;
 }
 
 ComPtr<ID3D12DescriptorHeap> DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)
@@ -61,15 +181,6 @@ ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTextureResource()
 }
 void DirectXCommon::CreateFactory()
 {
-#ifdef _DEBUG
-	ComPtr<ID3D12Debug1> debugController = nullptr;
-	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
-	{
-		debugController->EnableDebugLayer();
-		debugController->SetEnableGPUBasedValidation(TRUE);
-	}
-	DirectXCommon::GetInstance()->m_pDebugController = debugController;
-#endif
 
 	//DXGIファクトリーの生成
 	ComPtr<IDXGIFactory7>dxgiFactory = nullptr;
@@ -130,32 +241,48 @@ void DirectXCommon::CreateDevice()
 
 void DirectXCommon::DebugErrorinfiQueue()
 {
-#ifdef _DEBUG
-	ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->m_pDevice_;
+	ID3D12InfoQueue* infoQueue = nullptr;
+	ID3D12Device* device = DirectXCommon::GetInstance()->m_pDevice_.Get();
 
 	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
 	{
+		//やばいエラー時に止まる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+
+		//エラー時に止まる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+
+		//警告時に止まる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
+
+		//
+		//エラーと警告の抑制
+
 
 		D3D12_MESSAGE_ID denyIds[] =
 		{
+			//windows11でのDXGIデバッグレイヤーとDX12デバッグレイヤーの相互バグによるエラーメッセージ
+			//https:,,stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
+
 			D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
 		};
 
+		//抑制するレベル
 		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
 		D3D12_INFO_QUEUE_FILTER filter{};
+
 		filter.DenyList.NumIDs = _countof(denyIds);
 		filter.DenyList.pIDList = denyIds;
 		filter.DenyList.NumSeverities = _countof(severities);
 		filter.DenyList.pSeverityList = severities;
 
+		//指定したメッセージの表示を抑制する
 		infoQueue->PushStorageFilter(&filter);
+
+		//解放
+		infoQueue->Release();
 	}
-	DirectXCommon::GetInstance()->m_pDevice_ = device;
-#endif // _DEBUG
+	
 }
 
 void DirectXCommon::CreateCommands()
@@ -254,5 +381,21 @@ void DirectXCommon::CreateRTV()
 	DirectXCommon::GetInstance()->rtv = rtv;
 	DirectXCommon::GetInstance()->m_pDevice_ = device;
 
+}
+
+void DirectXCommon::CreateFence()
+{
+	ComPtr<ID3D12Fence> fence = nullptr;
+	uint64_t fenceValue = {};
+	HANDLE fenceEvent = {};
+	fenceValue = 0;
+
+	DirectXCommon::GetInstance()->m_pDevice_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+	assert(fenceEvent != nullptr);
+
+	DirectXCommon::GetInstance()->m_pFence_ = fence;
+	DirectXCommon::GetInstance()->fenceEvent = fenceEvent;
+	DirectXCommon::GetInstance()->fenceValue = fenceValue;
 }
 

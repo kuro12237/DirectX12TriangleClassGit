@@ -44,6 +44,10 @@ public:
 	static DirectXCommon* GetInstance();
 
 	static void initialize();
+	static void Finalize();
+
+	static void BeginFlame();
+	static void EndFlame();
 
 private:
 
@@ -57,20 +61,29 @@ private:
 	static void CreateDescritorHeap();
 	static void CreateSwapChainResource();
 	static void CreateRTV();
+	static void CreateFence();
 
 	//DXGI/ID3D12‚ÍŠî–{Comptr‚É•Ï‚¦‚é
-	D3DResourceLeakChecker leakCheck;
+
 
     ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 	ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
 	ComPtr<ID3D12Device>m_pDevice_ = nullptr;
-	ComPtr<ID3D12Debug1> m_pDebugController = nullptr;
+	ID3D12Debug1* debugController = nullptr;
 	Commands commands = {};
 	SwapChain swapChain = {};
 	RTV rtv = {};
 	ComPtr<ID3D12DescriptorHeap> m_pSrvDescriptorHeap;
 	ComPtr<ID3D12DescriptorHeap> m_pDsvDescripterHeap;
 	ComPtr<ID3D12Resource> m_pDepthResource = nullptr;
+	ComPtr<ID3D12Fence> m_pFence_ = nullptr;
+	uint64_t fenceValue;
+	HANDLE fenceEvent;
+
+	D3D12_RESOURCE_BARRIER barrier{};
+
+
+
 
 	DirectXCommon() = default;
 	~DirectXCommon() = default;
