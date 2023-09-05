@@ -90,13 +90,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		model->TransferMatrix(ShereWorldMatrix);
 		//model->Draw();
 
-		ImGui::Begin("obj");
+		ImGui::Begin("plane");
 
 		ImGui::SliderFloat3("trans", &worldTransform_[2].translation_.x, -10.0f, 10.0f);
 		ImGui::SliderFloat3("rotate", &worldTransform_[2].rotate_.x, -10.0f, 10.0f);
 
 		ImGui::End();
-		ImGui::Begin("obj2");
+		ImGui::Begin("axis");
 
 		ImGui::SliderFloat3("trans", &worldTransform_[3].translation_.x, -10.0f, 10.0f);
 		ImGui::SliderFloat3("rotate", &worldTransform_[3].rotate_.x, -10.0f, 10.0f);
