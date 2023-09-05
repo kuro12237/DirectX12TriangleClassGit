@@ -43,6 +43,7 @@ private:
 	ResourcePeroperty Resource_ = {};
 
 
+	DirectX::ScratchImage mipImages2 = {};
 
 	texResourceProperty tex_;
 	WorldTransform workdTransform_ = {};
