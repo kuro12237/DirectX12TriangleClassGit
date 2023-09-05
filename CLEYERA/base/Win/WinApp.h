@@ -28,7 +28,6 @@ private:
 
 	static const int32_t kWindowWidth = 1280;
 	static const int32_t kWindowHeight = 720;
-
 	WNDCLASS wc_{};
 	HWND hwnd_ = {};
 

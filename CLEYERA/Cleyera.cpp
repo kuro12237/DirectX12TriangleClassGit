@@ -10,13 +10,12 @@ Cleyera* Cleyera::GetInstance()
 void Cleyera::Initialize()
 {
 	WinApp::Initialize();
-
 	DirectXCommon::initialize();
 }
 
 void Cleyera::WinMSG(MSG msg)
 {
-		WinApp::Msg(msg);	
+	WinApp::Msg(msg);	
 }
 
 void Cleyera::Finalize()
@@ -27,11 +26,10 @@ void Cleyera::Finalize()
 
 void Cleyera::BeginFlame()
 {
-	//DirectXCommon::BeginFlame();
+	DirectXCommon::BeginFlame();
 }
 
 void Cleyera::EndFlame()
 {
-	//DirectXCommon::EndFlame();
-
+	DirectXCommon::EndFlame();
 }

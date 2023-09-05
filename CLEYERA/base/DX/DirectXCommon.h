@@ -3,8 +3,7 @@
 #include"WinApp.h"
 #include"LogManager.h"
 
-struct D3DResourceLeakChecker
-{
+struct D3DResourceLeakChecker{
 	~D3DResourceLeakChecker() {
 		ComPtr<IDXGIDebug1>debug;
 		if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(&debug))))
@@ -23,22 +22,19 @@ struct Commands {
 	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
 };
 
-struct SwapChain
-{
+struct SwapChain{
 	ComPtr<IDXGISwapChain4> m_pSwapChain;
 	ComPtr<ID3D12Resource> m_pResource[2];
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 };
-struct  RTV
-{
+struct  RTV{
 	ComPtr<ID3D12DescriptorHeap> m_pDescritorHeap;
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 };
 
-class DirectXCommon
-{
+class DirectXCommon{
 public:
 	
 	static DirectXCommon* GetInstance();
@@ -55,7 +51,6 @@ private:
 	static ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
 	static void CreateFactory();
 	static void CreateDevice();
-	static void DebugErrorinfiQueue();
 	static void CreateCommands();
 	static void CreateSwapChain();
 	static void CreateDescritorHeap();
@@ -63,13 +58,12 @@ private:
 	static void CreateRTV();
 	static void CreateFence();
 
-	//DXGI/ID3D12‚ÍŠî–{Comptr‚É•Ï‚¦‚é
-
+	//DXGI+ID3D12‚ÍŠî–{Comptr‚É•Ï‚¦‚é
 
     ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 	ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
 	ComPtr<ID3D12Device>m_pDevice_ = nullptr;
-	ID3D12Debug1* debugController = nullptr;
+	ComPtr<ID3D12Debug1> m_pDebugController = nullptr;
 	Commands commands = {};
 	SwapChain swapChain = {};
 	RTV rtv = {};
@@ -77,12 +71,9 @@ private:
 	ComPtr<ID3D12DescriptorHeap> m_pDsvDescripterHeap;
 	ComPtr<ID3D12Resource> m_pDepthResource = nullptr;
 	ComPtr<ID3D12Fence> m_pFence_ = nullptr;
-	uint64_t fenceValue;
-	HANDLE fenceEvent;
-
+	uint64_t fenceValue = {};
+	HANDLE fenceEvent = {};
 	D3D12_RESOURCE_BARRIER barrier{};
-
-
 
 
 	DirectXCommon() = default;

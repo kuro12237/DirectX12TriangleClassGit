@@ -1,9 +1,7 @@
 #include "DirectXCommon.h"
 
-DirectXCommon* DirectXCommon::GetInstance()
-{
+DirectXCommon* DirectXCommon::GetInstance(){
 	static DirectXCommon instance;
-
 	return &instance;
 }
 
@@ -11,57 +9,51 @@ void DirectXCommon::initialize()
 {
 #ifdef _DEBUG
 	
-	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&DirectXCommon::GetInstance()->debugController))))
+	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&DirectXCommon::GetInstance()->m_pDebugController))))
 	{
-		DirectXCommon::GetInstance()->debugController->EnableDebugLayer();
-		DirectXCommon::GetInstance()->debugController->SetEnableGPUBasedValidation(TRUE);
+		DirectXCommon::GetInstance()->m_pDebugController->EnableDebugLayer();
+		DirectXCommon::GetInstance()->m_pDebugController->SetEnableGPUBasedValidation(TRUE);
 	}
 #endif
 	CreateFactory();
 	CreateDevice();
 
 #ifdef _DEBUG
-	//ID3D12InfoQueue* infoQueue = nullptr;
-	//if (SUCCEEDED(DirectXCommon::GetInstance()->m_pDevice_->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
-	//	//やばいエラー
-	//	infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
-	//	//エラー
-	//	infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
-	//	//警告
-	//	infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
-	//	//リリース
-	//	//infoQueue->Release();
-	//	//エラーの抑制
-	//	D3D12_MESSAGE_ID denyIds[] = {
-	//		D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
-	//	};
-	//	//抑制レベル
-	//	D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
-	//	D3D12_INFO_QUEUE_FILTER filter{};
-	//	filter.DenyList.NumIDs = _countof(denyIds);
-	//	filter.DenyList.pIDList = denyIds;
-	//	filter.DenyList.NumSeverities = _countof(severities);
-	//	filter.DenyList.pSeverityList = severities;
-	//	infoQueue->PushStorageFilter(&filter);
-	//	infoQueue->Release();
-	//}
-#endif _DEBUG
+	ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
 
+	if (SUCCEEDED(DirectXCommon::GetInstance()->m_pDevice_->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+	{
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
+		D3D12_MESSAGE_ID denyIds[] =
+		{
+			D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
+		};
+		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
+		D3D12_INFO_QUEUE_FILTER filter{};
+		filter.DenyList.NumIDs = _countof(denyIds);
+		filter.DenyList.pIDList = denyIds;
+		filter.DenyList.NumSeverities = _countof(severities);
+		filter.DenyList.pSeverityList = severities;
+		infoQueue->PushStorageFilter(&filter);
+		infoQueue->Release();
+	}
+#endif _DEBUG
 
 	CreateCommands();
 	CreateSwapChain();
 	CreateDescritorHeap();
 	CreateSwapChainResource();
-	CreateRTV();
+    CreateRTV();
 	CreateFence();
 }
 
 void DirectXCommon::Finalize()
 {
-
 	CloseHandle(DirectXCommon::GetInstance()->fenceEvent);
 #ifdef _DEBUG
-	DirectXCommon::GetInstance()->debugController->Release();
+	DirectXCommon::GetInstance()->m_pDebugController->Release();
 #endif
 }
 
@@ -140,7 +132,7 @@ void DirectXCommon::EndFlame()
 	DirectXCommon::GetInstance()->fenceValue = fenceValue;
 }
 
-ComPtr<ID3D12DescriptorHeap> DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)
+ComPtr<ID3D12DescriptorHeap>  DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)
 {
 	ComPtr<ID3D12DescriptorHeap> descriptHeap = nullptr;
 	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
@@ -151,7 +143,8 @@ ComPtr<ID3D12DescriptorHeap> DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPTO
 	DirectXCommon::GetInstance()->m_pDevice_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
 	return descriptHeap;
 }
-ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTextureResource()
+
+ComPtr<ID3D12Resource>DirectXCommon::CreateDepthStencilTextureResource()
 {
 	D3D12_RESOURCE_DESC resourceDesc{};
 	resourceDesc.Width = WinApp::GetInstance()->GetkCilientWidth();
@@ -179,6 +172,7 @@ ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTextureResource()
 
 	return resource;
 }
+
 void DirectXCommon::CreateFactory()
 {
 
@@ -239,52 +233,6 @@ void DirectXCommon::CreateDevice()
 	assert(DirectXCommon::GetInstance()->m_pDevice_ != nullptr);
 }
 
-void DirectXCommon::DebugErrorinfiQueue()
-{
-	ID3D12InfoQueue* infoQueue = nullptr;
-	ID3D12Device* device = DirectXCommon::GetInstance()->m_pDevice_.Get();
-
-	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
-	{
-		//やばいエラー時に止まる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
-
-		//エラー時に止まる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
-
-		//警告時に止まる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
-
-		//
-		//エラーと警告の抑制
-
-
-		D3D12_MESSAGE_ID denyIds[] =
-		{
-			//windows11でのDXGIデバッグレイヤーとDX12デバッグレイヤーの相互バグによるエラーメッセージ
-			//https:,,stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
-
-			D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
-		};
-
-		//抑制するレベル
-		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
-		D3D12_INFO_QUEUE_FILTER filter{};
-
-		filter.DenyList.NumIDs = _countof(denyIds);
-		filter.DenyList.pIDList = denyIds;
-		filter.DenyList.NumSeverities = _countof(severities);
-		filter.DenyList.pSeverityList = severities;
-
-		//指定したメッセージの表示を抑制する
-		infoQueue->PushStorageFilter(&filter);
-
-		//解放
-		infoQueue->Release();
-	}
-	
-}
-
 void DirectXCommon::CreateCommands()
 {
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->m_pDevice_;
@@ -328,7 +276,6 @@ void DirectXCommon::CreateSwapChain()
 
 	DirectXCommon::GetInstance()->swapChain.swapChainDesc = swapChainDesc;
 }
-
 
 void DirectXCommon::CreateDescritorHeap()
 {
