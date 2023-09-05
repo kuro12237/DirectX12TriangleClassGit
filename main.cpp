@@ -50,6 +50,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	ObjectManager* obj[2];// = nullptr;
 
+
 	obj[0] = new ObjectManager;
 	obj[0]->Initialize({0,0,0,0}, size, worldTransform_[2], texUV, "Resource", "plane.obj");
 
