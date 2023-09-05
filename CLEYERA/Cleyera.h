@@ -17,6 +17,6 @@ public:
 	static void EndFlame();
 private:
 
-	//static D3DResourceLeakChecker leakCheck;
+	static D3DResourceLeakChecker leakCheck;
 };
 
