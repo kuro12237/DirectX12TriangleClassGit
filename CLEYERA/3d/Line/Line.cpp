@@ -19,6 +19,7 @@ void Line::Initialize(LinePloperty line, WorldTransform worldTransform)
 
 }
 
+
 void Line::Draw()
 {
 
