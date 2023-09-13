@@ -13,10 +13,7 @@ void Cleyera::Initialize()
 	DirectXCommon::initialize();
 }
 
-void Cleyera::WinMSG(MSG msg)
-{
-	WinApp::Msg(msg);	
-}
+
 
 void Cleyera::Finalize()
 {

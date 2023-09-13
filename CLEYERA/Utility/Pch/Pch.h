@@ -19,6 +19,7 @@
 
 
 using Microsoft::WRL::ComPtr;
+using namespace std;
 
 
 

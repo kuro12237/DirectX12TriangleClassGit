@@ -9,23 +9,72 @@ WinApp *WinApp::GetInstance()
 
 void WinApp::Initialize()
 {
-	WNDCLASS wc_{};
-	HWND hwnd;
+	//MainWindow
+	WinApp::GetInstance()->hwnd_= CreateWIND(
+		WinApp::GetInstance()->kWindowWidth,
+		WinApp::GetInstance()->kWindowHeight,
+		L"CLEYERA",
+		WinApp::GetInstance()->wc_);
+	ShowWindow(WinApp::GetInstance()->hwnd_, SW_SHOW);
+	
+#ifdef _DEBUG
+	//Debugƒc[ƒ‹
 
-	wc_.lpfnWndProc = WinApp::WindowProc;
-	wc_.lpszClassName = L"CLEYERA";
-	wc_.hInstance = GetModuleHandle(nullptr);
-	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	RegisterClass(&wc_);
+	WinApp::GetInstance()->DebugHwnd_ = CreateWIND(
+			WinApp::GetInstance()->kDebugToolWindowWidth,
+			WinApp::GetInstance()->kDebugToolWindowHeight,
+			L"CLEYERA",
+			WinApp::GetInstance()->wc_
+		);
+	ShowWindow(WinApp::GetInstance()->DebugHwnd_, SW_SHOW);
+
+#endif // _DEBUG
+
+	
+
+}
+
+bool WinApp::WinMsg()
+{
+	if (PeekMessage(&WinApp::GetInstance()->msg, NULL, 0, 0, PM_REMOVE)) {
+		TranslateMessage(&WinApp::GetInstance()->msg);
+		DispatchMessage(&WinApp::GetInstance()->msg);
+	}
+
+	if (WinApp::GetInstance()->msg.message != WM_QUIT) {
+		return true;
+	}
+
+	return false;
+}
+
+void WinApp::Finalize()
+{
+	CloseWindow(WinApp::GetInstance()->hwnd_);
+
+#ifdef _DEBUG
+	CloseWindow(WinApp::GetInstance()->DebugHwnd_);
+#endif // _DEBUG
+
+
+}
+
+HWND WinApp::CreateWIND(const int32_t kWidth, const int32_t kHeight, LPCTSTR title, WNDCLASS wc)
+{
+	wc.lpfnWndProc = WinApp::WindowProc;
+	wc.lpszClassName = title;
+	wc.hInstance = GetModuleHandle(nullptr);
+	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	RegisterClass(&wc);
 
 	RECT wrc = { 0,0,
-	WinApp::GetInstance()->kWindowWidth,
-	WinApp::GetInstance()->kWindowHeight };
+	kWidth,
+	kHeight };
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
-	hwnd = CreateWindow(
-		wc_.lpszClassName,
-		L"CLEYERA",
+	return CreateWindow(
+		wc.lpszClassName,
+		title,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
@@ -33,25 +82,9 @@ void WinApp::Initialize()
 		wrc.bottom - wrc.top,
 		nullptr,
 		nullptr,
-		wc_.hInstance,
+		wc.hInstance,
 		nullptr
 	);
-
-	ShowWindow(hwnd, SW_SHOW);
-	WinApp::GetInstance()->wc_ = wc_;
-	WinApp::GetInstance()->hwnd_ = hwnd;
-
-}
-
-void WinApp::Msg(MSG& msg)
-{
-	TranslateMessage(&msg);
-	DispatchMessage(&msg);
-}
-
-void WinApp::Finalize()
-{
-	CloseWindow(WinApp::GetInstance()->hwnd_);
 }
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)

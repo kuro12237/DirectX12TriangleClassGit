@@ -25,6 +25,8 @@
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CompileShaders\ShaderManager.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.h</PrecompiledHeaderFile>
@@ -36,6 +38,8 @@
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
+    <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
   </ItemGroup>

@@ -25,6 +25,15 @@
     <Filter Include="CLEYERA\Utility\LogManager">
       <UniqueIdentifier>{b67d1e82-2147-439b-85b5-dca6f7ac9655}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Graphics">
+      <UniqueIdentifier>{eddfe59e-92dc-4d1f-9c69-0b1ecce6088a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\GraphicsPipelineManager">
+      <UniqueIdentifier>{a485ec73-e80c-4af8-82bf-ff922e9a87eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\CompileShaders">
+      <UniqueIdentifier>{cc587c9c-3c0b-42de-af43-dd42597eb5a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -48,6 +57,12 @@
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp">
       <Filter>CLEYERA\Utility\LogManager</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\CompileShaders\ShaderManager.cpp">
+      <Filter>CLEYERA\Graphics\CompileShaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -64,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h">
       <Filter>CLEYERA\Utility\LogManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h">
+      <Filter>CLEYERA\Graphics\CompileShaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
