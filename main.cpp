@@ -20,8 +20,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{
 		Cleyera::BeginFlame();
 	
-
-
 		viewProjection->UpdateMatrix();
 		
 		worldTransform.translate.z += 0.01f;
