@@ -13,12 +13,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	WorldTransform worldTransform = {};
 	worldTransform.Initialize();
 
+	ViewProjection *viewProjection = new ViewProjection;
+	viewProjection->Initialize({ 0,0,0 }, { 0,0,-5 });
 
 	while (WinApp::WinMsg())
 	{
 		Cleyera::BeginFlame();
 	
-		model->Draw(worldTransform);
+		viewProjection->UpdateMatrix();
+
+		model->Draw(worldTransform,viewProjection);
 
 		Cleyera::EndFlame();
 

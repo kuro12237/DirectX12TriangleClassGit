@@ -15,7 +15,7 @@ void ModelPlaneState::Initialize(Model* state)
 	state;
 }
 
-void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform)
+void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProjection *viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
@@ -29,16 +29,16 @@ void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform)
 	Vector4 pos = state->GetCenterPos();
 	float size = state->GetSize();
 
-	vertexData[0].position = { pos.x - size,pos.y + size,pos.z,pos.w };
-	vertexData[1].position = { pos.x - size,pos.y - size,pos.z,pos.w };
-	vertexData[2].position = { pos.x + size,pos.y + size,pos.z,pos.w };
-	vertexData[3].position = { pos.x + size,pos.y - size,pos.z,pos.w };
+	vertexData[0].position = { pos.x - size,pos.y - size,pos.z,pos.w };
+	vertexData[1].position = { pos.x - size,pos.y + size,pos.z,pos.w };
+	vertexData[2].position = { pos.x + size,pos.y - size,pos.z,pos.w };
+	vertexData[3].position = { pos.x + size,pos.y + size,pos.z,pos.w };
 
 	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
 	indexData[3] = 1; indexData[4] = 3; indexData[5] = 2;
 
 	*materialData = state->GetColor();
-	worldTransform.TransfarMatrix(resource_.wvpResource);
+	worldTransform.TransfarMatrix(resource_.wvpResource,viewprojection);
 	
 	CommandCall();
 

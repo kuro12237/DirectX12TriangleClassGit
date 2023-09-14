@@ -8,7 +8,7 @@ class Model
 public:
 	~Model();
 	void Initialize(IModelState *state);
-	void Draw(WorldTransform worldTransform);
+	void Draw(WorldTransform worldTransform, ViewProjection *viewprojection);
 
 	WorldTransform GetWorldTransform() { return worldTransform_; }
 	Vector4 GetColor() { return color_; }

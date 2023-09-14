@@ -2,6 +2,7 @@
 #include"Pch.h"
 #include"MatrixTransform.h"
 #include"CreateResource.h"
+#include"ViewProjection.h"
 
 struct WorldTransform
 {
@@ -15,7 +16,7 @@ struct WorldTransform
 
 	void UpdateMatrix();
 
-	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource);
+	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection *viewProjection);
 
 
 

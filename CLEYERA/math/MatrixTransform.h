@@ -31,6 +31,12 @@ public:
 	/// </summary>
 	static Matrix4x4 ViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth);
 	
+	/// <summary>
+    /// 余接
+    /// </summary>
+    /// <param name="theta"></param>
+    /// <returns></returns>
+	static float Cot(float theta);
 
 	/// <summary>
 	/// 透視投影行列

@@ -11,7 +11,7 @@ class ModelPlaneState: public IModelState
 	~ModelPlaneState() {};
 	void Initialize(Model* state)override;
 
-	void Draw(Model* state, WorldTransform worldTransform)override;
+	void Draw(Model* state, WorldTransform worldTransform,ViewProjection *viewprojection)override;
 
 public:
 

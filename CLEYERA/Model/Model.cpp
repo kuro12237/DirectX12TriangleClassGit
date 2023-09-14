@@ -12,8 +12,8 @@ void Model::Initialize(IModelState* state)
 	state_->Initialize(this);
 }
 
-void Model::Draw(WorldTransform worldTransform)
+void Model::Draw(WorldTransform worldTransform, ViewProjection *viewprojection)
 {
 	worldTransform_ = worldTransform;
-	state_->Draw(this, worldTransform_);
+	state_->Draw(this, worldTransform_,viewprojection);
 }

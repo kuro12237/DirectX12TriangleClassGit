@@ -2,7 +2,7 @@
 
 Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 {
-	Matrix4x4 result;
+	Matrix4x4 result = {};
 
 	result.m[0][0] = (m1.m[0][0] * m2.m[0][0]) + (m1.m[0][1] * m2.m[1][0]) +
 		(m1.m[0][2] * m2.m[2][0]) + (m1.m[0][3] * m2.m[3][0]);
@@ -145,18 +145,25 @@ Matrix4x4 MatrixTransform::ViewportMatrix(float left, float top, float width, fl
 }
 
 
+float MatrixTransform::Cot(float theta)
+{
+
+	return (1.0f / tan(theta));
+
+}
+
 Matrix4x4 MatrixTransform::PerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip)
 {
 	Matrix4x4 result;
 	float theta = fovY / 2.0f;
 
-	result.m[0][0] = (1.0f / aspectRatio) * (1.0f/tanf(theta));
+	result.m[0][0] = (1.0f / aspectRatio) * Cot(theta);
 	result.m[0][1] = 0;
 	result.m[0][2] = 0;
 	result.m[0][3] = 0;
 
 	result.m[1][0] = 0;
-	result.m[1][1] = tanf(theta);
+	result.m[1][1] = Cot(theta);
 	result.m[1][2] = 0;
 	result.m[1][3] = 0;
 
@@ -253,7 +260,7 @@ Matrix4x4 MatrixTransform::TranslateMatrix(Vector3 t)
 
 Matrix4x4 MatrixTransform::RotateXMatrix(float theta)
 {
-	Matrix4x4 result;
+	Matrix4x4 result = {};
 
 	result.m[0][0] = 1.0f;
 	result.m[0][1] = 0.0f;
@@ -280,7 +287,7 @@ Matrix4x4 MatrixTransform::RotateXMatrix(float theta)
 
 Matrix4x4 MatrixTransform::RotateYMatrix(float theta)
 {
-	Matrix4x4 result;
+	Matrix4x4 result = {};
 
 	result.m[0][0] = std::cos(theta);
 	result.m[0][1] = 0.0f;
