@@ -29,10 +29,10 @@ void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProj
 	Vector4 pos = state->GetCenterPos();
 	float size = state->GetSize();
 
-	vertexData[0].position = { pos.x - size,pos.y - size,pos.z,pos.w };
-	vertexData[1].position = { pos.x - size,pos.y + size,pos.z,pos.w };
-	vertexData[2].position = { pos.x + size,pos.y - size,pos.z,pos.w };
-	vertexData[3].position = { pos.x + size,pos.y + size,pos.z,pos.w };
+	vertexData[0].position = { pos.x - size,pos.y + size,pos.z,pos.w };
+	vertexData[1].position = { pos.x - size,pos.y - size,pos.z,pos.w };
+	vertexData[2].position = { pos.x + size,pos.y + size,pos.z,pos.w };
+	vertexData[3].position = { pos.x + size,pos.y - size,pos.z,pos.w };
 
 	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
 	indexData[3] = 1; indexData[4] = 3; indexData[5] = 2;
