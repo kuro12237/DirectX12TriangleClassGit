@@ -20,13 +20,13 @@ void WinApp::Initialize()
 #ifdef _DEBUG
 	//Debugƒc[ƒ‹
 
-	WinApp::GetInstance()->DebugHwnd_ = CreateWIND(
-			WinApp::GetInstance()->kDebugToolWindowWidth,
-			WinApp::GetInstance()->kDebugToolWindowHeight,
-			L"CLEYERA",
-			WinApp::GetInstance()->wc_
-		);
-	ShowWindow(WinApp::GetInstance()->DebugHwnd_, SW_SHOW);
+	//WinApp::GetInstance()->DebugHwnd_ = CreateWIND(
+	//		WinApp::GetInstance()->kDebugToolWindowWidth,
+	//		WinApp::GetInstance()->kDebugToolWindowHeight,
+	//		L"CLEYERA",
+	//		WinApp::GetInstance()->wc_
+	//	);
+	//ShowWindow(WinApp::GetInstance()->DebugHwnd_, SW_SHOW);
 
 #endif // _DEBUG
 
@@ -53,7 +53,7 @@ void WinApp::Finalize()
 	CloseWindow(WinApp::GetInstance()->hwnd_);
 
 #ifdef _DEBUG
-	CloseWindow(WinApp::GetInstance()->DebugHwnd_);
+	//CloseWindow(WinApp::GetInstance()->DebugHwnd_);
 #endif // _DEBUG
 
 

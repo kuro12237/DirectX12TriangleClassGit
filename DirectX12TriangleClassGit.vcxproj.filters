@@ -34,6 +34,30 @@
     <Filter Include="CLEYERA\Graphics\CompileShaders">
       <UniqueIdentifier>{cc587c9c-3c0b-42de-af43-dd42597eb5a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{fb13fadd-3e00-414f-b0b7-9654c61d327d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model">
+      <UniqueIdentifier>{34952989-3102-48d1-a740-9c6ad56ab3ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\Plane">
+      <UniqueIdentifier>{a25d7723-6a3e-4057-a4b6-6baa02c6eef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Transform">
+      <UniqueIdentifier>{3a8bfbae-0acc-40fc-ba35-5e6fa5bb1c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\CreateResource">
+      <UniqueIdentifier>{508999da-fe71-4022-a8ab-7e84d14adaf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math">
+      <UniqueIdentifier>{df1d8822-d2f8-42f4-b43e-f0b3d1ed1520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math\Matrix">
+      <UniqueIdentifier>{692e5c6d-0514-47b2-8bce-9c008250ca03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{8e3763ee-ab75-4802-b3ed-6bf968714386}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -60,8 +84,26 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Graphics\CompileShaders\ShaderManager.cpp">
+    <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp">
       <Filter>CLEYERA\Graphics\CompileShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\Model.cpp">
+      <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp">
+      <Filter>CLEYERA\Model\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\CreateResource\CreateResource.cpp">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\MatrixTransform.cpp">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Transform\ViewProjection.cpp">
+      <Filter>CLEYERA\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,5 +128,52 @@
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h">
       <Filter>CLEYERA\Graphics\CompileShaders</Filter>
     </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Model.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\IModelState.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h">
+      <Filter>CLEYERA\Model\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\CreateResource\CreateResource.h">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector4.h">
+      <Filter>CLEYERA\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector3.h">
+      <Filter>CLEYERA\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector2.h">
+      <Filter>CLEYERA\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Transform\WorldTransform.h">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\MatrixTransform.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix2x2.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix3x3.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix4x4.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Transform\ViewProjection.h">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\ShapeObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -44,9 +44,18 @@ public:
 
 	static void BeginFlame();
 	static void EndFlame();
+	static void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
+
+#pragma region get
+	Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
+	ComPtr<ID3D12Device>GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_; }
+
+#pragma endregion
+
 
 private:
-
+	static D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
+	static D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
 	static ComPtr<ID3D12DescriptorHeap> CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
 	static ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
 	static void CreateFactory();

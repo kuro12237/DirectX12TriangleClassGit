@@ -25,8 +25,14 @@
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\CompileShaders\ShaderManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
+    <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\Model\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="CLEYERA\Model\Model.cpp" />
+    <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp" />
+    <ClCompile Include="CLEYERA\Transform\ViewProjection.cpp" />
+    <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.h</PrecompiledHeaderFile>
@@ -40,8 +46,31 @@
     <ClInclude Include="CLEYERA\Cleyera.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="CLEYERA\math\Matrix2x2.h" />
+    <ClInclude Include="CLEYERA\math\Matrix3x3.h" />
+    <ClInclude Include="CLEYERA\math\Matrix4x4.h" />
+    <ClInclude Include="CLEYERA\math\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\math\Vector2.h" />
+    <ClInclude Include="CLEYERA\math\Vector3.h" />
+    <ClInclude Include="CLEYERA\math\Vector4.h" />
+    <ClInclude Include="CLEYERA\Model\CreateResource\CreateResource.h" />
+    <ClInclude Include="CLEYERA\Model\Model.h" />
+    <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
+    <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h" />
+    <ClInclude Include="CLEYERA\Transform\ViewProjection.h" />
+    <ClInclude Include="CLEYERA\Transform\WorldTransform.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\ShapeObject3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -129,9 +158,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/Model/CreateResource;$(ProjectDir)CLEYERA/Transform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/Wv:18 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,9 +181,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/Model/CreateResource;$(ProjectDir)CLEYERA/Transform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/Wv:18 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -50,8 +50,8 @@ void LogManager::Log(const std::string& message)
 
 }
 
-void LogManager::CompliteLog()
+void LogManager::CompliteLog(const string message)
 {
-	Log("Complite\n\n");
+	Log(message+"Complite\n");
 
 }

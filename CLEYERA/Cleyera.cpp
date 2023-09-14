@@ -1,5 +1,9 @@
 #include "Cleyera.h"
 
+Cleyera::~Cleyera()
+{
+}
+
 Cleyera* Cleyera::GetInstance()
 {
 	static Cleyera instance;
@@ -9,11 +13,12 @@ Cleyera* Cleyera::GetInstance()
 
 void Cleyera::Initialize()
 {
+
 	WinApp::Initialize();
 	DirectXCommon::initialize();
+	ShaderManager::Initialize();
+	GraphicsPipelineManager::Initialize();
 }
-
-
 
 void Cleyera::Finalize()
 {

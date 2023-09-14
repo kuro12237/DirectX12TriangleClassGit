@@ -12,7 +12,7 @@ public:
 
 	static void Log(const std::string& message);
 
-	static void CompliteLog();
+	static void CompliteLog(const string message=nullptr);
 
 private:
 

@@ -2,10 +2,15 @@
 #include"Pch.h"
 #include"WinApp.h"
 #include"DirectXCommon.h"
+#include"ShaderManager.h"
+#include"GraphicsPipelineManager.h"
+#include"Model.h"
 
 class Cleyera
 {
 public:
+	
+	~Cleyera();
 
 	static Cleyera* GetInstance();
 
@@ -16,6 +21,6 @@ public:
 	static void EndFlame();
 private:
 
-	D3DResourceLeakChecker leakCheck;
+
 };
 

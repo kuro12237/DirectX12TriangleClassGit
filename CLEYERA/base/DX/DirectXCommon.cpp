@@ -83,7 +83,59 @@ void DirectXCommon::BeginFlame()
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart();
 	commands.m_pList.Get()->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv.rtvHandles[backBufferIndex], false, &dsvHandle);
 	commands.m_pList.Get()->ClearDepthStencilView(dsvHandle,D3D12_CLEAR_FLAG_DEPTH,1.0f,0,0,nullptr);
+	ScissorViewCommand(WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
 	
+}
+
+D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
+{
+
+	D3D12_VIEWPORT viewport = {};
+
+	//クライアント領域のサイズを一緒にして画面全体に表示
+	viewport.Width = float(kClientWidth);
+	viewport.Height = float(kClientHeight);
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+
+
+	return viewport;
+}
+
+D3D12_RECT DirectXCommon::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
+{
+	//シザー矩形
+	D3D12_RECT scissorRect{};
+
+	//基本的にビューポートと同じ矩形が構成されるようにする
+	scissorRect.left = 0;
+	scissorRect.right = kClientWidth;
+	scissorRect.top = 0;
+	scissorRect.bottom = kClientHeight;
+
+
+	return scissorRect;
+
+}
+
+void DirectXCommon::ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight)
+{
+	D3D12_VIEWPORT viewport{};
+
+	viewport = viewportSetting(kClientWidth, kClientHeight);
+
+	//シザー矩形
+	D3D12_RECT scissorRect{};
+	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
+
+	//コマンドを積む
+	Commands commands = DirectXCommon::GetInstance()->commands;
+
+	commands.m_pList->RSSetViewports(1, &viewport); //
+	commands.m_pList->RSSetScissorRects(1, &scissorRect);
 
 }
 
