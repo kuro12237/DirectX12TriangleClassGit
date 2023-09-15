@@ -25,6 +25,8 @@
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
+    <ClCompile Include="CLEYERA\DebugTools\DebugTools.cpp" />
+    <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp" />
@@ -54,6 +56,9 @@
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
+    <ClInclude Include="CLEYERA\DebugTools\Commands\ICommand.h" />
+    <ClInclude Include="CLEYERA\DebugTools\DebugTools.h" />
+    <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imconfig.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imgui.h" />
     <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_dx12.h" />

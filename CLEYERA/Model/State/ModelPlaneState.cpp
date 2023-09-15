@@ -15,7 +15,7 @@ void ModelPlaneState::Initialize(Model* state)
 	state;
 }
 
-void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProjection *viewprojection)
+void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;

@@ -11,7 +11,7 @@ void ModelLineState::Initialize(Model* state)
 
 }
 
-void ModelLineState::Draw(Model* state, WorldTransform worldTransform, ViewProjection* viewprojection)
+void ModelLineState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
 {
 
 	worldTransform;

@@ -20,9 +20,10 @@ public:
 	/// </summary>
 	/// <param name="StertPosition"></param>
 	/// <param name="EndPosition"></param>
+	/// 
 	void Initialize(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 	
-	void Draw(WorldTransform worldTransform, ViewProjection *viewprojection);
+	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
 
 	WorldTransform GetWorldTransform() { return worldTransform_; }
 	Vector4 GetColor() { return color_; }

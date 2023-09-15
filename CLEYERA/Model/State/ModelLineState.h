@@ -11,7 +11,7 @@ public:
 
 	void Initialize(Model* state)override;
 
-	void Draw(Model* state, WorldTransform worldTransform, ViewProjection* viewprojection)override;
+	void Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)override;
 
 private:
 

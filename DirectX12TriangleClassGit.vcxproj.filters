@@ -73,6 +73,12 @@
     <Filter Include="CLEYERA\externals\ImGui">
       <UniqueIdentifier>{221c64db-6fdf-4858-a4cc-2ac1e3c57026}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\DebugTools">
+      <UniqueIdentifier>{0e048dfb-f3ee-43a9-9ed9-7e69565dfa83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\DebugTools\DebugGrid">
+      <UniqueIdentifier>{910d38c5-eed0-437d-b10d-55ce3a3c775d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -149,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp">
       <Filter>CLEYERA\externals\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\DebugTools\DebugTools.cpp">
+      <Filter>CLEYERA\DebugTools</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp">
+      <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +256,15 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h">
       <Filter>CLEYERA\externals\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTools\DebugTools.h">
+      <Filter>CLEYERA\DebugTools</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTools\Commands\ICommand.h">
+      <Filter>CLEYERA\DebugTools</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h">
+      <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

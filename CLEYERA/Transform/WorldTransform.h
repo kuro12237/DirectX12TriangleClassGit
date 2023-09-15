@@ -16,7 +16,7 @@ struct WorldTransform
 
 	void UpdateMatrix();
 
-	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection *viewProjection);
+	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection viewProjection);
 
 
 

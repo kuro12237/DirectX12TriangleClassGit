@@ -6,6 +6,7 @@
 #include"GraphicsPipelineManager.h"
 #include"Model.h"
 #include"ImGuiManager.h"
+#include"DebugTools/DebugTools.h"
 class Cleyera
 {
 public:
