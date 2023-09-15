@@ -31,6 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ImGui::End();
 
 		viewProjection.UpdateMatrix();
+
 		DebugTools::SetViewProjection(viewProjection);
 		DebugTools::Execute(0);
 
