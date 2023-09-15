@@ -16,7 +16,7 @@ struct SPSOProperty
 struct SPSO
 {
 	SPSOProperty shape;
-
+	SPSOProperty Line;
 
 };
 
@@ -32,8 +32,8 @@ public:
 private:
 
 	static void CreatePSO();
-	static  SPSOProperty CreateShape(ComPtr<ID3D12Device>,Commands command,SShaderMode shader);
-
+	static  SPSOProperty CreateShape(ComPtr<ID3D12Device>device,Commands command,SShaderMode shader);
+	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
 
 

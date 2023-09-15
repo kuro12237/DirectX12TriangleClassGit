@@ -8,7 +8,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Cleyera::Initialize();
     unique_ptr<Model> model = make_unique< Model>();
 
-	model->Initialize(new ModelPlaneState);
+	model->Initialize(new ModelLineState,{-1,0,0,1},{1,0,0,1});
 	
 	WorldTransform worldTransform = {};
 	worldTransform.Initialize();
@@ -23,7 +23,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		viewProjection->UpdateMatrix();
 		
 		worldTransform.translate.z += 0.01f;
-		worldTransform.rotation.y += 0.1f;
 		worldTransform.UpdateMatrix();
 		model->Draw(worldTransform,viewProjection);
 

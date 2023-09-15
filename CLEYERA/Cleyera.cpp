@@ -18,10 +18,12 @@ void Cleyera::Initialize()
 	DirectXCommon::initialize();
 	ShaderManager::Initialize();
 	GraphicsPipelineManager::Initialize();
+	ImGuiManager::Initialize();
 }
 
 void Cleyera::Finalize()
 {
+	ImGuiManager::Finalize();
 	DirectXCommon::Finalize();
 	WinApp::Finalize();
 }
@@ -29,9 +31,11 @@ void Cleyera::Finalize()
 void Cleyera::BeginFlame()
 {
 	DirectXCommon::BeginFlame();
+	ImGuiManager::BeginFlame();
 }
 
 void Cleyera::EndFlame()
 {
+	ImGuiManager::EndFlame();
 	DirectXCommon::EndFlame();
 }

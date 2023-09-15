@@ -9,6 +9,8 @@ WinApp *WinApp::GetInstance()
 
 void WinApp::Initialize()
 {
+
+
 	//MainWindow
 	WinApp::GetInstance()->hwnd_= CreateWIND(
 		WinApp::GetInstance()->kWindowWidth,
@@ -89,7 +91,10 @@ HWND WinApp::CreateWIND(const int32_t kWidth, const int32_t kHeight, LPCTSTR tit
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
-
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam))
+	{
+		return true;
+	}
 	switch (msg)
 	{
 		//ウインドウが破棄
