@@ -14,6 +14,7 @@ void Model::Initialize(IModelState* state, Vector4 CenterPos , float size , Vect
 	CenterPos_ = CenterPos;
 	size_=size;
 	color_ = color;
+
 }
 
 void Model::Initialize(IModelState* state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
@@ -30,4 +31,14 @@ void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 {
 	worldTransform_ = worldTransform;
 	state_->Draw(this, worldTransform_,viewprojection);
+}
+
+Vector4 Model::ColorConversion(uint32_t rgbaValue)
+{
+	Vector4 result = {};
+	result.x = ((rgbaValue >> 24) & 0xFF) / 255.0f; // Red
+	result.y = ((rgbaValue >> 16) & 0xFF) / 255.0f; // Green
+	result.z = ((rgbaValue >> 8) & 0xFF) / 255.0f;  // Blue
+	result.w = (rgbaValue & 0xFF) / 255.0f;         // Alpha
+	return result;
 }

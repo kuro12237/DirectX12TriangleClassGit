@@ -9,6 +9,11 @@ public:
 #pragma region 
 
 	/// <summary>
+	/// 足し算
+	/// </summary>
+	static Matrix4x4 Add(Matrix4x4 m1, Matrix4x4 m2);
+
+	/// <summary>
 	/// 掛け算
 	/// </summary>
 	static Matrix4x4 Multiply(Matrix4x4 m1, Matrix4x4 m2);

@@ -1,8 +1,8 @@
 #pragma once
 #include"DebugTools/Commands/ICommand.h"
 #include"Model.h"
-#define XYGridLine_Max 20
-
+#define XYGridLine_Max 50
+#include"VectorTransform.h"
 
 class Grid :public ICommand
 {
@@ -24,5 +24,8 @@ private:
 
 	unique_ptr <Model>YLine_ = {};
 	WorldTransform YworldTransform_ = {};
+
+	unique_ptr <Model>CenterPoint_ = {};
+	WorldTransform CenterWorldTransform_ = {};
 };
 

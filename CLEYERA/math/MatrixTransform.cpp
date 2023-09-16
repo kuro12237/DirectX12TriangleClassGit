@@ -1,5 +1,20 @@
 #include "MatrixTransform.h"
 
+Matrix4x4 MatrixTransform::Add(Matrix4x4 m1, Matrix4x4 m2)
+{
+	Matrix4x4 result = {};
+
+	for (int row = 0; row < 4; row++)
+	{
+		for (int col = 0; col < 4; col++)
+		{
+			result.m[row][col] = m1.m[row][col] + m2.m[row][col];
+		}
+	}
+
+	return result;
+}
+
 Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 {
 	Matrix4x4 result = {};
@@ -154,7 +169,7 @@ float MatrixTransform::Cot(float theta)
 
 Matrix4x4 MatrixTransform::PerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip)
 {
-	Matrix4x4 result;
+	Matrix4x4 result = {};
 	float theta = fovY / 2.0f;
 
 	result.m[0][0] = (1.0f / aspectRatio) * Cot(theta);

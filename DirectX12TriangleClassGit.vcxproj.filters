@@ -55,9 +55,6 @@
     <Filter Include="CLEYERA\math\Matrix">
       <UniqueIdentifier>{692e5c6d-0514-47b2-8bce-9c008250ca03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{8e3763ee-ab75-4802-b3ed-6bf968714386}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Model\DrawLine">
       <UniqueIdentifier>{f85b1b84-693e-4840-a15b-a2820c64e40c}</UniqueIdentifier>
     </Filter>
@@ -79,10 +76,16 @@
     <Filter Include="CLEYERA\DebugTools\DebugGrid">
       <UniqueIdentifier>{910d38c5-eed0-437d-b10d-55ce3a3c775d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Utility\GameObject">
+      <UniqueIdentifier>{8e3763ee-ab75-4802-b3ed-6bf968714386}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
       <Filter>CLEYERA\config</Filter>
+    </None>
+    <None Include="Resources\Shader\SpriteObject3d.hlsli">
+      <Filter>Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp">
       <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
+      <Filter>CLEYERA\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,12 +272,21 @@
     <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h">
       <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
     </ClInclude>
+    <ClInclude Include="CLEYERA\math\VectorTransform.h">
+      <Filter>CLEYERA\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\ShapeObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

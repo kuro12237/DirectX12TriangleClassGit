@@ -7,7 +7,7 @@
 void ModelPlaneState::Initialize(Model* state)
 {
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize);
-	resource_.Material = CreateResources::CreateBufferResource(sizeof(Vector4));
+	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
 	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * VertexSize, resource_.Vertex.Get(), VertexSize);
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * IndexSize);
@@ -18,7 +18,7 @@ void ModelPlaneState::Initialize(Model* state)
 void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
 {
 	VertexData* vertexData = nullptr;
-	Vector4* materialData = nullptr;
+	Material* materialData = nullptr;
 	//LightData* lightData = nullptr;
 	uint32_t* indexData = nullptr;
 
@@ -29,29 +29,54 @@ void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProj
 	Vector4 pos = state->GetCenterPos();
 	float size = state->GetSize();
 
-	vertexData[0].position = { pos.x - size,pos.y + size,pos.z,pos.w };
-	vertexData[1].position = { pos.x - size,pos.y - size,pos.z,pos.w };
-	vertexData[2].position = { pos.x + size,pos.y + size,pos.z,pos.w };
-	vertexData[3].position = { pos.x + size,pos.y - size,pos.z,pos.w };
+	vertexData[0].position = { pos.x - size,pos.y,pos.z + size,pos.w };
+	vertexData[0].texcoord = { 0.0f,1.0f };
+	vertexData[0].normal = { 0.0f,1.0f,0.0f };
+
+	vertexData[1].position = { pos.x - size,pos.y,pos.z - size,pos.w };
+	vertexData[1].texcoord = { 0.0f,0.0f };
+	vertexData[1].normal = { 0.0f,1.0f,0.0f };
+
+
+	vertexData[2].position = { pos.x + size,pos.y,pos.z + size,pos.w };
+	vertexData[2].texcoord = { 1.0f,1.0f };
+	vertexData[2].normal = { 0.0f,1.0f,0.0f };
+
+	vertexData[3].position = { pos.x + size,pos.y,pos.z - size,pos.w };
+	vertexData[3].texcoord = { 1.0f,0.0f };
+	vertexData[3].normal = { 0.0f,1.0f,0.0f };
+
 
 	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
 	indexData[3] = 1; indexData[4] = 3; indexData[5] = 2;
 
-	*materialData = state->GetColor();
+	materialData->color = state->GetColor();
+	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
+
+
 	worldTransform.TransfarMatrix(resource_.wvpResource,viewprojection);
 	
-	CommandCall();
+	CommandCall(state->GetTexHandle());
 
 }
 
 
 
-void ModelPlaneState::CommandCall()
+void ModelPlaneState::CommandCall(uint32_t texHandle)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
+	
+	SPSOProperty PSO = {};
+	
+	if (texHandle==0)
+	{
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
+	}else if (!texHandle == 0)
+	{
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite;
+	}
 
-
+	
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
@@ -66,6 +91,11 @@ void ModelPlaneState::CommandCall()
 
 	//wvp用のCBufferの場所を設定
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
+
+	if (!texHandle==0)
+	{
+		TextureManager::texCommand(texHandle);
+	}
 
 	//描画(DrawCall/ドローコール)。
 	commands.m_pList->DrawIndexedInstanced(IndexSize, 1, 0, 0, 0);

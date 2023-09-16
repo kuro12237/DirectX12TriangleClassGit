@@ -1,11 +1,13 @@
 #pragma once
 #include"Pch.h"
-
+#include"DirectXCommon.h"
+#include"WinApp.h"
 
 struct texResourceProperty
 {
+	D3D12_CPU_DESCRIPTOR_HANDLE SrvHandleCPU;
 	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU;
-	ID3D12Resource* Resource;
+	ComPtr<ID3D12Resource> Resource;
 
 };
 
@@ -20,31 +22,31 @@ class TextureManager
 {
 public:
 
+	TextureManager();
+	~TextureManager();
+
 	static void Initialize();
-
 	static void Finalize();
-
+	static TextureManager* GetInstance();
 	/// <summary>
 	/// é¿ç€Ç…égÇ§èàóù
 	/// </summary>
 	/// <param name="filePath"></param>
 	/// <returns></returns>
-	static texResourceProperty LoadTexture(const std::string& filePath);
+	static uint32_t LoadTexture(const std::string& filePath);
 
-	static texResourceProperty Release(texResourceProperty tex);
-
-
+	static void texCommand(uint32_t texhandle);
 private:
 
-	static ID3D12Resource* CreateTexResource(const DirectX::TexMetadata& metadata);
+	static ComPtr<ID3D12Resource> CreateTexResource(const DirectX::TexMetadata& metadata);
 
 	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);
 
-	static void UploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage& mipImage);
+	static void UploadTexData(const DirectX::ScratchImage& mipImage);
 
-	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ID3D12DescriptorHeap* descripterHeap, uint32_t desiripterSize, uint32_t index);
+	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descripterHeap, uint32_t desiripterSize, uint32_t index);
 
-	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ID3D12DescriptorHeap* descripterHeap, uint32_t desiripterSize, uint32_t index);
+	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descripterHeap, uint32_t desiripterSize, uint32_t index);
 
 
 	/// <summary>
@@ -60,7 +62,8 @@ private:
 	/// <returns></returns>
 	static D3D12_HEAP_PROPERTIES SettingHeap();
 
-
+	const static uint32_t TexLoadMax = 64;
+	texResourceProperty tex[TexLoadMax];
 };
 
 

@@ -105,6 +105,17 @@ void ShaderManager::ShapeShader()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/ShapeObject3d.PS.hlsl",
 			L"ps_6_0");
+	shaders.sprite.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SpriteObject3d.VS.hlsl",
+			L"vs_6_0");
+	
+	shaders.sprite.pixelBlob=
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SpriteObject3d.PS.hlsl",
+			L"ps_6_0");
+
+
 	ShaderManager::Getinstance()->shaders_ = shaders;
 }
 

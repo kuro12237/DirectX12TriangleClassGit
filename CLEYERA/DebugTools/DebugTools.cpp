@@ -8,19 +8,21 @@ DebugTools* DebugTools::GetInstance()
 
 void DebugTools::Initialize()
 {
-	
+#ifdef _DEBUG
+
+
 	Grid *grid = new Grid();
-	
+	Grid::Initialize();
+	//GridCommand‚ðƒZƒbƒg
 	DebugTools::addCommand(grid);
 
-	Grid::Initialize();
+#endif // _DEBUG
 
 }
 
 
 void DebugTools::addCommand(ICommand *command)
 {
-	
 	DebugTools::GetInstance()->commands.push_back(command);
 }
 

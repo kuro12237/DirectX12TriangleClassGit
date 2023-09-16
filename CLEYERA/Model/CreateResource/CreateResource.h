@@ -5,7 +5,7 @@
 struct  VertexData
 {
 	Vector4 position;
-	//Vector2 texcoord;
+    Vector2 texcoord;
 	Vector3 normal;
 };
 struct LightData
@@ -15,6 +15,8 @@ struct LightData
 	float intensity;
 
 };
+
+
 struct TransformationMatrix {
 	Matrix4x4 WVP;
 	Matrix4x4 world;
@@ -34,7 +36,7 @@ struct ResourcePeroperty
 struct  Material
 {
 	Vector4 color;
-	float padding[3];
+	//float padding[3];
 	Matrix4x4 uvTransform;
 };
 

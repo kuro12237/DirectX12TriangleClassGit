@@ -7,11 +7,13 @@
 #include"Model.h"
 #include"ImGuiManager.h"
 #include"DebugTools/DebugTools.h"
+#include"Graphics/TextureManager/TextureManager.h"
+
 class Cleyera
 {
 public:
-	
-	~Cleyera();
+	Cleyera() {};
+	~Cleyera() {};
 
 	static Cleyera* GetInstance();
 
@@ -21,7 +23,6 @@ public:
 	static void BeginFlame();
 	static void EndFlame();
 private:
-
 
 };
 

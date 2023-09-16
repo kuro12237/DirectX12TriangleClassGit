@@ -17,7 +17,7 @@ struct SPSO
 {
 	SPSOProperty shape;
 	SPSOProperty Line;
-
+	SPSOProperty Sprite;
 };
 
 class GraphicsPipelineManager
@@ -34,7 +34,7 @@ private:
 	static void CreatePSO();
 	static  SPSOProperty CreateShape(ComPtr<ID3D12Device>device,Commands command,SShaderMode shader);
 	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
-
+	static SPSOProperty CreateSprite(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
 
 	SPSO pso = {};

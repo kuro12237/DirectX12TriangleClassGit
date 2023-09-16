@@ -11,13 +11,13 @@ class ModelPlaneState: public IModelState
 	~ModelPlaneState() {};
 	void Initialize(Model* state)override;
 
-	void Draw(Model* state, WorldTransform worldTransform,ViewProjection viewprojection)override;
+	void Draw(Model* state,WorldTransform worldTransform,ViewProjection viewprojection)override;
 
 public:
 
 private:
 
-	void CommandCall();
+	void CommandCall(uint32_t texHandle);
 
 	const uint32_t VertexSize = 4;
 	const uint32_t IndexSize = 6;

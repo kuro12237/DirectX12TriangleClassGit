@@ -36,7 +36,9 @@ struct  RTV{
 
 class DirectXCommon{
 public:
-	
+	DirectXCommon() = default;
+	~DirectXCommon() {};
+
 	static DirectXCommon* GetInstance();
 
 	static void initialize();
@@ -87,10 +89,6 @@ private:
 	D3D12_RESOURCE_BARRIER barrier{};
 
 
-	DirectXCommon() = default;
-	~DirectXCommon() = default;
-	DirectXCommon(const DirectXCommon&) = delete;
-	const DirectXCommon& operator=(const DirectXCommon&) = delete;
 
 };
 

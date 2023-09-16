@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
+    <None Include="Resources\Shader\SpriteObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
@@ -27,17 +28,32 @@
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\DebugTools\DebugTools.cpp" />
     <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp" />
-    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinSpace</Optimization>
+    </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Model\CreateResource\CreateResource.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelLineState.cpp" />
@@ -77,6 +93,7 @@
     <ClInclude Include="CLEYERA\math\Vector2.h" />
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />
+    <ClInclude Include="CLEYERA\math\VectorTransform.h" />
     <ClInclude Include="CLEYERA\Model\CreateResource\CreateResource.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
@@ -94,6 +111,22 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shader\ShapeObject3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject3d.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject3d.VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
