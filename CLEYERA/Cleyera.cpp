@@ -10,6 +10,7 @@ Cleyera* Cleyera::GetInstance()
 
 void Cleyera::Initialize()
 {
+	Cleyera::GetInstance();
 
 	WinApp::Initialize();
 	DirectXCommon::initialize();

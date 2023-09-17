@@ -22,6 +22,18 @@ struct TransformationMatrix {
 	Matrix4x4 world;
 };
 
+struct MaterialData
+{
+	string textureFilePath;
+};
+
+struct  SModelData
+{
+	vector<VertexData> vertices;
+	MaterialData material;
+};
+
+
 struct ResourcePeroperty
 {
 	D3D12_VERTEX_BUFFER_VIEW BufferView;

@@ -5,24 +5,22 @@
 #include"WorldTransform.h"
 #include"GraphicsPipelineManager.h"
 
-class ModelPlaneState: public IModelState
+class ModelSphereState :public IModelState
 {
 public:
+	
+	~ModelSphereState() {};
 
-	~ModelPlaneState() {};
 	void Initialize(Model* state)override;
 
-	void Draw(Model* state,WorldTransform worldTransform,ViewProjection viewprojection)override;
+	void Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)override;
 
 
 private:
 
 	void CommandCall(uint32_t texHandle);
 
-	const uint32_t VertexSize = 4;
-	const uint32_t IndexSize = 6;
+	const int VertexNum = 16;
 	ResourcePeroperty resource_ = {};
-
-
 };
 

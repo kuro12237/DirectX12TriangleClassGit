@@ -27,6 +27,19 @@ void Model::Initialize(IModelState* state,Vector4 StartPosition, Vector4 EndPosi
 
 }
 
+void Model::CreateFromObj(const string& directoryFile)
+{
+	state_ = new ModelObjState();
+    directoryPath_ = directoryFile;
+
+	state_->Initialize(this);
+
+}
+
+
+
+
+
 void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 {
 	worldTransform_ = worldTransform;
@@ -42,3 +55,4 @@ Vector4 Model::ColorConversion(uint32_t rgbaValue)
 	result.w = (rgbaValue & 0xFF) / 255.0f;         // Alpha
 	return result;
 }
+

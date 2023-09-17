@@ -1,8 +1,11 @@
 #pragma once
 #include"Pch.h"
+#include"Graphics/TextureManager/TextureManager.h"
+
 #include"ModelPlaneState.h"
 #include"ModelLineState.h"
-#include"Graphics/TextureManager/TextureManager.h"
+#include"ModelSphereState.h"
+#include"ModelObjState.h"
 
 #include"WorldTransform.h"
 #include"ViewProjection.h"
@@ -27,6 +30,8 @@ public:
 	/// 
 	void Initialize(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 
+	void CreateFromObj( const string& directoryFile);
+
 	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
 
 #pragma region Set
@@ -34,7 +39,7 @@ public:
 	void SetUvScale(Vector3 uvScale) { uvScale_ = uvScale; }
 	void SetUvRotate(Vector3 uvRotate) { uvRotate_ = uvRotate; }
 	void SetUvTranslate(Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }
-
+	void SetColor(Vector4 color) { color_ = color; }
 
 
 #pragma endregion 
@@ -71,12 +76,15 @@ public:
 	/// 色コードをVector4に変換関数
 	/// </summary>
 	static Vector4 ColorConversion(uint32_t rgbaValue);
+
+	const string GetObjDirectoryPath() { return directoryPath_; }
 #pragma endregion 
 private:
 
+
 	
 	Vector4 CenterPos_ = { 0,0,0,1 };
-	float size_=0.5f;
+	float size_=1.5f;
 
 	Vector4 StartPos_ = {};
 	Vector4 EndPos_ = {};
@@ -88,6 +96,7 @@ private:
 	Vector3 uvScale_ = {1,1,1};
 	Vector3 uvRotate_ = {0,0,0};
 	Vector3 uvTranslate_ = {0,0,0};
+	string directoryPath_ = {};
 
 	IModelState* state_ = nullptr;
 };

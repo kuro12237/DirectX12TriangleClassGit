@@ -3,6 +3,13 @@
 #include"MatrixTransform.h"
 #include"CreateResource.h"
 #include"ViewProjection.h"
+#include"WinApp.h"
+enum Projection
+{
+	PerspectiveFov = 0,
+
+    OrthographicMatrix = 1
+};
 
 struct WorldTransform
 {
@@ -16,7 +23,7 @@ struct WorldTransform
 
 	void UpdateMatrix();
 
-	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection viewProjection);
+	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection viewProjection, Projection Flag=PerspectiveFov);
 
 
 

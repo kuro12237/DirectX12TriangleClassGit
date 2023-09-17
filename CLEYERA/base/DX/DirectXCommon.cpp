@@ -37,7 +37,6 @@ void DirectXCommon::initialize()
 		filter.DenyList.NumSeverities = _countof(severities);
 		filter.DenyList.pSeverityList = severities;
 		infoQueue->PushStorageFilter(&filter);
-		infoQueue->Release();
 	}
 #endif _DEBUG
 

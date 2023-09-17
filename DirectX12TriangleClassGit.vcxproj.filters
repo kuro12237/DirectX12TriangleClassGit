@@ -79,6 +79,18 @@
     <Filter Include="CLEYERA\Utility\GameObject">
       <UniqueIdentifier>{8e3763ee-ab75-4802-b3ed-6bf968714386}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Model\Sphere">
+      <UniqueIdentifier>{0f0d6265-9cf3-40ad-acfb-38de0182afa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\ObjState">
+      <UniqueIdentifier>{7ad064f9-c521-4fd5-a423-17a94a8c7364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Sprite">
+      <UniqueIdentifier>{8ca2e2a2-0644-42de-8d42-6af1da68f612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Sprite\state">
+      <UniqueIdentifier>{ba0140f6-2613-4cf0-beae-b806b72b32e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -119,9 +131,6 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp">
       <Filter>CLEYERA\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\Model\CreateResource\CreateResource.cpp">
-      <Filter>CLEYERA\Model\CreateResource</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp">
       <Filter>CLEYERA\math\Matrix</Filter>
@@ -168,6 +177,21 @@
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
       <Filter>CLEYERA\math</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp">
+      <Filter>CLEYERA\Model\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Sprite\Sprite.cpp">
+      <Filter>CLEYERA\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
+      <Filter>CLEYERA\Sprite\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -199,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h">
       <Filter>CLEYERA\Model\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Model\CreateResource\CreateResource.h">
-      <Filter>CLEYERA\Model\CreateResource</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\math\Vector4.h">
       <Filter>CLEYERA\math</Filter>
@@ -274,6 +295,24 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\math\VectorTransform.h">
       <Filter>CLEYERA\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h">
+      <Filter>CLEYERA\Model\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelObjState.h">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Sprite\Sprite.h">
+      <Filter>CLEYERA\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CreateResource\CreateResource.h">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h">
+      <Filter>CLEYERA\Sprite\state</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h">
+      <Filter>CLEYERA\Sprite\state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

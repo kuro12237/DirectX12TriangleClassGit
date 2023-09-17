@@ -8,6 +8,7 @@
 #include"ImGuiManager.h"
 #include"DebugTools/DebugTools.h"
 #include"Graphics/TextureManager/TextureManager.h"
+#include"Sprite/Sprite.h"
 
 class Cleyera
 {
@@ -24,5 +25,6 @@ public:
 	static void EndFlame();
 private:
 
+	D3DResourceLeakChecker leakCheck;
 };
 

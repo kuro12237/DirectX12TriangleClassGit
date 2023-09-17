@@ -6,7 +6,8 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg
 class WinApp
 {
 public:
-	
+	WinApp() = default;
+	~WinApp() {};
 	static WinApp *GetInstance();
 
 	static void Initialize();
@@ -44,13 +45,7 @@ private:
 
 	HWND DebugHwnd_{};
 
-#pragma region ƒVƒ“ƒOƒ‹
 
-	WinApp() = default;
-	~WinApp() = default;
-	WinApp(const WinApp&) = delete;
-	const WinApp& operator=(const WinApp&) = delete;
-#pragma endregion
 };
 
 
