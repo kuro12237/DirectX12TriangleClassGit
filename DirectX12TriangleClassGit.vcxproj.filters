@@ -97,6 +97,12 @@
     <Filter Include="Project\Scene">
       <UniqueIdentifier>{0c802be9-ee57-4ecc-a25c-5d726d7ef52b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Input">
+      <UniqueIdentifier>{0594f166-5a6b-43b3-8c36-5010288e57ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Audio">
+      <UniqueIdentifier>{4ee1b44c-d002-488d-8839-c1fc665d795c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -204,6 +210,12 @@
     </ClCompile>
     <ClCompile Include="Project\Scene\GameScene.cpp">
       <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Input\Input.cpp">
+      <Filter>CLEYERA\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Audio\Audio.cpp">
+      <Filter>CLEYERA\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +350,12 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\GameScene.h">
       <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Input\Input.h">
+      <Filter>CLEYERA\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Audio\Audio.h">
+      <Filter>CLEYERA\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

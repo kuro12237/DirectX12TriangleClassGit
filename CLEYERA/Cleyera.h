@@ -9,6 +9,8 @@
 #include"DebugTools/DebugTools.h"
 #include"Graphics/TextureManager/TextureManager.h"
 #include"Sprite/Sprite.h"
+#include"Input.h"
+#include"Audio.h"
 
 class Cleyera
 {
@@ -26,5 +28,6 @@ public:
 private:
 
 	D3DResourceLeakChecker leakCheck;
+	
 };
 

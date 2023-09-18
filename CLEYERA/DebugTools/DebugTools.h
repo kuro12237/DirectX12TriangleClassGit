@@ -12,14 +12,13 @@ public:
 
 	static DebugTools* GetInstance();
 
-	static void Initialize();
+	static void addCommand(ICommand* command);
 
 	static void SetViewProjection(ViewProjection &viewProjection) { DebugTools::GetInstance()->viewProjection_ = viewProjection; }
 
 	static void Execute(int buttonIndex);
 
 private:
-	static void addCommand(ICommand* command);
 
 
 	vector<ICommand*> commands;

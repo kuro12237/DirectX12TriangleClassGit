@@ -2,6 +2,7 @@
 
 void DebugScene::Initialize(GameManager* Scene)
 {
+	input_ = Input::GetInstance();
 
 	model_ = make_unique< Model>();
 	sprite_ = make_unique<Sprite>();
@@ -22,6 +23,7 @@ void DebugScene::Initialize(GameManager* Scene)
 
 	viewProjection.Initialize({ 0.2f,-0.6f,0.0f }, { 11.0f,5.0f,-15 });
 
+	soundHandle_ = Audio::SoundLoadWave("Resources/Select.wav");
 	Scene;
 }
 
@@ -61,11 +63,14 @@ void DebugScene::Update(GameManager* Scene)
 	ChangeSceneTimer_++;
 	if (ChangeSceneTimer_>300)
 	{
-		Scene->ChangeState(new GameScene);
+		//Scene->ChangeState(new GameScene);
 	}
-
+	if (input_->PushKey(DIK_0))
+	{
+		worldTransform.rotation.y+=0.1f;
+	}
+	Audio::AudioPlayWave(soundHandle_);
 	Scene;
-
 }
 
 void DebugScene::Draw(GameManager* Scene)

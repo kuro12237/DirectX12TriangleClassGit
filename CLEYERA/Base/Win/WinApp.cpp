@@ -12,13 +12,41 @@ void WinApp::Initialize()
 
 
 	//MainWindow
-	WinApp::GetInstance()->hwnd_= CreateWIND(
-		WinApp::GetInstance()->kWindowWidth,
-		WinApp::GetInstance()->kWindowHeight,
+	//WinApp::GetInstance()->hwnd_= CreateWIND(
+	//	WinApp::GetInstance()->kWindowWidth,
+	//	WinApp::GetInstance()->kWindowHeight,
+	//	L"CLEYERA",
+	//	WinApp::GetInstance()->wc_);
+	//ShowWindow(WinApp::GetInstance()->hwnd_, SW_SHOW);
+	//
+
+	WinApp::GetInstance()->wc_.lpfnWndProc = WinApp::WindowProc;
+	WinApp::GetInstance()->wc_.lpszClassName = L"CLEYERA";
+	WinApp::GetInstance()->wc_.hInstance = GetModuleHandle(nullptr);
+	WinApp::GetInstance()->wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	RegisterClass(&WinApp::GetInstance()->wc_);
+
+	RECT wrc = { 0,0,
+	WinApp::GetInstance()->kWindowWidth,
+	WinApp::GetInstance()->kWindowHeight };
+	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
+
+	WinApp::GetInstance()->hwnd_=CreateWindow(
+		WinApp::GetInstance()->wc_.lpszClassName,
 		L"CLEYERA",
-		WinApp::GetInstance()->wc_);
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		wrc.right - wrc.left,
+		wrc.bottom - wrc.top,
+		nullptr,
+		nullptr,
+		WinApp::GetInstance()->wc_.hInstance,
+		nullptr
+	);
+
 	ShowWindow(WinApp::GetInstance()->hwnd_, SW_SHOW);
-	
+
 #ifdef _DEBUG
 	//Debugƒc[ƒ‹
 

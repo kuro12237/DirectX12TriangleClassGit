@@ -18,11 +18,14 @@ void Cleyera::Initialize()
 	GraphicsPipelineManager::Initialize();
 	TextureManager::Initialize();
 	ImGuiManager::Initialize();
-
+	
+	Input::Initialize();
+	Audio::Initialize();
 }
 
 void Cleyera::Finalize()
 {
+	Audio::Finalize();
 	TextureManager::Finalize();
 	ImGuiManager::Finalize();
 	DirectXCommon::Finalize();
@@ -32,7 +35,10 @@ void Cleyera::Finalize()
 void Cleyera::BeginFlame()
 {
 	DirectXCommon::BeginFlame();
+
 	ImGuiManager::BeginFlame();
+
+	Input::BeginFlame();
 }
 
 void Cleyera::EndFlame()

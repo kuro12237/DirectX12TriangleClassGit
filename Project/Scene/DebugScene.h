@@ -4,6 +4,8 @@
 #include"Cleyera.h"
 
 #include"GameScene.h"
+#include"Input.h"
+#include"Audio.h"
 
 class DebugScene:public IScene
 {
@@ -22,6 +24,8 @@ public:
 
 private:
 
+	Input* input_ = nullptr;
+
 	unique_ptr<Model> model_ = nullptr;
 	unique_ptr<Sprite>sprite_ = nullptr;
 	uint32_t BlockTexHandle = {};
@@ -37,4 +41,5 @@ private:
 	
 	int32_t ChangeSceneTimer_ = 0;
 
+	uint32_t soundHandle_  = 0;
 };

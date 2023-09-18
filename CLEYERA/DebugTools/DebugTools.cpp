@@ -6,16 +6,7 @@ DebugTools* DebugTools::GetInstance()
 	return &instance;
 }
 
-void DebugTools::Initialize()
-{
-#ifdef _DEBUG
-	Grid *grid = new Grid();
-	Grid::Initialize();
-	//GridCommand‚ðƒZƒbƒg
-	DebugTools::addCommand(grid);
-#endif // _DEBUG
 
-}
 
 
 void DebugTools::addCommand(ICommand *command)

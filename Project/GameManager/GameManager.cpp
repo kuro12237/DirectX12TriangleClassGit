@@ -5,7 +5,12 @@ GameManager::GameManager()
 	Cleyera::Initialize();
 	Scene_ = new DebugScene();
 	Scene_->Initialize(this);
-	DebugTools::Initialize();
+
+	Grid* grid = new Grid();
+	Grid::Initialize();
+	//GridCommand‚ðƒZƒbƒg
+	DebugTools::addCommand(grid);
+	
 }
 
 GameManager::~GameManager()
@@ -19,9 +24,13 @@ void GameManager::Run()
 	while (WinApp::WinMsg())
 	{
 		Cleyera::BeginFlame();
+		
 		Scene_->Update(this);
+		
 		DebugTools::Execute(0);;
+		
 		Scene_->Draw(this);
+
 		Cleyera::EndFlame();
 	}
 }
