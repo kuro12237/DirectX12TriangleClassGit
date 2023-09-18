@@ -91,6 +91,12 @@
     <Filter Include="CLEYERA\Sprite\state">
       <UniqueIdentifier>{ba0140f6-2613-4cf0-beae-b806b72b32e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{387c7c14-6a86-4f80-8065-ebfe3a2a4364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{0c802be9-ee57-4ecc-a25c-5d726d7ef52b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -191,6 +197,13 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
       <Filter>CLEYERA\Sprite\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameManager\GameManager.cpp" />
+    <ClCompile Include="Project\Scene\DebugScene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\GameScene.cpp">
+      <Filter>Project\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +326,18 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h">
       <Filter>CLEYERA\Sprite\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameManager\GameManager.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\IScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\DebugScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\GameScene.h">
+      <Filter>Project\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
