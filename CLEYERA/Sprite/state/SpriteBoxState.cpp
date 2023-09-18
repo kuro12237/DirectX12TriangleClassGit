@@ -24,20 +24,16 @@ void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform)
 
 	vertexData[0].position = { pos.x,pos.y+size.y,1,1 };
 	vertexData[0].texcoord = { 0.0f,1.0f };
-	vertexData[0].normal = { 0.0f,1.0f,0.0f };
-
+	
 	vertexData[1].position = { pos.x ,pos.y,1,1 };
 	vertexData[1].texcoord = { 0.0f,0.0f };
-	vertexData[1].normal = { 0.0f,1.0f,0.0f };
 
 
 	vertexData[2].position = { pos.x + size.x,pos.y+size.y,1,1 };
 	vertexData[2].texcoord = { 1.0f,1.0f };
-	vertexData[2].normal = { 0.0f,1.0f,0.0f };
 
 	vertexData[3].position = { pos.x + size.x,pos.y,1,1 };
 	vertexData[3].texcoord = { 1.0f,0.0f };
-	vertexData[3].normal = { 0.0f,1.0f,0.0f };
 
 
 	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
