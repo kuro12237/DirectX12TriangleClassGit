@@ -5,6 +5,9 @@ GameManager::GameManager()
 	Cleyera::Initialize();
 	Scene_ = new DebugScene();
 	Scene_->Initialize(this);
+
+	DebugTools::Initialize();
+
 }
 
 GameManager::~GameManager()

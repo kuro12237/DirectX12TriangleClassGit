@@ -18,7 +18,7 @@ void Cleyera::Initialize()
 	GraphicsPipelineManager::Initialize();
 	TextureManager::Initialize();
 	ImGuiManager::Initialize();
-	DebugTools::Initialize();
+
 }
 
 void Cleyera::Finalize()
