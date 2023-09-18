@@ -69,7 +69,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		DebugTools::Execute(0);;
 	
 
-
 		model->Draw(worldTransform,viewProjection);
 		sprite->Draw(SpriteWorldTransform);
 		Cleyera::EndFlame();
