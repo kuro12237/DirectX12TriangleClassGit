@@ -103,6 +103,9 @@
     <Filter Include="CLEYERA\Audio">
       <UniqueIdentifier>{4ee1b44c-d002-488d-8839-c1fc665d795c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\DebugTools\DebugCamera">
+      <UniqueIdentifier>{37a1bfe0-2b42-4cbc-b26f-65f851b2677c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -113,7 +116,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
       <Filter>CLEYERA\Utility\Pch</Filter>
     </ClCompile>
@@ -204,7 +206,6 @@
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
       <Filter>CLEYERA\Sprite\state</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\Scene\DebugScene.cpp">
       <Filter>Project\Scene</Filter>
     </ClCompile>
@@ -217,6 +218,13 @@
     <ClCompile Include="CLEYERA\Audio\Audio.cpp">
       <Filter>CLEYERA\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\DebugTools\Camera\DebugCamera.cpp">
+      <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameManager\GameManager.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -356,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\Audio.h">
       <Filter>CLEYERA\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTools\Camera\DebugCamera.h">
+      <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,7 +39,6 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat3("scale", &SpriteWorldTransform.scale.x, 0.1f);
 	ImGui::DragFloat3("rotate", &SpriteWorldTransform.rotation.x, 0.1f);
 	ImGui::DragFloat3("trans", &SpriteWorldTransform.translate.x, 0.1f);
-
 	ImGui::End();
 
 	ImGui::Begin("Axis");
@@ -52,6 +51,14 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat3("uvTrans", &uvtranslate.x, 0.1f);
 	ImGui::End();
 
+
+	ImGui::Begin("key");
+	ImGui::Text("0 Pushkey PlayAudio");
+	ImGui::Text("9 Pushkey StateChange");
+	ImGui::Text("8 Pushkey ObjRotate");
+	ImGui::End();
+
+
 	model_->SetUvRotate(uvrotate);
 	model_->SetUvScale(uvScale);
 	model_->SetUvTranslate(uvtranslate);
@@ -59,17 +66,24 @@ void DebugScene::Update(GameManager* Scene)
 	worldTransform.UpdateMatrix();
 	viewProjection.UpdateMatrix();
 	SpriteWorldTransform.UpdateMatrix();
+
 	DebugTools::SetViewProjection(viewProjection);
-	ChangeSceneTimer_++;
-	if (ChangeSceneTimer_>300)
+	
+	if (input_->PushKey(DIK_8))
 	{
-		//Scene->ChangeState(new GameScene);
+		worldTransform.rotation.y += 0.1f;
 	}
-	if (input_->PushKey(DIK_0))
+
+	if (input_->PushKeyPressed(DIK_9))
+	{
+		Scene->ChangeState(new GameScene);
+	}
+	if (input_->PushKeyPressed(DIK_0))
 	{
 		worldTransform.rotation.y+=0.1f;
+		Audio::AudioPlayWave(soundHandle_);
 	}
-	Audio::AudioPlayWave(soundHandle_);
+	
 	Scene;
 }
 

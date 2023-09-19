@@ -17,6 +17,8 @@ public:
 
 	bool PushKey(uint8_t keyNum);
 
+	bool PushKeyPressed(uint32_t keyNum);
+
 private:
 
 	static void CreateKeybordDevice();
@@ -24,8 +26,8 @@ private:
 	ComPtr<IDirectInput8> directInput = nullptr;
 	ComPtr<IDirectInputDevice8> keyboard = nullptr;
 
-	BYTE key[256] = {};
-
+	BYTE keys[256] = {};
+	BYTE preKeys[256] = {};
 	//0x80=‰Ÿ‚µ‚Ä‚¢‚éó‘Ô
 	//0x00=‰Ÿ‚µ‚Ä‚È‚¢ó‘Ô
 };

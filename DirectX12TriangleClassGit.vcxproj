@@ -28,6 +28,7 @@
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="CLEYERA\DebugTools\Camera\DebugCamera.cpp" />
     <ClCompile Include="CLEYERA\DebugTools\DebugTools.cpp" />
     <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp" />
     <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp">
@@ -83,6 +84,7 @@
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
     <ClInclude Include="CLEYERA\CreateResource\CreateResource.h" />
+    <ClInclude Include="CLEYERA\DebugTools\Camera\DebugCamera.h" />
     <ClInclude Include="CLEYERA\DebugTools\Commands\ICommand.h" />
     <ClInclude Include="CLEYERA\DebugTools\DebugTools.h" />
     <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h" />
