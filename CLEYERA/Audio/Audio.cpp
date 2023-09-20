@@ -89,7 +89,7 @@ void Audio::SoundUnLoad(uint32_t soundHandle)
 	Audio::GetInstance()->soundData_[soundHandle].pBuffer = 0;
 	Audio::GetInstance()->soundData_[soundHandle].bufferSize = 0;
 	Audio::GetInstance()->soundData_[soundHandle].wfex = {};
-	//Audio::GetInstance()->soundDataCount_--;
+	Audio::GetInstance()->soundDataCount_--;
 }
 
 void Audio::AudioPlayWave(uint32_t soundHandle)
