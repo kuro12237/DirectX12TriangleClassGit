@@ -68,9 +68,9 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::End();
 
 
-	//model_->SetUvRotate(uvrotate);
-	//model_->SetUvScale(uvScale);
-	//model_->SetUvTranslate(uvtranslate);
+	model_->SetUvRotate(uvrotate);
+	model_->SetUvScale(uvScale);
+	model_->SetUvTranslate(uvtranslate);
 
 	worldTransform.UpdateMatrix();
 	viewProjection.UpdateMatrix();
