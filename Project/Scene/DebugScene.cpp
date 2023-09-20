@@ -20,6 +20,7 @@ void DebugScene::Initialize(GameManager* Scene)
 	//sprite_->SetTexHandle(BlockTexHandle);
 	//sprite_->SetColor({ 1,1,1,1.0f });
 
+
 	SpriteWorldTransform = {};
 	SpriteWorldTransform.Initialize();
 
