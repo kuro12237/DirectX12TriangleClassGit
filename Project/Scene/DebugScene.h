@@ -11,7 +11,8 @@ class DebugScene:public IScene
 {
 public:
 	DebugScene() {};
-	~DebugScene() {};
+	~DebugScene();
+
 
 	void Initialize(GameManager* Scene)override;
 

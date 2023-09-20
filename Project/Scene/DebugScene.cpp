@@ -1,5 +1,10 @@
 #include "DebugScene.h"
 
+DebugScene::~DebugScene()
+{
+	Audio::SoundUnLoad(soundHandle_);
+}
+
 void DebugScene::Initialize(GameManager* Scene)
 {
 	input_ = Input::GetInstance();
@@ -23,7 +28,7 @@ void DebugScene::Initialize(GameManager* Scene)
 
 	viewProjection.Initialize({ 0.2f,-0.6f,0.0f }, { 11.0f,5.0f,-15 });
 
-	//soundHandle_ = Audio::SoundLoadWave("Resources/Select.wav");
+	soundHandle_ = Audio::SoundLoadWave("Resources/Select.wav");
 	Scene;
 }
 
