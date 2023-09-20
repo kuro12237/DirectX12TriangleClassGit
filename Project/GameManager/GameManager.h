@@ -2,6 +2,7 @@
 #include"Cleyera.h"
 #include"IScene.h"
 #include"DebugScene.h"
+#include"../DebugTools/Camera/DebugCamera.h"
 
 class GameManager
 {

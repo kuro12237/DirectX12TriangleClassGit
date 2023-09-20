@@ -221,10 +221,10 @@
     <ClCompile Include="CLEYERA\DebugTools\Camera\DebugCamera.cpp">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameManager\GameManager.cpp">
-      <Filter>Project\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project\GameManager\GameManager.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">

@@ -23,5 +23,5 @@ private:
 
 	vector<ICommand*> commands;
 
-	ViewProjection viewProjection_;
+	ViewProjection viewProjection_{};
 };

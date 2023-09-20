@@ -74,7 +74,7 @@ uint32_t Audio::SoundLoadWave(const char* filename)
 	char* pBuffer = new char[data.size];
 	file.read(pBuffer, data.size);
 	file.close();
-
+	//‘ã“ü
 	Audio::GetInstance()->soundData_[Audio::GetInstance()->soundDataCount_].wfex = format.fmt;
 	Audio::GetInstance()->soundData_[Audio::GetInstance()->soundDataCount_].pBuffer = reinterpret_cast<BYTE*>(pBuffer);
 	Audio::GetInstance()->soundData_[Audio::GetInstance()->soundDataCount_].bufferSize = data.size;
@@ -84,6 +84,7 @@ uint32_t Audio::SoundLoadWave(const char* filename)
 
 void Audio::SoundUnLoad(uint32_t soundHandle)
 {
+	//‚·‚×‚Ä‹ó“ñ‚·‚é
 	delete[] Audio::GetInstance()->soundData_[soundHandle].pBuffer;
 	Audio::GetInstance()->soundData_[soundHandle].pBuffer = 0;
 	Audio::GetInstance()->soundData_[soundHandle].bufferSize = 0;

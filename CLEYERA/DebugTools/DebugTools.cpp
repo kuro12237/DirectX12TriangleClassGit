@@ -23,6 +23,7 @@ void DebugTools::Execute(int buttonIndex)
 	else 
 	{
 		LogManager::Log("None_Command\n");
+		assert(0);
 	}
 
 }

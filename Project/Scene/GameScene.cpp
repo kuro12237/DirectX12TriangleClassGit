@@ -8,7 +8,15 @@ void GameScene::Initialize(GameManager* scene)
 
 void GameScene::Update(GameManager* scene)
 {
-	
+	ImGui::Begin("ChangeDebugScene");
+	ImGui::Text("9 key");
+	ImGui::End();
+
+	if (Input::GetInstance()->PushKeyPressed(DIK_9))
+	{
+		scene->ChangeState(new DebugScene);
+	}
+
 	viewProjection.UpdateMatrix();
 	DebugTools::SetViewProjection(viewProjection);
 	scene;

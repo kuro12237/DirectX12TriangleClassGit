@@ -5,15 +5,15 @@ void DebugScene::Initialize(GameManager* Scene)
 	input_ = Input::GetInstance();
 
 	model_ = make_unique< Model>();
-	sprite_ = make_unique<Sprite>();
+	//sprite_ = make_unique<Sprite>();
 
-	texHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
-	BlockTexHandle = TextureManager::LoadTexture("Resources/block.png");
-	//model->Initialize(new ModelSphereState);
-	model_->CreateFromObj("Axis");
-	sprite_->Initialize(new SpriteBoxState, { 0,0 }, { 500,200 });
-	sprite_->SetTexHandle(BlockTexHandle);
-	sprite_->SetColor({ 1,1,1,1.0f });
+	//texHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
+	//BlockTexHandle = TextureManager::LoadTexture("Resources/block.png");
+	model_->Initialize(new ModelSphereState);
+	//model_->CreateFromObj("Axis");
+	//sprite_->Initialize(new SpriteBoxState, { 0,0 }, { 500,200 });
+	//sprite_->SetTexHandle(BlockTexHandle);
+	//sprite_->SetColor({ 1,1,1,1.0f });
 
 	SpriteWorldTransform = {};
 	SpriteWorldTransform.Initialize();
@@ -59,15 +59,14 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::End();
 
 
-	model_->SetUvRotate(uvrotate);
-	model_->SetUvScale(uvScale);
-	model_->SetUvTranslate(uvtranslate);
+	//model_->SetUvRotate(uvrotate);
+	//model_->SetUvScale(uvScale);
+	//model_->SetUvTranslate(uvtranslate);
 
 	worldTransform.UpdateMatrix();
 	viewProjection.UpdateMatrix();
 	SpriteWorldTransform.UpdateMatrix();
 
-	DebugTools::SetViewProjection(viewProjection);
 	
 	if (input_->PushKey(DIK_8))
 	{
@@ -89,8 +88,11 @@ void DebugScene::Update(GameManager* Scene)
 
 void DebugScene::Draw(GameManager* Scene)
 {
+	DebugTools::SetViewProjection(viewProjection);
+	//viewProjection = DebugCamera::DebugCameraViewProjection();
+	
 
 	model_->Draw(worldTransform, viewProjection);
-	sprite_->Draw(SpriteWorldTransform);
+	//sprite_->Draw(SpriteWorldTransform);
 	Scene;
 }

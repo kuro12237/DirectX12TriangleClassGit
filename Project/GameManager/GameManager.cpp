@@ -10,8 +10,11 @@ GameManager::GameManager()
 	Grid::Initialize();
 	//GridCommand‚ðƒZƒbƒg
 	DebugTools::addCommand(grid);
-	
+	DebugCamera* debugcamera = new DebugCamera();
+	DebugCamera::Initialize();
+	DebugTools::addCommand(debugcamera);
 }
+
 
 GameManager::~GameManager()
 {
@@ -27,8 +30,8 @@ void GameManager::Run()
 		
 		Scene_->Update(this);
 		
-		DebugTools::Execute(0);;
-		
+		DebugTools::Execute(0);
+		DebugTools::Execute(1);
 		Scene_->Draw(this);
 
 		Cleyera::EndFlame();
