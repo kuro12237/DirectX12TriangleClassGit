@@ -30,7 +30,7 @@ private:
 	unique_ptr<Model> model_ = nullptr;
 	//unique_ptr<Sprite>sprite_ = nullptr;
 	//uint32_t BlockTexHandle = {};
-	//uint32_t texHandle = {};
+	uint32_t texHandle = {};
 
 	WorldTransform SpriteWorldTransform = {};
 	WorldTransform worldTransform = {};

@@ -164,6 +164,13 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath)
 	return indexTex;
 }
 
+void TextureManager::UnTexture(uint32_t texHandle)
+{
+	
+	TextureManager::GetInstance()->tex[texHandle].Resource.Reset();
+	indexTex--;
+}
+
 void TextureManager::texCommand(uint32_t texhandle)
 {
 	Commands command = DirectXCommon::GetInstance()->GetCommands();

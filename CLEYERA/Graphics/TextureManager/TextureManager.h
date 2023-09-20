@@ -35,6 +35,14 @@ public:
 	/// <returns></returns>
 	static uint32_t LoadTexture(const std::string& filePath);
 
+
+	/// <summary>
+	/// tex‚Ì‰ð•ú
+	/// </summary>
+	/// <param name="texHandle"></param>
+	/// <returns></returns>
+	static void UnTexture(uint32_t texHandle);
+
 	static void texCommand(uint32_t texhandle);
 private:
 
@@ -62,8 +70,9 @@ private:
 	/// <returns></returns>
 	static D3D12_HEAP_PROPERTIES SettingHeap();
 
-	const static uint32_t TexLoadMax = 64;
+	const static uint32_t TexLoadMax = 256;
 	texResourceProperty tex[TexLoadMax];
+
 };
 
 

@@ -3,6 +3,7 @@
 DebugScene::~DebugScene()
 {
 	Audio::SoundUnLoad(soundHandle_);
+	TextureManager::UnTexture(texHandle);
 }
 
 void DebugScene::Initialize(GameManager* Scene)
@@ -12,9 +13,11 @@ void DebugScene::Initialize(GameManager* Scene)
 	model_ = make_unique< Model>();
 	//sprite_ = make_unique<Sprite>();
 
-	//texHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
+	texHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
 	//BlockTexHandle = TextureManager::LoadTexture("Resources/block.png");
 	model_->Initialize(new ModelSphereState);
+	model_->SetTexHandle(texHandle);
+
 	//model_->CreateFromObj("Axis");
 	//sprite_->Initialize(new SpriteBoxState, { 0,0 }, { 500,200 });
 	//sprite_->SetTexHandle(BlockTexHandle);

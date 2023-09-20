@@ -56,8 +56,8 @@ private:
 	IXAudio2MasteringVoice* masterVoice = nullptr;
 	uint32_t soundDataCount_{};
 
-	static const uint32_t kSoundDataMax = 64;
-	soundData soundData_[kSoundDataMax]{};
+	static const uint32_t kSoundDataMax = 4;
+    soundData soundData_[kSoundDataMax]{};
 	
 };
 
