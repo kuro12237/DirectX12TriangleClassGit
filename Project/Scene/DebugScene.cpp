@@ -50,7 +50,7 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat3("trans", &SpriteWorldTransform.translate.x, 0.1f);
 	ImGui::End();
 
-	ImGui::Begin("Axis");
+	ImGui::Begin("Sphere");
 	ImGui::DragFloat3("scale", &worldTransform.scale.x, 0.1f);
 	ImGui::DragFloat3("rotate", &worldTransform.rotation.x, 0.1f);
 	ImGui::DragFloat3("trans", &worldTransform.translate.x, 0.1f);
