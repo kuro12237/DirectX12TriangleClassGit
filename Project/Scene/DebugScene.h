@@ -6,6 +6,11 @@
 #include"GameScene.h"
 #include"Input.h"
 #include"Audio.h"
+#include"FileLoader.h"
+
+#include"GameObject/PlayerSphere.h"
+#include"GameObject/EnemySphere.h"
+#include"CollisionManager.h"
 
 class DebugScene:public IScene
 {
@@ -25,24 +30,16 @@ public:
 
 private:
 
-	Input* input_ = nullptr;
-
-	unique_ptr<Model> model_ = nullptr;
-	unique_ptr<Model>ObjModel_ = nullptr;
-	//unique_ptr<Sprite>sprite_ = nullptr;
-	//uint32_t BlockTexHandle = {};
-	uint32_t texHandle = {};
-
-	WorldTransform SpriteWorldTransform = {};
-	WorldTransform worldTransform = {};
-	WorldTransform ObjWorldTransform = {};
+	void CheckAllCollision();
+	
 	ViewProjection viewProjection{};
 
-	Vector3 uvScale = { 1,1,1, };
-	Vector3 uvrotate = {};
-	Vector3 uvtranslate = {};
-	
-	int32_t ChangeSceneTimer_ = 0;
-
 	uint32_t soundHandle_  = 0;
+	stringstream file{};
+
+
+	unique_ptr<Player>player_ = nullptr;
+	unique_ptr<Enemy>enemy_=nullptr;
+	CollisionManager* collisionManager = nullptr;
+
 };

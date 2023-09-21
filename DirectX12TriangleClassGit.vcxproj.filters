@@ -109,6 +109,15 @@
     <Filter Include="CLEYERA\Utility\CollisionManager">
       <UniqueIdentifier>{ed3e1e6f-dffc-42be-8658-1325a16db11b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Utility\FileLoader">
+      <UniqueIdentifier>{13b52452-38fe-4472-b33d-1e13f29e3436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\CollisionManager\Collider">
+      <UniqueIdentifier>{21ee60c1-ccf2-421f-a591-bbd6ae2f0d39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject">
+      <UniqueIdentifier>{bd50fd17-dc80-4453-abab-990b87bb4c34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -224,6 +233,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp">
       <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp">
+      <Filter>CLEYERA\Utility\FileLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\PlayerSphere.cpp">
+      <Filter>Project\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\EnemySphere.cpp">
+      <Filter>Project\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +388,24 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\DebugTools\Camera\DebugCamera.h">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionManager.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\Collider.h">
+      <Filter>CLEYERA\Utility\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h">
+      <Filter>CLEYERA\Utility\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h">
+      <Filter>CLEYERA\Utility\FileLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\PlayerSphere.h">
+      <Filter>Project\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\EnemySphere.h">
+      <Filter>Project\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
