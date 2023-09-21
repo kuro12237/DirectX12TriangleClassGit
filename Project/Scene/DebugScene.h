@@ -28,12 +28,14 @@ private:
 	Input* input_ = nullptr;
 
 	unique_ptr<Model> model_ = nullptr;
+	unique_ptr<Model>ObjModel_ = nullptr;
 	//unique_ptr<Sprite>sprite_ = nullptr;
 	//uint32_t BlockTexHandle = {};
 	uint32_t texHandle = {};
 
 	WorldTransform SpriteWorldTransform = {};
 	WorldTransform worldTransform = {};
+	WorldTransform ObjWorldTransform = {};
 	ViewProjection viewProjection{};
 
 	Vector3 uvScale = { 1,1,1, };

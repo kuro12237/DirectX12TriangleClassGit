@@ -11,12 +11,14 @@ void DebugScene::Initialize(GameManager* Scene)
 	input_ = Input::GetInstance();
 
 	model_ = make_unique< Model>();
+	ObjModel_ = make_unique<Model>();
 	//sprite_ = make_unique<Sprite>();
 
 	texHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
 	//BlockTexHandle = TextureManager::LoadTexture("Resources/block.png");
 	model_->Initialize(new ModelSphereState);
 	model_->SetTexHandle(texHandle);
+	ObjModel_->CreateFromObj("Axis");
 
 	//model_->CreateFromObj("Axis");
 	//sprite_->Initialize(new SpriteBoxState, { 0,0 }, { 500,200 });
@@ -29,6 +31,7 @@ void DebugScene::Initialize(GameManager* Scene)
 
 	worldTransform = {};
 	worldTransform.Initialize();
+	ObjWorldTransform.Initialize();
 
 	viewProjection.Initialize({ 0.2f,-0.6f,0.0f }, { 11.0f,5.0f,-15 });
 
@@ -75,7 +78,7 @@ void DebugScene::Update(GameManager* Scene)
 	worldTransform.UpdateMatrix();
 	viewProjection.UpdateMatrix();
 	SpriteWorldTransform.UpdateMatrix();
-
+	ObjWorldTransform.UpdateMatrix();
 	
 	if (input_->PushKey(DIK_8))
 	{
@@ -100,7 +103,7 @@ void DebugScene::Draw(GameManager* Scene)
 	DebugTools::SetViewProjection(viewProjection);
 	//viewProjection = DebugCamera::DebugCameraViewProjection();
 	
-
+	ObjModel_->Draw(ObjWorldTransform, viewProjection);
 	model_->Draw(worldTransform, viewProjection);
 	//sprite_->Draw(SpriteWorldTransform);
 	Scene;
