@@ -25,9 +25,6 @@ public:
 
 	void Draw(GameManager* Scene)override;
 
-
-
-
 private:
 
 	void CheckAllCollision();
