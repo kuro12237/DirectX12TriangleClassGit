@@ -96,13 +96,13 @@ void DebugScene::Update(GameManager* Scene)
 	}
 	
 	Scene;
+	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
+
 }
 
 void DebugScene::Draw(GameManager* Scene)
 {
-	DebugTools::SetViewProjection(viewProjection);
-	//viewProjection = DebugCamera::DebugCameraViewProjection();
-	
+
 	ObjModel_->Draw(ObjWorldTransform, viewProjection);
 	model_->Draw(worldTransform, viewProjection);
 	//sprite_->Draw(SpriteWorldTransform);

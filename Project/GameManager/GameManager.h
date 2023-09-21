@@ -11,11 +11,11 @@ public:
 	GameManager();
 	~GameManager();
 
-	void Run();
-	void ChangeState(IScene *newScene);
+    void Run();
+    void ChangeState(IScene *newScene);
 
 private:
-	
+
 	IScene* Scene_ = nullptr;
 
 };

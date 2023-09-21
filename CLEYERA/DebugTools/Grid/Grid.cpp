@@ -26,6 +26,7 @@ void Grid::Initialize()
 			{ float(XYGridLine_Max)/2 ,0.01f,float(i - (XYGridLine_Max) / 2),1 },
 			{ 1,0,0,0.5f });
 	}
+
 	Grid::GetInstance()->YLine_ = make_unique<Model>();
 	Grid::GetInstance()->YLine_->Initialize(new ModelLineState, { 0,-float(XYGridLine_Max),0,1 }, { 0,float(XYGridLine_Max),0,1 }, { 0,0,1,0.5f });
 	Grid::GetInstance()->YworldTransform_.Initialize();
@@ -39,20 +40,25 @@ void Grid::Initialize()
 
 }
 
-void Grid::execute(ViewProjection viewProjection)
+void Grid::UpdateExecute()
 {
 	for (int i = 0; i < XYGridLine_Max; i++)
 	{
 		XworldTransform_[i].UpdateMatrix();
-		Grid::GetInstance()->XLine_[i]->Draw(XworldTransform_[i], viewProjection);
-		
 		ZworldTransform_[i].UpdateMatrix();
+	}
+	YworldTransform_.UpdateMatrix();
+	CenterWorldTransform_.UpdateMatrix();
+}
+
+void Grid::DrawExecute(ViewProjection viewProjection)
+{
+	for (int i = 0; i < XYGridLine_Max; i++)
+	{
+		Grid::GetInstance()->XLine_[i]->Draw(XworldTransform_[i], viewProjection);
 		Grid::GetInstance()->ZLine_[i]->Draw(ZworldTransform_[i], viewProjection);
 	}
 
-	YworldTransform_.UpdateMatrix();
 	Grid::GetInstance()->YLine_->Draw(YworldTransform_, viewProjection);
-
-	CenterWorldTransform_.UpdateMatrix();
 	Grid::GetInstance()->CenterPoint_->Draw(CenterWorldTransform_, viewProjection);
 }

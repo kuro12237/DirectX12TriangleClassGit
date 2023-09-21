@@ -116,9 +116,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CLEYERA\Utility\Pch\Pch.cpp">
-      <Filter>CLEYERA\Utility\Pch</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
       <Filter>CLEYERA</Filter>
     </ClCompile>

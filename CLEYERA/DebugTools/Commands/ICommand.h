@@ -6,7 +6,8 @@ class ICommand
 public:
 
 	virtual ~ICommand() {};
-	virtual void execute(ViewProjection viewProjedction) = 0;
+	virtual void UpdateExecute() = 0;
+	virtual void DrawExecute(ViewProjection viewProjedction) = 0;
 
 };
 

@@ -11,9 +11,10 @@ public:
 
 	static Grid* GetInstance();
 
-	static void Initialize();
+	void Initialize();
 
-	void execute(ViewProjection viewProjection)override;
+	void UpdateExecute()override;
+	void DrawExecute(ViewProjection viewProjection)override;
 private:
 
 	unique_ptr<Model> XLine_[XYGridLine_Max] = {};
