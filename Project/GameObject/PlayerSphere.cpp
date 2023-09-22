@@ -30,6 +30,7 @@ void Player::Update()
 	ImGui::Begin("Player");
 	ImGui::Text("WASD:Move");
 	ImGui::Text("Collision BlueShere");
+	ImGui::DragFloat("UP,DOWN", &worldTransform_.translate.y, -0.1f, 0.1f);
 	ImGui::End();
 
 	if (Input::GetInstance()->PushKey(DIK_A))

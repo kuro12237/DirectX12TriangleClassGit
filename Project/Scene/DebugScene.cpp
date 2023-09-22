@@ -40,6 +40,7 @@ void DebugScene::Update(GameManager* Scene)
 	if (Input::GetInstance()->PushKeyPressed(DIK_9))
 	{
 		Scene->ChangeState(new GameScene);
+		return;
 	}
 	if (Input::GetInstance()->PushKeyPressed(DIK_0))
 	{

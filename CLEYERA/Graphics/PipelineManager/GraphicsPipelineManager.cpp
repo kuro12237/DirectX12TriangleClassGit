@@ -9,8 +9,6 @@ GraphicsPipelineManager* GraphicsPipelineManager::GetInstance()
 void GraphicsPipelineManager::Initialize()
 {
 	CreatePSO();
-
-
 }
 
 void GraphicsPipelineManager::CreatePSO()
@@ -18,7 +16,7 @@ void GraphicsPipelineManager::CreatePSO()
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
-	SPSO pso;
+	SPSO pso{};
 
 	pso.shape=CreateShape(device.Get(), commands, shader.shape);
 	LogManager::CompliteLog("CreateShapePSO");
@@ -601,4 +599,3 @@ SPSOProperty GraphicsPipelineManager::CreateHerf_Lambert(ComPtr<ID3D12Device> de
 
 	return DirectionalLightPSO;
 }
-

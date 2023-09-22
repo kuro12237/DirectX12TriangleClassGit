@@ -15,7 +15,7 @@ void Enemy::Initialize()
 	texHandle_ = TextureManager::LoadTexture("Resources/uvChecker.png");
 	model->SetTexHandle(texHandle_);
 	model->SetColor({ 0, 1, 0, 1 });
-	worldTransform_.translate = { -10,0,0 };
+	worldTransform_.translate = { -5,0,0 };
 
 	SetCollosionAttribute(kCollisionAttributeEnemy);
 	SetCollisionMask(kCollisionAttributePlayer);
