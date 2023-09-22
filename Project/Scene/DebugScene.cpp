@@ -79,5 +79,4 @@ void DebugScene::CheckAllCollision()
 	collisionManager->ClliderPush(enemy_.get());
 	//
 	collisionManager->CheckAllCollision();
-
 }
