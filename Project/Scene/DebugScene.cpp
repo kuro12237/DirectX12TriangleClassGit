@@ -13,8 +13,9 @@ void DebugScene::Initialize(GameManager* Scene)
 	soundHandle_ = Audio::SoundLoadWave("Resources/Select.wav");
 	Scene;
 	file = FileLoader::CSVLoadFile("Resources/DebugTest.csv");
+	TestCsvFile();
 
-	collisionManager = new CollisionManager;
+	collisionManager = make_unique< CollisionManager>();
 
 	player_ = make_unique<Player>();
 	player_->Initialize();
@@ -39,7 +40,7 @@ void DebugScene::Update(GameManager* Scene)
 
 	ImGui::End();
 
-	viewProjection.UpdateMatrix();
+	
 
 
 
@@ -54,9 +55,12 @@ void DebugScene::Update(GameManager* Scene)
 	
 	player_->Update();
 	enemy_->Update();
-	Scene;
-	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
+	
 	CheckAllCollision();
+	viewProjection.UpdateMatrix();
+	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
+	
+	
 }
 
 void DebugScene::Draw(GameManager* Scene)
@@ -65,6 +69,15 @@ void DebugScene::Draw(GameManager* Scene)
 	enemy_->Draw(viewProjection);
 
 	Scene;
+}
+
+void DebugScene::TestCsvFile()
+{
+	string line;
+	getline(file, line);
+	istringstream line_stream(line);
+	
+	LogManager::Log(line_stream.str());
 }
 
 void DebugScene::CheckAllCollision()

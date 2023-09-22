@@ -26,6 +26,7 @@ public:
 	void Draw(GameManager* Scene)override;
 
 private:
+	void TestCsvFile();
 
 	void CheckAllCollision();
 	
@@ -37,6 +38,5 @@ private:
 
 	unique_ptr<Player>player_ = nullptr;
 	unique_ptr<Enemy>enemy_=nullptr;
-	CollisionManager* collisionManager = nullptr;
-
+	unique_ptr <CollisionManager> collisionManager = nullptr;
 };
