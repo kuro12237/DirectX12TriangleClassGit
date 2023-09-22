@@ -30,18 +30,10 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::SliderFloat3("rotate", &viewProjection.rotation_.x, -1, 1);
 	ImGui::End();
 
-
-
-
-
 	ImGui::Begin("key");
 	ImGui::Text("0 Pushkey PlayAudio");
 	ImGui::Text("9 Pushkey StateChange");
-
 	ImGui::End();
-
-	
-
 
 
 	if (Input::GetInstance()->PushKeyPressed(DIK_9))
@@ -76,7 +68,6 @@ void DebugScene::TestCsvFile()
 	string line;
 	getline(file, line);
 	istringstream line_stream(line);
-	
 	LogManager::Log(line_stream.str());
 }
 
