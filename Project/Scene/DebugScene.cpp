@@ -18,6 +18,7 @@ void DebugScene::Initialize(GameManager* Scene)
 	collisionManager = make_unique< CollisionManager>();
 
 	player_ = make_unique<Player>();
+
 	player_->Initialize();
 	enemy_ = make_unique<Enemy>();
 	enemy_->Initialize();

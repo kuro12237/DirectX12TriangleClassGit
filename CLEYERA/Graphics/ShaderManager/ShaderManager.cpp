@@ -92,30 +92,53 @@ void ShaderManager::includeHandlerSetting()
 void ShaderManager::ShaderComples()
 {
 	ShapeShader();
+	SpriteShader();
+	LightShader();
 }
 
 void ShaderManager::ShapeShader()
 {
-	SShaders shaders;
-	shaders.shape.vertexBlob =
+	SShaderMode shaders; shaders;
+	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/ShapeObject3d.VS.hlsl",
 			L"vs_6_0");
-	shaders.shape.pixelBlob =
+	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/ShapeObject3d.PS.hlsl",
 			L"ps_6_0");
-	shaders.sprite.vertexBlob =
+	ShaderManager::Getinstance()->shaders_.shape = shaders;
+}
+
+void ShaderManager::SpriteShader()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/SpriteObject3d.VS.hlsl",
 			L"vs_6_0");
-	
-	shaders.sprite.pixelBlob=
+
+	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/SpriteObject3d.PS.hlsl",
 			L"ps_6_0");
+	ShaderManager::Getinstance()->shaders_.sprite = shaders;
+}
+
+void ShaderManager::LightShader()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Harf_LambertLightObject.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Harf_LambertLightObject.PS.hlsl",
+			L"ps_6_0");
+	ShaderManager::Getinstance()->shaders_.light = shaders;
 
 
-	ShaderManager::Getinstance()->shaders_ = shaders;
 }
 

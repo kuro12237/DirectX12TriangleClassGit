@@ -11,6 +11,7 @@ Player::~Player()
 void Player::Initialize()
 {
 	model = make_unique<Model>();
+	model->UseLight(HARF_LAMBERT);
 	model->Initialize(new ModelSphereState);
 	texHandle_ = TextureManager::LoadTexture("Resources/uvChecker.png");
 	model->SetTexHandle(texHandle_);

@@ -36,8 +36,8 @@ void GameManager::Run()
 		DebugTools::UpdateExecute(1);
 
 		Scene_->Draw(this);
-		DebugTools::DrawExecute(0);
-		DebugTools::DrawExecute(1);
+		//DebugTools::DrawExecute(0);
+	//	DebugTools::DrawExecute(1);
 
 		Cleyera::EndFlame();
 	}

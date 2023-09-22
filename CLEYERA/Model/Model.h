@@ -10,7 +10,12 @@
 #include"WorldTransform.h"
 #include"ViewProjection.h"
 
-
+enum SUseLight
+{
+	NONE,
+	LAMBERT,
+	HARF_LAMBERT
+};
 
 class Model
 {
@@ -30,9 +35,15 @@ public:
 	/// 
 	void Initialize(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 
-	void CreateFromObj( const string& directoryFile);
+
+	void CreateFromObj(const string& directoryFile);
 
 	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
+
+	/// <summary>
+	/// ライトを使うか : 初期化の前に行う
+	/// </summary>
+	void UseLight(SUseLight use);
 
 #pragma region Set
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
@@ -52,25 +63,25 @@ public:
 
 	Vector3 GetuvScale() { return uvScale_; }
 	Vector3 GetuvRotate() { return uvRotate_; }
-	Vector3 GetuvTranslate(){return uvTranslate_;}
+	Vector3 GetuvTranslate() { return uvTranslate_; }
 
 	/// <summary>
 	/// GetLineStartPos
 	/// </summary>
-	Vector4 GetStartPos() { return StartPos_;}
+	Vector4 GetStartPos() { return StartPos_; }
 	/// <summary>
 	/// GetLineEndPos
 	/// </summary>
-	Vector4 GetEndPos(){ return EndPos_; }
-	
+	Vector4 GetEndPos() { return EndPos_; }
+
 	/// <summary>
 	/// GetModelCenterPos
 	/// </summary>
-	Vector4 GetCenterPos(){ return CenterPos_; }
+	Vector4 GetCenterPos() { return CenterPos_; }
 	/// <summary>
 	/// GetModelSize
 	/// </summary>
-	float GetSize(){ return size_; }
+	float GetSize() { return size_; }
 
 	/// <summary>
 	/// 色コードをVector4に変換関数
@@ -78,7 +89,9 @@ public:
 	static Vector4 ColorConversion(uint32_t rgbaValue);
 
 	const string GetObjDirectoryPath() { return directoryPath_; }
+	SUseLight GetUseLight(){return uselight_;}
 #pragma endregion 
+
 private:
 
 
@@ -97,6 +110,8 @@ private:
 	Vector3 uvRotate_ = {0,0,0};
 	Vector3 uvTranslate_ = {0,0,0};
 	string directoryPath_ = {};
+
+	SUseLight uselight_ = NONE;
 
 	IModelState* state_ = nullptr;
 };

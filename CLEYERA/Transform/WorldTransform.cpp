@@ -29,6 +29,6 @@ void WorldTransform::TransfarMatrix(ComPtr<ID3D12Resource>& wvpResource, ViewPro
 		matWorld =MatrixTransform::Multiply(matWorld,MatrixTransform::Multiply(viewMatrix,OrthographicMatrix));
 	}
 	wvp->WVP = matWorld;
-	wvp->world = matWorld;
+	wvp->world = MatrixTransform::Identity();
 	
 }

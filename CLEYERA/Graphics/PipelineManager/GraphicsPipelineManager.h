@@ -18,6 +18,7 @@ struct SPSO
 	SPSOProperty shape;
 	SPSOProperty Line;
 	SPSOProperty Sprite;
+	SPSOProperty Herf_Lambert;
 };
 
 class GraphicsPipelineManager
@@ -35,7 +36,7 @@ private:
 	static  SPSOProperty CreateShape(ComPtr<ID3D12Device>device,Commands command,SShaderMode shader);
 	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 	static SPSOProperty CreateSprite(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
-
+	static SPSOProperty CreateHerf_Lambert(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
 	SPSO pso = {};
 

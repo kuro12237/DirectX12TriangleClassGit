@@ -9,6 +9,11 @@ void ModelSphereState::Initialize(Model* state)
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
 	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * v, resource_.Vertex.Get(), v);
+	if (state->GetUseLight()!=NONE)
+	{
+		resource_.Light = CreateResources::CreateBufferResource(sizeof(LightData));
+	}
+
 
 	uint32_t i = VertexNum * VertexNum * 6;
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * i);
@@ -25,7 +30,6 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
-	//resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
 #pragma region 球の座標処理
@@ -109,22 +113,37 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 	worldTransform.TransfarMatrix(resource_.wvpResource,viewprojection);
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
-	CommandCall(state->GetTexHandle());
+	if (state->GetUseLight()!=NONE)
+	{
+		LightData* lightData = nullptr;
+		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+		
+		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
+		lightData->direction = { 0.0f,-1.0f,0.0f };
+		lightData->intensity = 1.0f;
+
+	}
+
+	CommandCall(state);
 }
 
-void ModelSphereState::CommandCall(uint32_t texHandle)
+void ModelSphereState::CommandCall(Model*state)
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = {};
 
-	if (texHandle == 0)
-	{
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
-	}else if (!texHandle==0){
+	
+	PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
+
+	//テクスチャがある場合
+	if (!state->GetTexHandle() == 0) {
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite;
 	}
-
+	if (state->GetUseLight() == HARF_LAMBERT)
+	{
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
+	}
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
@@ -135,12 +154,15 @@ void ModelSphereState::CommandCall(uint32_t texHandle)
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-	if (!texHandle == 0)
+	if (!state->GetTexHandle() == 0)
 	{
-		TextureManager::texCommand(texHandle);
+		TextureManager::texCommand(state->GetTexHandle());
 	}
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
-	//commands.List->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
+	if (state->GetUseLight()!=NONE)
+	{
+		commands.m_pList->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
+	}
 
 	commands.m_pList->DrawIndexedInstanced(VertexNum * VertexNum * 6, 1, 0, 0, 0);
 }

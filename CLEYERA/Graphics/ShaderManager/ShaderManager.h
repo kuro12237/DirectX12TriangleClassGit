@@ -17,6 +17,7 @@ struct SShaders
 {
 	SShaderMode shape;
 	SShaderMode sprite;
+	SShaderMode light;
 
 };
 
@@ -48,7 +49,9 @@ private:
 	static void ShaderComples();
 
 	static void ShapeShader();
-
+	static void SpriteShader();
+	static void LightShader();
+		 
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};
 

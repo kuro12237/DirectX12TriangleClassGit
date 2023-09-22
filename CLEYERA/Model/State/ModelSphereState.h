@@ -18,7 +18,7 @@ public:
 
 private:
 
-	void CommandCall(uint32_t texHandle);
+	void CommandCall(Model*state);
 
 	const int VertexNum = 16;
 	ResourcePeroperty resource_ = {};
