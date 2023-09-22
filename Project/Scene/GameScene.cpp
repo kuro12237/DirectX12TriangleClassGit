@@ -18,12 +18,11 @@ void GameScene::Update(GameManager* scene)
 	}
 
 	viewProjection.UpdateMatrix();
-	
-	scene;
+	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
 }
 
 void GameScene::Draw(GameManager* scene)
 {
-	viewProjection= DebugTools::ConvertViewProjection(viewProjection);
+	
 	scene;
 }

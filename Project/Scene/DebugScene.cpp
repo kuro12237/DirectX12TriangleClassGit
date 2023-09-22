@@ -12,14 +12,15 @@ void DebugScene::Initialize(GameManager* Scene)
 
 	soundHandle_ = Audio::SoundLoadWave("Resources/Select.wav");
 	Scene;
+
 	file = FileLoader::CSVLoadFile("Resources/DebugTest.csv");
 	TestCsvFile();
 
 	collisionManager = make_unique< CollisionManager>();
 
 	player_ = make_unique<Player>();
-
 	player_->Initialize();
+
 	enemy_ = make_unique<Enemy>();
 	enemy_->Initialize();
 }
@@ -35,7 +36,6 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Text("0 Pushkey PlayAudio");
 	ImGui::Text("9 Pushkey StateChange");
 	ImGui::End();
-
 
 	if (Input::GetInstance()->PushKeyPressed(DIK_9))
 	{
