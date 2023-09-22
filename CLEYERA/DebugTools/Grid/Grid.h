@@ -28,5 +28,7 @@ private:
 
 	unique_ptr <Model>CenterPoint_ = {};
 	WorldTransform CenterWorldTransform_ = {};
+
+	
 };
 

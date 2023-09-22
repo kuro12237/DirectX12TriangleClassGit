@@ -14,7 +14,6 @@ void ModelSphereState::Initialize(Model* state)
 		resource_.Light = CreateResources::CreateBufferResource(sizeof(LightData));
 	}
 
-
 	uint32_t i = VertexNum * VertexNum * 6;
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * i);
 	resource_.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * i, resource_.Index.Get());
