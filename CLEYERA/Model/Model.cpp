@@ -14,7 +14,6 @@ void Model::Initialize(IModelState* state, Vector4 CenterPos , float size , Vect
 	CenterPos_ = CenterPos;
 	size_=size;
 	color_ = color;
-
 }
 
 void Model::Initialize(IModelState* state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
@@ -24,22 +23,14 @@ void Model::Initialize(IModelState* state,Vector4 StartPosition, Vector4 EndPosi
 	EndPos_ = EndPosition;
 	color_ = Color;
 	state->Initialize(this);
-
 }
 
 void Model::CreateFromObj(const string& directoryFile)
 {
 	state_ = new ModelObjState();
     directoryPath_ = directoryFile;
-
 	state_->Initialize(this);
-
 }
-
-
-
-
-
 void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 {
 	worldTransform_ = worldTransform;
@@ -49,7 +40,6 @@ void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 void Model::UseLight(SUseLight use)
 {
 	uselight_ = use;
-
 }
 
 Vector4 Model::ColorConversion(uint32_t rgbaValue)
